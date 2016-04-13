@@ -1,9 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>BlogSite</groupId>
-  <artifactId>BlogSite</artifactId>
+  <groupId>CMS</groupId>
+  <artifactId>CMS</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>BlogSite</name>
+  <packaging>war</packaging>
+  <name>CMS</name>
   <description/>
   <properties>
     <guice.version>3.0-rc3</guice.version>
@@ -585,16 +586,16 @@
       <artifactId>oro</artifactId>
       <version>2.0.8</version>
     </dependency>
-	<dependency>
-		<groupId>org.apache.struts</groupId>
-		<artifactId>struts2-embeddedjsp-plugin</artifactId>
-		<version>2.3.24.1</version>
-	</dependency>
-	<dependency>
-		<groupId>org.apache.struts</groupId>
-		<artifactId>struts2-json-plugin</artifactId>
-		<version>2.3.24.1</version>
-	</dependency>
+    <dependency>
+      <groupId>org.apache.struts</groupId>
+      <artifactId>struts2-embeddedjsp-plugin</artifactId>
+      <version>2.3.24.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.struts</groupId>
+      <artifactId>struts2-json-plugin</artifactId>
+      <version>2.3.24.1</version>
+    </dependency>
     <dependency>
       <groupId>org.apache.struts</groupId>
       <artifactId>struts2-convention-plugin</artifactId>
@@ -611,41 +612,35 @@
       <version>2.3.24.1</version>
     </dependency>
     <dependency>
-		<groupId>org.apache.struts</groupId>
-		<artifactId>struts2-tiles-plugin</artifactId>
-		<version>2.3.24.1</version>
-	</dependency>
-	<dependency>
-	<groupId>org.apache.commons</groupId>
-		<artifactId>commons-lang3</artifactId>
-		<version>3.0</version>
-	</dependency>
-	<dependency>
-		<groupId>com.jgeppert.struts2.jquery</groupId>
-		<artifactId>struts2-jquery-plugin</artifactId>
-		<version>3.7.1</version>
-	</dependency>
-		
-	    
-    
+      <groupId>org.apache.struts</groupId>
+      <artifactId>struts2-tiles-plugin</artifactId>
+      <version>2.3.24.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.jgeppert.struts2.jquery</groupId>
+      <artifactId>struts2-jquery-plugin</artifactId>
+      <version>3.7.1</version>
+    </dependency>
     <dependency>
       <groupId>jboss</groupId>
       <artifactId>javassist</artifactId>
       <version>3.7.ga</version>
     </dependency>
-    
     <dependency>
-    <groupId>org.apache.commons</groupId>
-    <artifactId>commons-dbcp2</artifactId>
-    <version>2.1.1</version>
-  </dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-dbcp2</artifactId>
+      <version>2.1.1</version>
+    </dependency>
     <dependency>
-    <groupId>mysql</groupId>
-    <artifactId>mysql-connector-java</artifactId>
-    <version>5.1.38</version>
-  </dependency>
-        
-      
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.38</version>
+    </dependency>
   </dependencies>
   <repositories>
     <repository>
@@ -657,6 +652,12 @@
   <build>
     <sourceDirectory>src</sourceDirectory>
     <resources>
+      <resource>
+        <directory>src</directory>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+      </resource>
       <resource>
         <directory>src</directory>
         <excludes>
