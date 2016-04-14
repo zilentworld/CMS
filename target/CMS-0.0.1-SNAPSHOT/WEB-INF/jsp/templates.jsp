@@ -23,12 +23,19 @@
     .ov-hidden {
         overflow: hidden;
     }
-    h2, h3{
+    h2, h3 {
         text-align: center;
     }
 </style>
 <body>
     <div>
+    	<s:div style="top: 20;">
+    		<s:if test="errMsg !=null && errMsg.length() > 0">
+    			<h3>
+    				<s:property value="errMsg"/>
+    			</h3>
+    		</s:if>
+    	</s:div>
         <div style="height: 75vh;
                     width: 90vw;
                     position:absolute;
@@ -74,7 +81,6 @@
     $(document).ready(function(){
         $("img").click(function(){
         	$("#templateFrm #imgSrc").val($(this).attr('src'));
-        	alert($("#templateFrm #imgSrc").val());
    			$("#templateFrm").attr('action', 'pickTemplate.action');
         	$("#templateFrm").submit();
         });

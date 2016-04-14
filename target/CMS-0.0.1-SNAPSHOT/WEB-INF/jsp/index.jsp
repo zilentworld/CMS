@@ -83,7 +83,6 @@
 	<script>
 		$(document).ready(function() {
 			$("#createBlogSite").click(function() {
-				alert("WELCOME!");
 				var frm = $("#idxForm");
    				frm.attr('action', 'showTemplate.action');
 				frm.submit();

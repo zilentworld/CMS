@@ -3,11 +3,21 @@
 <struts>
     <constant name="struts.devMode" value="true" />
     <package name="test" extends="struts-default" namespace="/">
+    
 	    <action name="showTemplate" class="newBlogSite"  method="showTemplate">
 	        <result name="success">/WEB-INF/jsp/templates.jsp</result>
 	    </action>
-	    <action name="pickTemplate" class="newBlogSite"  method="pickTemplate">
-	        <result name="success">/WEB-INF/jsp/requestRegister.jsp</result>
+	    
+	    <action name="pickTemplate" class="newBlogSite">
+	        <result name="error">/WEB-INF/jsp/templates.jsp</result>
+            <result name="success">/WEB-INF/jsp/requestRegister.jsp</result>
 	    </action>
+	    
+	    <action name="processRegister" class="registerCms">
+	        <result name="error">/WEB-INF/jsp/requestRegister.jsp</result>
+	        <result name="input">/WEB-INF/jsp/requestRegister.jsp</result>
+	        <result name="success">/WEB-INF/jsp/index.jsp</result>
+	    </action>
+	    
     </package>
 </struts>

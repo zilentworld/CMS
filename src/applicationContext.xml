@@ -11,38 +11,47 @@
 					    http://www.springframework.org/schema/context/spring-context.xsd"
 	xmlns:tx="http://www.springframework.org/schema/tx">
 	
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" p:dataSource-ref="dataSource">		
-		<property name="packagesToScan" value="com.jiro.model"></property>
-	    <property name="hibernateProperties">
-	        <props>
-	            <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-	            <prop key="hibernate.show_sql">true</prop>
-	        </props>
-	    </property>
-	</bean>
-	
-	
+    
+	<!--     model -->
+    <bean id="cmsUser" class="com.jiro.model.CmsUser" scope="prototype" />
+    <bean id="cmsUserType" class="com.jiro.model.CmsUserType" scope="prototype" />
     <bean id="cmsTemplates" class="com.jiro.model.CmsTemplates" scope="prototype" />
+    
+	<!--     dao -->
+    <bean id="cmsUserDao" class="com.jiro.dao.CmsUserDao" scope="prototype" />
+    <bean id="cmsUserTypeDao" class="com.jiro.dao.CmsUserTypeDao" scope="prototype" />
     <bean id="cmsTemplatesDao" class="com.jiro.dao.CmsTemplatesDao" scope="prototype" />
-		    
-	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+    
+    <bean id="genericDao" abstract="true" class="com.jiro.dao.GenericDaoImpl" scope="prototype">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
-    <bean id="newBlogSite" class="com.jiro.action.CreateNewBlogSiteAction" scope="prototype">
-    	<property name="cmsTemplatesService">
-    		<ref bean="cmsTemplatesService"/>
-    	</property>
+	<!--     service -->
+    <bean id="cmsUserService" class="com.jiro.service.CmsUserServiceImpl" scope="prototype">
+    	<property name="cmsUserDao" ref="cmsUserDao" />
+    	<property name="cmsUserTypeService" ref="cmsUserTypeService" />
     </bean>
     
-    <bean id="cmsTemplatesService" class="com.jiro.service.CmsTemplatesServiceImpl">
-    	<property name="cmsTemplatesDao">
-    		<ref bean="cmsTemplatesDao"/>
-    	</property>
+    <bean id="cmsUserTypeService" class="com.jiro.service.CmsUserTypeServiceImpl" scope="prototype">
+    	<property name="cmsUserTypeDao" ref="cmsUserTypeDao"/>
+    </bean>
+    
+    <bean id="cmsTemplatesService" class="com.jiro.service.CmsTemplatesServiceImpl" scope="prototype">
+    	<property name="cmsTemplatesDao" ref="cmsTemplatesDao"/>
+    </bean>
+    
+    
+	<!--     action -->
+    <bean id="registerCms" class="com.jiro.action.RegisterAction" scope="prototype">
+    	<property name="cmsUserService" ref="cmsUserService" />
+    	<property name="cmsTemplatesService" ref="cmsTemplatesService"/>
+    </bean>
+    
+    <bean id="newBlogSite" class="com.jiro.action.CreateNewBlogSiteAction" scope="prototype">
+    	<property name="cmsTemplatesService" ref="cmsTemplatesService"/>
     </bean>
 
+	<!-- 	settings -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	<tx:annotation-driven proxy-target-class="true"/>
 		
@@ -55,6 +64,22 @@
 		p:url="jdbc:mysql://localhost:3306/cms"
 		p:driverClassName="com.mysql.jdbc.Driver" p:username="root"
 		p:password="12345">
+	</bean>
+	
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" p:dataSource-ref="dataSource">		
+		<property name="packagesToScan" value="com.jiro.model"></property>
+	    <property name="hibernateProperties">
+	        <props>
+	            <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+	            <prop key="hibernate.show_sql">true</prop>
+	        </props>
+	    </property>
 	</bean>
 
 </beans>

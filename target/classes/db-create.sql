@@ -101,4 +101,9 @@ CREATE TABLE `site_comment` (
    ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-My	
+CREATE TABLE `cms_templates` (
+  `template_name` varchar(20) NOT NULL,
+  `webpath` varchar(100) DEFAULT NULL,
+  `template_img_name` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`template_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

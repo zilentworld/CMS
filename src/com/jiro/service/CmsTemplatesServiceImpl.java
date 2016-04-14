@@ -19,10 +19,18 @@ public class CmsTemplatesServiceImpl implements CmsTemplatesService {
     public void setCmsTemplatesDao(CmsTemplatesDao cmsTemplatesDao) {
         this.cmsTemplatesDao = cmsTemplatesDao;
     }
+    
+
+    @Override
+    public CmsTemplates get(long templateId) {
+        return cmsTemplatesDao.get(templateId);
+    }
 
     @Override
     public CmsTemplates getByImgSrc(String imgSrc) {
+        System.out.println("service img src");
         if(checkImgSrc(imgSrc)) {
+            System.out.println("pasok");
             int x = imgSrc.lastIndexOf("/") + 1;
             String webpath = imgSrc.substring(0, x);
             String imgName = imgSrc.substring(x);
@@ -37,6 +45,8 @@ public class CmsTemplatesServiceImpl implements CmsTemplatesService {
     }
     
     private boolean checkImgSrc(String imgSrc) {
+        System.out.println("check img src");
+        System.out.println("" + imgSrc.contains("/") + ":" + imgSrc.contains(".png") + ":" + imgSrc.contains(".jpg") + ":" +imgSrc.contains(".jpeg"));
         return (imgSrc.contains("/") && (
                     imgSrc.contains(".png") ||
                     imgSrc.contains(".jpg") ||
