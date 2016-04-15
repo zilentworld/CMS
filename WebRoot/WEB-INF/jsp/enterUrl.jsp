@@ -16,14 +16,14 @@
 	                left: 0;
 	                right: 0;
 	                margin: auto;">
-	    	<h2>
-	    		Enter your URL
-	    	</h2>
-	    	<s:property value="#session.cms_username"/>
-	    	<s:property value="#session.cms_user_type_code"/>
-	    	<s:property value="#session.cms_template.templateName"/>
-	    	<s:property value="#session.cms_user.cmsUsername"/>
-	    	<s:textfield placeholder="Your URL here" name="siteUrl" />
+	        <div style="margin: 5%;">
+		    	<h2>
+		    		Enter your URL
+		    	</h2>
+		    	<s:form method="post">
+		    		<s:textfield placeholder="Your URL here" name="siteUrl" />
+		    	</s:form>
+	    	</div>
 		</s:div>
 	</s:div>
 	<s:form id="idxForm" action="showTemplate">
