@@ -40,9 +40,8 @@ public class LoginAction extends ActionSupport implements SessionAware {
     @Override
     public String execute() throws Exception {
         sessionMap.put(Constants.CMS_SESSION_CMS_USER, cmsUser);
-        sessionMap.put(Constants.CMS_SESSION_USERNAME, cmsUser.getCmsUsername());
-        sessionMap.put(Constants.CMS_SESSION_USER_TYPE_CODE, cmsUser.getCmsUserTypeCode());
-        return "SUCCESS";
+        
+        return SUCCESS;
     }
 
     @Override

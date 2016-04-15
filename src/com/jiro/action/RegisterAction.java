@@ -111,8 +111,6 @@ public class RegisterAction extends ActionSupport implements SessionAware {
             return ERROR;
         }
         sessionMap.put(Constants.CMS_SESSION_CMS_USER, cmsUserRegister);
-        sessionMap.put(Constants.CMS_SESSION_USERNAME, cmsUserRegister.getCmsUsername());
-        sessionMap.put(Constants.CMS_SESSION_USER_TYPE_CODE, cmsUserRegister.getCmsUserTypeCode());
         
         return SUCCESS;
     }
