@@ -1,10 +1,15 @@
 package com.jiro.action;
 
+import java.util.Map;
+
+import org.apache.struts2.interceptor.SessionAware;
+
 import com.jiro.model.CmsTemplates;
 import com.jiro.service.CmsTemplatesService;
+import com.jiro.utility.Constants;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class CreateNewBlogSiteAction extends ActionSupport {
+public class CreateNewBlogSiteAction extends ActionSupport implements SessionAware {
 
     /**
      * 
@@ -15,6 +20,7 @@ public class CreateNewBlogSiteAction extends ActionSupport {
     private CmsTemplatesService cmsTemplatesService;
     private String imgSrc;
     private String errMsg;
+    private Map<String, Object> sessionMap;
 
     public String getImgSrc() {
         return imgSrc;
@@ -61,6 +67,12 @@ public class CreateNewBlogSiteAction extends ActionSupport {
             return ERROR;
         }
         System.out.println(cmsTemplates.getTemplateName());
+        sessionMap.put(Constants.CMS_SESSION_CMS_TEMPLATE, cmsTemplates);
         return SUCCESS;
+    }
+
+    @Override
+    public void setSession(Map<String, Object> sessionMap) {
+        this.sessionMap = sessionMap;
     }
 }

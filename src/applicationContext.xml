@@ -50,6 +50,10 @@
     <bean id="newBlogSite" class="com.jiro.action.CreateNewBlogSiteAction" scope="prototype">
     	<property name="cmsTemplatesService" ref="cmsTemplatesService"/>
     </bean>
+    
+    <bean id="loginAction" class="com.jiro.action.LoginAction" scope="prototype">
+    	<property name="cmsUserService" ref="cmsUserService" />
+    </bean>
 
 	<!-- 	settings -->
 	<tx:annotation-driven transaction-manager="transactionManager" />

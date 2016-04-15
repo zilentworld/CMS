@@ -16,7 +16,13 @@
 	    <action name="processRegister" class="registerCms">
 	        <result name="error">/WEB-INF/jsp/requestRegister.jsp</result>
 	        <result name="input">/WEB-INF/jsp/requestRegister.jsp</result>
-	        <result name="success">/WEB-INF/jsp/index.jsp</result>
+	        <result name="success">/WEB-INF/jsp/enterUrl.jsp</result>
+	    </action>
+	    
+	    <action name="processLogin" class="loginAction">
+	        <result name="error">/WEB-INF/jsp/requestRegister.jsp</result>
+	        <result name="input">/WEB-INF/jsp/requestRegister.jsp</result>
+	        <result name="success">/WEB-INF/jsp/enterUrl.jsp</result>
 	    </action>
 	    
     </package>

@@ -35,17 +35,11 @@ public class CmsUserServiceImpl implements CmsUserService {
     }
 
     @Override
-    public CmsUser createNewCmsUser(CmsUser cmsUser, String cmsUserType) {
-        if(cmsUserTypeService.checkUserType(cmsUserType)) {
-            //cmsUser.setCmsUserType(cmsUserTypeService.getCmsUserType(cmsUserType));
-            cmsUser.setCmsUserTypeCode(cmsUserType);
-            if(cmsUserDao.persist(cmsUser) > 0)
-                return cmsUser;
-            else
-                return null;
-        } else {
-            return null;
-        }
+    public boolean createNewCmsUser(CmsUser cmsUser) {
+        if(cmsUserDao.persist(cmsUser) > 0)
+            return true;
+        else
+            return false;
     }
 
     @Override
@@ -64,5 +58,13 @@ public class CmsUserServiceImpl implements CmsUserService {
         }
         
         return false;
+    }
+    
+    @Override
+    public boolean checkLogin(CmsUser cmsUser) {
+        if(cmsUserDao.getByLogin(cmsUser.getCmsUsername(), cmsUser.getCmsPassword()) != null)
+            return true;
+        else 
+            return false;        
     }
 }
