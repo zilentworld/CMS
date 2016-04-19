@@ -67,4 +67,13 @@ public class CmsUserServiceImpl implements CmsUserService {
         else 
             return false;        
     }
+    
+
+    public CmsUser getByLogin(CmsUser cmsUser) {
+        return getByLogin(cmsUser.getCmsUsername(), cmsUser.getCmsPassword());
+    }
+    
+    public CmsUser getByLogin(String username, String password) {
+        return cmsUserDao.getByLogin(username, password);
+    }
 }

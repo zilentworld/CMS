@@ -4,13 +4,17 @@
     <constant name="struts.devMode" value="true" />
     <package name="test" extends="struts-default" namespace="/">
     
+        <result-types>
+            <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
+        </result-types>
+    
 	    <action name="showTemplate" class="newBlogSite"  method="showTemplate">
 	        <result name="success">/WEB-INF/jsp/templates.jsp</result>
 	    </action>
 	    
 	    <action name="pickTemplate" class="newBlogSite">
 	        <result name="error">/WEB-INF/jsp/templates.jsp</result>
-            <result name="success">/WEB-INF/jsp/requestRegister.jsp</result>
+	        <result name="success">/WEB-INF/jsp/requestRegister.jsp</result>
 	    </action>
 	    
 	    <action name="processRegister" class="registerCms">
@@ -24,6 +28,15 @@
 	        <result name="input">/WEB-INF/jsp/requestRegister.jsp</result>
 	        <result name="success">/WEB-INF/jsp/enterUrl.jsp</result>
 	    </action>
+	    
+	    <action name="confirmUrl" class="userSiteAction">
+	        <result name="input">/WEB-INF/jsp/enterUrl.jsp</result>
+	        <result name="error">/WEB-INF/jsp/enterUrl.jsp</result>
+	    	<result name="template1" type="tiles">theme1</result>
+	    	<result name="template2" type="tiles">theme2</result>
+	    	<result name="template3" type="tiles">theme3</result>
+	    </action>
+	    
 	    
     </package>
 </struts>

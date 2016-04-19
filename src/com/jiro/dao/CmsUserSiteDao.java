@@ -17,10 +17,11 @@ public class CmsUserSiteDao extends GenericDaoImpl {
     }
     
     @Transactional
-    public CmsUserSite getByUrl(String cmsUrl) {
+    public CmsUserSite getByUrl(String blogUrl) {
         return (CmsUserSite) getCurrentSession()
                              .createCriteria(CmsUserSite.class)
-                             .add(Restrictions.eq("cmsUrl", cmsUrl))
+                             .add(Restrictions.eq("blogUrl", blogUrl))
                              .uniqueResult();
     }
+    
 }

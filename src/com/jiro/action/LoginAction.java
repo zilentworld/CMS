@@ -19,6 +19,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
     
     private CmsUser cmsUser;
     private CmsUserService cmsUserService;
+    private String cmsTemplateId;
     private Map<String, Object> sessionMap;
     
     public CmsUser getCmsUser() {
@@ -37,10 +38,19 @@ public class LoginAction extends ActionSupport implements SessionAware {
         this.cmsUserService = cmsUserService;
     }
     
+    
+    public String getCmsTemplateId() {
+        return cmsTemplateId;
+    }
+
+    public void setCmsTemplateId(String cmsTemplateId) {
+        this.cmsTemplateId = cmsTemplateId;
+    }
+
     @Override
     public String execute() throws Exception {
+        cmsUser = cmsUserService.getByLogin(cmsUser);
         sessionMap.put(Constants.CMS_SESSION_CMS_USER, cmsUser);
-        
         return SUCCESS;
     }
 
@@ -56,6 +66,11 @@ public class LoginAction extends ActionSupport implements SessionAware {
         } else if(!cmsUserService.checkLogin(cmsUser)) {
             addFieldError("cmsUser.cmsUsername", Constants.CMS_ERROR_INVALID_LOGIN);
             cmsUser.setCmsPassword("");            
+        }
+        try {
+            Long.parseLong(cmsTemplateId);
+        } catch (Exception e) {
+            addFieldError("cmsUserRegister.cmsUsername", Constants.CMS_ERROR_GENERIC_ERROR);
         }
     }
 

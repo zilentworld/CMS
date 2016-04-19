@@ -53,4 +53,5 @@ public class CmsTemplatesServiceImpl implements CmsTemplatesService {
                     imgSrc.contains(".jpeg")
                 ));
     }
+    
 }

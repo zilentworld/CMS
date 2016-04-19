@@ -1,14 +1,16 @@
 package com.jiro.action;
 
-import java.util.Map;
+import java.util.Map; 
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.jiro.model.CmsTemplates;
 import com.jiro.model.CmsUser;
+import com.jiro.model.CmsUserType;
 import com.jiro.service.CmsTemplatesService;
 import com.jiro.service.CmsUserService;
+import com.jiro.service.CmsUserTypeService;
 import com.jiro.utility.Constants;
 import com.jiro.utility.Utility;
 import com.opensymphony.xwork2.ActionSupport;
@@ -24,9 +26,11 @@ public class RegisterAction extends ActionSupport implements SessionAware {
     private CmsUserService cmsUserService;
     private CmsTemplates cmsTemplates;
     private CmsTemplatesService cmsTemplatesService;
+    private CmsUserTypeService cmsUserTypeService;
     private String repeatPassword;
     private String nextAction;
     private String errMsg;
+    private String cmsTemplateId;
     private Map<String, Object> sessionMap;
     
     public CmsUser getCmsUserRegister() {
@@ -84,30 +88,52 @@ public class RegisterAction extends ActionSupport implements SessionAware {
     public void setCmsTemplatesService(CmsTemplatesService cmsTemplatesService) {
         this.cmsTemplatesService = cmsTemplatesService;
     }
+    
+    public CmsUserTypeService getCmsUserTypeService() {
+        return cmsUserTypeService;
+    }
+
+    public void setCmsUserTypeService(CmsUserTypeService cmsUserTypeService) {
+        this.cmsUserTypeService = cmsUserTypeService;
+    }
+    
+    public String getCmsTemplateId() {
+        return cmsTemplateId;
+    }
+
+    public void setCmsTemplateId(String cmsTemplateId) {
+        this.cmsTemplateId = cmsTemplateId;
+    }
 
     @Override
     public String execute() throws Exception {
         System.out.println("REGISTER");
 //        System.out.println(cmsTemplateId);
         
-//        cmsTemplates = cmsTemplatesService.get(Long.parseLong(cmsTemplateId));
-        cmsTemplates = (CmsTemplates) sessionMap.get(Constants.CMS_SESSION_CMS_TEMPLATE);
+        cmsTemplates = cmsTemplatesService.get(Long.parseLong(cmsTemplateId));
+//        cmsTemplates = (CmsTemplates) sessionMap.get(Constants.CMS_SESSION_CMS_TEMPLATE);
         
         if(cmsTemplates == null) {
-            errMsg = "An error occured. Kindly restart the process";
+            errMsg = Constants.CMS_ERROR_GENERIC_ERROR;
             return ERROR;
         }
 
         System.out.println("checkexist");
         if(cmsUserService.checkExistingCmsUser(cmsUserRegister)) {
-            errMsg = "An error occurred. Kindly register again";
+            errMsg = Constants.CMS_ERROR_GENERIC_REGISTER;
             return ERROR;
         }
 
         System.out.println("createnewcms");
-        cmsUserRegister.setCmsUserTypeCode("cms_user");
+//        cmsUserRegister.setCmsUserTypeCode("cms_user");
+        CmsUserType cmsUserType = cmsUserTypeService.getCmsUserType(Constants.CMS_DEFAULT_USER_TYPE);
+        if(cmsUserType == null) {
+            errMsg = Constants.CMS_ERROR_GENERIC_REGISTER;
+            return ERROR;
+        }
+        cmsUserRegister.setCmsUserType(cmsUserType);
         if(cmsUserService.createNewCmsUser(cmsUserRegister)) {
-            errMsg = "An error occurred. Kindly register again";
+            errMsg = Constants.CMS_ERROR_GENERIC_REGISTER;
             return ERROR;
         }
         sessionMap.put(Constants.CMS_SESSION_CMS_USER, cmsUserRegister);
@@ -134,6 +160,12 @@ public class RegisterAction extends ActionSupport implements SessionAware {
             addFieldError("cmsUserRegister.cmsPassword", Constants.CMS_ERROR_PASS_NOTSAME);
             addFieldError("repeatPassword", Constants.CMS_ERROR_PASS_NOTSAME);
         }
+        try {
+            Long.parseLong(cmsTemplateId);
+        } catch (Exception e) {
+            addFieldError("cmsUserRegister.cmsUsername", Constants.CMS_ERROR_GENERIC_ERROR);
+        }
+        
     }
 
     @Override

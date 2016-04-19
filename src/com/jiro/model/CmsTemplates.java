@@ -1,8 +1,13 @@
 package com.jiro.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,7 +23,10 @@ public class CmsTemplates {
     private String webpath;
     @Column(name="template_img_name")
     private String templateImgName;
-        
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cmsTemplates", fetch = FetchType.LAZY)
+    private Set<CmsUserSite> cmsUserSites;
+    
     public long getTemplateId() {
         return templateId;
     }
@@ -43,5 +51,11 @@ public class CmsTemplates {
     public void setTemplateImgName(String templateImgName) {
         this.templateImgName = templateImgName;
     }
-    
+    public Set<CmsUserSite> getCmsUserSites() {
+        return cmsUserSites;
+    }
+    public void setCmsUserSites(Set<CmsUserSite> cmsUserSites) {
+        this.cmsUserSites = cmsUserSites;
+    }
+        
 }

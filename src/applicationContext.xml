@@ -20,6 +20,7 @@
 	<!--     dao -->
     <bean id="cmsUserDao" class="com.jiro.dao.CmsUserDao" scope="prototype" />
     <bean id="cmsUserTypeDao" class="com.jiro.dao.CmsUserTypeDao" scope="prototype" />
+    <bean id="cmsUserSiteDao" class="com.jiro.dao.CmsUserSiteDao" scope="prototype" />
     <bean id="cmsTemplatesDao" class="com.jiro.dao.CmsTemplatesDao" scope="prototype" />
     
     <bean id="genericDao" abstract="true" class="com.jiro.dao.GenericDaoImpl" scope="prototype">
@@ -40,11 +41,16 @@
     	<property name="cmsTemplatesDao" ref="cmsTemplatesDao"/>
     </bean>
     
+    <bean id="cmsUserSiteService" class="com.jiro.service.CmsUserSiteServiceImpl" scope="prototype">
+    	<property name="cmsUserSiteDao" ref="cmsUserSiteDao" />
+    </bean>
+    
     
 	<!--     action -->
     <bean id="registerCms" class="com.jiro.action.RegisterAction" scope="prototype">
     	<property name="cmsUserService" ref="cmsUserService" />
     	<property name="cmsTemplatesService" ref="cmsTemplatesService"/>
+    	<property name="cmsUserTypeService" ref="cmsUserTypeService" />
     </bean>
     
     <bean id="newBlogSite" class="com.jiro.action.CreateNewBlogSiteAction" scope="prototype">
@@ -54,6 +60,12 @@
     <bean id="loginAction" class="com.jiro.action.LoginAction" scope="prototype">
     	<property name="cmsUserService" ref="cmsUserService" />
     </bean>
+    
+    <bean id="userSiteAction" class="com.jiro.action.BlogUrlAction" scope="prototype">
+    	<property name="cmsUserSiteService" ref="cmsUserSiteService" />
+    	<property name="cmsTemplatesService" ref="cmsTemplatesService" />
+    </bean>
+    
 
 	<!-- 	settings -->
 	<tx:annotation-driven transaction-manager="transactionManager" />

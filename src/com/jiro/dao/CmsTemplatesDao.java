@@ -30,5 +30,5 @@ public class CmsTemplatesDao extends GenericDaoImpl {
             return null;
         }
     }
-
+    
 }

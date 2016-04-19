@@ -19,6 +19,11 @@ public final class Constants {
     public static final String CMS_ERROR_REPEATPASS_REQUIRED = "Repeat Password is required";
     public static final String CMS_ERROR_PASS_NOTSAME = "Password must be the same";
     public static final String CMS_ERROR_GENERIC_ERROR = "An error occured. Kindly restart the process";
+    public static final String CMS_ERROR_GENERIC_REGISTER = "An error occurred. Kindly register again";
+    public static final String CMS_ERROR_BLOG_URL_TAKEN = "Site name is taken";
+    
+    //CMS Variables
+    public static final String CMS_DEFAULT_USER_TYPE = "cms_user";
     
     //Integer values for CMS
     public static final int CMS_USERNAME_MIN_LENGTH = 5;

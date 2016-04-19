@@ -22,11 +22,11 @@ public class CmsUser {
     private String cmsUsername;
     @Column(name="cms_password")
     private String cmsPassword;
-//    @ManyToOne
-//    @JoinColumn(name = "cms_user_type")
-//    private CmsUserType cmsUserType;
-    @Column(name="cms_user_type_code")
-    private String cmsUserTypeCode;
+    @ManyToOne
+    @JoinColumn(name = "cms_user_type_code")
+    private CmsUserType cmsUserType;
+//    @Column(name="cms_user_type_code")
+//    private String cmsUserTypeCode;
     
     @Column(name="cms_register_date")
     @Temporal(TemporalType.TIMESTAMP)
@@ -51,19 +51,23 @@ public class CmsUser {
         this.cmsPassword = cmsPassword;
     }
 
-    public String getCmsUserTypeCode() {
-        return cmsUserTypeCode;
-    }
-    public void setCmsUserTypeCode(String cmsUserTypeCode) {
-        this.cmsUserTypeCode = cmsUserTypeCode;
-    }
-
-//    public CmsUserType getCmsUserType() {
-//        return cmsUserType;
+//    public String getCmsUserTypeCode() {
+//        return cmsUserTypeCode;
 //    }
-//    public void setCmsUserType(CmsUserType cmsUserType) {
-//        this.cmsUserType = cmsUserType;
-//    }   
+//    
+//    public void setCmsUserTypeCode(String cmsUserTypeCode) {
+//        this.cmsUserTypeCode = cmsUserTypeCode;
+//    }
+
+
+    public CmsUserType getCmsUserType() {
+        return cmsUserType;
+    }
+    
+    public void setCmsUserType(CmsUserType cmsUserType) {
+        this.cmsUserType = cmsUserType;
+    }
+    
     public Date getCmsRegisterDate() {
         return cmsRegisterDate;
     }

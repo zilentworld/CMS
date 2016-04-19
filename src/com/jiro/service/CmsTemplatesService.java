@@ -9,5 +9,5 @@ public interface CmsTemplatesService {
     public CmsTemplates getNewCmsTemplates();
     
     public CmsTemplates get(long templateId);
-    
+        
 }

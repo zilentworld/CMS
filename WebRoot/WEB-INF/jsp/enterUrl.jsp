@@ -20,8 +20,15 @@
 		    	<h2>
 		    		Enter your URL
 		    	</h2>
-		    	<s:form method="post">
-		    		<s:textfield placeholder="Your URL here" name="siteUrl" />
+		    	<s:form method="post" action="confirmUrl">
+		    		<s:if test="msgError != null && msgError.length() > 0">
+		    			<h2>
+		    				<s:property value="msgError" />
+		    			</h2>
+		    		</s:if>
+					<s:hidden name="cmsTemplateId" value="%{cmsTemplateId}" />
+		    		<s:textfield placeholder="Your URL here" name="cmsUserSite.blogUrl" />
+		    		<s:submit />
 		    	</s:form>
 	    	</div>
 		</s:div>

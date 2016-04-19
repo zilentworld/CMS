@@ -20,6 +20,7 @@ public class CreateNewBlogSiteAction extends ActionSupport implements SessionAwa
     private CmsTemplatesService cmsTemplatesService;
     private String imgSrc;
     private String errMsg;
+    private long cmsTemplateId;
     private Map<String, Object> sessionMap;
 
     public String getImgSrc() {
@@ -58,7 +59,23 @@ public class CreateNewBlogSiteAction extends ActionSupport implements SessionAwa
         System.out.println("SHOW TEMPLATE");
         return SUCCESS;
     }
-    
+        
+    public long getCmsTemplateId() {
+        return cmsTemplateId;
+    }
+
+    public void setCmsTemplateId(long cmsTemplateId) {
+        this.cmsTemplateId = cmsTemplateId;
+    }
+
+    public Map<String, Object> getSessionMap() {
+        return sessionMap;
+    }
+
+    public void setSessionMap(Map<String, Object> sessionMap) {
+        this.sessionMap = sessionMap;
+    }
+
     @Override
     public String execute() throws Exception {
         cmsTemplates = cmsTemplatesService.getByImgSrc(imgSrc);
@@ -68,6 +85,7 @@ public class CreateNewBlogSiteAction extends ActionSupport implements SessionAwa
         }
         System.out.println(cmsTemplates.getTemplateName());
         sessionMap.put(Constants.CMS_SESSION_CMS_TEMPLATE, cmsTemplates);
+        cmsTemplateId = cmsTemplates.getTemplateId();
         return SUCCESS;
     }
 
