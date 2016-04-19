@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<!DOCTYPE struts PUBLIC 
+"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" 
+"http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
     <constant name="struts.devMode" value="true" />
     <package name="test" extends="struts-default" namespace="/">
@@ -7,9 +9,13 @@
         <result-types>
             <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
         </result-types>
+        
+	    <global-results>
+	    	<result name="next" type="tiles">${nextAction}</result>
+		</global-results>
     
 	    <action name="showTemplate" class="newBlogSite"  method="showTemplate">
-	        <result name="success">/WEB-INF/jsp/templates.jsp</result>
+	        <result name="success">/WEB-INF/jsp/templatePicker.jsp</result>
 	    </action>
 	    
 	    <action name="pickTemplate" class="newBlogSite">
@@ -32,11 +38,6 @@
 	    <action name="confirmUrl" class="userSiteAction">
 	        <result name="input">/WEB-INF/jsp/enterUrl.jsp</result>
 	        <result name="error">/WEB-INF/jsp/enterUrl.jsp</result>
-	    	<result name="template1" type="tiles">theme1</result>
-	    	<result name="template2" type="tiles">theme2</result>
-	    	<result name="template3" type="tiles">theme3</result>
 	    </action>
-	    
-	    
     </package>
 </struts>

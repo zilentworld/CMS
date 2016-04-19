@@ -23,6 +23,7 @@ public class BlogUrlAction extends ActionSupport implements SessionAware {
     private CmsUserSite cmsUserSite;
     private CmsUserSiteService cmsUserSiteService;
     private CmsTemplatesService cmsTemplatesService;
+    private String nextAction;
         
     public CmsUserSiteService getCmsUserSiteService() {
         return cmsUserSiteService;
@@ -54,7 +55,12 @@ public class BlogUrlAction extends ActionSupport implements SessionAware {
     public void setMsgError(String msgError) {
         this.msgError = msgError;
     }
-    
+    public String getNextAction() {
+        return nextAction;
+    }
+    public void setNextAction(String nextAction) {
+        this.nextAction = nextAction;
+    }
     @Override
     public String execute() throws Exception {
         cmsUserSite.setCmsUser((CmsUser) sessionMap.get(Constants.CMS_SESSION_CMS_USER));
@@ -64,7 +70,9 @@ public class BlogUrlAction extends ActionSupport implements SessionAware {
             msgError = Constants.CMS_ERROR_BLOG_URL_TAKEN;
             return ERROR;
         }
-        return cmsUserSite.getCmsTemplates().getTemplateName();
+        nextAction = cmsUserSite.getCmsTemplates().getTemplateName();
+        System.out.println("resultMsg:"+nextAction);
+        return "next";
     }
     
     @Override
