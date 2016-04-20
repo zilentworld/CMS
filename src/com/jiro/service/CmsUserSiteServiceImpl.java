@@ -5,23 +5,38 @@ import org.springframework.stereotype.Service;
 
 import com.jiro.dao.CmsUserSiteDao;
 import com.jiro.model.CmsUserSite;
+import com.jiro.model.SitePost;
 
 @Service
 public class CmsUserSiteServiceImpl implements CmsUserSiteService {
     
     @Autowired
     private CmsUserSiteDao cmsUserSiteDao;
+    @Autowired
+    private SiteUserService siteUserService;
+    @Autowired
+    private SitePostService sitePostService;
     
-    public boolean saveNewUserSite(CmsUserSite cmsUserSite) {
-        return cmsUserSiteDao.persist(cmsUserSite) > 0;
+    public void setSiteUserService(SiteUserService siteUserService) {
+        this.siteUserService = siteUserService;
     }
 
-    public CmsUserSiteDao getCmsUserSiteDao() {
-        return cmsUserSiteDao;
+    public void setSitePostService(SitePostService sitePostService) {
+        this.sitePostService = sitePostService;
     }
 
     public void setCmsUserSiteDao(CmsUserSiteDao cmsUserSiteDao) {
         this.cmsUserSiteDao = cmsUserSiteDao;
+    }
+    
+    public boolean saveNewUserSite(CmsUserSite cmsUserSite) {
+        if(cmsUserSiteDao.persist(cmsUserSite) > 0) {
+            SitePost firstPost = sitePostService.siteFirstPost(
+                    siteUserService.siteFirstUser(cmsUserSite));
+            
+            return firstPost != null;
+        } else
+            return false;
     }
 
     @Override
@@ -31,5 +46,10 @@ public class CmsUserSiteServiceImpl implements CmsUserSiteService {
         else
             return false;
     }
-        
+    
+    @Override
+    public CmsUserSite getByUrl(String blogSiteUrl) {
+        return cmsUserSiteDao.getByUrl(blogSiteUrl);
+    }
+    
 }

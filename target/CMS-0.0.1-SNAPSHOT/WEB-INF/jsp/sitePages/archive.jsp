@@ -1,6 +1,6 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <s:div>
 	<h2>
-		BANNER
+		ARCHIVE
 	</h2>
 </s:div>

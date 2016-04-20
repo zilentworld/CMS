@@ -12,10 +12,6 @@ public class CmsUserTypeServiceImpl implements CmsUserTypeService {
     @Autowired
     CmsUserTypeDao cmsUserTypeDao;
     
-    public CmsUserTypeDao getCmsUserTypeDao() {
-        return cmsUserTypeDao;
-    }
-
     public void setCmsUserTypeDao(CmsUserTypeDao cmsUserTypeDao) {
         this.cmsUserTypeDao = cmsUserTypeDao;
     }

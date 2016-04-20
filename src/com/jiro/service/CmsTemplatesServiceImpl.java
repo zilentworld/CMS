@@ -54,4 +54,8 @@ public class CmsTemplatesServiceImpl implements CmsTemplatesService {
                 ));
     }
     
+    public void initializeBlog() {
+        
+    }
+    
 }
