@@ -28,7 +28,7 @@
     }
 </style>
 <body>
-    <div>
+    <s:div>
     	<s:div style="top: 20;">
     		<s:if test="errMsg !=null && errMsg.length() > 0">
     			<h3>
@@ -36,7 +36,7 @@
     			</h3>
     		</s:if>
     	</s:div>
-        <div style="height: 75vh;
+        <s:div style="height: 75vh;
                     width: 90vw;
                     position:absolute;
 	                top:0;
@@ -48,31 +48,31 @@
             <h2>
                 Pick a template
             </h2>
-            <div style="margin: 3%;">
-                <div class="template right-open border" id="ww">
+            <s:div style="margin: 3%;">
+                <s:div class="template right-open border" id="ww">
                     <img src="<s:url value="/images/template1.png"/>" style="height: 100%; width: 100%"/>
                     <h3>
                         Template1
                     </h3>
-                </div>
-                <div class="template right-open border">
+                </s:div>
+                <s:div class="template right-open border">
                     <img src="<s:url value="/images/template2.png"/>" style="height: 100%; width: 100%" />
                     <h3>
                         Template2
                     </h3>
-                </div>
-                <div class="template border">
+                </s:div>
+                <s:div class="template border">
                     <img src="<s:url value="/images/template3.png"/>" style="height: 100%; width: 100%" />
                     <h3>
                         Template3
                     </h3>
-                </div>
-                <div style="clear:both;">
+                </s:div>
+                <s:div style="clear:both;">
 
-                </div>
-            </div>
-        </div>
-    </div>
+                </s:div>
+            </s:div>
+        </s:div>
+    </s:div>
     <s:form id="templateFrm">
     	<s:hidden id="imgSrc" name="imgSrc" />
     </s:form>
@@ -81,7 +81,7 @@
     $(document).ready(function(){
         $("img").click(function(){
         	$("#templateFrm #imgSrc").val($(this).attr('src'));
-   			$("#templateFrm").attr('action', 'pickTemplate.action');
+   			$("#templateFrm").attr('action', 'pickTemplate');
         	$("#templateFrm").submit();
         });
     });

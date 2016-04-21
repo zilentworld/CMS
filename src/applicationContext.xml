@@ -87,6 +87,14 @@
     	<property name="cmsTemplatesService" ref="cmsTemplatesService" />
     </bean>
     
+    <bean id="checkBlogUrl" class="com.jiro.action.CheckBlogUrlAction" scope="prototype">
+    	<property name="cmsUserSiteService" ref="cmsUserSiteService" />
+    </bean>
+    
+    <bean id="blogPostAction" class="com.jiro.action.BlogPostAction" scope="prototype">
+    	<property name="sitePostService" ref="sitePostService" />
+    </bean>
+    
 
 	<!-- 	settings -->
 	<tx:annotation-driven transaction-manager="transactionManager" />

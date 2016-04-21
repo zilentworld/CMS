@@ -5,8 +5,8 @@
 <head>
 </head>
 <body>
-	<div>
-		<div
+	<s:div>
+		<s:div
 			style="border:1px solid black;
                     height:600px;
                     width:1000px;
@@ -16,8 +16,8 @@
 	                left: 0;
 	                right: 0;
 	                margin: auto;">
-			<div>
-				<div
+			<s:div>
+				<s:div
 					style="width:400px;
                             height:30px;
                             position:absolute;
@@ -27,8 +27,8 @@
 	                        right: 0;
 	                        margin: auto;">
 					<h2 style="text-align:center;">Welcome to MyCMS!</h2>
-				</div>
-				<div id="createBlogSite"
+				</s:div>
+				<s:div id="createBlogSite"
 					style="border:1px solid black;
                             height: 30px;
                             width: 200px;
@@ -40,13 +40,13 @@
 	                        margin: auto;
 	                        cursor: pointer;
 	                        ">
-					<div style="margin:2%;">
+					<s:div style="margin:2%;">
 						<label style="margin:5%; cursor: pointer; text-align: center;">
 							Create New Blog Site 
 						</label>
-					</div>
-				</div>
-				<div
+					</s:div>
+				</s:div>
+				<s:div
 					style="width:400px;
                             height:30px;
                             position:absolute;
@@ -56,8 +56,8 @@
 	                        right: 0;
 	                        margin: auto;">
 					<h4 style="text-align:center;">or</h4>
-				</div>
-				<div id="loginCMS"
+				</s:div>
+				<s:div id="loginCMS"
 					style="border:1px solid black;
                             height: 30px;
                             width: 70px;
@@ -68,23 +68,23 @@
 	                        right: 0;
 	                        margin: auto;
 	                        cursor: pointer;">
-					<div style="margin:5%;">
+					<s:div style="margin:5%;">
 						<label style="margin:5%; cursor: pointer; text-align: center;">
 							Login 
 						</label>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<form id="idxForm" action="showTemplate.action">
-	</form>
+					</s:div>
+				</s:div>
+			</s:div>
+		</s:div>
+	</s:div>
+	<s:form id="idxForm" action="showTemplate">
+	</s:form>
 	<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 	<script>
 		$(document).ready(function() {
 			$("#createBlogSite").click(function() {
 				var frm = $("#idxForm");
-   				frm.attr('action', 'showTemplate.action');
+   				frm.attr('action', 'showTemplate');
 				frm.submit();
 			});
 			$("#loginCMS").click(function() {

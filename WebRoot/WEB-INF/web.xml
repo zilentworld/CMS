@@ -28,7 +28,7 @@
   </filter-mapping>
   <error-page>
     <error-code>404</error-code>
-    <location>/checkBlogUrl.action</location>
+    <location>/WEB-INF/jsp/sitePages/test.jsp</location>
   </error-page>
   <listener>
     <listener-class>

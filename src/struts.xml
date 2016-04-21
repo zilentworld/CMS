@@ -4,11 +4,23 @@
 "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
     <constant name="struts.devMode" value="true" />
+    <constant name="struts.enable.SlashesInActionNames" value="true"/>
+	<constant name="struts.mapper.alwaysSelectFullNamespace" value="false"/>	
+    <constant name="struts.action.extension" value=","/> 
+	
     <package name="test" extends="struts-default" namespace="/">
-    
+        
         <result-types>
             <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
         </result-types>
+        
+	    <action name="/*" class="checkBlogUrl">
+		    <param name="blogSiteUrl">{1}</param>
+		    <result type="redirectAction">
+		      <param name="actionName">checkBlogUrl</param>
+		      <param name="blogSiteUrl">{1}</param> 
+		    </result>
+		</action>
     
 	    <action name="showTemplate" class="newBlogSite"  method="showTemplate">
 	        <result name="success">/WEB-INF/jsp/cmsPages/templatePicker.jsp</result>
@@ -41,8 +53,17 @@
 	    </action>
 	    
 	    <action name="checkBlogUrl" class="checkBlogUrl">
-	    	<result name="success" type="tiles">${nextAction}</result>
-	    	<result name="error" type="redirect">/WEB-INF/jsp/cmsPages/index.jsp</result>
+	    	<result name="success" type="redirectAction">
+	    		<param name="actionName">postPreview</param>
+	    		<param name="nextAction">${nextAction}</param>
+	        	<param name="blogSiteUrl">${blogSiteUrl}</param>
+			</result>
+	    	<result name="error">/WEB-INF/jsp/cmsPages/index.jsp</result>
 	    </action>
+	    
+	    <action name="postPreview" class="blogPostAction">
+	    	<result name="success" type="tiles">${nextAction}</result>
+	    </action>
+	    
     </package>
 </struts>

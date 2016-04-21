@@ -16,7 +16,7 @@
 	                left: 0;
 	                right: 0;
 	                margin: auto;">
-	        <div style="margin: 5%;">
+	        <s:div style="margin: 5%;">
 		    	<h2>
 		    		Enter your URL
 		    	</h2>
@@ -30,7 +30,7 @@
 		    		<s:textfield placeholder="Your URL here" name="cmsUserSite.blogUrl" />
 		    		<s:submit />
 		    	</s:form>
-	    	</div>
+	    	</s:div>
 		</s:div>
 	</s:div>
 	<s:form id="idxForm" action="showTemplate">
