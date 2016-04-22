@@ -30,11 +30,7 @@
             <s:div id="headers" style="min-height: 5%;">
                 <s:div id="header-buttons" style="min-height: 10px;">
                     <s:div style="float:right;">
-                        <s:div id="header">
-							<s:div id="header-buttons">
-								<tiles:insertAttribute name="header" ignore="true" />
-							</s:div>
-	                    </s:div>
+						<tiles:insertAttribute name="header" ignore="true" />
                     </s:div>
                     <s:div style="clear:both;">
 
@@ -45,7 +41,7 @@
             <s:div id="body-content" style="height:70%">
                 <s:div id="body-container" style="margin: 1%">
                     <s:div id="main-content" style="min-width:70%; width:85%; max-width:85%; float:left">
-                        <s:div style="width=90%; height=90%; clear:both;" style="margin:1%">
+                        <s:div style="width=90%; height=90%; clear:both; margin:1%">
                             <s:div id="posts-content" style="margin:1%">
 		                        <s:div id="body">
 									<tiles:insertAttribute name="body" />

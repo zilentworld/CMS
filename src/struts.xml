@@ -65,5 +65,9 @@
 	    	<result name="success" type="tiles">${nextAction}</result>
 	    </action>
 	    
+	    <action name="bannerImg" class="bannerImgAction">
+	    	<result name="success">/WEB-INF/jsp/sitePages/bannerImg.jsp</result>
+	    </action>
+	    
     </package>
 </struts>

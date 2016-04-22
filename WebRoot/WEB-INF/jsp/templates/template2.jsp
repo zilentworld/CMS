@@ -18,7 +18,7 @@
 						<s:div id="header-buttons">
 							<tiles:insertAttribute name="header" ignore="true" />
 						</s:div>
-                    </s:div>
+					</s:div>
                     <s:div id="archive-content" style="margin: 3%; min-height: 30%">
 						<tiles:insertAttribute name="archive" />
                     </s:div>

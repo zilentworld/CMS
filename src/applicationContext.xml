@@ -30,6 +30,7 @@
     <bean id="siteUserDao" class="com.jiro.dao.SiteUserDao" scope="prototype" />
     <bean id="sitePostDao" class="com.jiro.dao.SitePostDao" scope="prototype" />
     <bean id="siteCommentDao" class="com.jiro.dao.SiteCommentDao" scope="prototype" />
+    <bean id="siteSettingsDao" class="com.jiro.dao.SiteSettingsDao" scope="prototype" />
     
     <bean id="genericDao" abstract="true" class="com.jiro.dao.GenericDaoImpl" scope="prototype">
 		<property name="sessionFactory" ref="sessionFactory" />
@@ -67,6 +68,10 @@
     	<property name="siteCommentDao" ref="siteCommentDao" />
     </bean>    
     
+    <bean id="siteSettingsService" class="com.jiro.service.SiteSettingsServiceImpl">
+    	<property name="siteSettingsDao" ref="siteSettingsDao" />
+    </bean>    
+    
 	<!--     action -->
     <bean id="registerCms" class="com.jiro.action.RegisterAction" scope="prototype">
     	<property name="cmsUserService" ref="cmsUserService" />
@@ -93,6 +98,10 @@
     
     <bean id="blogPostAction" class="com.jiro.action.BlogPostAction" scope="prototype">
     	<property name="sitePostService" ref="sitePostService" />
+    </bean>
+    
+    <bean id="bannerImgAction" class="com.jiro.action.BannerImageAction" scope="prototype">
+    	<property name="siteSettingsService" ref="siteSettingsService" />
     </bean>
     
 

@@ -131,11 +131,17 @@ public class RegisterAction extends ActionSupport implements SessionAware {
             errMsg = Constants.CMS_ERROR_GENERIC_REGISTER;
             return ERROR;
         }
+        System.out.println("create new");
         cmsUserRegister.setCmsUserType(cmsUserType);
         if(cmsUserService.createNewCmsUser(cmsUserRegister)) {
             errMsg = Constants.CMS_ERROR_GENERIC_REGISTER;
             return ERROR;
         }
+        System.out.println("get by login");
+        cmsUserRegister = cmsUserService.getByLogin(
+                cmsUserRegister.getCmsUsername(), 
+                cmsUserRegister.getCmsPassword());
+        System.out.println("after register, userId:"+cmsUserRegister.getCmsUserId());
         sessionMap.put(Constants.CMS_SESSION_CMS_USER, cmsUserRegister);
         
         return SUCCESS;

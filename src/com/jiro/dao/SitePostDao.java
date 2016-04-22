@@ -27,16 +27,19 @@ public class SitePostDao extends GenericDaoImpl {
     }
 
     @SuppressWarnings("unchecked")
+    @Transactional
     public List<SitePost> getList() {
         return (List<SitePost>) super.getList(SitePost.class);
     }
 
     @SuppressWarnings("unchecked")
     @Transactional
-    public List<SitePost> getPostPreview(int currPage, int maxResults) {
+    public List<SitePost> getPostPreview(String siteUrl, int currPage, int maxResults) {
         return (List<SitePost>) getCurrentSession()
                 .createCriteria(SitePost.class)
-                .addOrder(Order.desc("siteUserId"))
+                .addOrder(Order.desc("sitePostId"))
+                .createAlias("cmsUserSite", "cmsUserSite")
+                .add(Restrictions.eq("cmsUserSite.blogUrl", siteUrl))
                 .setFirstResult(maxResults * (currPage-1))
                 .setMaxResults(maxResults)
                 .list();

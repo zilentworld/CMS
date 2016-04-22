@@ -23,10 +23,33 @@ public class CmsTemplates {
     private String webpath;
     @Column(name="template_img_name")
     private String templateImgName;
-
+    @Column(name="default_banner_img")
+    private String defaultBannerImg;
+    @Column(name="default_footer_img")
+    private String defaultFooterImg;
+    @Column(name="default_background_img")
+    private String defaultBackgroundImg;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cmsTemplates", fetch = FetchType.LAZY)
     private Set<CmsUserSite> cmsUserSites;
     
+    public String getDefaultFooterImg() {
+        return defaultFooterImg;
+    }
+    public void setDefaultFooterImg(String defaultFooterImg) {
+        this.defaultFooterImg = defaultFooterImg;
+    }
+    public String getDefaultBackgroundImg() {
+        return defaultBackgroundImg;
+    }
+    public void setDefaultBackgroundImg(String defaultBackgroundImg) {
+        this.defaultBackgroundImg = defaultBackgroundImg;
+    }
+    public String getDefaultBannerImg() {
+        return defaultBannerImg;
+    }
+    public void setDefaultBannerImg(String defaultBannerImg) {
+        this.defaultBannerImg = defaultBannerImg;
+    }
     public long getTemplateId() {
         return templateId;
     }

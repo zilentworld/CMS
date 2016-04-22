@@ -16,6 +16,8 @@ public class CmsUserSiteServiceImpl implements CmsUserSiteService {
     private SiteUserService siteUserService;
     @Autowired
     private SitePostService sitePostService;
+    @Autowired
+    private SiteSettingsService siteSettingsService;
     
     public void setSiteUserService(SiteUserService siteUserService) {
         this.siteUserService = siteUserService;
@@ -33,7 +35,7 @@ public class CmsUserSiteServiceImpl implements CmsUserSiteService {
         if(cmsUserSiteDao.persist(cmsUserSite) > 0) {
             SitePost firstPost = sitePostService.siteFirstPost(
                     siteUserService.siteFirstUser(cmsUserSite));
-            
+            siteSettingsService.setInitialSettings(cmsUserSite);
             return firstPost != null;
         } else
             return false;

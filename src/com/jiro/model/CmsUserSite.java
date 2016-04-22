@@ -3,13 +3,16 @@ package com.jiro.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,7 +25,6 @@ public class CmsUserSite {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="cms_user_site_id")
     private long cmsUserSiteId;
-    
 
     @ManyToOne
     @JoinColumn(name = "cms_user_id")
@@ -43,6 +45,9 @@ public class CmsUserSite {
     @Column(name="create_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "cmsUserSite", cascade = CascadeType.ALL)
+    private SiteSettings siteSettings;
     
     
 //    public String getCmsUserId() {

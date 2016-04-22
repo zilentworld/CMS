@@ -35,8 +35,8 @@ public class SitePostServiceImpl implements SitePostService {
     }
 
     @Override
-    public List<SitePost> getPostPreview(int currPage, int maxResults) {
-        return sitePostDao.getPostPreview(currPage, maxResults);
+    public List<SitePost> getPostPreview(String siteUrl, int currPage, int maxResults) {
+        return sitePostDao.getPostPreview(siteUrl, currPage, maxResults);
     }
 
     @Override

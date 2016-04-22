@@ -39,11 +39,6 @@ public class CheckBlogUrlAction extends ActionSupport {
 
     @Override
     public String execute() throws Exception {
-        System.out.println("blogSiteUrl2:"+blogSiteUrl);
-        return SUCCESS;
-    }
-    
-    public String checkUrl() {
         HttpServletRequest request = ServletActionContext.getRequest();
         if(blogSiteUrl == null || blogSiteUrl == "")
             blogSiteUrl = request.getServletPath().substring(1);
@@ -57,6 +52,5 @@ public class CheckBlogUrlAction extends ActionSupport {
         nextAction = "home-" + cmsUserSite.getCmsTemplates().getTemplateName().toLowerCase();
         return SUCCESS;
     }
-    
 
 }

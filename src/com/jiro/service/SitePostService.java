@@ -13,7 +13,7 @@ public interface SitePostService {
 
     public List<SitePost> getUserPost(long siteUserId);
     
-    public List<SitePost> getPostPreview(int currPage, int maxResults);
+    public List<SitePost> getPostPreview(String siteUrl, int currPage, int maxResults);
     
     public SitePost siteFirstPost(SiteUser siteUser);
 
