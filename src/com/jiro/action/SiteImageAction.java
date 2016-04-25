@@ -1,27 +1,17 @@
 package com.jiro.action;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.jiro.model.SiteSettings;
 import com.jiro.service.SiteSettingsService;
-import com.opensymphony.xwork2.ActionSupport;
 
-public class BannerImageAction extends ActionSupport {
+public class SiteImageAction extends SiteAbstractAction {
 
     /**
      * 
      */
     private static final long serialVersionUID = 1L;
-    private String blogSiteUrl;
     private SiteSettings siteSettings;
     private SiteSettingsService siteSettingsService;
     
-    public String getBlogSiteUrl() {
-        return blogSiteUrl;
-    }
-    public void setBlogSiteUrl(String blogSiteUrl) {
-        this.blogSiteUrl = blogSiteUrl;
-    }
     public SiteSettingsService getSiteSettingsService() {
         return siteSettingsService;
     }
@@ -37,8 +27,8 @@ public class BannerImageAction extends ActionSupport {
     
     @Override
     public String execute() throws Exception {
-        System.out.println("PASOK SA IMG:"+blogSiteUrl);
-        siteSettings = siteSettingsService.getByUrl(blogSiteUrl);
+        System.out.println("PASOK SA IMG:"+getBlogSiteUrl());
+        siteSettings = siteSettingsService.getByUrl(getBlogSiteUrl());
         return SUCCESS;
     }
     

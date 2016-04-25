@@ -7,6 +7,10 @@ public final class Constants {
     public static final String CMS_SESSION_USERNAME = "cms_username";
     public static final String CMS_SESSION_USER_TYPE_CODE = "cms_user_type_code";
     public static final String CMS_SESSION_CMS_TEMPLATE = "cms_template";
+    public static final String CMS_SESSION_BLOG_URL = "blog_site_url";
+    
+    //Site Session Attributes
+    public static final String SITE_SESSION_SITE_USER_ID = "siteUserId";
     
     //Error Messages for CMS
     public static final String CMS_ERROR_USERNAME_REQUIRED = "Username is required";

@@ -4,9 +4,8 @@ import java.util.List;
 
 import com.jiro.model.SitePost;
 import com.jiro.service.SitePostService;
-import com.opensymphony.xwork2.ActionSupport;
 
-public class BlogPostAction extends ActionSupport {
+public class BlogPostAction extends SiteAbstractAction {
 
     /**
      * 
@@ -14,21 +13,7 @@ public class BlogPostAction extends ActionSupport {
     private static final long serialVersionUID = 1L;
     private SitePostService sitePostService;
     private List<SitePost> postPreviewList;
-    private String blogSiteUrl;
-    private String nextAction;
-        
-    public String getNextAction() {
-        return nextAction;
-    }
-    public void setNextAction(String nextAction) {
-        this.nextAction = nextAction;
-    }
-    public String getBlogSiteUrl() {
-        return blogSiteUrl;
-    }
-    public void setBlogSiteUrl(String blogSiteUrl) {
-        this.blogSiteUrl = blogSiteUrl;
-    }
+     
     public List<SitePost> getPostPreviewList() {
         return postPreviewList;
     }
@@ -44,8 +29,8 @@ public class BlogPostAction extends ActionSupport {
     
     @Override
     public String execute() throws Exception {
-        System.out.println("blogPostAction:"+blogSiteUrl);
-        postPreviewList = sitePostService.getPostPreview(blogSiteUrl, 0, 5);
+        System.out.println("blogPostAction:"+getBlogSiteUrl());
+        postPreviewList = sitePostService.getPostPreview(getBlogSiteUrl(), 0, 5);
         return SUCCESS;
     }
     

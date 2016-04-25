@@ -4,6 +4,13 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
+    <!-- <definition name="home-*" template="/WEB-INF/jsp/templates/{1}.jsp">
+        <put-attribute name="banner" value="/WEB-INF/jsp/sitePages/banner.jsp" />
+        <put-attribute name="header" value="/WEB-INF/jsp/sitePages/header.jsp" />
+        <put-attribute name="body" value="/WEB-INF/jsp/sitePages/body.jsp" />
+        <put-attribute name="archive" value="/WEB-INF/jsp/sitePages/archive.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/jsp/sitePages/footer.jsp" />
+    </definition> -->
     <definition name="home-template1" template="/WEB-INF/jsp/templates/template1.jsp">
         <put-attribute name="banner" value="/WEB-INF/jsp/sitePages/banner.jsp" />
         <put-attribute name="header" value="/WEB-INF/jsp/sitePages/header.jsp" />
@@ -24,5 +31,14 @@
         <put-attribute name="body" value="/WEB-INF/jsp/sitePages/body.jsp" />
         <put-attribute name="archive" value="/WEB-INF/jsp/sitePages/archive.jsp" />
         <put-attribute name="footer" value="/WEB-INF/jsp/sitePages/footer.jsp" />
+    </definition>
+    <definition name="postContent-template1" extends="home-template1">
+        <put-attribute name="body" value="/WEB-INF/jsp/sitePages/postContent.jsp" />
+    </definition>
+    <definition name="postContent-template2" extends="home-template2">
+        <put-attribute name="body" value="/WEB-INF/jsp/sitePages/postContent.jsp" />
+    </definition>
+    <definition name="postContent-template3" extends="home-template3">
+        <put-attribute name="body" value="/WEB-INF/jsp/sitePages/postContent.jsp" />
     </definition>
 </tiles-definitions>

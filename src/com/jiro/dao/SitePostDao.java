@@ -14,7 +14,7 @@ public class SitePostDao extends GenericDaoImpl {
 
     @Transactional
     public SitePost getById(long sitePostId) {
-        return (SitePost) super.get(SitePostDao.class,sitePostId);
+        return (SitePost) super.get(SitePost.class,sitePostId);
     }
     
     @SuppressWarnings("unchecked")

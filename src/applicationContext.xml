@@ -100,8 +100,12 @@
     	<property name="sitePostService" ref="sitePostService" />
     </bean>
     
-    <bean id="bannerImgAction" class="com.jiro.action.BannerImageAction" scope="prototype">
+    <bean id="siteImgAction" class="com.jiro.action.SiteImageAction" scope="prototype">
     	<property name="siteSettingsService" ref="siteSettingsService" />
+    </bean>
+    
+    <bean id="postContentAction" class="com.jiro.action.PostContentAction" scope="prototype">
+    	<property name="sitePostService" ref="sitePostService" />
     </bean>
     
 

@@ -6,9 +6,8 @@ import org.apache.struts2.ServletActionContext;
 
 import com.jiro.model.CmsUserSite;
 import com.jiro.service.CmsUserSiteService;
-import com.opensymphony.xwork2.ActionSupport;
 
-public class CheckBlogUrlAction extends ActionSupport {
+public class CheckBlogUrlAction extends SiteAbstractAction {
 
     /**
      * 
@@ -48,9 +47,9 @@ public class CheckBlogUrlAction extends ActionSupport {
         CmsUserSite cmsUserSite = cmsUserSiteService.getByUrl(blogSiteUrl);
         if(cmsUserSite == null)
             return ERROR;
-        
+                
         nextAction = "home-" + cmsUserSite.getCmsTemplates().getTemplateName().toLowerCase();
         return SUCCESS;
     }
-
+    
 }
