@@ -7,7 +7,7 @@
 <package name="default" namespace="/" extends="struts-default">
 </package>
 
-<include file="strutsxmls/cms/struts-cms.xml"></include>
-<include file="strutsxmls/site/struts-site.xml"></include>
+<include file="com/jiro/cms/struts-cms.xml"></include>
+<include file="com/jiro/site/struts-site.xml"></include>
     
 </struts>
