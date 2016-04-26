@@ -13,98 +13,98 @@
 	
     
 	<!--     model -->
-    <bean id="cmsUser" class="com.jiro.cms.model.CmsUser" scope="prototype" />
-    <bean id="cmsUserType" class="com.jiro.cms.model.CmsUserType" scope="prototype" />
-    <bean id="cmsTemplates" class="com.jiro.cms.model.CmsTemplates" scope="prototype" />
-    <bean id="cmsUserSite" class="com.jiro.cms.model.CmsUserSite" scope="prototype" />
-    <bean id="siteUser" class="com.jiro.site.model.SiteUser" scope="prototype" />
-    <bean id="sitePost" class="com.jiro.site.model.SitePost" scope="prototype" />
-    <bean id="siteComment" class="com.jiro.site.model.SiteComment" scope="prototype" />
+    <bean id="cmsUser" class="com.jiro.model.cms.CmsUser" scope="prototype" />
+    <bean id="cmsUserType" class="com.jiro.model.cms.CmsUserType" scope="prototype" />
+    <bean id="cmsTemplates" class="com.jiro.model.cms.CmsTemplates" scope="prototype" />
+    <bean id="cmsUserSite" class="com.jiro.model.cms.CmsUserSite" scope="prototype" />
+    <bean id="siteUser" class="com.jiro.model.site.SiteUser" scope="prototype" />
+    <bean id="sitePost" class="com.jiro.model.site.SitePost" scope="prototype" />
+    <bean id="siteComment" class="com.jiro.model.site.SiteComment" scope="prototype" />
     
     
 	<!--     dao -->
-    <bean id="cmsUserDao" class="com.jiro.cms.dao.CmsUserDao" scope="prototype" />
-    <bean id="cmsUserTypeDao" class="com.jiro.cms.dao.CmsUserTypeDao" scope="prototype" />
-    <bean id="cmsUserSiteDao" class="com.jiro.cms.dao.CmsUserSiteDao" scope="prototype" />
-    <bean id="cmsTemplatesDao" class="com.jiro.cms.dao.CmsTemplatesDao" scope="prototype" />
-    <bean id="siteUserDao" class="com.jiro.site.dao.SiteUserDao" scope="prototype" />
-    <bean id="sitePostDao" class="com.jiro.site.dao.SitePostDao" scope="prototype" />
-    <bean id="siteCommentDao" class="com.jiro.site.dao.SiteCommentDao" scope="prototype" />
-    <bean id="siteSettingsDao" class="com.jiro.site.dao.SiteSettingsDao" scope="prototype" />
+    <bean id="cmsUserDao" class="com.jiro.dao.cms.CmsUserDao" scope="prototype" />
+    <bean id="cmsUserTypeDao" class="com.jiro.dao.cms.CmsUserTypeDao" scope="prototype" />
+    <bean id="cmsUserSiteDao" class="com.jiro.dao.cms.CmsUserSiteDao" scope="prototype" />
+    <bean id="cmsTemplatesDao" class="com.jiro.dao.cms.CmsTemplatesDao" scope="prototype" />
+    <bean id="siteUserDao" class="com.jiro.dao.site.SiteUserDao" scope="prototype" />
+    <bean id="sitePostDao" class="com.jiro.dao.site.SitePostDao" scope="prototype" />
+    <bean id="siteCommentDao" class="com.jiro.dao.site.SiteCommentDao" scope="prototype" />
+    <bean id="siteSettingsDao" class="com.jiro.dao.site.SiteSettingsDao" scope="prototype" />
     
     <bean id="genericDao" abstract="true" class="com.jiro.dao.GenericDaoImpl" scope="prototype">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
 	<!--     service -->
-    <bean id="cmsUserService" class="com.jiro.cms.service.impl.CmsUserServiceImpl" scope="prototype">
+    <bean id="cmsUserService" class="com.jiro.service.cms.impl.CmsUserServiceImpl" scope="prototype">
     	<property name="cmsUserDao" ref="cmsUserDao" />
     	<property name="cmsUserTypeService" ref="cmsUserTypeService" />
     </bean>
     
-    <bean id="cmsUserTypeService" class="com.jiro.cms.service.impl.CmsUserTypeServiceImpl" scope="prototype">
+    <bean id="cmsUserTypeService" class="com.jiro.service.cms.impl.CmsUserTypeServiceImpl" scope="prototype">
     	<property name="cmsUserTypeDao" ref="cmsUserTypeDao"/>
     </bean>
     
-    <bean id="cmsTemplatesService" class="com.jiro.cms.service.impl.CmsTemplatesServiceImpl" scope="prototype">
+    <bean id="cmsTemplatesService" class="com.jiro.service.cms.impl.CmsTemplatesServiceImpl" scope="prototype">
     	<property name="cmsTemplatesDao" ref="cmsTemplatesDao"/>
     </bean>
     
-    <bean id="cmsUserSiteService" class="com.jiro.cms.service.impl.CmsUserSiteServiceImpl" scope="prototype">
+    <bean id="cmsUserSiteService" class="com.jiro.service.cms.impl.CmsUserSiteServiceImpl" scope="prototype">
     	<property name="cmsUserSiteDao" ref="cmsUserSiteDao" />
     	<property name="sitePostService" ref="sitePostService" />
     	<property name="siteUserService" ref="siteUserService" />
     </bean>
     
-    <bean id="siteUserService" class="com.jiro.site.service.impl.SiteUserServiceImpl">
+    <bean id="siteUserService" class="com.jiro.service.site.impl.SiteUserServiceImpl">
     	<property name="siteUserDao" ref="siteUserDao" />
     </bean>    
     
-    <bean id="sitePostService" class="com.jiro.site.service.impl.SitePostServiceImpl">
+    <bean id="sitePostService" class="com.jiro.service.site.impl.SitePostServiceImpl">
     	<property name="sitePostDao" ref="sitePostDao" />
     </bean>
     
-    <bean id="siteCommentService" class="com.jiro.site.service.impl.SiteCommentServiceImpl">
+    <bean id="siteCommentService" class="com.jiro.service.site.impl.SiteCommentServiceImpl">
     	<property name="siteCommentDao" ref="siteCommentDao" />
     </bean>    
     
-    <bean id="siteSettingsService" class="com.jiro.site.service.impl.SiteSettingsServiceImpl">
+    <bean id="siteSettingsService" class="com.jiro.service.site.impl.SiteSettingsServiceImpl">
     	<property name="siteSettingsDao" ref="siteSettingsDao" />
     </bean>    
     
 	<!--     action -->
-    <bean id="registerCms" class="com.jiro.cms.action.RegisterAction" scope="prototype">
+    <bean id="registerCms" class="com.jiro.action.cms.RegisterAction" scope="prototype">
     	<property name="cmsUserService" ref="cmsUserService" />
     	<property name="cmsTemplatesService" ref="cmsTemplatesService"/>
     	<property name="cmsUserTypeService" ref="cmsUserTypeService" />
     </bean>
     
-    <bean id="newBlogSite" class="com.jiro.cms.action.CreateNewBlogSiteAction" scope="prototype">
+    <bean id="newBlogSite" class="com.jiro.action.cms.CreateNewBlogSiteAction" scope="prototype">
     	<property name="cmsTemplatesService" ref="cmsTemplatesService"/>
     </bean>
     
-    <bean id="loginAction" class="com.jiro.cms.action.LoginAction" scope="prototype">
+    <bean id="loginAction" class="com.jiro.action.cms.LoginAction" scope="prototype">
     	<property name="cmsUserService" ref="cmsUserService" />
     </bean>
     
-    <bean id="userSiteAction" class="com.jiro.site.action.BlogUrlAction" scope="prototype">
+    <bean id="userSiteAction" class="com.jiro.action.site.BlogUrlAction" scope="prototype">
     	<property name="cmsUserSiteService" ref="cmsUserSiteService" />
     	<property name="cmsTemplatesService" ref="cmsTemplatesService" />
     </bean>
     
-    <bean id="checkBlogUrl" class="com.jiro.cms.action.CheckBlogUrlAction" scope="prototype">
+    <bean id="checkBlogUrl" class="com.jiro.action.cms.CheckBlogUrlAction" scope="prototype">
     	<property name="cmsUserSiteService" ref="cmsUserSiteService" />
     </bean>
     
-    <bean id="blogPostAction" class="com.jiro.site.action.PostPreviewAction" scope="prototype">
+    <bean id="blogPostAction" class="com.jiro.action.site.PostPreviewAction" scope="prototype">
     	<property name="sitePostService" ref="sitePostService" />
     </bean>
     
-    <bean id="siteImgAction" class="com.jiro.site.action.SiteImageAction" scope="prototype">
+    <bean id="siteImgAction" class="com.jiro.action.site.SiteImageAction" scope="prototype">
     	<property name="siteSettingsService" ref="siteSettingsService" />
     </bean>
     
-    <bean id="postContentAction" class="com.jiro.site.action.PostContentAction" scope="prototype">
+    <bean id="postContentAction" class="com.jiro.action.site.PostContentAction" scope="prototype">
     	<property name="sitePostService" ref="sitePostService" />
     </bean>
     
@@ -131,7 +131,7 @@
 	
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" p:dataSource-ref="dataSource">		
-		<property name="packagesToScan" value="com.jiro.model"></property>
+		<property name="packagesToScan" value="com.jiro.model" />
 	    <property name="hibernateProperties">
 	        <props>
 	            <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
