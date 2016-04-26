@@ -4,7 +4,7 @@
 	<s:action name="postPreview" executeResult="false">
 		<s:iterator value="postPreviewList">
 		    <s:div id="post-title-%{sitePostId}">
-		    	<s:a href="javascript:callAction('postContent?postId='+%{sitePostId});">
+		    	<s:a href="javascript:callAction('postContent?postId=%{sitePostId}&blogSiteUrl=%{blogSiteUrl}');">
 		    		<s:property value="sitePostTitle"/>
 		    	</s:a>
 		    </s:div>

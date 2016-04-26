@@ -1,11 +1,15 @@
 package com.jiro.action;
 
 import java.util.List;
+import java.util.Map;
+
+import org.apache.struts2.interceptor.SessionAware;
 
 import com.jiro.model.SitePost;
 import com.jiro.service.SitePostService;
+import com.jiro.utility.Constants;
 
-public class BlogPostAction extends SiteAbstractAction {
+public class PostPreviewAction extends SiteAbstractAction implements SessionAware {
 
     /**
      * 
@@ -13,7 +17,8 @@ public class BlogPostAction extends SiteAbstractAction {
     private static final long serialVersionUID = 1L;
     private SitePostService sitePostService;
     private List<SitePost> postPreviewList;
-     
+    private Map<String, Object> sessionMap;
+    
     public List<SitePost> getPostPreviewList() {
         return postPreviewList;
     }
@@ -29,9 +34,17 @@ public class BlogPostAction extends SiteAbstractAction {
     
     @Override
     public String execute() throws Exception {
-        System.out.println("blogPostAction:"+getBlogSiteUrl());
-        postPreviewList = sitePostService.getPostPreview(getBlogSiteUrl(), 0, 5);
+        String blogUrl = (String) sessionMap.get(Constants.CMS_SESSION_BLOG_URL);
+        System.out.println("blogPostAction:"+blogUrl);
+        postPreviewList = sitePostService.getPostPreview(blogUrl, 0, 5);
+        
         return SUCCESS;
     }
+    @Override
+    public void setSession(Map<String, Object> sessionMap) {
+        this.sessionMap = sessionMap;
+    }
+
+    
     
 }

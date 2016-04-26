@@ -96,7 +96,7 @@
     	<property name="cmsUserSiteService" ref="cmsUserSiteService" />
     </bean>
     
-    <bean id="blogPostAction" class="com.jiro.action.BlogPostAction" scope="prototype">
+    <bean id="blogPostAction" class="com.jiro.action.PostPreviewAction" scope="prototype">
     	<property name="sitePostService" ref="sitePostService" />
     </bean>
     

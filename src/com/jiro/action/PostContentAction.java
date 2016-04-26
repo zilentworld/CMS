@@ -2,7 +2,6 @@ package com.jiro.action;
 
 import com.jiro.model.SitePost;
 import com.jiro.service.SitePostService;
-import com.opensymphony.xwork2.ActionSupport;
 
 public class PostContentAction extends SiteAbstractAction {
     

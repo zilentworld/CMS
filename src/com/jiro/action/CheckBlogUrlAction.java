@@ -1,44 +1,37 @@
 package com.jiro.action;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.SessionAware;
 
 import com.jiro.model.CmsUserSite;
 import com.jiro.service.CmsUserSiteService;
+import com.jiro.utility.Constants;
+import com.sun.tools.jxc.apt.Const;
 
-public class CheckBlogUrlAction extends SiteAbstractAction {
+public class CheckBlogUrlAction extends SiteAbstractAction implements SessionAware {
 
     /**
      * 
      */
     private static final long serialVersionUID = 1L;
     private CmsUserSiteService cmsUserSiteService;
-    private String blogSiteUrl;
-    private String nextAction;
+    private Map<String, Object> sessionMap;
             
-    public String getNextAction() {
-        return nextAction;
-    }
-    public void setNextAction(String nextAction) {
-        this.nextAction = nextAction;
-    }
     public CmsUserSiteService getCmsUserSiteService() {
         return cmsUserSiteService;
     }
     public void setCmsUserSiteService(CmsUserSiteService cmsUserSiteService) {
         this.cmsUserSiteService = cmsUserSiteService;
     }
-    public String getBlogSiteUrl() {
-        return blogSiteUrl;
-    }
-    public void setBlogSiteUrl(String blogSiteUrl) {
-        this.blogSiteUrl = blogSiteUrl;
-    }
 
     @Override
     public String execute() throws Exception {
         HttpServletRequest request = ServletActionContext.getRequest();
+        String blogSiteUrl = getBlogSiteUrl();
         if(blogSiteUrl == null || blogSiteUrl == "")
             blogSiteUrl = request.getServletPath().substring(1);
         
@@ -48,8 +41,17 @@ public class CheckBlogUrlAction extends SiteAbstractAction {
         if(cmsUserSite == null)
             return ERROR;
                 
-        nextAction = "home-" + cmsUserSite.getCmsTemplates().getTemplateName().toLowerCase();
+        String nextAction = "home-" + cmsUserSite.getCmsTemplates().getTemplateName().toLowerCase();
+        setNextAction(nextAction);
+        
+        sessionMap.put(Constants.CMS_SESSION_BLOG_URL, cmsUserSite.getBlogUrl());
+        
         return SUCCESS;
+    }
+    
+    @Override
+    public void setSession(Map<String, Object> sessionMap) {
+        this.sessionMap = sessionMap;
     }
     
 }
