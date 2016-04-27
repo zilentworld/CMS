@@ -73,7 +73,7 @@
     </bean>    
     
 	<!--     action -->
-    <bean id="registerCms" class="com.jiro.action.cms.RegisterAction" scope="prototype">
+    <bean id="registerCms" class="com.jiro.action.cms.CmsRegisterAction" scope="prototype">
     	<property name="cmsUserService" ref="cmsUserService" />
     	<property name="cmsTemplatesService" ref="cmsTemplatesService"/>
     	<property name="cmsUserTypeService" ref="cmsUserTypeService" />
@@ -83,7 +83,7 @@
     	<property name="cmsTemplatesService" ref="cmsTemplatesService"/>
     </bean>
     
-    <bean id="loginAction" class="com.jiro.action.cms.LoginAction" scope="prototype">
+    <bean id="loginAction" class="com.jiro.action.cms.CmsLoginAction" scope="prototype">
     	<property name="cmsUserService" ref="cmsUserService" />
     </bean>
     
@@ -103,18 +103,41 @@
     <bean id="siteImgAction" class="com.jiro.action.site.SiteImageAction" scope="prototype">
     	<property name="siteSettingsService" ref="siteSettingsService" />
     </bean>
+        
+    <bean abstract="true" id="siteAbstractAction" class="com.jiro.action.site.SiteAbstractAction" scope="prototype">
+    	<property name="cmsUserSiteService" ref="cmsUserSiteService" />
+    </bean>
     
     <bean id="postContentAction" class="com.jiro.action.site.PostContentAction" scope="prototype">
     	<property name="sitePostService" ref="sitePostService" />
+    	<property name="cmsUserSiteService" ref="cmsUserSiteService" />
     </bean>
     
+    <bean id="siteLoginAction" class="com.jiro.action.site.SiteLoginAction" scope="prototype">
+    	<property name="siteUserService" ref="siteUserService" />
+    	<property name="siteUser" ref="siteUser" />
+    	<property name="cmsUserSiteService" ref="cmsUserSiteService" />
+    </bean>
+    
+    <bean id="siteRegisterAction" class="com.jiro.action.site.SiteRegisterAction" scope="prototype">
+    	<property name="siteUserService" ref="siteUserService" />
+    	<property name="cmsUserSiteService" ref="cmsUserSiteService" />
+    	<property name="siteUser" ref="siteUser" />
+    </bean>
+    
+    <bean id="logoutAction" class="com.jiro.action.site.SiteLogoutAction" scope="prototype">
+    	<property name="cmsUserSiteService" ref="cmsUserSiteService" />
+    </bean>
+    
+    <bean id="actionForwarder" class="com.jiro.action.site.ActionForwarder" />
 
 	<!-- 	settings -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	<tx:annotation-driven proxy-target-class="true"/>
 		
 	<context:component-scan base-package="com.jiro.dao" />
-	<context:component-scan base-package="com.jiro.service" />
+	<context:component-scan base-package="com.jiro.service.site" />
+	<context:component-scan base-package="com.jiro.service.cms" />
 	
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource "

@@ -14,22 +14,22 @@ public class SiteUserDao extends GenericDaoImpl {
     public SiteUser getById(long siteUserId) {
         return (SiteUser) super.get(SiteUser.class, siteUserId);
     }
-    
+
     @Transactional
     public SiteUser getByUsername(String siteUsername) {
-        return (SiteUser) getCurrentSession()
-                          .createCriteria(SiteUser.class)
-                          .add(Restrictions.eq("siteUserUsername", siteUsername))
-                          .uniqueResult();
+        return (SiteUser) getCurrentSession().createCriteria(SiteUser.class)
+                .add(Restrictions.eq("siteUserUsername", siteUsername))
+                .uniqueResult();
     }
-    
+
     @Transactional
-    public SiteUser getByLogin(String siteUsername, String sitePassword) {
-        return (SiteUser) getCurrentSession()
-                          .createCriteria(SiteUser.class)
-                          .add(Restrictions.eq("siteUserUsername", siteUsername))
-                          .add(Restrictions.eq("siteUserPassword", sitePassword))
-                          .uniqueResult();
+    public SiteUser getByLogin(String siteUsername, String sitePassword, String siteUrl) {
+        return (SiteUser) getCurrentSession().createCriteria(SiteUser.class)
+                .add(Restrictions.eq("siteUserUsername", siteUsername))
+                .add(Restrictions.eq("siteUserPassword", sitePassword))
+                .createAlias("cmsUserSite", "cmsUserSite")
+                .add(Restrictions.eq("cmsUserSite.blogUrl", siteUrl))
+                .uniqueResult();
     }
 
 }

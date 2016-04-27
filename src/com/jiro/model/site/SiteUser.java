@@ -47,7 +47,7 @@ public class SiteUser {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "siteUser", fetch = FetchType.LAZY)
     private Set<SiteComment> siteComments;
-
+    
     public long getSiteUserId() {
         return siteUserId;
     }
@@ -103,7 +103,7 @@ public class SiteUser {
     public void setSiteComments(Set<SiteComment> siteComments) {
         this.siteComments = siteComments;
     }
-    
+
     public SiteUser() {}
     
     public SiteUser(CmsUserSite cmsUserSite) {

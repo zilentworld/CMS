@@ -10,7 +10,7 @@ import com.jiro.service.cms.CmsUserService;
 import com.jiro.utility.Constants;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class LoginAction extends ActionSupport implements SessionAware {
+public class CmsLoginAction extends ActionSupport implements SessionAware {
 
     /**
      * 

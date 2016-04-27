@@ -10,7 +10,10 @@ public final class Constants {
     public static final String CMS_SESSION_BLOG_URL = "blog_site_url";
     
     //Site Session Attributes
+    public static final String SITE_SESSION_MAP_VARIABLE = "siteMapVars";
+    public static final String SITE_SESSION_SITE_USER = "siteUser";
     public static final String SITE_SESSION_SITE_USER_ID = "siteUserId";
+    public static final String SITE_SESSION_SITE_USER_NAME = "siteUsername";
     
     //Error Messages for CMS
     public static final String CMS_ERROR_USERNAME_REQUIRED = "Username is required";
@@ -26,6 +29,19 @@ public final class Constants {
     public static final String CMS_ERROR_GENERIC_REGISTER = "An error occurred. Kindly register again";
     public static final String CMS_ERROR_BLOG_URL_TAKEN = "Site name is taken";
     
+    //Error Messages for SITE
+    public static final String SITE_ERROR_USERNAME_REQUIRED = "Username is required";
+    public static final String SITE_ERROR_USERNAME_SHORT = "Username is too short";
+    public static final String SITE_ERROR_USERNAME_TAKEN = "Username has been taken";
+    public static final String SITE_ERROR_USERNAME_NOT_EXIST = "Username does not exist";
+    public static final String SITE_ERROR_INVALID_LOGIN = "Invalid username/password.";
+    public static final String SITE_ERROR_USERNAME_INVALID_CHAR = "Username contains invalid characters";
+    public static final String SITE_ERROR_PASSWORD_REQUIRED = "Password is required";
+    public static final String SITE_ERROR_REPEATPASS_REQUIRED = "Repeat Password is required";
+    public static final String SITE_ERROR_PASS_NOTSAME = "Password must be the same";
+    public static final String SITE_ERROR_GENERIC_ERROR = "An error occured. Kindly restart the process";
+    public static final String SITE_ERROR_GENERIC_REGISTER = "An error occurred. Kindly register again";
+    public static final String SITE_ERROR_BLOG_URL_TAKEN = "Site name is taken";
     //CMS Variables
     public static final String CMS_DEFAULT_USER_TYPE = "cms_user";
     
@@ -33,7 +49,7 @@ public final class Constants {
     public static final int CMS_USERNAME_MIN_LENGTH = 5;
     
     //CMS Regex
-    public static final String CMS_REGEX_USERNAME = "^[a-z0-9_-]{3,15}$";
+    public static final String REGEX_USERNAME = "^[a-z0-9_-]{3,15}$";
     
     private Constants() {}
 

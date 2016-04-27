@@ -36,8 +36,18 @@ public class PostContentAction extends SiteAbstractAction {
     public String execute() throws Exception {
         System.out.println("postContent:postId:"+postId);
         sitePost = sitePostService.getById(Long.parseLong(postId));
-        String nextAction = "postContent-" + sitePost.getCmsUserSite().getCmsTemplates().getTemplateName().toLowerCase();
+//        String nextAction = "postContent-" + sitePost.getCmsUserSite().getCmsTemplates().getTemplateName().toLowerCase();
+        String nextAction = "postContent" + getSiteTemplate();
         setNextAction(nextAction);
+        System.out.println("postContentAction:execute:blogSiteUrl:"+getBlogSiteUrl());
+        System.out.println("postContentAction:execute:nextAction:"+getNextAction());
+        
         return SUCCESS;
     }
+    
+    @Override
+    public void validate() {
+        // TODO Auto-generated method stub
+    }
+    
 }

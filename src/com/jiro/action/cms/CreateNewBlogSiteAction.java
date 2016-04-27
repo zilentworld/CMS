@@ -1,15 +1,10 @@
 package com.jiro.action.cms;
 
-import java.util.Map;
-
-import org.apache.struts2.interceptor.SessionAware;
-
+import com.jiro.action.site.SiteAbstractAction;
 import com.jiro.model.cms.CmsTemplates;
 import com.jiro.service.cms.CmsTemplatesService;
-import com.jiro.utility.Constants;
-import com.opensymphony.xwork2.ActionSupport;
 
-public class CreateNewBlogSiteAction extends ActionSupport implements SessionAware {
+public class CreateNewBlogSiteAction extends SiteAbstractAction {
 
     /**
      * 
@@ -21,7 +16,6 @@ public class CreateNewBlogSiteAction extends ActionSupport implements SessionAwa
     private String imgSrc;
     private String errMsg;
     private long cmsTemplateId;
-    private Map<String, Object> sessionMap;
 
     public String getImgSrc() {
         return imgSrc;
@@ -68,14 +62,6 @@ public class CreateNewBlogSiteAction extends ActionSupport implements SessionAwa
         this.cmsTemplateId = cmsTemplateId;
     }
 
-    public Map<String, Object> getSessionMap() {
-        return sessionMap;
-    }
-
-    public void setSessionMap(Map<String, Object> sessionMap) {
-        this.sessionMap = sessionMap;
-    }
-
     @Override
     public String execute() throws Exception {
         cmsTemplates = cmsTemplatesService.getByImgSrc(imgSrc);
@@ -84,13 +70,15 @@ public class CreateNewBlogSiteAction extends ActionSupport implements SessionAwa
             return ERROR;
         }
         System.out.println(cmsTemplates.getTemplateName());
-        sessionMap.put(Constants.CMS_SESSION_CMS_TEMPLATE, cmsTemplates);
+//        getSessionMap().put(Constants.CMS_SESSION_CMS_TEMPLATE, cmsTemplates);
         cmsTemplateId = cmsTemplates.getTemplateId();
+        
         return SUCCESS;
     }
 
     @Override
-    public void setSession(Map<String, Object> sessionMap) {
-        this.sessionMap = sessionMap;
+    public void validate() {
+        // TODO Auto-generated method stub        
     }
+
 }

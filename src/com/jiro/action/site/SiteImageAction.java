@@ -1,14 +1,9 @@
 package com.jiro.action.site;
 
-import java.util.Map;
-
-import org.apache.struts2.interceptor.SessionAware;
-
 import com.jiro.model.site.SiteSettings;
 import com.jiro.service.site.SiteSettingsService;
-import com.jiro.utility.Constants;
 
-public class SiteImageAction extends SiteAbstractAction implements SessionAware {
+public class SiteImageAction extends SiteAbstractAction {
 
     /**
      * 
@@ -16,7 +11,6 @@ public class SiteImageAction extends SiteAbstractAction implements SessionAware 
     private static final long serialVersionUID = 1L;
     private SiteSettings siteSettings;
     private SiteSettingsService siteSettingsService;
-    private Map<String, Object> sessionMap;
     
     public SiteSettingsService getSiteSettingsService() {
         return siteSettingsService;
@@ -33,16 +27,9 @@ public class SiteImageAction extends SiteAbstractAction implements SessionAware 
     
     @Override
     public String execute() throws Exception {
-        String blogUrl = (String) sessionMap.get(Constants.CMS_SESSION_BLOG_URL);
-        System.out.println("PASOK SA IMG:"+blogUrl);
-        siteSettings = siteSettingsService.getByUrl(blogUrl);
+        System.out.println("PASOK SA IMG:"+getBlogSiteUrl());
+        siteSettings = siteSettingsService.getByUrl(getBlogSiteUrl());
         return SUCCESS;
     }
-    
-    @Override
-    public void setSession(Map<String, Object> sessionMap) {
-        this.sessionMap = sessionMap;
-    }
-    
     
 }

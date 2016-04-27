@@ -15,7 +15,7 @@ import com.jiro.utility.Constants;
 import com.jiro.utility.Utility;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class RegisterAction extends ActionSupport implements SessionAware {
+public class CmsRegisterAction extends ActionSupport implements SessionAware {
 
     /**
      * 
@@ -118,12 +118,6 @@ public class RegisterAction extends ActionSupport implements SessionAware {
             return ERROR;
         }
 
-        System.out.println("checkexist");
-        if(cmsUserService.checkExistingCmsUser(cmsUserRegister)) {
-            errMsg = Constants.CMS_ERROR_GENERIC_REGISTER;
-            return ERROR;
-        }
-
         System.out.println("createnewcms");
 //        cmsUserRegister.setCmsUserTypeCode("cms_user");
         CmsUserType cmsUserType = cmsUserTypeService.getCmsUserType(Constants.CMS_DEFAULT_USER_TYPE);
@@ -159,12 +153,17 @@ public class RegisterAction extends ActionSupport implements SessionAware {
         } else if(StringUtils.isEmpty(repeatPassword)) {
             resetPasswords();
             addFieldError("repeatPassword", Constants.CMS_ERROR_REPEATPASS_REQUIRED);
-        } else if (!Utility.checkStringByRegex(cmsUserRegister.getCmsUsername(), Constants.CMS_REGEX_USERNAME)) {
+        } else if (!Utility.checkStringByRegex(cmsUserRegister.getCmsUsername(), Constants.REGEX_USERNAME)) {
             addFieldError("cmsUserRegister.cmsUsername", Constants.CMS_ERROR_USERNAME_INVALID_CHAR);
         } else if(!repeatPassword.equals(cmsUserRegister.getCmsPassword())) {
             resetPasswords();
             addFieldError("cmsUserRegister.cmsPassword", Constants.CMS_ERROR_PASS_NOTSAME);
             addFieldError("repeatPassword", Constants.CMS_ERROR_PASS_NOTSAME);
+        }
+
+        System.out.println("checkexist");
+        if(cmsUserService.checkExistingCmsUser(cmsUserRegister)) {
+            addFieldError("cmsUserRegister.cmsUsername", Constants.CMS_ERROR_GENERIC_REGISTER);
         }
         try {
             Long.parseLong(cmsTemplateId);

@@ -13,14 +13,15 @@ public class SiteUserServiceImpl implements SiteUserService {
     
     @Autowired
     private SiteUserDao siteUserDao;
+    
 
     public void setSiteUserDao(SiteUserDao siteUserDao) {
         this.siteUserDao = siteUserDao;
     }
 
     @Override
-    public boolean checkLogin(String username, String password) {
-        return siteUserDao.getByLogin(username, password) != null ? true : false;
+    public boolean checkLoginExists(String username, String password, String siteUrl) {
+        return siteUserDao.getByLogin(username, password, siteUrl) != null ? true : false;
     }
 
     @Override
@@ -39,8 +40,8 @@ public class SiteUserServiceImpl implements SiteUserService {
     }
 
     @Override
-    public SiteUser getByLogin(String siteUsername, String sitePassword) {
-        return siteUserDao.getByUsername(siteUsername);
+    public SiteUser getByLogin(String siteUsername, String sitePassword, String siteUrl) {
+        return siteUserDao.getByLogin(siteUsername, sitePassword, siteUrl);
     }
     
     @Override

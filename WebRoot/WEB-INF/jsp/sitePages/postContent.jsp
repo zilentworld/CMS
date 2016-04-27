@@ -1,6 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
+<s:set var="siteMapVars" value="#session.siteMapVars" />
+<s:set var="blogSiteUrl" value="blogSiteUrl" />
+<s:set var="sessionSiteUser" value="%{#siteMapVars[#blogSiteUrl]}"/>
+
 <s:set var="sitePost" value="sitePost" />
 <s:if test="sitePost != null">
 	<s:div id="sitePost-content"
@@ -20,7 +24,7 @@
 				<s:property value="sitePost.sitePostcontent" escape="false"/>
 			</s:div>
 		</s:div>
-		<s:if test="#session.siteUserId == sitePost.siteUser.siteUserId">
+		<s:if test="#sessionSiteUser.siteUserId == sitePost.siteUser.siteUserId">
 			<s:div id="post-controls" style="clear:both; float:right;">
 				<s:form id="post-control-form">
 					<s:a
@@ -40,7 +44,7 @@
 	<br />
 	<s:div id="post-comment-area" style="clear:both;">
 		<s:label>Post a Comment:</s:label>
-		<s:if test="#session.siteUserId > 0">
+		<s:if test="#sessionSiteUser.siteUserId > 0">
 			<s:div id="post-comment-new">
 				<s:form action="postComment" method="post">
 					<s:hidden name="siteComment.sitePost.sitePostId"
@@ -64,7 +68,7 @@
 						<s:form id="comment-control-form-%{siteCommentId}">
 							<s:property value="siteUser.siteUserUsername" />
 							<s:date name="dateTime" format="MM/dd/yyyy hh:mm" />
-							<s:if test="#session.siteUserId == siteUser.siteUserId">
+							<s:if test="#sessionSiteUser.siteUserId == siteUser.siteUserId">
 								(
 					    		<s:a
 									onclick="javascript:return toggleHidden('comment-edit-%{siteCommentId}') 
@@ -87,7 +91,7 @@
 						<s:property value="commentContent" />
 					</p>
 				</s:div>
-				<s:if test="#session.siteUserId == siteUser.siteUserId">
+				<s:if test="#sessionSiteUser.siteUserId == siteUser.siteUserId">
 					<s:div id="comment-edit-%{siteCommentId}" style="display:none;">
 						<s:form action="postComment" method="post">
 							<table>
