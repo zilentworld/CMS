@@ -51,6 +51,8 @@ public class CmsUserSite {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "cmsUserSite", cascade = CascadeType.ALL)
     private SiteSettings siteSettings;
     
+    @Column(name="is_published")
+    private int isPublished;
     
 //    public String getCmsUserId() {
 //        return cmsUserId;
@@ -95,6 +97,18 @@ public class CmsUserSite {
     }
     public void setCmsUserSiteId(long cmsUserSiteId) {
         this.cmsUserSiteId = cmsUserSiteId;
+    }
+    public SiteSettings getSiteSettings() {
+        return siteSettings;
+    }
+    public void setSiteSettings(SiteSettings siteSettings) {
+        this.siteSettings = siteSettings;
+    }
+    public int getIsPublished() {
+        return isPublished;
+    }
+    public void setIsPublished(int isPublished) {
+        this.isPublished = isPublished;
     }
     public CmsUserSite() {}
 

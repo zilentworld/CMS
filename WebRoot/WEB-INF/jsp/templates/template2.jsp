@@ -19,7 +19,7 @@
 							<tiles:insertAttribute name="header" ignore="true" />
 						</s:div>
 					</s:div>
-                    <s:div id="archive-content" style="margin: 3%; min-height: 30%">
+                    <s:div id="archive-content" style="margin: 3%; min-height: 30%; clear:both;">
 						<tiles:insertAttribute name="archive" />
                     </s:div>
                 </s:div>

@@ -1,9 +1,10 @@
 package com.jiro.action.site;
 
-import java.util.Map; 
+import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.jiro.model.cms.CmsUserSite;
 import com.jiro.service.cms.CmsUserSiteService;
 import com.jiro.utility.Constants;
 import com.opensymphony.xwork2.ActionSupport;
@@ -70,6 +71,10 @@ public abstract class SiteAbstractAction extends ActionSupport implements Sessio
     public void setSiteUserSessionName(String siteUserSessionName) {
         this.siteUserSessionName = siteUserSessionName;
     }
+    public CmsUserSite getCmsUserSite() {
+        return cmsUserSiteService.getByUrl(blogSiteUrl);
+    }
+    
     @Override
     public void setSession(Map<String, Object> sessionMap) {
         this.sessionMap = sessionMap;

@@ -76,6 +76,63 @@
 			<param name="blogSiteUrl">{1}</param>
 			<result name="success" type="tiles">${nextAction}</result>
 		</action>
+		
+		<action name="*/showNewSitePost" class="sitePostAction" method="showNewSitePost">
+			<param name="blogSiteUrl">{1}</param>
+			<result name="success" type="tiles">${nextAction}</result>
+			<result name="input" type="tiles">${nextAction}</result>
+		</action>
+		
+		<action name="*/editSitePost" class="sitePostAction" method="editSitePost">
+			<param name="blogSiteUrl">{1}</param>
+			<result name="success" type="tiles">${nextAction}</result>
+			<result name="input" type="tiles">${nextAction}</result>
+		</action>
+		
+		<action name="*/deleteSitePost" class="sitePostAction" method="deleteSitePost">
+			<param name="blogSiteUrl">{1}</param>
+			<result name="success" type="redirectAction">
+				<param name="actionName">${blogSiteUrl}/postPreview</param>
+				<param name="nextAction">${nextAction}</param>
+			</result>
+			<result name="input" type="tiles">${nextAction}</result>
+		</action>
+		
+		<action name="*/newSitePost" class="sitePostAction">
+			<param name="blogSiteUrl">{1}</param>
+			<result name="success" type="redirectAction">
+				<param name="actionName">${blogSiteUrl}/postContent</param>
+				<param name="postId">${postId}</param>
+			</result>
+			<result name="error" type="redirectAction">
+				<param name="actionName">${blogSiteUrl}/newSitePost</param>
+				<param name="msg">${msg}</param>
+			</result>
+			<result name="input" type="tiles">${nextAction}</result>
+		</action>
+		
+		<action name="*/saveCommentPost" class="siteCommentAction">
+			<param name="blogSiteUrl">{1}</param>
+			<result name="success" type="redirectAction">
+				<param name="actionName">${blogSiteUrl}/postContent</param>
+				<param name="postId">${postId}</param>
+			</result>
+			<result name="input" type="tiles">${nextAction}</result>
+		</action>
+		
+		<action name="*/deleteCommentPost" class="siteCommentAction" method="deleteComment">
+			<param name="blogSiteUrl">{1}</param>
+			<result name="success" type="redirectAction">
+				<param name="actionName">${blogSiteUrl}/postContent</param>
+				<param name="postId">${postId}</param>
+			</result>
+			<result name="input" type="tiles">${nextAction}</result>
+		</action>
+		
+		<action name="*/userComments" class="userCommentAction">
+			<param name="blogSiteUrl">{1}</param>
+			<result name="success" type="tiles">${nextAction}</result>
+		</action>
 
 		<action name="/*" class="checkBlogUrl">
 			<param name="blogSiteUrl">{1}</param>
@@ -83,6 +140,7 @@
 				<param name="actionName">checkBlogUrl</param>
 				<param name="blogSiteUrl">{1}</param>
 			</result>
+			<result name="error">/WEB-INF/jsp/cmsPages/index.jsp</result>
 		</action>
 		
 		<action name="checkBlogUrl" class="checkBlogUrl">
@@ -95,6 +153,22 @@
 
 		<action name="showTemplate" class="newBlogSite" method="showTemplate">
 			<result name="success">/WEB-INF/jsp/cmsPages/templatePicker.jsp</result>
+		</action>
+		
+		<action name="showCmsLogin" class="loginAction" method="showCmsLogin">
+			<result name="success">/WEB-INF/jsp/cmsPages/cmsAccountLogin.jsp</result>
+		</action>
+		
+		<action name="doCmsLogin" class="loginAction" method="cmsLoginAction">
+			<result name="success" type="tiles">cms-management</result>
+		</action>
+		
+		<action name="showSiteList" class="cmsMgmtAction" method="showSiteList">
+			<result name="success" type="tiles">site-list</result>
+		</action>		
+		
+		<action name="showManageHeaders" class="cmsMgmtAction" method="showManageHeaders">
+			<result name="success" type="tiles">manage-headers</result>
 		</action>
 
 		<action name="pickTemplate" class="newBlogSite">
@@ -127,7 +201,7 @@
 				<param name="blogSiteUrl">${cmsUserSite.blogUrl}</param>
 			</result>
 		</action>
-		
+
 		<action name="bannerImg" class="siteImgAction">
 			<result name="success">/WEB-INF/jsp/sitePages/bannerImg.jsp</result>
 		</action>

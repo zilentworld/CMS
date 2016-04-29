@@ -41,7 +41,7 @@ public class SitePost {
     private String sitePostTitle;
     
     @Column(name="site_post_content")
-    private String sitePostcontent;
+    private String sitePostContent;
     
     @Column(name="site_post_date")
     @Temporal(TemporalType.TIMESTAMP)
@@ -82,12 +82,12 @@ public class SitePost {
         this.sitePostTitle = sitePostTitle;
     }
 
-    public String getSitePostcontent() {
-        return sitePostcontent;
+    public String getSitePostContent() {
+        return sitePostContent;
     }
 
-    public void setSitePostcontent(String sitePostcontent) {
-        this.sitePostcontent = sitePostcontent;
+    public void setSitePostContent(String sitePostContent) {
+        this.sitePostContent = sitePostContent;
     }
 
     public Date getSitePostDate() {
@@ -112,7 +112,7 @@ public class SitePost {
         this.cmsUserSite = siteUser.getCmsUserSite();
         this.siteUser = siteUser;
         this.sitePostTitle = "First Post";
-        this.sitePostcontent = "Hello World!";
+        this.sitePostContent = "Hello World!";
     }
 
 }

@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.interceptor.SessionAware;
+import org.apache.struts2.interceptor.validation.SkipValidation;
 
 import com.jiro.model.cms.CmsUser;
 import com.jiro.service.cms.CmsUserService;
@@ -46,11 +47,25 @@ public class CmsLoginAction extends ActionSupport implements SessionAware {
     public void setCmsTemplateId(String cmsTemplateId) {
         this.cmsTemplateId = cmsTemplateId;
     }
+    
+    public String cmsLoginAction() {
+        cmsUser = cmsUserService.getByLogin(cmsUser);
+        sessionMap.put(Constants.CMS_SESSION_CMS_USER, cmsUser);
+        System.out.println("cmsLoginAction:cmsUsername:"+cmsUser.getCmsUsername());
+        
+        return SUCCESS;
+    }
 
     @Override
     public String execute() throws Exception {
         cmsUser = cmsUserService.getByLogin(cmsUser);
         sessionMap.put(Constants.CMS_SESSION_CMS_USER, cmsUser);
+        
+        return SUCCESS;
+    }
+    
+    @SkipValidation
+    public String showCmsLogin() {
         return SUCCESS;
     }
 
@@ -67,11 +82,11 @@ public class CmsLoginAction extends ActionSupport implements SessionAware {
             addFieldError("cmsUser.cmsUsername", Constants.CMS_ERROR_INVALID_LOGIN);
             cmsUser.setCmsPassword("");            
         }
-        try {
-            Long.parseLong(cmsTemplateId);
-        } catch (Exception e) {
-            addFieldError("cmsUserRegister.cmsUsername", Constants.CMS_ERROR_GENERIC_ERROR);
-        }
+//        try {
+//            Long.parseLong(cmsTemplateId);
+//        } catch (Exception e) {
+//            addFieldError("cmsUserRegister.cmsUsername", Constants.CMS_ERROR_GENERIC_ERROR);
+//        }
     }
 
     @Override

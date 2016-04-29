@@ -110,6 +110,7 @@
     
     <bean id="postContentAction" class="com.jiro.action.site.PostContentAction" scope="prototype">
     	<property name="sitePostService" ref="sitePostService" />
+    	<property name="siteCommentService" ref="siteCommentService" />
     	<property name="cmsUserSiteService" ref="cmsUserSiteService" />
     </bean>
     
@@ -127,6 +128,24 @@
     
     <bean id="logoutAction" class="com.jiro.action.site.SiteLogoutAction" scope="prototype">
     	<property name="cmsUserSiteService" ref="cmsUserSiteService" />
+    </bean>
+    
+    <bean id="sitePostAction" class="com.jiro.action.site.SitePostAction" scope="prototype">
+    	<property name="sitePostService" ref="sitePostService" />
+    	<property name="cmsUserSiteService" ref="cmsUserSiteService" />
+    </bean>
+    
+    <bean id="siteCommentAction" class="com.jiro.action.site.SiteCommentAction" scope="prototype">
+    	<property name="siteCommentService" ref="siteCommentService" />
+    	<property name="cmsUserSiteService" ref="cmsUserSiteService" />
+    </bean>
+    
+    <bean id="userCommentAction" class="com.jiro.action.site.SiteUserComments" scope="prototype">
+    	<property name="siteCommentService" ref="siteCommentService" />
+    	<property name="cmsUserSiteService" ref="cmsUserSiteService" />
+    </bean>
+    
+    <bean id="cmsMgmtAction" class="com.jiro.action.cms.CmsMgmtAction" scope="prototype">
     </bean>
     
     <bean id="actionForwarder" class="com.jiro.action.site.ActionForwarder" />

@@ -50,6 +50,7 @@ public class SiteUserServiceImpl implements SiteUserService {
             return null;
         }
         SiteUser siteUser = new SiteUser(cmsUserSite);
+        siteUser.setIsAdmin(1);
         if(siteUserDao.persist(siteUser) > 0)
             return siteUser;
         else

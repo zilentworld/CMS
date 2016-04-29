@@ -36,8 +36,8 @@ public class SiteComment {
     @JoinColumn(name="site_post_id")
     private SitePost sitePost;
     
-    @Column(name="site_comment")
-    private String siteComment;
+    @Column(name="site_comment_content")
+    private String siteCommentContent;
 
     @Column(name="comment_date")
     @Temporal(TemporalType.TIMESTAMP)
@@ -74,13 +74,13 @@ public class SiteComment {
     public void setSitePost(SitePost sitePost) {
         this.sitePost = sitePost;
     }
-
-    public String getSiteComment() {
-        return siteComment;
+    
+    public String getSiteCommentContent() {
+        return siteCommentContent;
     }
 
-    public void setSiteComment(String siteComment) {
-        this.siteComment = siteComment;
+    public void setSiteCommentContent(String siteCommentContent) {
+        this.siteCommentContent = siteCommentContent;
     }
 
     public Date getCommentDate() {

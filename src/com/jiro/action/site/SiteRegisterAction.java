@@ -1,5 +1,8 @@
 package com.jiro.action.site;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
@@ -55,6 +58,7 @@ public class SiteRegisterAction extends SiteAbstractAction {
         return SUCCESS;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public String execute() throws Exception {
         System.out.println("SiteReg:EXEC");
@@ -70,8 +74,13 @@ public class SiteRegisterAction extends SiteAbstractAction {
             return ERROR;
         }
         
-        getSessionMap().put(Constants.SITE_SESSION_SITE_USER_NAME + getBlogSiteUrl(), siteUser.getSiteUserUsername());
-        getSessionMap().put(Constants.SITE_SESSION_SITE_USER_ID + getBlogSiteUrl(), siteUser.getSiteUserId());
+        Map<String, SiteUser> siteSessionMap = (Map<String, SiteUser>) getSessionMap().get(Constants.SITE_SESSION_MAP_VARIABLE);
+        if(siteSessionMap == null)
+            siteSessionMap = new HashMap<String, SiteUser>();
+        
+        siteSessionMap.put(getBlogSiteUrl(), siteUser);
+
+        getSessionMap().put(Constants.SITE_SESSION_MAP_VARIABLE, siteSessionMap);
         
         String nextAction = "home" + getSiteTemplate();
         setNextAction(nextAction);

@@ -1,10 +1,6 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <s:div>
 	<h2>Blog Posts</h2>
-	A
-	<s:property value="nextAction" />
-	<s:property value="blogSiteUrl" />
-	A
 	<s:iterator value="postPreviewList">
 	    <s:div id="post-title-%{sitePostId}">
 	    	<s:a href="javascript:callAction('postContent?postId=%{sitePostId}');">
@@ -17,8 +13,8 @@
 	    </s:div>
 	    <s:div id="post-preview-%{sitePostId}">
 	    	<p>
-				<s:property value="sitePostcontent.substring(0,sitePostcontent.length() > 100 ? 100 : sitePostcontent.length())"/>
-				<s:if test="sitePostcontent.length() > 100">
+				<s:property value="sitePostContent.substring(0,sitePostContent.length() > 100 ? 100 : sitePostcontent.length())"/>
+				<s:if test="sitePostContent.length() > 100">
 					...
 				</s:if>
 			</p>

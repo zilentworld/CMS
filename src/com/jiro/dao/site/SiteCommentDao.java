@@ -2,6 +2,7 @@ package com.jiro.dao.site;
 
 import java.util.List;
 
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,10 +20,24 @@ public class SiteCommentDao extends GenericDaoImpl {
     
     @SuppressWarnings("unchecked")
     @Transactional
-    public List<SiteComment> getUserComment(long siteUserId) {
+    public List<SiteComment> getUserComment(long siteUserId, String siteUrl) {
         return getCurrentSession()
                .createCriteria(SiteComment.class)
-               .add(Restrictions.eq("siteUserId", siteUserId))
+               .addOrder(Order.desc("commentDate"))
+               .createAlias("siteUser", "siteUser")
+               .add(Restrictions.eq("siteUser.siteUserId", siteUserId))
+               .createAlias("cmsUserSite", "cmsUserSite")
+               .add(Restrictions.eq("cmsUserSite.blogUrl", siteUrl))
+               .list();
+    }
+    
+    @SuppressWarnings("unchecked")
+    @Transactional
+    public List<SiteComment> getPostComments(long postId) {
+        return getCurrentSession()
+               .createCriteria(SiteComment.class)
+               .createAlias("sitePost", "site_post")
+               .add(Restrictions.eq("sitePost.sitePostId", postId))
                .list();
     }
 

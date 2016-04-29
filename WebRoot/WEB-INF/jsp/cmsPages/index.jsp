@@ -88,7 +88,9 @@
 				frm.submit();
 			});
 			$("#loginCMS").click(function() {
-				alert("LOGIN CMS");
+				var frm = $("#idxForm");
+   				frm.attr('action', 'showCmsLogin');
+				frm.submit();
 			});
 		});
 	</script>

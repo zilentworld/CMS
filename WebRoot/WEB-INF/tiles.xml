@@ -4,6 +4,15 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
+    <definition name="cms-management" template="/WEB-INF/jsp/cmsPages/cmsMgmtLayout.jsp">
+        <put-attribute name="content" value="" />
+    </definition>
+    <definition name="site-list" extends="cms-management">
+        <put-attribute name="content" value="/WEB-INF/jsp/cmsPages/siteList.jsp" />
+    </definition>
+    <definition name="manage-headers" extends="cms-management">
+        <put-attribute name="content" value="/WEB-INF/jsp/cmsPages/manageHeader.jsp" />
+    </definition>
     <!-- <definition name="home-*" template="/WEB-INF/jsp/templates/{1}.jsp">
         <put-attribute name="banner" value="/WEB-INF/jsp/sitePages/banner.jsp" />
         <put-attribute name="header" value="/WEB-INF/jsp/sitePages/header.jsp" />
@@ -61,6 +70,26 @@
     </definition>
     <definition name="siteRegister-template3" extends="home-template3">
         <put-attribute name="body" value="/WEB-INF/jsp/sitePages/siteRegister.jsp" />
+    </definition>
+    
+    <definition name="newSitePost-template1" extends="home-template1">
+        <put-attribute name="body" value="/WEB-INF/jsp/sitePages/newSitePost.jsp" />
+    </definition>
+    <definition name="newSitePost-template2" extends="home-template2">
+        <put-attribute name="body" value="/WEB-INF/jsp/sitePages/newSitePost.jsp" />
+    </definition>
+    <definition name="newSitePost-template3" extends="home-template3">
+        <put-attribute name="body" value="/WEB-INF/jsp/sitePages/newSitePost.jsp" />
+    </definition>
+    
+    <definition name="siteUserComments-template1" extends="home-template1">
+        <put-attribute name="body" value="/WEB-INF/jsp/sitePages/userComments.jsp" />
+    </definition>    
+    <definition name="siteUserComments-template2" extends="home-template2">
+        <put-attribute name="body" value="/WEB-INF/jsp/sitePages/userComments.jsp" />
+    </definition>    
+    <definition name="siteUserComments-template3" extends="home-template3">
+        <put-attribute name="body" value="/WEB-INF/jsp/sitePages/userComments.jsp" />
     </definition>
     
 </tiles-definitions>

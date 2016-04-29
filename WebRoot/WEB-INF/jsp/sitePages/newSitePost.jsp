@@ -9,23 +9,18 @@
 	<s:else>
 		<h2>New Blog Post</h2>
 	</s:else>
-	<s:if test="%{isErrMsg()}">
-    	Error in creating new blog post
+	<s:if test="%{msg} != null && %{msg}.length() > 0">
+    	<s:property value="msg"/>
     </s:if>
-	<s:form action="processBlogPost" method="post">
+	<s:form method="post">
 		<s:if test="'edit'.equals(postType)">
-			<s:hidden name="blogPost.blogPostId" value="%{postId}" />
+			<s:hidden name="sitePost.sitePostId" value="%{postId}" />
 			<s:hidden name="postType" value="edit" />
 		</s:if>
-		<s:textfield label="Title" name="blogPost.blogTitle"
+		<s:textfield label="Title" name="sitePost.sitePostTitle"
 			style="min-width:400px" id="blog_title" />
-		<s:textarea label="Content" name="blogPost.postContent"
+		<s:textarea label="Content" name="sitePost.sitePostContent"
 			style="width:600px; height:300px; max-width:1100px" id="blog_content" />
-		<s:label>
-			<i style="font-size:13px">Note: Enclose a url in &ltimage&gt
-				&lt/image&gt for image support (max display size 800x800)</i>
-		</s:label>
-		<s:submit />
+		<s:submit type="button" onclick="form.action='newSitePost'; form.submit();" value="Submit"/>
 	</s:form>
-	
 </s:div>

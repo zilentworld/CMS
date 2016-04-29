@@ -48,6 +48,17 @@ public class SiteUser {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "siteUser", fetch = FetchType.LAZY)
     private Set<SiteComment> siteComments;
     
+    @Column(name="is_admin")
+    private int isAdmin;
+        
+    public int getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(int isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+
     public long getSiteUserId() {
         return siteUserId;
     }

@@ -3,7 +3,7 @@
 
 <s:set var="siteMapVars" value="#session.siteMapVars" />
 <s:set var="blogSiteUrl" value="blogSiteUrl" />
-<s:set var="sessionSiteUser" value="%{#siteMapVars[#blogSiteUrl]}"/>
+<s:set var="sessionSiteUser" value="%{#siteMapVars[#blogSiteUrl]}" />
 
 <s:set var="sitePost" value="sitePost" />
 <s:if test="sitePost != null">
@@ -16,15 +16,15 @@
 				</h4>
 			</s:div>
 			<s:div id="blog-poster">
-				<i>
-					by <s:property value="sitePost.siteUser.siteUserUsername" />
+				<i> by <s:property value="sitePost.siteUser.siteUserUsername" />
 				</i>
 			</s:div>
 			<s:div id="blog-postbody">
-				<s:property value="sitePost.sitePostcontent" escape="false"/>
+				<s:property value="sitePost.sitePostContent" escape="false" />
 			</s:div>
 		</s:div>
-		<s:if test="#sessionSiteUser.siteUserId == sitePost.siteUser.siteUserId">
+		<s:if
+			test="#sessionSiteUser.siteUserId == sitePost.siteUser.siteUserId">
 			<s:div id="post-controls" style="clear:both; float:right;">
 				<s:form id="post-control-form">
 					<s:a
@@ -33,7 +33,7 @@
 		    		</s:a> 
 			 		|
 		    		<s:a
-						href="javascript:callAction('deletePost?postId=' + %{sitePost.sitePostId});"
+						href="javascript:callAction('deleteSitePost?postId=' + %{sitePost.sitePostId});"
 						onclick="return confirm('Are you sure?')">
 		    			Delete
 		    		</s:a>
@@ -42,16 +42,19 @@
 		</s:if>
 	</s:div>
 	<br />
+
+	<!-- Comment Area -->
 	<s:div id="post-comment-area" style="clear:both;">
 		<s:label>Post a Comment:</s:label>
 		<s:if test="#sessionSiteUser.siteUserId > 0">
 			<s:div id="post-comment-new">
-				<s:form action="postComment" method="post">
+				<s:form method="post">
 					<s:hidden name="siteComment.sitePost.sitePostId"
 						value="%{sitePost.sitePostId}" />
-					<s:textarea name="siteComment.siteComment" style="width:320px; height:90px" />
-					<br />
-					<s:submit />
+					<s:textarea name="siteComment.siteCommentContent"
+						style="width:320px; height:90px" />
+					<br />					
+        		<s:submit type="button" onclick="form.action='saveCommentPost'; form.submit();" value="Submit"/>
 				</s:form>
 			</s:div>
 		</s:if>
@@ -61,13 +64,14 @@
 				Kindly login to comment
 			</s:label>
 		</s:else>
-		<s:iterator value="blogComments">
+		AA
+		<s:iterator value="siteComments">
 			<s:div id="comment-%{siteCommentId}">
 				<h5>
 					<s:div id="comment-controls" style="display:block;">
 						<s:form id="comment-control-form-%{siteCommentId}">
 							<s:property value="siteUser.siteUserUsername" />
-							<s:date name="dateTime" format="MM/dd/yyyy hh:mm" />
+							on <s:date name="commentDate" format="dd/MM/yyyy hh:mm:ss" />
 							<s:if test="#sessionSiteUser.siteUserId == siteUser.siteUserId">
 								(
 					    		<s:a
@@ -77,7 +81,7 @@
 					    		</s:a> 
 						 		|
 					    		<s:a
-									href="javascript:callAction('deleteComment?siteCommentId=' + %{siteCommentId} + '&postId=' + %{sitePost.sitePostId});"
+									href="javascript:callAction('deleteCommentPost?commentId=' + %{siteCommentId} + '&postId=' + %{sitePost.sitePostId});"
 									onclick="return confirm('Are you sure?')">
 					    			Delete
 					    		</s:a>
@@ -88,7 +92,7 @@
 				</h5>
 				<s:div id="comment-content-%{siteCommentId}" style="display:block;">
 					<p>
-						<s:property value="commentContent" />
+						<s:property value="siteCommentContent" />
 					</p>
 				</s:div>
 				<s:if test="#sessionSiteUser.siteUserId == siteUser.siteUserId">
@@ -96,20 +100,25 @@
 						<s:form action="postComment" method="post">
 							<table>
 								<tr>
-									<td colspan="2"><s:hidden
-											name="blogComment.sitePost.sitePostId"
-											value="%{sitePost.sitePostId}" /> <s:hidden
-											name="commentAction" value="edit" /> <s:hidden
-											name="blogComment.siteCommentId" value="%{siteCommentId}" /> <s:textarea
-											value="%{commentContent}" name="blogComment.commentContent"
-											theme="simple" /></td>
+									<td colspan="2">
+										<s:hidden
+											name="siteComment.sitePost.sitePostId"
+											value="%{sitePost.sitePostId}" /> 
+										<s:hidden
+											name="commentType" value="edit" /> 
+										<s:hidden
+											name="siteComment.siteCommentId" value="%{siteCommentId}" />
+										<s:textarea value="%{siteCommentContent}"
+											name="siteComment.siteCommentContent" theme="simple" /></td>
 								</tr>
 								<tr>
 									<td><s:submit
 											onclick="return toggleHidden('comment-edit-%{siteCommentId}') 
 											        || toggleHidden('comment-content-%{siteCommentId}');"
 											value="Cancel" theme="simple" /></td>
-									<td><s:submit theme="simple" value="Submit" /></td>
+									<td>
+        							<s:submit theme="simple" type="button" onclick="form.action='saveCommentPost'; form.submit();" value="Submit"/>
+									</td>
 								</tr>
 							</table>
 						</s:form>

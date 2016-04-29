@@ -51,4 +51,24 @@ public class SitePostServiceImpl implements SitePostService {
             return null;
     }
 
+    @Override
+    public long newSitePost(SitePost sitePost) {
+        return sitePostDao.persist(sitePost);
+    }
+    
+    @Override
+    public void updateSitePost(SitePost sitePost) {
+        sitePostDao.saveOrUpdate(sitePost);
+    }
+    
+    @Override
+    public void deleteSitePost(SitePost sitePost) {
+        sitePostDao.delete(sitePost);
+    }
+    
+    @Override
+    public void deleteSitePostById(long postId) {
+        sitePostDao.delete(sitePostDao.getById(postId));
+    }
+    
 }

@@ -16,5 +16,13 @@ public interface SitePostService {
     public List<SitePost> getPostPreview(String siteUrl, int currPage, int maxResults);
     
     public SitePost siteFirstPost(SiteUser siteUser);
+    
+    public long newSitePost(SitePost sitePost);
+
+    public void updateSitePost(SitePost sitePost);
+
+    public void deleteSitePost(SitePost sitePost);
+    
+    public void deleteSitePostById(long postId);
 
 }

@@ -42,6 +42,11 @@ public final class Constants {
     public static final String SITE_ERROR_GENERIC_ERROR = "An error occured. Kindly restart the process";
     public static final String SITE_ERROR_GENERIC_REGISTER = "An error occurred. Kindly register again";
     public static final String SITE_ERROR_BLOG_URL_TAKEN = "Site name is taken";
+    public static final String SITE_ERROR_NEW_POST_TITLE_EMPTY = "Title must not be empty";
+    public static final String SITE_ERROR_NEW_POST_CONTENT_EMPTY = "Content must not be empty";
+    public static final String SITE_ERROR_NEW_POST_USER_EMPTY = "An error occured, kindly relog.";
+    public static final String SITE_ERROR_NEW_POST_ERROR = "An error occured, kindly create a new post again";
+        
     //CMS Variables
     public static final String CMS_DEFAULT_USER_TYPE = "cms_user";
     
