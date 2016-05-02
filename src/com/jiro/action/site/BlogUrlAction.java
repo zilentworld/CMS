@@ -2,6 +2,7 @@ package com.jiro.action.site;
 
 import java.util.Map;
 
+import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.jiro.model.cms.CmsUser;
@@ -11,7 +12,9 @@ import com.jiro.service.cms.CmsUserSiteService;
 import com.jiro.utility.Constants;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class BlogUrlAction extends ActionSupport implements SessionAware {
+import javax.servlet.http.HttpServletRequest;
+
+public class BlogUrlAction extends ActionSupport implements SessionAware, ServletRequestAware {
 
     /**
      * 
@@ -24,6 +27,7 @@ public class BlogUrlAction extends ActionSupport implements SessionAware {
     private CmsUserSiteService cmsUserSiteService;
     private CmsTemplatesService cmsTemplatesService;
     private String nextAction;
+    private HttpServletRequest httpServletRequest;
 
     public CmsUserSiteService getCmsUserSiteService() {
         return cmsUserSiteService;
@@ -61,6 +65,7 @@ public class BlogUrlAction extends ActionSupport implements SessionAware {
     public void setNextAction(String nextAction) {
         this.nextAction = nextAction;
     }
+
     @Override
     public String execute() throws Exception {
         cmsUserSite.setCmsUser((CmsUser) sessionMap.get(Constants.CMS_SESSION_CMS_USER));
@@ -73,6 +78,7 @@ public class BlogUrlAction extends ActionSupport implements SessionAware {
         
         nextAction = "home-" + cmsUserSite.getCmsTemplates().getTemplateName().toLowerCase();
         System.out.println("resultMsg:"+nextAction);
+
         return SUCCESS;
     }
     
@@ -92,5 +98,9 @@ public class BlogUrlAction extends ActionSupport implements SessionAware {
     public void setSession(Map<String, Object> sessionMap) {
         this.sessionMap = sessionMap;
     }
-        
+
+    @Override
+    public void setServletRequest(HttpServletRequest httpServletRequest) {
+        this.httpServletRequest = httpServletRequest;
+    }
 }

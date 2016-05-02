@@ -1,6 +1,13 @@
 package com.jiro.utility;
 
 public final class Constants {
+
+    //CMS Paths
+    public static final String CMS_PATH_TO_PENDING = "/home/dev-pc/CMS/pending/";
+    public static final String CMS_PATH_TO_SITE = "/WEB-INF/jsp/sitePages/";
+    public static final String CMS_PATH_TO_TEMPLATES = "/WEB-INF/jsp/templates/";
+    public static final String CMS_PATH_TO_TILES = "/WEB-INF/tiles.xml";
+    public static final String CMS_PATH_TO_PROJECT_TILES = "/WEB-INF/tiles.xml";
     
     //CMS Session Attributes
     public static final String CMS_SESSION_CMS_USER = "cms_user";

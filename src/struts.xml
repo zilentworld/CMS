@@ -210,6 +210,10 @@
 			<result name="success">/WEB-INF/jsp/sitePages/footerImg.jsp</result>
 		</action>
 
+		<action name="testCreate" class="testCreate">
+			<result name="success" type="tiles">home-template2</result>
+		</action>
+
 
 	</package>
 

@@ -31,6 +31,8 @@ public class CmsTemplates {
     private String defaultBackgroundImg;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cmsTemplates", fetch = FetchType.LAZY)
     private Set<CmsUserSite> cmsUserSites;
+    @Column(name="template_baselayout")
+    private String templateBaselayout;
     
     public String getDefaultFooterImg() {
         return defaultFooterImg;
@@ -80,5 +82,10 @@ public class CmsTemplates {
     public void setCmsUserSites(Set<CmsUserSite> cmsUserSites) {
         this.cmsUserSites = cmsUserSites;
     }
-        
+    public String getTemplateBaselayout() {
+        return templateBaselayout;
+    }
+    public void setTemplateBaselayout(String templateBaselayout) {
+        this.templateBaselayout = templateBaselayout;
+    }
 }

@@ -144,9 +144,12 @@
     	<property name="siteCommentService" ref="siteCommentService" />
     	<property name="cmsUserSiteService" ref="cmsUserSiteService" />
     </bean>
-    
-    <bean id="cmsMgmtAction" class="com.jiro.action.cms.CmsMgmtAction" scope="prototype">
-    </bean>
+
+	<bean id="cmsMgmtAction" class="com.jiro.action.cms.CmsMgmtAction" scope="prototype">
+	</bean>
+
+	<bean id="testCreate" class="com.jiro.action.site.TestCreate" scope="prototype">
+	</bean>
     
     <bean id="actionForwarder" class="com.jiro.action.site.ActionForwarder" />
 

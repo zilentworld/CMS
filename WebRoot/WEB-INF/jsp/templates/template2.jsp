@@ -9,9 +9,9 @@
     <title>Title</title>
 </head>
 <body>
-    <s:div id="site-wrapper">
-		<s:property value="blogSiteUrl"/>
-        <s:div>
+<s:div id="site-wrapper">
+	<s:property value="blogSiteUrl"/>
+	<s:div>
             <s:div style="margin:1%; overflow-x:hidden;">
                 <s:div id="sidebar" style="width:20%; float:left; border: 1px solid black;">
                     <s:div id="header">
