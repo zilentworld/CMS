@@ -1,23 +1,21 @@
 package com.jiro.action.site;
 
-import java.util.Map;
-
-import org.apache.struts2.interceptor.ServletRequestAware;
-import org.apache.struts2.interceptor.SessionAware;
-
 import com.jiro.model.cms.CmsUser;
 import com.jiro.model.cms.CmsUserSite;
 import com.jiro.service.cms.CmsTemplatesService;
 import com.jiro.service.cms.CmsUserSiteService;
 import com.jiro.utility.Constants;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.interceptor.SessionAware;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 public class BlogUrlAction extends ActionSupport implements SessionAware, ServletRequestAware {
 
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 1L;
     private String cmsTemplateId;
@@ -28,63 +26,87 @@ public class BlogUrlAction extends ActionSupport implements SessionAware, Servle
     private CmsTemplatesService cmsTemplatesService;
     private String nextAction;
     private HttpServletRequest httpServletRequest;
+    private String msg;
 
     public CmsUserSiteService getCmsUserSiteService() {
         return cmsUserSiteService;
     }
+
     public void setCmsUserSiteService(CmsUserSiteService cmsUserSiteService) {
         this.cmsUserSiteService = cmsUserSiteService;
     }
+
     public CmsUserSite getCmsUserSite() {
         return cmsUserSite;
     }
+
     public void setCmsUserSite(CmsUserSite cmsUserSite) {
         this.cmsUserSite = cmsUserSite;
     }
+
     public String getCmsTemplateId() {
         return cmsTemplateId;
     }
+
     public void setCmsTemplateId(String cmsTemplateId) {
         this.cmsTemplateId = cmsTemplateId;
     }
+
     public CmsTemplatesService getCmsTemplatesService() {
         return cmsTemplatesService;
     }
+
     public void setCmsTemplatesService(CmsTemplatesService cmsTemplatesService) {
         this.cmsTemplatesService = cmsTemplatesService;
     }
+
     public String getMsgError() {
         return msgError;
     }
+
     public void setMsgError(String msgError) {
         this.msgError = msgError;
     }
+
     public String getNextAction() {
         return nextAction;
     }
+
     public void setNextAction(String nextAction) {
         this.nextAction = nextAction;
     }
 
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+
     @Override
     public String execute() throws Exception {
         cmsUserSite.setCmsUser((CmsUser) sessionMap.get(Constants.CMS_SESSION_CMS_USER));
-        System.out.println("cmsusersite:cmsuser:"+((CmsUser) sessionMap.get(Constants.CMS_SESSION_CMS_USER)).getCmsUserId());
+        System.out.println("cmsusersite:cmsuser:" + ((CmsUser) sessionMap.get(Constants.CMS_SESSION_CMS_USER)).getCmsUserId());
+
         cmsUserSite.setCmsTemplates(cmsTemplatesService.get(Long.parseLong(cmsTemplateId)));
-        if(!cmsUserSiteService.saveNewUserSite(cmsUserSite)) {
+        if (!cmsUserSiteService.saveNewUserSite(cmsUserSite)) {
             msgError = Constants.CMS_ERROR_BLOG_URL_TAKEN;
             return ERROR;
         }
-        
-        nextAction = "home-" + cmsUserSite.getCmsTemplates().getTemplateName().toLowerCase();
-        System.out.println("resultMsg:"+nextAction);
+
+        msg = "Your site is waiting for publication";
+
+//        nextAction = "home-" + cmsUserSite.getCmsTemplates().getTemplateName().toLowerCase();
+//        System.out.println("resultMsg:"+nextAction);
 
         return SUCCESS;
     }
-    
+
     @Override
     public void validate() {
-        if(cmsUserSiteService.checkBlogUrl(cmsUserSite.getBlogUrl())) {
+        if (cmsUserSiteService.checkBlogUrl(cmsUserSite.getBlogUrl())) {
             addFieldError("cmsUserSite.blogUrl", Constants.CMS_ERROR_BLOG_URL_TAKEN);
         }
         try {
@@ -93,7 +115,7 @@ public class BlogUrlAction extends ActionSupport implements SessionAware, Servle
             addFieldError("cmsUserSite.blogUrl", Constants.CMS_ERROR_GENERIC_ERROR);
         }
     }
-    
+
     @Override
     public void setSession(Map<String, Object> sessionMap) {
         this.sessionMap = sessionMap;

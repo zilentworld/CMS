@@ -1,6 +1,5 @@
-<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
-<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <s:div style="margin: 2.5%; width: 95%; height: 95%; overflow:auto; " class="border">
     <table style="width : 100%; text-align: center;">
         <tr>
@@ -10,151 +9,41 @@
             <th rowspan=2>
                 Cms User
             </th>
-            <th colspan=5>
+            <th colspan=
+                    <s:property value="siteHeaders.size()"/>>
                 Headers
             </th>
-        </tr>
-        <tr>
-            <th>
-                Home
-            </th>
-            <th>
-                About
-            </th>
-            <th>
-                Contact Us
-            </th>
-            <th>
-                Feedback
-            </th>
-            <th>
-                Forums
+            <th rowspan=2>
+                Action
             </th>
         </tr>
         <tr>
-            <td>
-                testingsite
-            </td>
-            <td>
-                testingname
-            </td>
-            <td>
-                <input type="checkbox">
-            </td>
-            <td>
-                <input type="checkbox">
-            </td>
-            <td>
-                <input type="checkbox">
-            </td>
-            <td>
-                <input type="checkbox">
-            </td>
-            <td>
-                <input type="checkbox">
-            </td>
+            <s:iterator value="siteHeaders">
+                <th>
+                    <s:property/>
+                </th>
+            </s:iterator>
         </tr>
-
-        <tr>
-            <td>
-                testingsite
-            </td>
-            <td>
-                testingname
-            </td>
-            <td>
-                <input type="checkbox">
-            </td>
-            <td>
-                <input type="checkbox">
-            </td>
-            <td>
-                <input type="checkbox">
-            </td>
-            <td>
-                <input type="checkbox">
-            </td>
-            <td>
-                <input type="checkbox">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                testingsite
-            </td>
-            <td>
-                testingname
-            </td>
-            <td>
-                <input type="checkbox">
-            </td>
-            <td>
-                <input type="checkbox">
-            </td>
-            <td>
-                <input type="checkbox">
-            </td>
-            <td>
-                <input type="checkbox">
-            </td>
-            <td>
-                <input type="checkbox">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                testingsite
-            </td>
-            <td>
-                testingname
-            </td>
-            <td>
-                <input type="checkbox">
-            </td>
-            <td>
-                <input type="checkbox">
-            </td>
-            <td>
-                <input type="checkbox">
-            </td>
-            <td>
-                <input type="checkbox">
-            </td>
-            <td>
-                <input type="checkbox">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                testingsite
-            </td>
-            <td>
-                testingname
-            </td>
-            <td>
-                <input type="checkbox">
-            </td>
-            <td>
-                <input type="checkbox">
-            </td>
-            <td>
-                <input type="checkbox">
-            </td>
-            <td>
-                <input type="checkbox">
-            </td>
-            <td>
-                <input type="checkbox">
-            </td>
-        </tr>
+        <s:iterator value="cmsUserSiteLists">
+            <s:form theme="simple">
+                <s:hidden name="cmsUserSiteId" value="%{cmsUserSiteId}" />
+                <tr>
+                    <td>
+                        <s:property value="blogUrl"/>
+                    </td>
+                    <td>
+                        <s:property value="cmsUser.cmsUsername"/>
+                    </td>
+                    <s:iterator value="siteLinksPermissions">
+                        <td>
+                            <s:checkbox theme="simple" fieldValue="%{siteLinks.siteLinkId}" value="%{isEnabled}" name="headerList" />
+                        </td>
+                    </s:iterator>
+                    <td>
+                        <s:submit type="button" theme="simple" value="Save" onclick="form.action='processManageHeaders'; form.submit();"/>
+                    </td>
+                </tr>
+            </s:form>
+        </s:iterator>
     </table>
-    <br />
-    <s:div style="float:right;">
-    	<s:div style="margin-right: 2vh;">
-    		<s:submit value="Save" theme="simple" />
-    		<s:submit value="Cancel" theme="simple" />
-    	</s:div>
-    </s:div>
-    <br />
-    <br />
 </s:div>

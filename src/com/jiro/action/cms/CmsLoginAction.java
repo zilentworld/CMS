@@ -50,6 +50,9 @@ public class CmsLoginAction extends ActionSupport implements SessionAware {
     
     public String cmsLoginAction() {
         cmsUser = cmsUserService.getByLogin(cmsUser);
+        if(cmsUser == null)
+            return ERROR;
+
         sessionMap.put(Constants.CMS_SESSION_CMS_USER, cmsUser);
         System.out.println("cmsLoginAction:cmsUsername:"+cmsUser.getCmsUsername());
         

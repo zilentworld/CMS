@@ -156,19 +156,31 @@
 		</action>
 		
 		<action name="showCmsLogin" class="loginAction" method="showCmsLogin">
-			<result name="success">/WEB-INF/jsp/cmsPages/cmsAccountLogin.jsp</result>
+            <result name="success">/WEB-INF/jsp/cmsPages/cmsAccountLogin.jsp</result>
+            <result name="error">/WEB-INF/jsp/cmsPages/cmsAccountLogin.jsp</result>
+            <result name="input">/WEB-INF/jsp/cmsPages/cmsAccountLogin.jsp</result>
 		</action>
 		
 		<action name="doCmsLogin" class="loginAction" method="cmsLoginAction">
 			<result name="success" type="tiles">cms-management</result>
+            <result name="error">/WEB-INF/jsp/cmsPages/cmsAccountLogin.jsp</result>
+            <result name="input">/WEB-INF/jsp/cmsPages/cmsAccountLogin.jsp</result>
 		</action>
 		
 		<action name="showSiteList" class="cmsMgmtAction" method="showSiteList">
 			<result name="success" type="tiles">site-list</result>
-		</action>		
-		
+		</action>
+
+		<action name="publishSite" class="cmsMgmtAction" method="publishSite">
+			<result name="success">/WEB-INF/jsp/cmsPages/index.jsp</result>
+		</action>
+
 		<action name="showManageHeaders" class="cmsMgmtAction" method="showManageHeaders">
 			<result name="success" type="tiles">manage-headers</result>
+		</action>
+
+		<action name="processManageHeaders" class="cmsMgmtAction" method="processManageHeaders">
+			<result name="success" type="redirectAction">showManageHeaders</result>
 		</action>
 
 		<action name="pickTemplate" class="newBlogSite">
@@ -196,10 +208,11 @@
 		<action name="confirmUrl" class="userSiteAction">
 			<result name="input">/WEB-INF/jsp/cmsPages/enterUrl.jsp</result>
 			<result name="error">/WEB-INF/jsp/cmsPages/enterUrl.jsp</result>
-			<result name="success" type="redirectAction">
-				<param name="actionName">checkBlogUrl</param>
-				<param name="blogSiteUrl">${cmsUserSite.blogUrl}</param>
-			</result>
+			<!--<result name="success" type="redirectAction">-->
+				<!--<param name="actionName">checkBlogUrl</param>-->
+				<!--<param name="blogSiteUrl">${cmsUserSite.blogUrl}</param>-->
+			<!--</result>-->
+            <result name="success">/WEB-INF/jsp/cmsPages/message.jsp</result>
 		</action>
 
 		<action name="bannerImg" class="siteImgAction">

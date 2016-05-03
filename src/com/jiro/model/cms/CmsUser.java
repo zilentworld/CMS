@@ -1,15 +1,9 @@
 package com.jiro.model.cms;
 
-import java.util.Date; 
+import java.util.Date;
+import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 @Entity
 @Table(name="cms_user")
@@ -25,8 +19,8 @@ public class CmsUser {
     @ManyToOne
     @JoinColumn(name = "cms_user_type_code")
     private CmsUserType cmsUserType;
-//    @Column(name="cms_user_type_code")
-//    private String cmsUserTypeCode;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cmsUser", fetch = FetchType.LAZY)
+    private Set<CmsUserSite> cmsUserSites;
     
     @Column(name="cms_register_date")
     @Temporal(TemporalType.TIMESTAMP)
@@ -51,14 +45,13 @@ public class CmsUser {
         this.cmsPassword = cmsPassword;
     }
 
-//    public String getCmsUserTypeCode() {
-//        return cmsUserTypeCode;
-//    }
-//    
-//    public void setCmsUserTypeCode(String cmsUserTypeCode) {
-//        this.cmsUserTypeCode = cmsUserTypeCode;
-//    }
+    public Set<CmsUserSite> getCmsUserSites() {
+        return cmsUserSites;
+    }
 
+    public void setCmsUserSites(Set<CmsUserSite> cmsUserSites) {
+        this.cmsUserSites = cmsUserSites;
+    }
 
     public CmsUserType getCmsUserType() {
         return cmsUserType;

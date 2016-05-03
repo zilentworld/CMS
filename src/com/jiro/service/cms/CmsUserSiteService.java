@@ -2,13 +2,17 @@ package com.jiro.service.cms;
 
 import com.jiro.model.cms.CmsUserSite;
 
+import java.util.List;
+
 
 public interface CmsUserSiteService {
     
-    public CmsUserSite getByUrl(String blogSiteUrl);
+    CmsUserSite getByUrl(String blogSiteUrl);
     
-    public boolean checkBlogUrl(String blogUrl);
-    
-    public boolean saveNewUserSite(CmsUserSite cmsUserSite);
+    boolean checkBlogUrl(String blogUrl);
+
+    boolean saveNewUserSite(CmsUserSite cmsUserSite);
+
+    List<CmsUserSite> getByPublished(boolean published);
 
 }

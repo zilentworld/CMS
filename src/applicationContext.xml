@@ -20,7 +20,8 @@
     <bean id="siteUser" class="com.jiro.model.site.SiteUser" scope="prototype" />
     <bean id="sitePost" class="com.jiro.model.site.SitePost" scope="prototype" />
     <bean id="siteComment" class="com.jiro.model.site.SiteComment" scope="prototype" />
-    
+    <bean id="siteLinks" class="com.jiro.model.site.SiteLinks" scope="prototype" />
+	<bean id="siteLinksPermission" class="com.jiro.model.site.SiteLinksPermission" scope="prototype" />
     
 	<!--     dao -->
     <bean id="cmsUserDao" class="com.jiro.dao.cms.CmsUserDao" scope="prototype" />
@@ -31,6 +32,8 @@
     <bean id="sitePostDao" class="com.jiro.dao.site.SitePostDao" scope="prototype" />
     <bean id="siteCommentDao" class="com.jiro.dao.site.SiteCommentDao" scope="prototype" />
     <bean id="siteSettingsDao" class="com.jiro.dao.site.SiteSettingsDao" scope="prototype" />
+	<bean id="siteLinksDao" class="com.jiro.dao.site.SiteLinksDao" scope="prototype" />
+	<bean id="siteLinksPermissionDao" class="com.jiro.dao.site.SiteLinksPermissionDao" scope="prototype" />
     
     <bean id="genericDao" abstract="true" class="com.jiro.dao.GenericDaoImpl" scope="prototype">
 		<property name="sessionFactory" ref="sessionFactory" />
@@ -70,7 +73,14 @@
     
     <bean id="siteSettingsService" class="com.jiro.service.site.impl.SiteSettingsServiceImpl">
     	<property name="siteSettingsDao" ref="siteSettingsDao" />
-    </bean>    
+    </bean>
+
+	<bean id="siteLinksService" class="com.jiro.service.site.impl.SiteLinksServiceImpl">
+	</bean>
+
+	<bean id="siteLinksPermissionService" class="com.jiro.service.site.impl.SiteLinksPermissionServiceImpl" >
+		<property name="siteLinksPermissionDao" ref="siteLinksPermissionDao" />
+	</bean>
     
 	<!--     action -->
     <bean id="registerCms" class="com.jiro.action.cms.CmsRegisterAction" scope="prototype">
@@ -146,6 +156,9 @@
     </bean>
 
 	<bean id="cmsMgmtAction" class="com.jiro.action.cms.CmsMgmtAction" scope="prototype">
+		<property name="cmsUserSiteService" ref="cmsUserSiteService" />
+		<property name="siteLinksService" ref="siteLinksServiceImpl" />
+		<property name="siteLinksPermissionService" ref="siteLinksPermissionService" />
 	</bean>
 
 	<bean id="testCreate" class="com.jiro.action.site.TestCreate" scope="prototype">

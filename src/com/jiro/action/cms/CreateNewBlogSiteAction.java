@@ -64,6 +64,7 @@ public class CreateNewBlogSiteAction extends SiteAbstractAction {
 
     @Override
     public String execute() throws Exception {
+        System.out.println("createNewBlogSite:imgSrc:"+imgSrc);
         cmsTemplates = cmsTemplatesService.getByImgSrc(imgSrc);
         if(cmsTemplates == null) {
             errMsg = "An error occured. Kindly pick a template again.";

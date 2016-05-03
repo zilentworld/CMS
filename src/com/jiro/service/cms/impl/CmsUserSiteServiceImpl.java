@@ -11,6 +11,8 @@ import com.jiro.service.site.SitePostService;
 import com.jiro.service.site.SiteSettingsService;
 import com.jiro.service.site.SiteUserService;
 
+import java.util.List;
+
 @Service
 public class CmsUserSiteServiceImpl implements CmsUserSiteService {
     
@@ -57,5 +59,9 @@ public class CmsUserSiteServiceImpl implements CmsUserSiteService {
     public CmsUserSite getByUrl(String blogSiteUrl) {
         return cmsUserSiteDao.getByUrl(blogSiteUrl);
     }
-    
+
+    @Override
+    public List<CmsUserSite> getByPublished(boolean published) {
+        return cmsUserSiteDao.getByPublished(published ? 1 : 0);
+    }
 }
