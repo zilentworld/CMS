@@ -7,7 +7,7 @@ public final class Constants {
     public static final String CMS_PATH_TO_SITE = "/WEB-INF/jsp/sitePages/";
     public static final String CMS_PATH_TO_TEMPLATES = "/WEB-INF/jsp/templates/";
     public static final String CMS_PATH_TO_TILES = "/WEB-INF/tiles.xml";
-    public static final String CMS_PATH_TO_PROJECT_TILES = "/WEB-INF/tiles.xml";
+    public static final String CMS_PATH_TO_WEBAPPS = "/opt/tomcat/webapps/";
     
     //CMS Session Attributes
     public static final String CMS_SESSION_CMS_USER = "cms_user";

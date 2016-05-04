@@ -9,6 +9,7 @@
 </head>
 <body>
 	<s:div id="site-wrapper">
+		template3
 		<s:property value="#blogSiteUrl" />
 		<s:div>
 			<s:div>

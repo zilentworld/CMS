@@ -11,7 +11,7 @@
                 <th>
                     Cms User
                 </th>
-                <th>
+                <th colspan="2">
                     Action
                 </th>
             </tr>
@@ -25,6 +25,10 @@
                     </td>
                     <td>
                         <s:submit class="publish" hidden-data="%{cmsUserSiteId}" type="button" value="Publish"
+                                  theme="simple"/>
+                    </td>
+                    <td>
+                        <s:submit class="disable" hidden-data="%{cmsUserSiteId}" type="button" value="Disable"
                                   theme="simple"/>
                     </td>
                 </tr>

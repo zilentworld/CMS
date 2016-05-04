@@ -10,6 +10,7 @@
 </head>
 <body>
 <s:div id="site-wrapper">
+	template2
 	<s:property value="blogSiteUrl"/>
 	<s:div>
             <s:div style="margin:1%; overflow-x:hidden;">

@@ -82,13 +82,19 @@ public class TestCreate extends ActionSupport implements SessionAware, ServletRe
 
         try {
             String tilesXml = FileUtils.readFileToString(tiles);
+            System.out.println("bb");
             int closeQoute = tilesXml.indexOf("</tiles-definitions>");
+            System.out.println("cc");
 
             String startTiles = tilesXml.substring(0, closeQoute);
+            System.out.println("dd");
             String appendTiles = "<!-- testing append to tiles -->" + "\n";
+            System.out.println("ee");
             String endTiles = tilesXml.substring(closeQoute);
+            System.out.println("ff");
 
             FileUtils.writeStringToFile(tiles, startTiles + appendTiles + endTiles, "UTF-8");
+            System.out.println("gg");
 
         } catch (IOException e) {
             e.printStackTrace();

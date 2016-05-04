@@ -227,6 +227,9 @@
 			<result name="success" type="tiles">home-template2</result>
 		</action>
 
+		<action name="*">
+			<result>/${1}.jsp</result>
+		</action>
 
 	</package>
 

@@ -5,6 +5,8 @@ import com.jiro.model.site.SiteLinksPermission;
 import com.jiro.service.site.SiteLinksPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 /**
  * Created by dev-pc on 5/3/16.
  */
@@ -27,5 +29,10 @@ public class SiteLinksPermissionServiceImpl implements SiteLinksPermissionServic
         SiteLinksPermission s = siteLinksPermissionDao.getByOtherIds(cmsUserSiteId, siteLinkId);
         s.setIsEnabled(isEnabled? 1 : 0);
         siteLinksPermissionDao.saveOrUpdate(s);
+    }
+
+    @Override
+    public List<SiteLinksPermission> getList() {
+        return siteLinksPermissionDao.getList();
     }
 }

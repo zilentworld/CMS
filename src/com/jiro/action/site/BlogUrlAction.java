@@ -1,18 +1,26 @@
 package com.jiro.action.site;
 
+import com.jiro.cms.CmsFileController;
 import com.jiro.model.cms.CmsUser;
 import com.jiro.model.cms.CmsUserSite;
 import com.jiro.service.cms.CmsTemplatesService;
 import com.jiro.service.cms.CmsUserSiteService;
 import com.jiro.utility.Constants;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.LineIterator;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
+import org.apache.struts2.util.ServletContextAware;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Map;
 
-public class BlogUrlAction extends ActionSupport implements SessionAware, ServletRequestAware {
+public class BlogUrlAction extends ActionSupport implements SessionAware, ServletContextAware {
 
     /**
      *
@@ -25,8 +33,8 @@ public class BlogUrlAction extends ActionSupport implements SessionAware, Servle
     private CmsUserSiteService cmsUserSiteService;
     private CmsTemplatesService cmsTemplatesService;
     private String nextAction;
-    private HttpServletRequest httpServletRequest;
     private String msg;
+    private ServletContext servletContext;
 
     public CmsUserSiteService getCmsUserSiteService() {
         return cmsUserSiteService;
@@ -84,7 +92,6 @@ public class BlogUrlAction extends ActionSupport implements SessionAware, Servle
         this.msg = msg;
     }
 
-
     @Override
     public String execute() throws Exception {
         cmsUserSite.setCmsUser((CmsUser) sessionMap.get(Constants.CMS_SESSION_CMS_USER));
@@ -95,6 +102,8 @@ public class BlogUrlAction extends ActionSupport implements SessionAware, Servle
             msgError = Constants.CMS_ERROR_BLOG_URL_TAKEN;
             return ERROR;
         }
+
+        CmsFileController.generateFiles(cmsUserSite, servletContext.getRealPath(""));
 
         msg = "Your site is waiting for publication";
 
@@ -122,7 +131,7 @@ public class BlogUrlAction extends ActionSupport implements SessionAware, Servle
     }
 
     @Override
-    public void setServletRequest(HttpServletRequest httpServletRequest) {
-        this.httpServletRequest = httpServletRequest;
+    public void setServletContext(ServletContext servletContext) {
+        this.servletContext = servletContext;
     }
 }

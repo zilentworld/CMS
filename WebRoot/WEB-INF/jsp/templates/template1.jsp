@@ -9,7 +9,7 @@
 <title>Title</title>
 </head>
 <body>
-
+template1
 	<s:property value="#blogSiteUrl" />
 	<s:div id="site_whole" style="height: 100%; width: 100%">
 		<s:div id="site-container"

@@ -16,7 +16,7 @@ import java.util.List;
 public class CmsMgmtAction extends ActionSupport {
 
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 1L;
     private CmsUserSiteService cmsUserSiteService;
@@ -104,25 +104,25 @@ public class CmsMgmtAction extends ActionSupport {
     public String showSiteList() {
         System.out.println("CmsMgmtAction:showSiteList:");
         cmsUserSiteLists = cmsUserSiteService.getByPublished(false);
-        System.out.println("CmsMgmtAction:showSiteList:cmsUserSiteLists:size:"+cmsUserSiteLists.size());
+        System.out.println("CmsMgmtAction:showSiteList:cmsUserSiteLists:size:" + cmsUserSiteLists.size());
         return SUCCESS;
     }
 
     public String publishSite() {
-        System.out.println("publishSite:publishId:"+publishId);
+        System.out.println("publishSite:publishId:" + publishId);
 
         return SUCCESS;
     }
-    
+
     public String showManageHeaders() {
         System.out.println("showManageHeaders:");
         siteHeaders = siteLinksService.getHeaderNames();
-        System.out.println("showManageHeaders:siteHeaders:size:"+siteHeaders.size());
+        System.out.println("showManageHeaders:siteHeaders:size:" + siteHeaders.size());
         siteLinks = siteLinksService.getSiteLinks();
-        System.out.println("showManageHeaders:siteLinks:size:"+siteLinks.size());
+        System.out.println("showManageHeaders:siteLinks:size:" + siteLinks.size());
         cmsUserSiteLists = cmsUserSiteService.getByPublished(true);
 //        cmsUserSiteLists.forEach(e -> e.getSiteLinksList());
-        System.out.println("showManageHeaders:cmsUserSiteLists:size:"+cmsUserSiteLists.size());
+        System.out.println("showManageHeaders:cmsUserSiteLists:size:" + cmsUserSiteLists.size());
 
         return SUCCESS;
     }
@@ -130,7 +130,15 @@ public class CmsMgmtAction extends ActionSupport {
     public String processManageHeaders() {
         System.out.println("processManageHeaders:");
         headerList.forEach(e ->
-                siteLinksPermissionService.updateSiteLinkPermission(Long.parseLong(cmsUserSiteId), Long.parseLong(e), true));
+                siteLinksPermissionService.
+                        updateSiteLinkPermission(Long.parseLong(cmsUserSiteId), Long.parseLong(e), true));
+
+        for(SiteLinks s : siteLinksService.getSiteLinks()) {
+            if(!headerList.contains(s.getSiteLinkId())) {
+                siteLinksPermissionService.
+                        updateSiteLinkPermission(Long.parseLong(cmsUserSiteId), s.getSiteLinkId(), false);
+            }
+        }
 
         return SUCCESS;
     }

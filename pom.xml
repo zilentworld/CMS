@@ -19,32 +19,6 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
       <artifactId>hibernate-jpa-2.0-api</artifactId>
       <version>1.0.1.Final</version>
     </dependency>
-<!--     <dependency> -->
-<!--        <groupId>javax</groupId> -->
-<!--        <artifactId>javaee-api</artifactId> -->
-<!--        <version>7.0</version> -->
-<!--        <scope>provided</scope> -->
-<!--      </dependency> -->
-<!--     <dependency> -->
-<!--       <groupId>org.glassfish.web</groupId> -->
-<!--       <artifactId>javax.servlet.jsp.jstl</artifactId> -->
-<!--       <version>1.2.2</version> -->
-<!--     </dependency> -->
-<!--     <dependency> -->
-<!--       <groupId>antlr</groupId> -->
-<!--       <artifactId>antlr</artifactId> -->
-<!--       <version>2.7.7</version> -->
-<!--     </dependency> -->
-<!--     <dependency> -->
-<!--       <groupId>org.slf4j</groupId> -->
-<!--       <artifactId>slf4j-api</artifactId> -->
-<!--       <version>1.6.1</version> -->
-<!--     </dependency> -->
-<!--     <dependency> -->
-<!--       <groupId>dom4j</groupId> -->
-<!--       <artifactId>dom4j</artifactId> -->
-<!--       <version>1.6.1</version> -->
-<!--     </dependency> -->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
@@ -55,21 +29,6 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
       <artifactId>hibernate-commons-annotations</artifactId>
       <version>4.0.1.Final</version>
     </dependency>
-<!--     <dependency> -->
-<!--       <groupId>org.javassist</groupId> -->
-<!--       <artifactId>javassist</artifactId> -->
-<!--       <version>3.15.0-GA</version> -->
-<!--     </dependency> -->
-<!--     <dependency> -->
-<!--       <groupId>org.jboss.logging</groupId> -->
-<!--       <artifactId>jboss-logging</artifactId> -->
-<!--       <version>3.1.0.GA</version> -->
-<!--     </dependency> -->
-<!--     <dependency> -->
-<!--       <groupId>org.jboss.spec.javax.transaction</groupId> -->
-<!--       <artifactId>jboss-transaction-api_1.1_spec</artifactId> -->
-<!--       <version>1.0.0.Final</version> -->
-<!--     </dependency> -->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-entitymanager</artifactId>
@@ -80,11 +39,6 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
       <artifactId>hibernate-validator</artifactId>
       <version>4.2.0.Final</version>
     </dependency>
-<!--     <dependency> -->
-<!--       <groupId>xml-apis</groupId> -->
-<!--       <artifactId>xml-apis</artifactId> -->
-<!--       <version>1.4.01</version> -->
-<!--     </dependency> -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-aop</artifactId>
@@ -205,11 +159,6 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
       <artifactId>spring-test</artifactId>
       <version>4.1.0.RELEASE</version>
     </dependency>
-<!--     <dependency> -->
-<!--       <groupId>org.testng</groupId> -->
-<!--       <artifactId>testng</artifactId> -->
-<!--       <version>6.8.8</version> -->
-<!--     </dependency> -->
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-web</artifactId>
@@ -437,11 +386,11 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
       <artifactId>jackson-mapper-asl</artifactId>
       <version>${jackson-version}</version>
     </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>1.6.6</version>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>org.slf4j</groupId>-->
+      <!--<artifactId>slf4j-log4j12</artifactId>-->
+      <!--<version>1.6.6</version>-->
+    <!--</dependency>-->
     <dependency>
       <groupId>postgresql</groupId>
       <artifactId>postgresql</artifactId>
@@ -623,9 +572,45 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 		<artifactId>struts2-jquery-plugin</artifactId>
 		<version>3.7.1</version>
 	</dependency>
-		
-	    
-    
+
+    <!--tiles update-->
+    <!--<dependency>-->
+      <!--<groupId>org.apache.tiles</groupId>-->
+      <!--<artifactId>tiles-api</artifactId>-->
+      <!--<version>2.2.2</version>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+      <!--<groupId>org.apache.tiles</groupId>-->
+      <!--<artifactId>tiles-core</artifactId>-->
+      <!--<version>2.2.2</version>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+      <!--<groupId>org.apache.tiles</groupId>-->
+      <!--<artifactId>tiles-extras</artifactId>-->
+      <!--<version>2.2.2</version>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+      <!--<groupId>org.apache.tiles</groupId>-->
+      <!--<artifactId>tiles-jsp</artifactId>-->
+      <!--<version>2.2.2</version>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+      <!--<groupId>org.apache.tiles</groupId>-->
+      <!--<artifactId>tiles-ognl</artifactId>-->
+      <!--<version>2.2.2</version>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+      <!--<groupId>org.apache.tiles</groupId>-->
+      <!--<artifactId>tiles-servlet</artifactId>-->
+      <!--<version>2.2.2</version>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+      <!--<groupId>org.apache.tiles</groupId>-->
+      <!--<artifactId>tiles-freemarker</artifactId>-->
+      <!--<version>2.2.2</version>-->
+    <!--</dependency>-->
+    <!--tiles update-->
+
     <dependency>
       <groupId>jboss</groupId>
       <artifactId>javassist</artifactId>

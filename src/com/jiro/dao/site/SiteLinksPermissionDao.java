@@ -6,6 +6,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by dev-pc on 5/3/16.
  */
@@ -15,6 +17,10 @@ public class SiteLinksPermissionDao extends GenericDaoImpl {
     @Transactional
     public SiteLinksPermission getById(long permissionId) {
         return (SiteLinksPermission) super.get(SiteLinksPermission.class, permissionId);
+    }
+
+    public List<SiteLinksPermission> getList() {
+        return (List<SiteLinksPermission>) super.getList(SiteLinksPermission.class);
     }
 
     @Transactional
