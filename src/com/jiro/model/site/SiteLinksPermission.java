@@ -66,4 +66,13 @@ public class SiteLinksPermission implements Comparable {
         }
         return  0;
     }
+
+    public SiteLinksPermission() {
+    }
+
+    public SiteLinksPermission(CmsUserSite cmsUserSite, SiteLinks siteLinks) {
+        this.cmsUserSite = cmsUserSite;
+        this.siteLinks = siteLinks;
+        this.isEnabled = 0;
+    }
 }

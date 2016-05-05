@@ -65,7 +65,7 @@ public class SitePostAction extends SiteAbstractAction {
     
     @SkipValidation
     public String showNewSitePost() {
-        setNextAction("newSitePost" + getSiteTemplate());
+        setNextAction(getBlogSiteUrl() + "/newSitePost");
         
         return SUCCESS;
     }
@@ -73,7 +73,7 @@ public class SitePostAction extends SiteAbstractAction {
     @SkipValidation
     public String editSitePost() {
         sitePost = sitePostService.getById(postId);
-        setNextAction("newSitePost" + getSiteTemplate());
+        setNextAction(getBlogSiteUrl() + "/newSitePost");
         
         return SUCCESS;
     }
@@ -81,7 +81,7 @@ public class SitePostAction extends SiteAbstractAction {
     @SkipValidation
     public String deleteSitePost() {
         sitePostService.deleteSitePostById(postId);
-        setNextAction("home" + getSiteTemplate());
+        setNextAction(getBlogSiteUrl() + "/home");
         System.out.println("deleteSitePost:nextAction:"+getNextAction());
         
         return SUCCESS;

@@ -44,7 +44,7 @@ template1
 							style="min-width:70%; width:85%; max-width:85%; float:left">
 							<s:div style="width=90%; height=90%; clear:both; margin:1%">
 								<s:div id="posts-content" style="margin:1%">
-									<s:div id="body">
+									<s:div id="body" style="margin: 5%;">
 										<tiles:insertAttribute name="body" />
 									</s:div>
 								</s:div>

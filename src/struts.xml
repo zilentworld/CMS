@@ -140,7 +140,7 @@
 				<param name="actionName">checkBlogUrl</param>
 				<param name="blogSiteUrl">{1}</param>
 			</result>
-			<result name="error">/WEB-INF/jsp/cmsPages/index.jsp</result>
+			<result name="error">/WEB-INF/jsp/cmsPages/message.jsp</result>
 		</action>
 		
 		<action name="checkBlogUrl" class="checkBlogUrl">
@@ -172,7 +172,31 @@
 		</action>
 
 		<action name="publishSite" class="cmsMgmtAction" method="publishSite">
-			<result name="success">/WEB-INF/jsp/cmsPages/index.jsp</result>
+			<result name="error" type="redirectAction">
+				<param name="actionName">showSiteList</param>
+			</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">${blogSiteUrl}/postPreview</param>
+				<param name="nextAction">${nextAction}</param>
+			</result>
+		</action>
+
+		<action name="republishSite" class="cmsMgmtAction" method="republishSite">
+			<result name="error" type="redirectAction">
+				<param name="actionName">showSiteList</param>
+			</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">showSiteList</param>
+			</result>
+		</action>
+
+		<action name="republishAllSites" class="cmsMgmtAction" method="republishAllSites">
+			<result name="error" type="redirectAction">
+				<param name="actionName">showSiteList</param>
+			</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">showSiteList</param>
+			</result>
 		</action>
 
 		<action name="showManageHeaders" class="cmsMgmtAction" method="showManageHeaders">
@@ -181,6 +205,14 @@
 
 		<action name="processManageHeaders" class="cmsMgmtAction" method="processManageHeaders">
 			<result name="success" type="redirectAction">showManageHeaders</result>
+		</action>
+
+		<action name="showMySites" class="cmsMgmtAction" method="showMySites">
+			<result name="success" type="tiles">my-sites</result>
+		</action>
+
+		<action name="showMyUsers" class="cmsMgmtAction" method="showMyUsers">
+		<result name="success" type="tiles">manage-headers</result>
 		</action>
 
 		<action name="pickTemplate" class="newBlogSite">
@@ -221,10 +253,6 @@
 
 		<action name="footerImg" class="siteImgAction">
 			<result name="success">/WEB-INF/jsp/sitePages/footerImg.jsp</result>
-		</action>
-
-		<action name="testCreate" class="testCreate">
-			<result name="success" type="tiles">home-template2</result>
 		</action>
 
 		<action name="*">

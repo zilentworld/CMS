@@ -57,8 +57,7 @@ public class PostContentAction extends SiteAbstractAction {
         System.out.println("postContent:postId:"+postId);
         sitePost = sitePostService.getById(Long.parseLong(postId));
         siteComments = siteCommentService.getPostComments(sitePost.getSitePostId());
-        String nextAction = "postContent" + getSiteTemplate();
-        setNextAction(nextAction);
+        setNextAction(getBlogSiteUrl() + "/postContent");
         System.out.println("postContentAction:execute:blogSiteUrl:"+getBlogSiteUrl());
         System.out.println("postContentAction:execute:nextAction:"+getNextAction());
         

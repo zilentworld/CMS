@@ -34,9 +34,10 @@ public class CmsUserSite {
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "cmsUserSite", cascade = CascadeType.ALL)
     private SiteSettings siteSettings;
-    
+
     @Column(name="is_published")
     private int isPublished;
+
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cmsUserSite", fetch = FetchType.LAZY)
     private List<SiteLinksPermission> siteLinksPermissions;
@@ -44,11 +45,9 @@ public class CmsUserSite {
     public List<SiteLinksPermission> getSiteLinksPermissions() {
         return siteLinksPermissions;
     }
-
     public void setSiteLinksPermissions(List<SiteLinksPermission> siteLinksPermissions) {
         this.siteLinksPermissions = siteLinksPermissions;
     }
-
     public String getBlogUrl() {
         return blogUrl;
     }
@@ -92,11 +91,11 @@ public class CmsUserSite {
         this.isPublished = isPublished;
     }
 
-    public CmsUserSite() {}
-
     public CmsUserSite(CmsUser cmsUser, String blogUrl, CmsTemplates cmsTemplates) {
         this.cmsUser = cmsUser;
         this.blogUrl = blogUrl;
         this.cmsTemplates = cmsTemplates;
-    }    
+    }
+
+    public CmsUserSite() {}
 }

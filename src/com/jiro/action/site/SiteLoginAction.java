@@ -48,9 +48,8 @@ public class SiteLoginAction extends SiteAbstractAction {
         siteSessionMap.put(getBlogSiteUrl(), siteUser);
 
         getSessionMap().put(Constants.SITE_SESSION_MAP_VARIABLE, siteSessionMap);
-        
-        String nextAction = "home" + getSiteTemplate();
-        setNextAction(nextAction);
+
+        setNextAction(getBlogSiteUrl() + "/home");
         System.out.println("siteLoginAction:execute:blogSiteUrl:"+getBlogSiteUrl());
         System.out.println("TEST");
 
@@ -67,17 +66,16 @@ public class SiteLoginAction extends SiteAbstractAction {
     @SkipValidation
     public String showLogin() {
         System.out.println("siteLoginAction:showLogin:blogSiteUrl:"+getBlogSiteUrl());
-        String nextAction = "siteLogin" + getSiteTemplate();
-        
-        System.out.println("nextAction:"+nextAction);
-        setNextAction(nextAction);
+
+        setNextAction(getBlogSiteUrl() + "/siteLogin");
+        System.out.println("nextAction:"+getNextAction());
 
         return SUCCESS;
     }
 
     @Override
     public void validate() {
-        setNextAction("siteLogin" + getSiteTemplate());
+        setNextAction(getBlogSiteUrl() + "/siteLogin");
         String username = siteUser.getSiteUserUsername();
         String password = siteUser.getSiteUserPassword();
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {

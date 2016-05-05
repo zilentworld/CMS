@@ -1,19 +1,21 @@
 package com.jiro.action.cms;
 
+import com.jiro.cms.CmsFileController;
+import com.jiro.model.cms.CmsUser;
 import com.jiro.model.cms.CmsUserSite;
 import com.jiro.model.site.SiteLinks;
 import com.jiro.service.cms.CmsUserSiteService;
-import com.jiro.service.cms.impl.CmsUserServiceImpl;
-import com.jiro.service.cms.impl.CmsUserSiteServiceImpl;
 import com.jiro.service.site.SiteLinksPermissionService;
 import com.jiro.service.site.SiteLinksService;
+import com.jiro.utility.Constants;
 import com.opensymphony.xwork2.ActionSupport;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.apache.struts2.interceptor.SessionAware;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public class CmsMgmtAction extends ActionSupport {
+public class CmsMgmtAction extends ActionSupport implements SessionAware {
 
     /**
      *
@@ -28,6 +30,25 @@ public class CmsMgmtAction extends ActionSupport {
     private String publishId;
     private List<String> headerList;
     private String cmsUserSiteId;
+    private String blogSiteUrl;
+    private String nextAction;
+    private Map<String, Object> sessionMap;
+
+    public String getBlogSiteUrl() {
+        return blogSiteUrl;
+    }
+
+    public void setBlogSiteUrl(String blogSiteUrl) {
+        this.blogSiteUrl = blogSiteUrl;
+    }
+
+    public String getNextAction() {
+        return nextAction;
+    }
+
+    public void setNextAction(String nextAction) {
+        this.nextAction = nextAction;
+    }
 
     public SiteLinksPermissionService getSiteLinksPermissionService() {
         return siteLinksPermissionService;
@@ -103,13 +124,41 @@ public class CmsMgmtAction extends ActionSupport {
 
     public String showSiteList() {
         System.out.println("CmsMgmtAction:showSiteList:");
-        cmsUserSiteLists = cmsUserSiteService.getByPublished(false);
+        cmsUserSiteLists = cmsUserSiteService.getList();
         System.out.println("CmsMgmtAction:showSiteList:cmsUserSiteLists:size:" + cmsUserSiteLists.size());
         return SUCCESS;
     }
 
     public String publishSite() {
-        System.out.println("publishSite:publishId:" + publishId);
+        System.out.println("publishSite:cmsUserSiteId:"+cmsUserSiteId);
+        System.out.println("publishSite:publishId:"+publishId);
+        CmsUserSite cmsUserSite = cmsUserSiteService.getById(Long.parseLong(cmsUserSiteId));
+        if(cmsUserSite == null)
+            return ERROR;
+
+        CmsFileController.publishSite(cmsUserSite);
+
+        cmsUserSiteService.updatePublishStatus(cmsUserSite, true);
+
+        blogSiteUrl = cmsUserSite.getBlogUrl();
+        nextAction = blogSiteUrl + "/home";
+
+        System.out.println("publishSite:blogSiteUrl:"+blogSiteUrl);
+        System.out.println("publishSite:nextAction:"+nextAction);
+
+        return SUCCESS;
+    }
+
+    public String republishSite() {
+        CmsUserSite cmsUserSite = cmsUserSiteService.getById(Long.parseLong(cmsUserSiteId));
+        if(cmsUserSite == null)
+            return ERROR;
+
+        CmsFileController.updatePublishedSite(cmsUserSite);
+        return SUCCESS;
+    }
+    public String republishAllSites() {
+        cmsUserSiteService.getByPublished(true).forEach(e -> CmsFileController.updatePublishedSite(e));
 
         return SUCCESS;
     }
@@ -141,5 +190,29 @@ public class CmsMgmtAction extends ActionSupport {
         }
 
         return SUCCESS;
+    }
+
+    public String showMySites() {
+        System.out.println("showMySites:");
+        CmsUser cmsUser = (CmsUser) sessionMap.get(Constants.CMS_SESSION_CMS_USER);
+
+        cmsUserSiteLists = cmsUserSiteService.getUserSites(cmsUser);
+        System.out.println("showMySites:cmsUserSiteList:size:"+cmsUserSiteLists.size());
+
+
+        return SUCCESS;
+    }
+
+    public String showMyUsers() {
+        CmsUser cmsUser = (CmsUser) sessionMap.get(Constants.CMS_SESSION_CMS_USER);
+        cmsUserSiteLists.clear();
+        cmsUserSiteLists.addAll(cmsUser.getCmsUserSites());
+
+        return SUCCESS;
+    }
+
+    @Override
+    public void setSession(Map<String, Object> sessionMap) {
+        this.sessionMap = sessionMap;
     }
 }

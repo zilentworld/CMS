@@ -41,7 +41,7 @@ public class SiteUserComments extends SiteAbstractAction {
         SiteUser sU = (SiteUser) varMap.get(getBlogSiteUrl());
         long userId = sU.getSiteUserId();
         userSiteComments = siteCommentService.getUserComment(userId, getBlogSiteUrl());
-        setNextAction("siteUserComments" + getSiteTemplate());
+        setNextAction(getBlogSiteUrl() + "/siteUserComments");
         System.out.println("siteUserComments:listSize:"+userSiteComments.size());
         
         return SUCCESS;

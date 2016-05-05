@@ -49,9 +49,8 @@ public class SiteRegisterAction extends SiteAbstractAction {
 
     @SkipValidation
     public String showRegister() {
-        String nextAction = "siteRegister" + getSiteTemplate();
-        setNextAction(nextAction);
-        System.out.println("showRegister:"+nextAction);
+        setNextAction(getBlogSiteUrl() + "/siteRegister");
+        System.out.println("showRegister:"+getNextAction());
         siteUser = new SiteUser();
         System.out.println("siteRegisterAction:showRegister:blogSiteUrl:"+getBlogSiteUrl());
         
@@ -81,10 +80,9 @@ public class SiteRegisterAction extends SiteAbstractAction {
         siteSessionMap.put(getBlogSiteUrl(), siteUser);
 
         getSessionMap().put(Constants.SITE_SESSION_MAP_VARIABLE, siteSessionMap);
-        
-        String nextAction = "home" + getSiteTemplate();
-        setNextAction(nextAction);
-        System.out.println("exec:nextAction:"+nextAction);
+
+        setNextAction(getBlogSiteUrl() + "/home");
+        System.out.println("exec:nextAction:"+getNextAction());
         System.out.println("siteRegisterAction:execute:blogSiteUrl:"+getBlogSiteUrl());
         
         return SUCCESS;
@@ -92,7 +90,7 @@ public class SiteRegisterAction extends SiteAbstractAction {
 
     @Override
     public void validate() {
-        setNextAction("siteRegister" + getSiteTemplate());
+        setNextAction(getBlogSiteUrl() + "/siteRegister");
         
         if(StringUtils.isEmpty(siteUser.getSiteUserUsername())) {
             System.out.println("1");

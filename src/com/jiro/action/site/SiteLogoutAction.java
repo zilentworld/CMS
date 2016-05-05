@@ -22,10 +22,9 @@ public class SiteLogoutAction extends SiteAbstractAction {
                 (HashMap<String, Object>) getSessionMap().get(Constants.SITE_SESSION_MAP_VARIABLE);
         
         sessionVars.remove(getBlogSiteUrl());
-        
-        String nextAction = "home" + getSiteTemplate();
-        setNextAction(nextAction);
-        System.out.println("logout:"+nextAction);
+
+        setNextAction(getBlogSiteUrl() + "/home");
+        System.out.println("logout:"+getNextAction());
         System.out.println("siteLogoutAction:execute:blogSiteUrl:"+getBlogSiteUrl());
         
         return SUCCESS;

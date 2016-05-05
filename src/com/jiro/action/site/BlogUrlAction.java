@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Map;
 
-public class BlogUrlAction extends ActionSupport implements SessionAware, ServletContextAware {
+public class BlogUrlAction extends ActionSupport implements SessionAware {
 
     /**
      *
@@ -34,7 +34,15 @@ public class BlogUrlAction extends ActionSupport implements SessionAware, Servle
     private CmsTemplatesService cmsTemplatesService;
     private String nextAction;
     private String msg;
-    private ServletContext servletContext;
+    private CmsFileController cmsFileController;
+
+    public CmsFileController getCmsFileController() {
+        return cmsFileController;
+    }
+
+    public void setCmsFileController(CmsFileController cmsFileController) {
+        this.cmsFileController = cmsFileController;
+    }
 
     public CmsUserSiteService getCmsUserSiteService() {
         return cmsUserSiteService;
@@ -103,7 +111,7 @@ public class BlogUrlAction extends ActionSupport implements SessionAware, Servle
             return ERROR;
         }
 
-        CmsFileController.generateFiles(cmsUserSite, servletContext.getRealPath(""));
+        cmsFileController.generateFiles(cmsUserSite);
 
         msg = "Your site is waiting for publication";
 
@@ -130,8 +138,4 @@ public class BlogUrlAction extends ActionSupport implements SessionAware, Servle
         this.sessionMap = sessionMap;
     }
 
-    @Override
-    public void setServletContext(ServletContext servletContext) {
-        this.servletContext = servletContext;
-    }
 }

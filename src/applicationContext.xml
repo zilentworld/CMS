@@ -10,7 +10,8 @@
 					    http://www.springframework.org/schema/context
 					    http://www.springframework.org/schema/context/spring-context.xsd"
 	xmlns:tx="http://www.springframework.org/schema/tx">
-	
+
+	<bean id="cmsFileController" class="com.jiro.cms.CmsFileController" scope="prototype"/>
     
 	<!--     model -->
     <bean id="cmsUser" class="com.jiro.model.cms.CmsUser" scope="prototype" />
@@ -57,6 +58,8 @@
     	<property name="cmsUserSiteDao" ref="cmsUserSiteDao" />
     	<property name="sitePostService" ref="sitePostService" />
     	<property name="siteUserService" ref="siteUserService" />
+		<property name="siteLinksPermissionService" ref="siteLinksPermissionService" />
+		<property name="siteSettingsService" ref="siteSettingsService" />
     </bean>
     
     <bean id="siteUserService" class="com.jiro.service.site.impl.SiteUserServiceImpl">
@@ -80,6 +83,7 @@
 
 	<bean id="siteLinksPermissionService" class="com.jiro.service.site.impl.SiteLinksPermissionServiceImpl" >
 		<property name="siteLinksPermissionDao" ref="siteLinksPermissionDao" />
+		<property name="siteLinksService" ref="siteLinksService" />
 	</bean>
     
 	<!--     action -->
@@ -100,6 +104,7 @@
     <bean id="userSiteAction" class="com.jiro.action.site.BlogUrlAction" scope="prototype">
     	<property name="cmsUserSiteService" ref="cmsUserSiteService" />
     	<property name="cmsTemplatesService" ref="cmsTemplatesService" />
+		<property name="cmsFileController" ref="cmsFileController" />
     </bean>
     
     <bean id="checkBlogUrl" class="com.jiro.action.cms.CheckBlogUrlAction" scope="prototype">
@@ -160,11 +165,6 @@
 		<property name="siteLinksService" ref="siteLinksServiceImpl" />
 		<property name="siteLinksPermissionService" ref="siteLinksPermissionService" />
 	</bean>
-
-	<bean id="testCreate" class="com.jiro.action.site.TestCreate" scope="prototype">
-	</bean>
-    
-    <bean id="actionForwarder" class="com.jiro.action.site.ActionForwarder" />
 
 	<!-- 	settings -->
 	<tx:annotation-driven transaction-manager="transactionManager" />

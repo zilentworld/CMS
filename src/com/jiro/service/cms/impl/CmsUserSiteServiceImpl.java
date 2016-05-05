@@ -1,5 +1,7 @@
 package com.jiro.service.cms.impl;
 
+import com.jiro.model.cms.CmsUser;
+import com.jiro.service.site.SiteLinksPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,7 @@ import com.jiro.service.site.SitePostService;
 import com.jiro.service.site.SiteSettingsService;
 import com.jiro.service.site.SiteUserService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,7 +27,17 @@ public class CmsUserSiteServiceImpl implements CmsUserSiteService {
     private SitePostService sitePostService;
     @Autowired
     private SiteSettingsService siteSettingsService;
-    
+    @Autowired
+    private SiteLinksPermissionService siteLinksPermissionService;
+
+    public void setSiteSettingsService(SiteSettingsService siteSettingsService) {
+        this.siteSettingsService = siteSettingsService;
+    }
+
+    public void setSiteLinksPermissionService(SiteLinksPermissionService siteLinksPermissionService) {
+        this.siteLinksPermissionService = siteLinksPermissionService;
+    }
+
     public void setSiteUserService(SiteUserService siteUserService) {
         this.siteUserService = siteUserService;
     }
@@ -42,6 +55,7 @@ public class CmsUserSiteServiceImpl implements CmsUserSiteService {
             SitePost firstPost = sitePostService.siteFirstPost(
                     siteUserService.siteFirstUser(cmsUserSite));
             siteSettingsService.setInitialSettings(cmsUserSite);
+            siteLinksPermissionService.addInitialLinks(cmsUserSite);
             return firstPost != null;
         } else
             return false;
@@ -63,5 +77,26 @@ public class CmsUserSiteServiceImpl implements CmsUserSiteService {
     @Override
     public List<CmsUserSite> getByPublished(boolean published) {
         return cmsUserSiteDao.getByPublished(published ? 1 : 0);
+    }
+
+    @Override
+    public CmsUserSite getById(long cmsUserSiteId) {
+        return cmsUserSiteDao.get(cmsUserSiteId);
+    }
+
+    @Override
+    public void updatePublishStatus(CmsUserSite cmsUserSite, boolean publishStatus) {
+        cmsUserSite.setIsPublished(publishStatus ? 1 : 0);
+        cmsUserSiteDao.saveOrUpdate(cmsUserSite);
+    }
+
+    @Override
+    public List<CmsUserSite> getUserSites(CmsUser cmsUser) {
+        return cmsUserSiteDao.getUserSites(cmsUser);
+    }
+
+    @Override
+    public List<CmsUserSite> getList() {
+        return cmsUserSiteDao.getList();
     }
 }

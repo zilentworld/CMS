@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<link rel="stylesheet" type="text/css" href="resources/markitup/skins/markitup/style.css" />
-<link rel="stylesheet" type="text/css" href="resources/markitup/sets/default/style.css" />
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 <s:div>
 	<s:if test="'edit'.equals(postType)">
 		<h2>Edit Blog Post</h2>
@@ -24,3 +23,6 @@
 		<s:submit type="button" onclick="form.action='newSitePost'; form.submit();" value="Submit"/>
 	</s:form>
 </s:div>
+<script>
+	tinymce.init({ selector:'textarea' });
+</script>

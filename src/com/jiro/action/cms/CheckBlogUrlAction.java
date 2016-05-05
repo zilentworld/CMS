@@ -23,7 +23,15 @@ public class CheckBlogUrlAction extends ActionSupport implements SessionAware {
     private String blogSiteUrl;
     private String nextAction;
     private String test;
-                    
+    private String msg;
+
+
+    public String getMsg() {
+        return msg;
+    }
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
     public String getTest() {
         return test;
     }
@@ -56,16 +64,24 @@ public class CheckBlogUrlAction extends ActionSupport implements SessionAware {
             blogSiteUrl = request.getServletPath().substring(1);
                 
         CmsUserSite cmsUserSite = cmsUserSiteService.getByUrl(blogSiteUrl);
-        if(cmsUserSite == null)
+        if(cmsUserSite == null) {
+            msg = Constants.CMS_ERROR_SITE_NOT_EXIST;
             return ERROR;
-                
-        nextAction = "home-" + cmsUserSite.getCmsTemplates().getTemplateName().toLowerCase();
+        }
 
-        System.out.println("checkBlogUrl:nextAction:"+nextAction);
-        System.out.println("checkBlogUrl:blogSiteUrl:"+blogSiteUrl);
-        
+        if(cmsUserSite.getIsPublished() == 0) {
+            msg = Constants.CMS_ERROR_SITE_NOT_PUBLISH;
+            return ERROR;
+        }
+
+
+//            nextAction = "home-" + cmsUserSite.getCmsTemplates().getTemplateName().toLowerCase();
+        nextAction = "home";
+
+        System.out.println("checkBlogUrl:nextAction:" + nextAction);
+        System.out.println("checkBlogUrl:blogSiteUrl:" + blogSiteUrl);
+
         sessionMap.put(Constants.CMS_SESSION_BLOG_URL, cmsUserSite.getBlogUrl());
-        
         return SUCCESS;
     }
     

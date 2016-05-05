@@ -16,6 +16,10 @@
     <definition name="manage-headers" extends="cms-management">
         <put-attribute name="content" value="/WEB-INF/jsp/cmsPages/manageHeader.jsp" />
     </definition>
+    <definition name="my-sites" extends="cms-management">
+        <put-attribute name="content" value="/WEB-INF/jsp/cmsPages/mySites.jsp" />
+    </definition>
+
     <definition name="*/home" template="/WEB-INF/jsp/generated/{1}/template.jsp">
         <put-attribute name="banner" value="/WEB-INF/jsp/generated/{1}/banner.jsp" />
         <put-attribute name="header" value="/WEB-INF/jsp/generated/{1}/header.jsp" />
@@ -23,6 +27,26 @@
         <put-attribute name="archive" value="/WEB-INF/jsp/generated/{1}/archive.jsp" />
         <put-attribute name="footer" value="/WEB-INF/jsp/generated/{1}/footer.jsp" />
     </definition>
+
+    <definition name="*/postContent" extends="{1}/home">
+        <put-attribute name="body" value="/WEB-INF/jsp/generated/{1}/postContent.jsp" />
+    </definition>
+
+    <definition name="*/siteLogin" extends="{1}/home">
+        <put-attribute name="body" value="/WEB-INF/jsp/generated/{1}/siteLogin.jsp" />
+    </definition>
+
+    <definition name="*/newSitePost" extends="{1}/home">
+        <put-attribute name="body" value="/WEB-INF/jsp/generated/{1}/newSitePost.jsp" />
+    </definition>
+
+    <definition name="*/siteUserComments" extends="{1}/home">
+        <put-attribute name="body" value="/WEB-INF/jsp/generated/{1}/userComments.jsp" />
+    </definition>
+    <definition name="*/siteRegister" extends="{1}/home">
+        <put-attribute name="body" value="/WEB-INF/jsp/generated/{1}/siteRegister.jsp" />
+    </definition>
+
     <!--<definition name="home-template1" template="/WEB-INF/jsp/templates/template1.jsp">-->
         <!--<put-attribute name="banner" value="/WEB-INF/jsp/sitePages/banner.jsp" />-->
         <!--<put-attribute name="header" value="/WEB-INF/js*p/sitePages/header.jsp" />-->

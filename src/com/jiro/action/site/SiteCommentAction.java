@@ -62,7 +62,7 @@ public class SiteCommentAction extends SiteAbstractAction {
     
     public String deleteComment() {
         siteCommentService.deleteCommentById(commentId);
-        setNextAction("postContent" + getSiteTemplate());
+        setNextAction(getBlogSiteUrl() + "/postContent");
         System.out.println("siteComment:nextAction:"+getNextAction());
         
         return SUCCESS;

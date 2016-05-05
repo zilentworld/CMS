@@ -1,8 +1,8 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<s:div style="margin: 2.5%; width: 95%; height: 95%;" class="border">
+<s:div style="margin: 2.5%; width: 95%; height: 95%; overflow: auto;" class="border">
     <s:form method="POST" id="publishFrm">
-        <s:hidden id="publishId" value="aa" />
+        <s:hidden id="publishId" name="cmsUserSiteId" value="aa"  />
         <table style="width : 100%; text-align: center;">
             <tr>
                 <th>
@@ -11,7 +11,7 @@
                 <th>
                     Cms User
                 </th>
-                <th colspan="2">
+                <th>
                     Action
                 </th>
             </tr>
@@ -27,10 +27,6 @@
                         <s:submit class="publish" hidden-data="%{cmsUserSiteId}" type="button" value="Publish"
                                   theme="simple"/>
                     </td>
-                    <td>
-                        <s:submit class="disable" hidden-data="%{cmsUserSiteId}" type="button" value="Disable"
-                                  theme="simple"/>
-                    </td>
                 </tr>
             </s:iterator>
         </table>
@@ -42,12 +38,9 @@
                 var id = $(this).attr('hidden-data');
                 var hidden = $("#publishId");
                 var frm = $("#publishFrm");
-                alert("id:"+id);
-                alert("hidden:"+hidden.val());
+
                 hidden.val(id);
                 frm.attr('action', 'publishSite');
-
-                alert("hidden:"+hidden.val());
                 frm.submit();
             });
         });

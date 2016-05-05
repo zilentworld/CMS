@@ -15,18 +15,18 @@ import com.jiro.model.cms.CmsUserSite;
 
 @Repository
 public class CmsUserSiteDao extends GenericDaoImpl {
-    
+
     @Transactional
     public CmsUserSite get(Serializable value) {
         return (CmsUserSite) super.get(CmsUserSite.class, value);
     }
-    
+
     @Transactional
     public CmsUserSite getByUrl(String blogUrl) {
         return (CmsUserSite) getCurrentSession()
-                             .createCriteria(CmsUserSite.class)
-                             .add(Restrictions.eq("blogUrl", blogUrl))
-                             .uniqueResult();
+                .createCriteria(CmsUserSite.class)
+                .add(Restrictions.eq("blogUrl", blogUrl))
+                .uniqueResult();
     }
 
     @Transactional
@@ -37,14 +37,23 @@ public class CmsUserSiteDao extends GenericDaoImpl {
     @Transactional
     public List<CmsUserSite> getByPublished(int publish) {
         List<CmsUserSite> list = (List<CmsUserSite>) getCurrentSession()
-                                    .createCriteria(CmsUserSite.class)
-                                    .add(Restrictions.eq("isPublished", publish))
-                                    .list();
+                .createCriteria(CmsUserSite.class)
+                .add(Restrictions.eq("isPublished", publish))
+                .list();
 
         list.forEach(e -> Hibernate.initialize(e.getSiteLinksPermissions()));
         list.forEach(e -> Collections.sort(e.getSiteLinksPermissions()));
 
         return list;
     }
-    
+
+    @Transactional
+    public List<CmsUserSite> getUserSites(CmsUser cmsUser) {
+        return (List<CmsUserSite>) getCurrentSession()
+                .createCriteria(CmsUserSite.class)
+                .createAlias("cmsUser","cmsUser")
+                .add(Restrictions.eq("cmsUser.cmsUserId", cmsUser.getCmsUserId()))
+                .list();
+    }
+
 }

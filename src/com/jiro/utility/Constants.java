@@ -4,10 +4,11 @@ public final class Constants {
 
     //CMS Paths
     public static final String CMS_PATH_TO_PENDING = "/home/dev-pc/CMS/pending/";
+    public static final String CMS_PATH_TO_PUBLISHED = "/home/dev-pc/CMS/published/";
     public static final String CMS_PATH_TO_SITE = "/WEB-INF/jsp/sitePages/";
     public static final String CMS_PATH_TO_TEMPLATES = "/WEB-INF/jsp/templates/";
     public static final String CMS_PATH_TO_TILES = "/WEB-INF/tiles.xml";
-    public static final String CMS_PATH_TO_WEBAPPS = "/opt/tomcat/webapps/";
+    public static final String CMS_PATH_TO_GENERATED = "/WEB-INF/jsp/generated/";
     
     //CMS Session Attributes
     public static final String CMS_SESSION_CMS_USER = "cms_user";
@@ -35,6 +36,9 @@ public final class Constants {
     public static final String CMS_ERROR_GENERIC_ERROR = "An error occured. Kindly restart the process";
     public static final String CMS_ERROR_GENERIC_REGISTER = "An error occurred. Kindly register again";
     public static final String CMS_ERROR_BLOG_URL_TAKEN = "Site name is taken";
+    public static final String CMS_ERROR_SITE_NOT_EXIST = "Site does not exist";
+    public static final String CMS_ERROR_SITE_NOT_PUBLISH = "Site is not yet published";
+    public static final String CMS_ERROR_SITE_DISABLED = "Site has been disabled";
     
     //Error Messages for SITE
     public static final String SITE_ERROR_USERNAME_REQUIRED = "Username is required";

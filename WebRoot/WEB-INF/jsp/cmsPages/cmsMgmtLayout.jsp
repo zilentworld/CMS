@@ -62,22 +62,22 @@
 	                    </s:div>
 	                </s:div>
                 </s:if>
-                <s:else>
-	                <!-- client -->
-	                <s:div style="float:right; margin-right: 2vh;">
-	                    <s:div class="header">
-	                    	<s:a>
-	                    		My Sites
-	                   		</s:a>
-	                   	</s:div>
-	                    <s:div class="header">&nbsp;|&nbsp;</s:div>
-	                    <s:div class="header">
-	                    	<s:a>
-	                    		My Users
-	                   		</s:a>
-	                   	</s:div>
-	                </s:div>
-                </s:else>
+				<s:else>
+					<!-- client -->
+					<s:div style="float:right; margin-right: 2vh;">
+						<s:div class="header">
+							<s:a href="javascript:callAction('showMySites');">
+								My Sites
+							</s:a>
+						</s:div>
+						<s:div class="header">&nbsp;|&nbsp;</s:div>
+						<s:div class="header">
+							<s:a href="javascript:callAction('showMyUsers');">
+								My Users
+							</s:a>
+						</s:div>
+					</s:div>
+				</s:else>
             </s:div>
         </s:div>
         <hr width="100%" />

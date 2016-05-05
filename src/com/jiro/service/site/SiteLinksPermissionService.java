@@ -1,5 +1,6 @@
 package com.jiro.service.site;
 
+import com.jiro.model.cms.CmsUserSite;
 import com.jiro.model.site.SiteLinksPermission;
 
 import java.util.List;
@@ -9,8 +10,9 @@ import java.util.List;
  */
 public interface SiteLinksPermissionService {
 
-    public void updateSiteLinkPermission(long cmsUserSiteId, long siteLinkId, boolean isEnabled);
+    void updateSiteLinkPermission(long cmsUserSiteId, long siteLinkId, boolean isEnabled);
 
-    public List<SiteLinksPermission> getList();
+    List<SiteLinksPermission> getList();
 
+    void addInitialLinks(CmsUserSite cmsUserSite);
 }

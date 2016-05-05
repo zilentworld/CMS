@@ -8,7 +8,7 @@
     </s:if>
 		<s:form id="header_form">
 			<s:div id="home" style="float:left">
-				<s:submit type="button" onclick="form.action='/CMS/%{blogSiteUrl}'; form.submit();" value="Home"/>
+				<s:submit type="button" onclick="form.action='/%{blogSiteUrl}'; form.submit();" value="Home"/>
 			</s:div>
 			<s:div id="login" style="float:left">
 				<s:if test="#siteUser.siteUserId > 0">
