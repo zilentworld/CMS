@@ -108,15 +108,6 @@ public class CmsRegisterAction extends ActionSupport implements SessionAware {
     @Override
     public String execute() throws Exception {
         System.out.println("REGISTER");
-//        System.out.println(cmsTemplateId);
-        
-        cmsTemplates = cmsTemplatesService.get(Long.parseLong(cmsTemplateId));
-//        cmsTemplates = (CmsTemplates) sessionMap.get(Constants.CMS_SESSION_CMS_TEMPLATE);
-        
-        if(cmsTemplates == null) {
-            errMsg = Constants.CMS_ERROR_GENERIC_ERROR;
-            return ERROR;
-        }
 
         System.out.println("createnewcms");
 //        cmsUserRegister.setCmsUserTypeCode("cms_user");

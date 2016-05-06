@@ -166,6 +166,9 @@
 		<property name="siteLinksPermissionService" ref="siteLinksPermissionService" />
 	</bean>
 
+    <bean id="cmsNavAction" class="com.jiro.action.cms.CmsNavAction" scope="prototype" />
+    <bean id="cmsAccountAction" class="com.jiro.action.cms.CmsAccountAction" scope="prototype" />
+
 	<!-- 	settings -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	<tx:annotation-driven proxy-target-class="true"/>

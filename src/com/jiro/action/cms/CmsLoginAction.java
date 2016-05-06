@@ -20,7 +20,6 @@ public class CmsLoginAction extends ActionSupport implements SessionAware {
     
     private CmsUser cmsUser;
     private CmsUserService cmsUserService;
-    private String cmsTemplateId;
     private Map<String, Object> sessionMap;
     
     public CmsUser getCmsUser() {
@@ -38,16 +37,7 @@ public class CmsLoginAction extends ActionSupport implements SessionAware {
     public void setCmsUserService(CmsUserService cmsUserService) {
         this.cmsUserService = cmsUserService;
     }
-    
-    
-    public String getCmsTemplateId() {
-        return cmsTemplateId;
-    }
 
-    public void setCmsTemplateId(String cmsTemplateId) {
-        this.cmsTemplateId = cmsTemplateId;
-    }
-    
     public String cmsLoginAction() {
         cmsUser = cmsUserService.getByLogin(cmsUser);
         if(cmsUser == null)
@@ -56,6 +46,16 @@ public class CmsLoginAction extends ActionSupport implements SessionAware {
         sessionMap.put(Constants.CMS_SESSION_CMS_USER, cmsUser);
         System.out.println("cmsLoginAction:cmsUsername:"+cmsUser.getCmsUsername());
         
+        return SUCCESS;
+    }
+
+    @SkipValidation
+    public String processLogout() {
+        cmsUser = (CmsUser) sessionMap.get(Constants.CMS_SESSION_CMS_USER);
+        if(cmsUser != null) {
+            sessionMap.remove(Constants.CMS_SESSION_CMS_USER);
+        }
+
         return SUCCESS;
     }
 
@@ -85,11 +85,6 @@ public class CmsLoginAction extends ActionSupport implements SessionAware {
             addFieldError("cmsUser.cmsUsername", Constants.CMS_ERROR_INVALID_LOGIN);
             cmsUser.setCmsPassword("");            
         }
-//        try {
-//            Long.parseLong(cmsTemplateId);
-//        } catch (Exception e) {
-//            addFieldError("cmsUserRegister.cmsUsername", Constants.CMS_ERROR_GENERIC_ERROR);
-//        }
     }
 
     @Override

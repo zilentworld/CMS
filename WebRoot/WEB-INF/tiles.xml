@@ -11,9 +11,42 @@
     <definition name="main-layout" template="/WEB-INF/jsp/cmsPages/main-layout.jsp">
         <put-attribute name="content" value="" />
     </definition>
-    <definition name="welcome-main" extends="main-layout">
+    <definition name="main-welcome" extends="main-layout">
         <put-attribute name="content" value="/WEB-INF/jsp/cmsPages/main-welcome.jsp" />
     </definition>
+    <definition name="main-about" extends="main-layout">
+        <put-attribute name="content" value="/WEB-INF/jsp/cmsPages/main-about.jsp" />
+    </definition>
+    <definition name="main-contactUs" extends="main-layout">
+        <put-attribute name="content" value="/WEB-INF/jsp/cmsPages/main-contactus.jsp" />
+    </definition>
+    <definition name="main-register-login" extends="main-layout">
+        <put-attribute name="content" value="/WEB-INF/jsp/cmsPages/main-register-login.jsp" />
+    </definition>
+    <definition name="main-template" extends="main-layout">
+        <put-attribute name="content" value="/WEB-INF/jsp/cmsPages/main-template.jsp" />
+    </definition>
+
+    <definition name="main-account" extends="main-layout">
+        <put-attribute name="content" value="/WEB-INF/jsp/cmsPages/main-account.jsp" />
+        <put-attribute name="accountContent" value=""/>
+    </definition>
+    <definition name="main-account-siteList" extends="main-account">
+        <put-attribute name="accountContent" value="/WEB-INF/jsp/cmsPages/main-account-siteList.jsp" />
+    </definition>
+    <definition name="main-account-userList" extends="main-layout">
+        <put-attribute name="content" value="/WEB-INF/jsp/cmsPages/main-account.jsp" />
+        <put-attribute name="accountContent" value="/WEB-INF/jsp/cmsPages/main-account-userList.jsp" />
+    </definition>
+    <definition name="main-account-userSites" extends="main-account">
+        <put-attribute name="accountContent" value="/WEB-INF/jsp/cmsPages/main-account-userSites.jsp" />
+    </definition>
+    <definition name="main-account-userInfo" extends="main-account">
+        <put-attribute name="accountContent" value="/WEB-INF/jsp/cmsPages/main-account-userInfo.jsp" />
+    </definition>
+
+
+
 
     <definition name="cms-management" template="/WEB-INF/jsp/cmsPages/cmsMgmtLayout.jsp">
         <put-attribute name="content" value="" />

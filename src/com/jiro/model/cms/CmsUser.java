@@ -21,10 +21,19 @@ public class CmsUser {
     private CmsUserType cmsUserType;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cmsUser", fetch = FetchType.LAZY)
     private Set<CmsUserSite> cmsUserSites;
-    
     @Column(name="cms_register_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date cmsRegisterDate;
+    @Column(name="first_name")
+    private String firstName;
+    @Column(name="middle_name")
+    private String middleName;
+    @Column(name="last_name")
+    private String lastName;
+    @Column(name="age")
+    private int age;
+    @Column(name="gender")
+    private String gender;
     
     public long getCmsUserId() {
         return cmsUserId;
@@ -44,30 +53,55 @@ public class CmsUser {
     public void setCmsPassword(String cmsPassword) {
         this.cmsPassword = cmsPassword;
     }
-
     public Set<CmsUserSite> getCmsUserSites() {
         return cmsUserSites;
     }
-
     public void setCmsUserSites(Set<CmsUserSite> cmsUserSites) {
         this.cmsUserSites = cmsUserSites;
     }
-
     public CmsUserType getCmsUserType() {
         return cmsUserType;
     }
-    
     public void setCmsUserType(CmsUserType cmsUserType) {
         this.cmsUserType = cmsUserType;
     }
-    
     public Date getCmsRegisterDate() {
         return cmsRegisterDate;
     }
     public void setCmsRegisterDate(Date cmsRegisterDate) {
         this.cmsRegisterDate = cmsRegisterDate;
     }
-    
+    public String getFirstName() {
+        return firstName;
+    }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    public String getMiddleName() {
+        return middleName;
+    }
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+    public String getLastName() {
+        return lastName;
+    }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    public int getAge() {
+        return age;
+    }
+    public void setAge(int age) {
+        this.age = age;
+    }
+    public String getGender() {
+        return gender;
+    }
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     @Override
     public String toString() {
         return "cmsUserId:"+cmsUserId+",cmsUsername:"+cmsUsername+",cmsPassword:"+cmsPassword ;//+  cmsUserType;

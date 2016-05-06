@@ -24,10 +24,54 @@
 			</result>
 			<!-- <result name="next" type="tiles">${nextAction}</result> -->
 		</global-results>
-		
-		<action name="actionForward" class="actionForwarder">
-			<result name="success" type="tiles">${nextAction}</result>
+
+		<action name="Home" class="cmsNavAction" method="showHome">
+			<result name="success" type="tiles">main-welcome</result>
 		</action>
+		<action name="About" class="cmsNavAction" method="showAbout">
+			<result name="success" type="tiles">main-about</result>
+		</action>
+		<action name="ContactUs" class="cmsNavAction" method="showContactUs">
+			<result name="success" type="tiles">main-contactUs</result>
+		</action>
+
+		<action name="Account" class="cmsNavAction" method="showAccount">
+			<result name="login" type="tiles">main-register-login</result>
+			<result name="success" type="tiles">main-account</result>
+		</action>
+		<action name="processRegister" class="registerCms">
+			<result name="error" type="tiles">main-register-login</result>
+			<result name="input" type="tiles">main-register-login</result>
+			<result name="success" type="tiles">main-account</result>
+		</action>
+		<action name="processLogin" class="loginAction">
+			<result name="error" type="tiles">main-register-login</result>
+			<result name="input" type="tiles">main-register-login</result>
+			<result name="success" type="tiles">main-account</result>
+		</action>
+		<action name="SiteList" class="cmsAccountAction" method="showSiteList">
+			<result name="success" type="tiles">main-account-siteList</result>
+		</action>
+		<action name="UserList" class="cmsAccountAction" method="showUserList">
+			<result name="success" type="tiles">main-account-userList</result>
+		</action>
+		<action name="UserSites" class="cmsAccountAction" method="showUserSites">
+			<result name="success" type="tiles">main-account-userSites</result>
+		</action>
+		<action name="UserInfo" class="cmsAccountAction" method="showUserInfo">
+			<result name="success" type="tiles">main-account-userInfo</result>
+		</action>
+
+		<action name="Logout" class="loginAction" method="processLogout">
+			<result name="success" type="tiles">main-welcome</result>
+		</action>
+		<action name="showTemplate" class="newBlogSite" method="showTemplate">
+			<result name="success" type="tiles">main-template</result>
+		</action>
+
+
+
+
 
 		<action name="*/showLogin" class="siteLoginAction" method="showLogin">
 			<param name="blogSiteUrl">{1}</param>
@@ -151,10 +195,6 @@
 			<result name="error">/WEB-INF/jsp/cmsPages/index.jsp</result>
 		</action>
 
-		<action name="showTemplate" class="newBlogSite" method="showTemplate">
-			<result name="success">/WEB-INF/jsp/cmsPages/templatePicker.jsp</result>
-		</action>
-		
 		<action name="showCmsLogin" class="loginAction" method="showCmsLogin">
             <result name="success">/WEB-INF/jsp/cmsPages/cmsAccountLogin.jsp</result>
             <result name="error">/WEB-INF/jsp/cmsPages/cmsAccountLogin.jsp</result>
@@ -219,22 +259,6 @@
 			<result name="error">/WEB-INF/jsp/cmsPages/templatePicker.jsp</result>
 			<result name="success">/WEB-INF/jsp/cmsPages/requestRegister.jsp
 			</result>
-		</action>
-
-		<action name="processRegister" class="registerCms">
-			<result name="error">/WEB-INF/jsp/cmsPages/requestRegister.jsp
-			</result>
-			<result name="input">/WEB-INF/jsp/cmsPages/requestRegister.jsp
-			</result>
-			<result name="success">/WEB-INF/jsp/cmsPages/enterUrl.jsp</result>
-		</action>
-
-		<action name="processLogin" class="loginAction">
-			<result name="error">/WEB-INF/jsp/cmsPages/requestRegister.jsp
-			</result>
-			<result name="input">/WEB-INF/jsp/cmsPages/requestRegister.jsp
-			</result>
-			<result name="success">/WEB-INF/jsp/cmsPages/enterUrl.jsp</result>
 		</action>
 
 		<action name="confirmUrl" class="userSiteAction">
