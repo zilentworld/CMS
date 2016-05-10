@@ -1,0 +1,156 @@
+.border {
+    border: 1px solid black;
+}
+.template {
+    height: 50vh;
+    width: 50vh;
+    float: left;
+    margin: 1%;
+    cursor: pointer;
+}
+.right-open {
+    margin-right: 5px;
+}
+.ov-hidden {
+    overflow: hidden;
+}
+.h2-mainTemplate, .h3-mainTemplate {
+    text-align: center;
+}
+.template-outer {
+    height: 75vh;
+    width: 90vw;
+    position:absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+.message-outer {
+    border:1px solid black;
+    height:600px;
+    width:1000px;
+    position:absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+.welcome-msg {
+    top: 0;
+    bottom: 260px;
+    left: 0;
+    right: 0;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10vh;
+}
+.create-label {
+    border: 1px solid black;
+    height: 75px;
+    width: 270px;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10vh;
+    cursor: pointer;
+}
+.outside {
+    border:1px solid black;
+    height:90vh;
+    width:150vh;
+    position:absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    min-height: 800px;
+    min-width: 800px;
+}
+.inner {
+    border-top: solid black 1px;
+    height: 83vh;
+    width: 100%;
+}
+.header {
+    height: 7vh;
+    width: 100%;
+}
+.header-buttons {
+    float: right;
+    margin-top: 2.5vh;
+    margin-right: 5vh;
+}
+.header-name {
+    float: left;
+    margin-top: 2.5vh;
+    margin-left: 5vh;
+}
+.header-button {
+    float: left;
+}
+.contactUs-msg {
+    width:400px;
+    height:30px;
+    position:absolute;
+    top:0;
+    bottom: 260px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+.account-header-tab {
+    height: 5vh;
+    min-height: 35px;
+}
+.account-headers {
+    float: right;
+    margin-top: 2.5vh;
+    margin-right: 5vh;
+}
+.account-header {
+    float: left;
+}
+.account-content {
+    border-top: 1px solid black;
+    overflow: auto;
+}
+.account-outer {
+    height: 100%;
+}
+.register {
+    width: 68vh;
+    height: 28vh;
+    float: left;
+    margin-top: 4vh;
+    margin-bottom: 7vh;
+    margin-left: 5vh;
+    min-height: 175px;
+    min-width: 410px;
+}
+
+.login {
+    width: 65vh;
+    height: 28vh;
+    float: left;
+    margin-top: 4vh;
+    margin-bottom: 7vh;
+    margin-left: 5vh;
+    margin-right: 5vh;
+    min-height: 150px;
+    min-width: 410px;
+}
+
+.msg {
+    margin-top: 3vh;
+    margin-left: 3vh;
+}
+.account-content-inner {
+    margin: 4vh;
+    width: 95%;
+    height: 95%;
+    overflow: auto;
+}

@@ -78,4 +78,25 @@ public class CmsUserServiceImpl implements CmsUserService {
     public CmsUser getByLogin(String username, String password) {
         return cmsUserDao.getByLogin(username, password);
     }
+
+    @Override
+    public List<CmsUser> getList() {
+        return cmsUserDao.getList();
+    }
+
+    @Override
+    public CmsUser getById(long cmsUserId) {
+        return cmsUserDao.get(cmsUserId);
+    }
+
+    @Override
+    public void updateCmsUser(CmsUser cmsUser) {
+        cmsUserDao.saveOrUpdate(cmsUser);
+    }
+
+    @Override
+    public void setCmsUserStatus(CmsUser cmsUser, boolean status) {
+        cmsUser.setIsEnabled(status ? 1 : 0);
+        cmsUserDao.saveOrUpdate(cmsUser);
+    }
 }

@@ -5,44 +5,7 @@
 <html>
 <head>
 </head>
-
-<style>
-    .outside {
-        border:1px solid black;
-        height:90vh;
-        width:150vh;
-        position:absolute;
-        top:0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
-        min-height: 800px;
-        min-width: 800px;
-    }
-    .inner {
-        border-top: solid black 1px;
-        height: 83vh;
-        width: 100%;
-    }
-    .header {
-        height: 7vh;
-        width: 100%;
-    }
-    .header-buttons {
-        float: right;
-        margin-top: 2.5vh;
-        margin-right: 5vh;
-    }
-    .header-name {
-        float: left;
-        margin-top: 2.5vh;
-        margin-left: 5vh;
-    }
-    .header-button {
-        float: left;
-    }
-</style>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cms-global.css" />
 <body>
 <s:div>
     <s:div class="outside">
@@ -95,7 +58,9 @@
             </s:div>
         </s:div>
         <s:div class="inner">
-            <tiles:insertAttribute name="content" ignore="true" />
+            <tiles:insertAttribute name="content" ignore="true" >
+                <tiles:insertAttribute name="accountContent" ignore="true" />
+            </tiles:insertAttribute>
         </s:div>
     </s:div>
 </s:div>

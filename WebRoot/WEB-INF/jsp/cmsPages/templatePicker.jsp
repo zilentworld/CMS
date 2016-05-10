@@ -6,32 +6,11 @@
     <meta charset="UTF-8">
     <title>Template</title>
 </head>
-<style>
-    .border {
-        border: 1px solid black;
-    }
-    .template {
-        height: 50vh;
-        width: 50vh;
-        float: left;
-        margin: 1%;
-        cursor: pointer;
-    }
-    .right-open {
-        margin-right: 5px;
-    }
-    .ov-hidden {
-        overflow: hidden;
-    }
-    h2, h3 {
-        text-align: center;
-    }
-</style>
 <body>
     <s:div>
     	<s:div style="top: 20;">
     		<s:if test="errMsg !=null && errMsg.length() > 0">
-    			<h3>
+    			<h3 class="h3-templatePicker">
     				<s:property value="errMsg"/>
     			</h3>
     		</s:if>
@@ -45,25 +24,25 @@
 	                right: 0;
 	                margin: auto;"
             class="border">
-            <h2>
+            <h2 class="h2-templatePicker">
                 Pick a template
             </h2>
             <s:div style="margin: 3%;">
                 <s:div class="template right-open border" id="ww">
                     <img src="<s:url value="/images/template1.png"/>" style="height: 100%; width: 100%"/>
-                    <h3>
+                    <h3 class="h3-templatePicker">
                         Template1
                     </h3>
                 </s:div>
                 <s:div class="template right-open border">
                     <img src="<s:url value="/images/template2.png"/>" style="height: 100%; width: 100%" />
-                    <h3>
+                    <h3 class="h3-templatePicker">
                         Template2
                     </h3>
                 </s:div>
                 <s:div class="template border">
                     <img src="<s:url value="/images/template3.png"/>" style="height: 100%; width: 100%" />
-                    <h3>
+                    <h3 class="h3-templatePicker">
                         Template3
                     </h3>
                 </s:div>

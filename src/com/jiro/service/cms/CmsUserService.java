@@ -2,18 +2,28 @@ package com.jiro.service.cms;
 
 import com.jiro.model.cms.CmsUser;
 
+import java.util.List;
+
 public interface CmsUserService {
-    
-    public boolean createNewCmsUser(CmsUser cmsUser);
 
-    public boolean checkExistingCmsUser(CmsUser cmsUser);
-    
-    public boolean checkExistingCmsUser(String cmsUsername);
+    boolean createNewCmsUser(CmsUser cmsUser);
 
-    public boolean checkLogin(CmsUser cmsUser);
+    boolean checkExistingCmsUser(CmsUser cmsUser);
 
-    public CmsUser getByLogin(CmsUser cmsUser);
-    
-    public CmsUser getByLogin(String username, String password);
+    boolean checkExistingCmsUser(String cmsUsername);
+
+    boolean checkLogin(CmsUser cmsUser);
+
+    CmsUser getByLogin(CmsUser cmsUser);
+
+    CmsUser getByLogin(String username, String password);
+
+    List<CmsUser> getList();
+
+    CmsUser getById(long cmsUserId);
+
+    void updateCmsUser(CmsUser cmsUser);
+
+    void setCmsUserStatus(CmsUser cmsUser, boolean status);
 
 }

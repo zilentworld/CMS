@@ -59,7 +59,6 @@
         </s:div>
     </s:div>
     <s:div class="account-content">
-        aaaaa
         <tiles:insertAttribute name="accountContent" ignore="true" />
     </s:div>
 </s:div>

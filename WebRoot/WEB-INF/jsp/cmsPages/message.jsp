@@ -4,18 +4,10 @@
 <html>
 <head>
 </head>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cms-global.css" />
 <body>
 <s:div>
-    <s:div
-            style="border:1px solid black;
-                    height:600px;
-                    width:1000px;
-                    position:absolute;
-	                top:0;
-	                bottom: 0;
-	                left: 0;
-	                right: 0;
-	                margin: auto;">
+    <s:div class="message-outer">
         <s:div style="text-align:center; margin-top: 10%;">
             <h1>
                 <s:property value="msg" />

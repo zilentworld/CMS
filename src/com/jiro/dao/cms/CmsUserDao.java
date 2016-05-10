@@ -35,4 +35,10 @@ public class CmsUserDao extends GenericDaoImpl {
                         .getExecutableCriteria(getCurrentSession())
                         .list();
     }
+
+    @SuppressWarnings("unchecked")
+    @Transactional
+    public List<CmsUser> getList() {
+        return (List<CmsUser>) super.getList(CmsUser.class);
+    }
 }

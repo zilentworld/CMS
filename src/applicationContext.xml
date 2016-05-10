@@ -1,204 +1,211 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:p="http://www.springframework.org/schema/p"
-    xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
 	                    http://www.springframework.org/schema/beans/spring-beans-4.1.xsd 
 	                    http://www.springframework.org/schema/tx 
 	                    http://www.springframework.org/schema/tx/spring-tx.xsd
 					    http://www.springframework.org/schema/context
 					    http://www.springframework.org/schema/context/spring-context.xsd"
-	xmlns:tx="http://www.springframework.org/schema/tx">
+       xmlns:tx="http://www.springframework.org/schema/tx">
 
-	<bean id="cmsFileController" class="com.jiro.cms.CmsFileController" scope="prototype"/>
-    
-	<!--     model -->
-    <bean id="cmsUser" class="com.jiro.model.cms.CmsUser" scope="prototype" />
-    <bean id="cmsUserType" class="com.jiro.model.cms.CmsUserType" scope="prototype" />
-    <bean id="cmsTemplates" class="com.jiro.model.cms.CmsTemplates" scope="prototype" />
-    <bean id="cmsUserSite" class="com.jiro.model.cms.CmsUserSite" scope="prototype" />
-    <bean id="siteUser" class="com.jiro.model.site.SiteUser" scope="prototype" />
-    <bean id="sitePost" class="com.jiro.model.site.SitePost" scope="prototype" />
-    <bean id="siteComment" class="com.jiro.model.site.SiteComment" scope="prototype" />
-    <bean id="siteLinks" class="com.jiro.model.site.SiteLinks" scope="prototype" />
-	<bean id="siteLinksPermission" class="com.jiro.model.site.SiteLinksPermission" scope="prototype" />
-    
-	<!--     dao -->
-    <bean id="cmsUserDao" class="com.jiro.dao.cms.CmsUserDao" scope="prototype" />
-    <bean id="cmsUserTypeDao" class="com.jiro.dao.cms.CmsUserTypeDao" scope="prototype" />
-    <bean id="cmsUserSiteDao" class="com.jiro.dao.cms.CmsUserSiteDao" scope="prototype" />
-    <bean id="cmsTemplatesDao" class="com.jiro.dao.cms.CmsTemplatesDao" scope="prototype" />
-    <bean id="siteUserDao" class="com.jiro.dao.site.SiteUserDao" scope="prototype" />
-    <bean id="sitePostDao" class="com.jiro.dao.site.SitePostDao" scope="prototype" />
-    <bean id="siteCommentDao" class="com.jiro.dao.site.SiteCommentDao" scope="prototype" />
-    <bean id="siteSettingsDao" class="com.jiro.dao.site.SiteSettingsDao" scope="prototype" />
-	<bean id="siteLinksDao" class="com.jiro.dao.site.SiteLinksDao" scope="prototype" />
-	<bean id="siteLinksPermissionDao" class="com.jiro.dao.site.SiteLinksPermissionDao" scope="prototype" />
-    
+    <bean id="cmsFileController" class="com.jiro.cms.CmsFileController" scope="prototype"/>
+
+    <!--     model -->
+    <bean id="cmsUser" class="com.jiro.model.cms.CmsUser" scope="prototype"/>
+    <bean id="cmsUserType" class="com.jiro.model.cms.CmsUserType" scope="prototype"/>
+    <bean id="cmsTemplates" class="com.jiro.model.cms.CmsTemplates" scope="prototype"/>
+    <bean id="cmsUserSite" class="com.jiro.model.cms.CmsUserSite" scope="prototype"/>
+    <bean id="siteUser" class="com.jiro.model.site.SiteUser" scope="prototype"/>
+    <bean id="sitePost" class="com.jiro.model.site.SitePost" scope="prototype"/>
+    <bean id="siteComment" class="com.jiro.model.site.SiteComment" scope="prototype"/>
+    <bean id="siteLinks" class="com.jiro.model.site.SiteLinks" scope="prototype"/>
+    <bean id="siteLinksPermission" class="com.jiro.model.site.SiteLinksPermission" scope="prototype"/>
+
+    <!--     dao -->
+    <bean id="cmsUserDao" class="com.jiro.dao.cms.CmsUserDao" scope="prototype"/>
+    <bean id="cmsUserTypeDao" class="com.jiro.dao.cms.CmsUserTypeDao" scope="prototype"/>
+    <bean id="cmsUserSiteDao" class="com.jiro.dao.cms.CmsUserSiteDao" scope="prototype"/>
+    <bean id="cmsTemplatesDao" class="com.jiro.dao.cms.CmsTemplatesDao" scope="prototype"/>
+    <bean id="siteUserDao" class="com.jiro.dao.site.SiteUserDao" scope="prototype"/>
+    <bean id="sitePostDao" class="com.jiro.dao.site.SitePostDao" scope="prototype"/>
+    <bean id="siteCommentDao" class="com.jiro.dao.site.SiteCommentDao" scope="prototype"/>
+    <bean id="siteSettingsDao" class="com.jiro.dao.site.SiteSettingsDao" scope="prototype"/>
+    <bean id="siteLinksDao" class="com.jiro.dao.site.SiteLinksDao" scope="prototype"/>
+    <bean id="siteLinksPermissionDao" class="com.jiro.dao.site.SiteLinksPermissionDao" scope="prototype"/>
+
     <bean id="genericDao" abstract="true" class="com.jiro.dao.GenericDaoImpl" scope="prototype">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-	
-	<!--     service -->
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!--     service -->
     <bean id="cmsUserService" class="com.jiro.service.cms.impl.CmsUserServiceImpl" scope="prototype">
-    	<property name="cmsUserDao" ref="cmsUserDao" />
-    	<property name="cmsUserTypeService" ref="cmsUserTypeService" />
+        <property name="cmsUserDao" ref="cmsUserDao"/>
+        <property name="cmsUserTypeService" ref="cmsUserTypeService"/>
     </bean>
-    
+
     <bean id="cmsUserTypeService" class="com.jiro.service.cms.impl.CmsUserTypeServiceImpl" scope="prototype">
-    	<property name="cmsUserTypeDao" ref="cmsUserTypeDao"/>
+        <property name="cmsUserTypeDao" ref="cmsUserTypeDao"/>
     </bean>
-    
+
     <bean id="cmsTemplatesService" class="com.jiro.service.cms.impl.CmsTemplatesServiceImpl" scope="prototype">
-    	<property name="cmsTemplatesDao" ref="cmsTemplatesDao"/>
+        <property name="cmsTemplatesDao" ref="cmsTemplatesDao"/>
     </bean>
-    
+
     <bean id="cmsUserSiteService" class="com.jiro.service.cms.impl.CmsUserSiteServiceImpl" scope="prototype">
-    	<property name="cmsUserSiteDao" ref="cmsUserSiteDao" />
-    	<property name="sitePostService" ref="sitePostService" />
-    	<property name="siteUserService" ref="siteUserService" />
-		<property name="siteLinksPermissionService" ref="siteLinksPermissionService" />
-		<property name="siteSettingsService" ref="siteSettingsService" />
+        <property name="cmsUserSiteDao" ref="cmsUserSiteDao"/>
+        <property name="sitePostService" ref="sitePostService"/>
+        <property name="siteUserService" ref="siteUserService"/>
+        <property name="siteLinksPermissionService" ref="siteLinksPermissionService"/>
+        <property name="siteSettingsService" ref="siteSettingsService"/>
     </bean>
-    
+
     <bean id="siteUserService" class="com.jiro.service.site.impl.SiteUserServiceImpl">
-    	<property name="siteUserDao" ref="siteUserDao" />
-    </bean>    
-    
+        <property name="siteUserDao" ref="siteUserDao"/>
+    </bean>
+
     <bean id="sitePostService" class="com.jiro.service.site.impl.SitePostServiceImpl">
-    	<property name="sitePostDao" ref="sitePostDao" />
+        <property name="sitePostDao" ref="sitePostDao"/>
     </bean>
-    
+
     <bean id="siteCommentService" class="com.jiro.service.site.impl.SiteCommentServiceImpl">
-    	<property name="siteCommentDao" ref="siteCommentDao" />
-    </bean>    
-    
+        <property name="siteCommentDao" ref="siteCommentDao"/>
+    </bean>
+
     <bean id="siteSettingsService" class="com.jiro.service.site.impl.SiteSettingsServiceImpl">
-    	<property name="siteSettingsDao" ref="siteSettingsDao" />
+        <property name="siteSettingsDao" ref="siteSettingsDao"/>
     </bean>
 
-	<bean id="siteLinksService" class="com.jiro.service.site.impl.SiteLinksServiceImpl">
-	</bean>
+    <bean id="siteLinksService" class="com.jiro.service.site.impl.SiteLinksServiceImpl">
+    </bean>
 
-	<bean id="siteLinksPermissionService" class="com.jiro.service.site.impl.SiteLinksPermissionServiceImpl" >
-		<property name="siteLinksPermissionDao" ref="siteLinksPermissionDao" />
-		<property name="siteLinksService" ref="siteLinksService" />
-	</bean>
-    
-	<!--     action -->
+    <bean id="siteLinksPermissionService" class="com.jiro.service.site.impl.SiteLinksPermissionServiceImpl">
+        <property name="siteLinksPermissionDao" ref="siteLinksPermissionDao"/>
+        <property name="siteLinksService" ref="siteLinksService"/>
+    </bean>
+
+    <!--     action -->
     <bean id="registerCms" class="com.jiro.action.cms.CmsRegisterAction" scope="prototype">
-    	<property name="cmsUserService" ref="cmsUserService" />
-    	<property name="cmsTemplatesService" ref="cmsTemplatesService"/>
-    	<property name="cmsUserTypeService" ref="cmsUserTypeService" />
+        <property name="cmsUserService" ref="cmsUserService"/>
+        <property name="cmsTemplatesService" ref="cmsTemplatesService"/>
+        <property name="cmsUserTypeService" ref="cmsUserTypeService"/>
     </bean>
-    
+
     <bean id="newBlogSite" class="com.jiro.action.cms.CreateNewBlogSiteAction" scope="prototype">
-    	<property name="cmsTemplatesService" ref="cmsTemplatesService"/>
+        <property name="cmsTemplatesService" ref="cmsTemplatesService"/>
     </bean>
-    
+
     <bean id="loginAction" class="com.jiro.action.cms.CmsLoginAction" scope="prototype">
-    	<property name="cmsUserService" ref="cmsUserService" />
+        <property name="cmsUserService" ref="cmsUserService"/>
     </bean>
-    
+
     <bean id="userSiteAction" class="com.jiro.action.site.BlogUrlAction" scope="prototype">
-    	<property name="cmsUserSiteService" ref="cmsUserSiteService" />
-    	<property name="cmsTemplatesService" ref="cmsTemplatesService" />
-		<property name="cmsFileController" ref="cmsFileController" />
+        <property name="cmsUserSiteService" ref="cmsUserSiteService"/>
+        <property name="cmsTemplatesService" ref="cmsTemplatesService"/>
+        <property name="cmsFileController" ref="cmsFileController"/>
     </bean>
-    
+
     <bean id="checkBlogUrl" class="com.jiro.action.cms.CheckBlogUrlAction" scope="prototype">
-    	<property name="cmsUserSiteService" ref="cmsUserSiteService" />
+        <property name="cmsUserSiteService" ref="cmsUserSiteService"/>
     </bean>
-    
+
     <bean id="blogPostAction" class="com.jiro.action.site.PostPreviewAction" scope="prototype">
-    	<property name="sitePostService" ref="sitePostService" />
+        <property name="sitePostService" ref="sitePostService"/>
     </bean>
-    
+
     <bean id="siteImgAction" class="com.jiro.action.site.SiteImageAction" scope="prototype">
-    	<property name="siteSettingsService" ref="siteSettingsService" />
+        <property name="siteSettingsService" ref="siteSettingsService"/>
     </bean>
-        
+
     <bean abstract="true" id="siteAbstractAction" class="com.jiro.action.site.SiteAbstractAction" scope="prototype">
-    	<property name="cmsUserSiteService" ref="cmsUserSiteService" />
+        <property name="cmsUserSiteService" ref="cmsUserSiteService"/>
     </bean>
-    
+
     <bean id="postContentAction" class="com.jiro.action.site.PostContentAction" scope="prototype">
-    	<property name="sitePostService" ref="sitePostService" />
-    	<property name="siteCommentService" ref="siteCommentService" />
-    	<property name="cmsUserSiteService" ref="cmsUserSiteService" />
+        <property name="sitePostService" ref="sitePostService"/>
+        <property name="siteCommentService" ref="siteCommentService"/>
+        <property name="cmsUserSiteService" ref="cmsUserSiteService"/>
     </bean>
-    
+
     <bean id="siteLoginAction" class="com.jiro.action.site.SiteLoginAction" scope="prototype">
-    	<property name="siteUserService" ref="siteUserService" />
-    	<property name="siteUser" ref="siteUser" />
-    	<property name="cmsUserSiteService" ref="cmsUserSiteService" />
+        <property name="siteUserService" ref="siteUserService"/>
+        <property name="siteUser" ref="siteUser"/>
+        <property name="cmsUserSiteService" ref="cmsUserSiteService"/>
     </bean>
-    
+
     <bean id="siteRegisterAction" class="com.jiro.action.site.SiteRegisterAction" scope="prototype">
-    	<property name="siteUserService" ref="siteUserService" />
-    	<property name="cmsUserSiteService" ref="cmsUserSiteService" />
-    	<property name="siteUser" ref="siteUser" />
+        <property name="siteUserService" ref="siteUserService"/>
+        <property name="cmsUserSiteService" ref="cmsUserSiteService"/>
+        <property name="siteUser" ref="siteUser"/>
     </bean>
-    
+
     <bean id="logoutAction" class="com.jiro.action.site.SiteLogoutAction" scope="prototype">
-    	<property name="cmsUserSiteService" ref="cmsUserSiteService" />
+        <property name="cmsUserSiteService" ref="cmsUserSiteService"/>
     </bean>
-    
+
     <bean id="sitePostAction" class="com.jiro.action.site.SitePostAction" scope="prototype">
-    	<property name="sitePostService" ref="sitePostService" />
-    	<property name="cmsUserSiteService" ref="cmsUserSiteService" />
+        <property name="sitePostService" ref="sitePostService"/>
+        <property name="cmsUserSiteService" ref="cmsUserSiteService"/>
     </bean>
-    
+
     <bean id="siteCommentAction" class="com.jiro.action.site.SiteCommentAction" scope="prototype">
-    	<property name="siteCommentService" ref="siteCommentService" />
-    	<property name="cmsUserSiteService" ref="cmsUserSiteService" />
+        <property name="siteCommentService" ref="siteCommentService"/>
+        <property name="cmsUserSiteService" ref="cmsUserSiteService"/>
     </bean>
-    
+
     <bean id="userCommentAction" class="com.jiro.action.site.SiteUserComments" scope="prototype">
-    	<property name="siteCommentService" ref="siteCommentService" />
-    	<property name="cmsUserSiteService" ref="cmsUserSiteService" />
+        <property name="siteCommentService" ref="siteCommentService"/>
+        <property name="cmsUserSiteService" ref="cmsUserSiteService"/>
     </bean>
 
-	<bean id="cmsMgmtAction" class="com.jiro.action.cms.CmsMgmtAction" scope="prototype">
-		<property name="cmsUserSiteService" ref="cmsUserSiteService" />
-		<property name="siteLinksService" ref="siteLinksServiceImpl" />
-		<property name="siteLinksPermissionService" ref="siteLinksPermissionService" />
-	</bean>
+    <bean id="cmsMgmtAction" class="com.jiro.action.cms.CmsMgmtAction" scope="prototype">
+        <property name="cmsUserSiteService" ref="cmsUserSiteService"/>
+        <property name="siteLinksService" ref="siteLinksServiceImpl"/>
+        <property name="siteLinksPermissionService" ref="siteLinksPermissionService"/>
+    </bean>
 
-    <bean id="cmsNavAction" class="com.jiro.action.cms.CmsNavAction" scope="prototype" />
-    <bean id="cmsAccountAction" class="com.jiro.action.cms.CmsAccountAction" scope="prototype" />
+    <bean id="cmsNavAction" class="com.jiro.action.cms.CmsNavAction" scope="prototype"/>
 
-	<!-- 	settings -->
-	<tx:annotation-driven transaction-manager="transactionManager" />
-	<tx:annotation-driven proxy-target-class="true"/>
-		
-	<context:component-scan base-package="com.jiro.dao" />
-	<context:component-scan base-package="com.jiro.service.site" />
-	<context:component-scan base-package="com.jiro.service.cms" />
-	
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource "
-		abstract="false" lazy-init="default" autowire="default"
-		p:url="jdbc:mysql://localhost:3306/cms"
-		p:driverClassName="com.mysql.jdbc.Driver" p:username="root"
-		p:password="12345">
-	</bean>
-	
-	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-	
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" p:dataSource-ref="dataSource">		
-		<property name="packagesToScan" value="com.jiro.model" />
-	    <property name="hibernateProperties">
-	        <props>
-	            <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-	            <prop key="hibernate.show_sql">true</prop>
-	        </props>
-	    </property>
-	</bean>
+    <bean id="cmsAccountAction" class="com.jiro.action.cms.CmsAccountAction" scope="prototype">
+        <property name="cmsUserSiteService" ref="cmsUserSiteService"/>
+    </bean>
+
+    <bean id="cmsEdituserAction" class="com.jiro.action.cms.CmsEditUserAction" scope="prototype">
+        <property name="cmsUserService" ref="cmsUserService" />
+    </bean>
+
+    <!-- 	settings -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <tx:annotation-driven proxy-target-class="true"/>
+
+    <context:component-scan base-package="com.jiro.dao"/>
+    <context:component-scan base-package="com.jiro.service.site"/>
+    <context:component-scan base-package="com.jiro.service.cms"/>
+
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource "
+          abstract="false" lazy-init="default" autowire="default"
+          p:url="jdbc:mysql://localhost:3306/cms"
+          p:driverClassName="com.mysql.jdbc.Driver" p:username="root"
+          p:password="12345">
+    </bean>
+
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" p:dataSource-ref="dataSource">
+        <property name="packagesToScan" value="com.jiro.model"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
+    </bean>
 
 </beans>

@@ -10,6 +10,7 @@
 
     <definition name="main-layout" template="/WEB-INF/jsp/cmsPages/main-layout.jsp">
         <put-attribute name="content" value="" />
+        <put-attribute name="accountContent" value=""/>
     </definition>
     <definition name="main-welcome" extends="main-layout">
         <put-attribute name="content" value="/WEB-INF/jsp/cmsPages/main-welcome.jsp" />
@@ -31,18 +32,20 @@
         <put-attribute name="content" value="/WEB-INF/jsp/cmsPages/main-account.jsp" />
         <put-attribute name="accountContent" value=""/>
     </definition>
-    <definition name="main-account-siteList" extends="main-account">
-        <put-attribute name="accountContent" value="/WEB-INF/jsp/cmsPages/main-account-siteList.jsp" />
+    <definition name="main-account-siteList" extends="main-layout">
+        <put-attribute name="content" value="/WEB-INF/jsp/cmsPages/main-account-siteList.jsp" />
     </definition>
     <definition name="main-account-userList" extends="main-layout">
-        <put-attribute name="content" value="/WEB-INF/jsp/cmsPages/main-account.jsp" />
-        <put-attribute name="accountContent" value="/WEB-INF/jsp/cmsPages/main-account-userList.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/cmsPages/main-account-userList.jsp" />
     </definition>
-    <definition name="main-account-userSites" extends="main-account">
-        <put-attribute name="accountContent" value="/WEB-INF/jsp/cmsPages/main-account-userSites.jsp" />
+    <definition name="main-account-userSites" extends="main-layout">
+        <put-attribute name="content" value="/WEB-INF/jsp/cmsPages/main-account-userSites.jsp" />
     </definition>
-    <definition name="main-account-userInfo" extends="main-account">
-        <put-attribute name="accountContent" value="/WEB-INF/jsp/cmsPages/main-account-userInfo.jsp" />
+    <definition name="main-account-userInfo" extends="main-layout">
+        <put-attribute name="content" value="/WEB-INF/jsp/cmsPages/main-account-userInfo.jsp" />
+    </definition>
+    <definition name="main-account-editUser" extends="main-layout">
+        <put-attribute name="content" value="/WEB-INF/jsp/cmsPages/main-account-editUser.jsp" />
     </definition>
 
 

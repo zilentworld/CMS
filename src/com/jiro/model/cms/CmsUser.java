@@ -11,6 +11,7 @@ public class CmsUser {
     
     @Id
     @Column(name="cms_user_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long cmsUserId;
     @Column(name="cms_username")
     private String cmsUsername;
@@ -34,6 +35,8 @@ public class CmsUser {
     private int age;
     @Column(name="gender")
     private String gender;
+    @Column(name = "is_enabled")
+    private int isEnabled;
     
     public long getCmsUserId() {
         return cmsUserId;
@@ -100,6 +103,12 @@ public class CmsUser {
     }
     public void setGender(String gender) {
         this.gender = gender;
+    }
+    public int getIsEnabled() {
+        return isEnabled;
+    }
+    public void setIsEnabled(int isEnabled) {
+        this.isEnabled = isEnabled;
     }
 
     @Override

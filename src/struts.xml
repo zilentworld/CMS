@@ -61,7 +61,25 @@
 		<action name="UserInfo" class="cmsAccountAction" method="showUserInfo">
 			<result name="success" type="tiles">main-account-userInfo</result>
 		</action>
-
+		<action name="deactivateUser" class="cmsAccountAction" method="deactivateUser">
+			<result name="error">UserList</result>
+			<result name="success">UserList</result>
+		</action>
+		<action name="activateUser" class="cmsAccountAction" method="activateUser">
+			<result name="error">UserList</result>
+			<result name="success">UserList</result>
+		</action>
+		<action name="EditUser" class="cmsEdituserAction" method="showEditUser">
+			<result name="error" type="tiles">main-account-editUser</result>
+			<result name="success" type="tiles">main-account-editUser</result>
+		</action>
+		<action name="SaveEditUser" class="cmsEdituserAction">
+			<result name="error" type="tiles">main-account-editUser</result>
+			<result name="input">EditUser</result>
+			<!--<result name="input" type="tiles">main-account-editUser</result>-->
+			<!--<result name="success">UserList</result>-->
+			<result name="success">${sourcePage}</result>
+		</action>
 		<action name="Logout" class="loginAction" method="processLogout">
 			<result name="success" type="tiles">main-welcome</result>
 		</action>

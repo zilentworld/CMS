@@ -39,7 +39,13 @@ public final class Constants {
     public static final String CMS_ERROR_SITE_NOT_EXIST = "Site does not exist";
     public static final String CMS_ERROR_SITE_NOT_PUBLISH = "Site is not yet published";
     public static final String CMS_ERROR_SITE_DISABLED = "Site has been disabled";
-    
+    public static final String CMS_ERROR_FIRST_NAME_INVALID = "Invalid format for the first name";
+    public static final String CMS_ERROR_MIDDLE_NAME_INVALID = "Invalid format for the middle name";
+    public static final String CMS_ERROR_LAST_NAME_INVALID = "Invalid format for the last name";
+    public static final String CMS_ERROR_GENDER_INVALID = "Invalid format for the gender";
+    public static final String CMS_ERROR_AGE_INVALID = "Invalid format for the age";
+    public static final String CMS_ERROR_ID_INVALID = "Invalid ID. Kindly return to User List";
+
     //Error Messages for SITE
     public static final String SITE_ERROR_USERNAME_REQUIRED = "Username is required";
     public static final String SITE_ERROR_USERNAME_SHORT = "Username is too short";
