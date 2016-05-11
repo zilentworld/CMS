@@ -8,7 +8,7 @@
 <s:set var="sitePost" value="sitePost" />
 <s:if test="sitePost != null">
 	<s:div id="sitePost-content"
-		style="word-wrap: break-word; overflow: hidden;">
+		class="site-post-content">
 		<s:div id="post-content">
 			<s:div id="post-title">
 				<h4>
@@ -25,7 +25,7 @@
 		</s:div>
 		<s:if
 			test="#sessionSiteUser.siteUserId == sitePost.siteUser.siteUserId">
-			<s:div id="post-controls" style="clear:both; float:right;">
+			<s:div id="post-controls" class="clear float-right">
 				<s:form id="post-control-form">
 					<s:a
 						href="javascript:callAction('editSitePost?postType=edit&postId=' + %{sitePost.sitePostId});">
@@ -44,7 +44,7 @@
 	<br />
 
 	<!-- Comment Area -->
-	<s:div id="post-comment-area" style="clear:both;">
+	<s:div id="post-comment-area" class="clear">
 		<s:label>Post a Comment:</s:label>
 		<s:if test="#sessionSiteUser.siteUserId > 0">
 			<s:div id="post-comment-new">
@@ -52,7 +52,7 @@
 					<s:hidden name="siteComment.sitePost.sitePostId"
 						value="%{sitePost.sitePostId}" />
 					<s:textarea name="siteComment.siteCommentContent"
-						style="width:320px; height:90px" />
+						class="comment-textarea" />
 					<br />					
         		<s:submit type="button" onclick="form.action='saveCommentPost'; form.submit();" value="Submit"/>
 				</s:form>
@@ -68,7 +68,7 @@
 		<s:iterator value="siteComments">
 			<s:div id="comment-%{siteCommentId}">
 				<h5>
-					<s:div id="comment-controls" style="display:block;">
+					<s:div id="comment-controls" class="display-block">
 						<s:form id="comment-control-form-%{siteCommentId}">
 							<s:property value="siteUser.siteUserUsername" />
 							on <s:date name="commentDate" format="dd/MM/yyyy hh:mm:ss" />
@@ -90,13 +90,13 @@
 						</s:form>
 					</s:div>
 				</h5>
-				<s:div id="comment-content-%{siteCommentId}" style="display:block;">
+				<s:div id="comment-content-%{siteCommentId}" class="display-block">
 					<p>
 						<s:property value="siteCommentContent" />
 					</p>
 				</s:div>
 				<s:if test="#sessionSiteUser.siteUserId == siteUser.siteUserId">
-					<s:div id="comment-edit-%{siteCommentId}" style="display:none;">
+					<s:div id="comment-edit-%{siteCommentId}" class="display-none">
 						<s:form action="postComment" method="post">
 							<table>
 								<tr>

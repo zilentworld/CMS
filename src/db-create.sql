@@ -14,19 +14,24 @@ CREATE TABLE cms_templates
   default_background_img VARCHAR(100),
   template_baselayout VARCHAR(200)
 );
+CREATE TABLE cms_user_type
+(
+  cms_user_type_code VARCHAR(10) PRIMARY KEY NOT NULL,
+  cms_user_type_desc VARCHAR(50)
+);
 CREATE TABLE cms_user
 (
   cms_user_id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   cms_username VARCHAR(50) NOT NULL,
   cms_password VARCHAR(50) NOT NULL,
   cms_user_type_code VARCHAR(15) NOT NULL,
-  cms_register_date TIMESTAMP DEFAULT 'CURRENT_TIMESTAMP' NOT NULL,
-  first_name VARCHAR(50),
-  middle_name VARCHAR(50),
-  last_name VARCHAR(50),
+  cms_register_date TIMESTAMP DEFAULT now() NOT NULL,
   age INT(11),
-  gender VARCHAR(10),
   is_enabled INT(1) DEFAULT '1',
+  first_name VARCHAR(50) NOT NULL,
+  middle_name VARCHAR(50) NOT NULL,
+  last_name VARCHAR(50) NOT NULL,
+  gender VARCHAR(10) NOT NULL,
   CONSTRAINT fk_cms_user_type_code FOREIGN KEY (cms_user_type_code) REFERENCES cms_user_type (cms_user_type_code)
 );
 CREATE INDEX fk_cms_user_1_idx ON cms_user (cms_user_type_code);
@@ -43,29 +48,11 @@ CREATE TABLE cms_user_site
   cms_user_id BIGINT(20) NOT NULL,
   blog_url VARCHAR(50) NOT NULL,
   blog_template VARCHAR(10) NOT NULL,
-  create_date TIMESTAMP DEFAULT 'CURRENT_TIMESTAMP' NOT NULL,
+  create_date TIMESTAMP DEFAULT now() NOT NULL,
   is_published INT(1) DEFAULT '0',
   CONSTRAINT cms_user_site_ibfk_1 FOREIGN KEY (cms_user_id) REFERENCES cms_user (cms_user_id)
 );
 CREATE INDEX fk_cms_user_id ON cms_user_site (cms_user_id);
-CREATE TABLE cms_user_type
-(
-  cms_user_type_code VARCHAR(10) PRIMARY KEY NOT NULL,
-  cms_user_type_desc VARCHAR(50)
-);
-CREATE TABLE site_comment
-(
-  site_comment_id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  site_user_id BIGINT(20) NOT NULL,
-  site_post_id BIGINT(20),
-  site_comment_content VARCHAR(1000),
-  comment_date TIMESTAMP DEFAULT 'CURRENT_TIMESTAMP' NOT NULL,
-  cms_user_site_id BIGINT(20) NOT NULL,
-  CONSTRAINT site_comment_ibfk_1 FOREIGN KEY (site_user_id) REFERENCES site_user (site_user_id),
-  CONSTRAINT site_comment_ibfk_2 FOREIGN KEY (site_post_id) REFERENCES site_post (site_post_id)
-);
-CREATE INDEX fk_site_post_id ON site_comment (site_post_id);
-CREATE INDEX fk_site_user_id ON site_comment (site_user_id);
 CREATE TABLE site_links
 (
   site_link_id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -79,17 +66,6 @@ CREATE TABLE site_links_permission
   is_enabled INT(1) DEFAULT '0',
   permission_id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT
 );
-CREATE TABLE site_post
-(
-  site_post_id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  cms_user_site_id BIGINT(20) NOT NULL,
-  site_user_id BIGINT(20),
-  site_post_title VARCHAR(100),
-  site_post_content VARCHAR(50000),
-  site_post_date TIMESTAMP DEFAULT 'CURRENT_TIMESTAMP' NOT NULL,
-  CONSTRAINT site_post_ibfk_1 FOREIGN KEY (site_user_id) REFERENCES site_user (site_user_id)
-);
-CREATE INDEX fk_site_user_id ON site_post (site_user_id);
 CREATE TABLE site_settings
 (
   site_settings_id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -105,11 +81,35 @@ CREATE TABLE site_user
   cms_user_site_id BIGINT(20) NOT NULL,
   site_user_username VARCHAR(50),
   site_user_password VARCHAR(50),
-  site_register_date TIMESTAMP DEFAULT 'CURRENT_TIMESTAMP' NOT NULL,
+  site_register_date TIMESTAMP DEFAULT now() NOT NULL,
   is_admin INT(1) DEFAULT '0',
   CONSTRAINT site_user_ibfk_1 FOREIGN KEY (cms_user_site_id) REFERENCES cms_user_site (cms_user_site_id)
 );
 CREATE INDEX fk_cms_user_site_id ON site_user (cms_user_site_id);
+CREATE TABLE site_post
+(
+  site_post_id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  cms_user_site_id BIGINT(20) NOT NULL,
+  site_user_id BIGINT(20),
+  site_post_title VARCHAR(100),
+  site_post_content VARCHAR(50000),
+  site_post_date TIMESTAMP DEFAULT now() NOT NULL,
+  CONSTRAINT site_post_ibfk_1 FOREIGN KEY (site_user_id) REFERENCES site_user (site_user_id)
+);
+CREATE INDEX fk_site_user_id ON site_post (site_user_id);
+CREATE TABLE site_comment
+(
+  site_comment_id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  site_user_id BIGINT(20) NOT NULL,
+  site_post_id BIGINT(20),
+  site_comment_content VARCHAR(1000),
+  comment_date TIMESTAMP DEFAULT now() NOT NULL,
+  cms_user_site_id BIGINT(20) NOT NULL,
+  CONSTRAINT site_comment_ibfk_1 FOREIGN KEY (site_user_id) REFERENCES site_user (site_user_id),
+  CONSTRAINT site_comment_ibfk_2 FOREIGN KEY (site_post_id) REFERENCES site_post (site_post_id)
+);
+CREATE INDEX fk_site_post_id ON site_comment (site_post_id);
+CREATE INDEX fk_site_user_id ON site_comment (site_user_id);
 
 INSERT INTO cms.cms_user_type (cms_user_type_code, cms_user_type_desc) VALUES ('cms_admin', 'cms admin user');
 INSERT INTO cms.cms_user_type (cms_user_type_code, cms_user_type_desc) VALUES ('cms_user', 'cms user');

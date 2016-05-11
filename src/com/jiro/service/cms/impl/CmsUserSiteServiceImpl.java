@@ -1,8 +1,11 @@
 package com.jiro.service.cms.impl;
 
 import com.jiro.model.cms.CmsUser;
+import com.jiro.service.cms.CmsTemplatesService;
+import com.jiro.service.cms.CmsUserService;
 import com.jiro.service.site.SiteLinksPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.jiro.dao.cms.CmsUserSiteDao;
@@ -29,6 +32,11 @@ public class CmsUserSiteServiceImpl implements CmsUserSiteService {
     private SiteSettingsService siteSettingsService;
     @Autowired
     private SiteLinksPermissionService siteLinksPermissionService;
+    @Autowired
+    private CmsUserService cmsUserService;
+    @Autowired
+    private CmsTemplatesService cmsTemplatesService;
+
 
     public void setSiteSettingsService(SiteSettingsService siteSettingsService) {
         this.siteSettingsService = siteSettingsService;
@@ -51,12 +59,16 @@ public class CmsUserSiteServiceImpl implements CmsUserSiteService {
     }
     
     public boolean saveNewUserSite(CmsUserSite cmsUserSite) {
+        System.out.println("saveNewUserSite");
         if(cmsUserSiteDao.persist(cmsUserSite) > 0) {
+            System.out.println("saveNewUserSite:saved:");
             SitePost firstPost = sitePostService.siteFirstPost(
                     siteUserService.siteFirstUser(cmsUserSite));
             siteSettingsService.setInitialSettings(cmsUserSite);
             siteLinksPermissionService.addInitialLinks(cmsUserSite);
+            System.out.println("saveNewUserSite:saved:firstPost:"+firstPost);
             return firstPost != null;
+//            return true;
         } else
             return false;
     }
@@ -98,5 +110,19 @@ public class CmsUserSiteServiceImpl implements CmsUserSiteService {
     @Override
     public List<CmsUserSite> getList() {
         return cmsUserSiteDao.getList();
+    }
+
+    @Override
+    public CmsUserSite createNewCmsUserSite(long cmsUserId, String blogUrl, long cmsTemplateId) {
+        System.out.println("createNewCmsUserSite:");
+        CmsUserSite cmsUserSite = new CmsUserSite();
+        cmsUserSite.setCmsUser(cmsUserService.getById(cmsUserId));
+        cmsUserSite.setCmsTemplates(cmsTemplatesService.getById(cmsTemplateId));
+        cmsUserSite.setBlogUrl(blogUrl);
+        cmsUserSite.setIsPublished(0);
+        System.out.println("createNewCmsUserSite:saveNewUserSite:");
+        saveNewUserSite(cmsUserSite);
+
+        return cmsUserSite;
     }
 }

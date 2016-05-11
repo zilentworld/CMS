@@ -8,24 +8,23 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/generationBaseFiles/css/template2.css" />
 <body>
 <s:div id="site-wrapper">
-	template2
-	<s:property value="blogSiteUrl"/>
 	<s:div>
-            <s:div style="margin:1%; overflow-x:hidden;">
-                <s:div id="sidebar" style="width:20%; float:left; border: 1px solid black;">
+            <s:div class="outer">
+                <s:div id="sidebar" class="sidebar">
                     <s:div id="header">
 						<s:div id="header-buttons">
 							<tiles:insertAttribute name="header" ignore="true" />
 						</s:div>
 					</s:div>
-                    <s:div id="archive-content" style="margin: 3%; min-height: 30%; clear:both;">
+                    <s:div id="archive-content clear" class="archive-content">
 						<tiles:insertAttribute name="archive" />
                     </s:div>
                 </s:div>
-                <s:div id="main-content" style="margin-left: 2%; margin-bottom:2%; width:75%; float:left;">
-                    <s:div style=" border: 1px solid black;">
+                <s:div id="main-content" class="main-content">
+                    <s:div class="border">
 						<s:div id="banner">
 							<s:div id="banner-img">
 								<tiles:insertAttribute name="banner" ignore="true" />
@@ -35,7 +34,7 @@
 							<tiles:insertAttribute name="body" />
                         </s:div>
                     </s:div>
-                    <s:div id="footer" style=" border: 1px solid black; margin-top: 10px;">
+                    <s:div id="footer" class="border footer">
 						<tiles:insertAttribute name="footer" />
                     </s:div>
                 </s:div>

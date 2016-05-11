@@ -13,6 +13,15 @@ import java.util.Map;
 public class CmsNavAction extends ActionSupport implements SessionAware {
 
     private Map<String, Object> sessionmap;
+    private String sourcePage;
+
+    public String getSourcePage() {
+        return sourcePage;
+    }
+
+    public void setSourcePage(String sourcePage) {
+        this.sourcePage = sourcePage;
+    }
 
     public String showHome() {
         return SUCCESS;
@@ -26,13 +35,19 @@ public class CmsNavAction extends ActionSupport implements SessionAware {
         return SUCCESS;
     }
 
+    public String checkAccount() {
+        return SUCCESS;
+    }
+
     public String showAccount() {
         CmsUser cmsUser = (CmsUser) sessionmap.get(Constants.CMS_SESSION_CMS_USER);
         if(cmsUser != null && cmsUser.getCmsUserId() > 0) {
             return SUCCESS;
         }
-        else
+        else {
+            sourcePage = "checkAccount";
             return LOGIN;
+        }
     }
 
     @Override

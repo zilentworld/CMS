@@ -7,17 +7,8 @@ import com.jiro.service.cms.CmsTemplatesService;
 import com.jiro.service.cms.CmsUserSiteService;
 import com.jiro.utility.Constants;
 import com.opensymphony.xwork2.ActionSupport;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.LineIterator;
-import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
-import org.apache.struts2.util.ServletContextAware;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.Map;
 
 public class BlogUrlAction extends ActionSupport implements SessionAware {
@@ -105,7 +96,7 @@ public class BlogUrlAction extends ActionSupport implements SessionAware {
         cmsUserSite.setCmsUser((CmsUser) sessionMap.get(Constants.CMS_SESSION_CMS_USER));
         System.out.println("cmsusersite:cmsuser:" + ((CmsUser) sessionMap.get(Constants.CMS_SESSION_CMS_USER)).getCmsUserId());
 
-        cmsUserSite.setCmsTemplates(cmsTemplatesService.get(Long.parseLong(cmsTemplateId)));
+        cmsUserSite.setCmsTemplates(cmsTemplatesService.getById(Long.parseLong(cmsTemplateId)));
         if (!cmsUserSiteService.saveNewUserSite(cmsUserSite)) {
             msgError = Constants.CMS_ERROR_BLOG_URL_TAKEN;
             return ERROR;

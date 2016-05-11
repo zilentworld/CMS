@@ -8,7 +8,7 @@ public interface CmsTemplatesService {
     
     public CmsTemplates getNewCmsTemplates();
     
-    public CmsTemplates get(long templateId);
+    public CmsTemplates getById(long templateId);
     
     public void initializeBlog();
         

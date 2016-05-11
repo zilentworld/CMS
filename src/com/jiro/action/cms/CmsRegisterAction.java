@@ -30,9 +30,27 @@ public class CmsRegisterAction extends ActionSupport implements SessionAware {
     private String repeatPassword;
     private String nextAction;
     private String errMsg;
-    private String cmsTemplateId;
     private Map<String, Object> sessionMap;
-    
+    private String sourcePage;
+    private String cmsTemplateId;
+    private String urlName;
+
+    public String getUrlName() {
+        return urlName;
+    }
+
+    public void setUrlName(String urlName) {
+        this.urlName = urlName;
+    }
+
+    public String getSourcePage() {
+        return sourcePage;
+    }
+
+    public void setSourcePage(String sourcePage) {
+        this.sourcePage = sourcePage;
+    }
+
     public CmsUser getCmsUserRegister() {
         return cmsUserRegister;
     }
@@ -114,21 +132,26 @@ public class CmsRegisterAction extends ActionSupport implements SessionAware {
         CmsUserType cmsUserType = cmsUserTypeService.getCmsUserType(Constants.CMS_DEFAULT_USER_TYPE);
         if(cmsUserType == null) {
             errMsg = Constants.CMS_ERROR_GENERIC_REGISTER;
+            System.out.println(errMsg);
             return ERROR;
         }
         System.out.println("create new");
         cmsUserRegister.setCmsUserType(cmsUserType);
-        if(cmsUserService.createNewCmsUser(cmsUserRegister)) {
+        cmsUserRegister.setDefaultValues();
+        if(!cmsUserService.createNewCmsUser(cmsUserRegister)) {
             errMsg = Constants.CMS_ERROR_GENERIC_REGISTER;
+            System.out.println(errMsg);
             return ERROR;
         }
-        System.out.println("get by login");
+        System.out.println("getById by login");
         cmsUserRegister = cmsUserService.getByLogin(
                 cmsUserRegister.getCmsUsername(), 
                 cmsUserRegister.getCmsPassword());
         System.out.println("after register, userId:"+cmsUserRegister.getCmsUserId());
         sessionMap.put(Constants.CMS_SESSION_CMS_USER, cmsUserRegister);
-        
+        System.out.println("cmsRegisterAction:execute:sourcePage:"+sourcePage);
+        System.out.println("cmsRegisterAction:execute:urlName:"+urlName);
+        System.out.println("cmsRegisterAction:execute:cmsTemplateId:"+cmsTemplateId);
         return SUCCESS;
     }
 

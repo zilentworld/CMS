@@ -17,9 +17,9 @@
 			<s:hidden name="postType" value="edit" />
 		</s:if>
 		<s:textfield label="Title" name="sitePost.sitePostTitle"
-			style="min-width:400px" id="blog_title" />
+			class="blog-title" id="blog_title" />
 		<s:textarea label="Content" name="sitePost.sitePostContent"
-			style="width:600px; height:300px; max-width:1100px" id="blog_content" />
+			class="blog-content" id="blog_content" />
 		<s:submit type="button" onclick="form.action='newSitePost'; form.submit();" value="Submit"/>
 	</s:form>
 </s:div>

@@ -2,8 +2,8 @@
     border: 1px solid black;
 }
 .template {
-    height: 50vh;
-    width: 50vh;
+    height: 45vh;
+    width: 44vh;
     float: left;
     margin: 1%;
     cursor: pointer;
@@ -18,9 +18,9 @@
     text-align: center;
 }
 .template-outer {
-    height: 75vh;
-    width: 90vw;
-    position:absolute;
+    height: 100%;
+    width: 100%;
+    /*position:absolute;*/
     top:0;
     bottom: 0;
     left: 0;

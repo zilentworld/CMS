@@ -27,6 +27,9 @@
     <definition name="main-template" extends="main-layout">
         <put-attribute name="content" value="/WEB-INF/jsp/cmsPages/main-template.jsp" />
     </definition>
+    <definition name="main-enterUrl" extends="main-layout">
+        <put-attribute name="content" value="/WEB-INF/jsp/cmsPages/main-enterUrl.jsp" />
+    </definition>
 
     <definition name="main-account" extends="main-layout">
         <put-attribute name="content" value="/WEB-INF/jsp/cmsPages/main-account.jsp" />

@@ -21,7 +21,34 @@ public class CmsLoginAction extends ActionSupport implements SessionAware {
     private CmsUser cmsUser;
     private CmsUserService cmsUserService;
     private Map<String, Object> sessionMap;
-    
+    private String sourcePage;
+    private String cmsTemplateId;
+    private String urlName;
+
+    public String getCmsTemplateId() {
+        return cmsTemplateId;
+    }
+
+    public void setCmsTemplateId(String cmsTemplateId) {
+        this.cmsTemplateId = cmsTemplateId;
+    }
+
+    public String getUrlName() {
+        return urlName;
+    }
+
+    public void setUrlName(String urlName) {
+        this.urlName = urlName;
+    }
+
+    public String getSourcePage() {
+        return sourcePage;
+    }
+
+    public void setSourcePage(String sourcePage) {
+        this.sourcePage = sourcePage;
+    }
+
     public CmsUser getCmsUser() {
         return cmsUser;
     }
@@ -63,7 +90,9 @@ public class CmsLoginAction extends ActionSupport implements SessionAware {
     public String execute() throws Exception {
         cmsUser = cmsUserService.getByLogin(cmsUser);
         sessionMap.put(Constants.CMS_SESSION_CMS_USER, cmsUser);
-        
+        System.out.println("cmsLoginAction:execute:sourcePage:"+sourcePage);
+        System.out.println("cmsLoginAction:execute:urlName:"+urlName);
+
         return SUCCESS;
     }
     
@@ -74,6 +103,7 @@ public class CmsLoginAction extends ActionSupport implements SessionAware {
 
     @Override
     public void validate() {
+        System.out.println("cmsLoginAction:validate:sourcePage:"+sourcePage);
         if(StringUtils.isEmpty(cmsUser.getCmsUsername())) {
             addFieldError("cmsUser.cmsUsername", Constants.CMS_ERROR_USERNAME_REQUIRED);
         } else if(StringUtils.isEmpty(cmsUser.getCmsPassword())) {
@@ -84,6 +114,12 @@ public class CmsLoginAction extends ActionSupport implements SessionAware {
         } else if(!cmsUserService.checkLogin(cmsUser)) {
             addFieldError("cmsUser.cmsUsername", Constants.CMS_ERROR_INVALID_LOGIN);
             cmsUser.setCmsPassword("");            
+        }
+        cmsUser = cmsUserService.getByLogin(cmsUser);
+
+        if("UserSites".equals(sourcePage) && "cms_admin".equals(cmsUser.getCmsUserType().getCmsUserTypeCode())) {
+            addFieldError("cmsUser.cmsUsername", "Cannot use admin account");
+            cmsUser.setCmsPassword("");
         }
     }
 

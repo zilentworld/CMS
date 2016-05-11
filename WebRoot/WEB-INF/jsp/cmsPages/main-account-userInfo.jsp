@@ -96,7 +96,7 @@
                 &nbsp;
             </s:div>
             <s:div style="float: right;">
-                <form id="editUserForm">
+                <form id="editUserForm" method="POST">
                     <s:hidden id="cmsUserId" name="cmsUserId"  value="%{cmsUserId}"/>
                     <s:hidden id="sourcePage" name="sourcePage"  value="UserInfo"/>
                     <s:submit id="edit" type="button" value="Edit" theme="simple"/>

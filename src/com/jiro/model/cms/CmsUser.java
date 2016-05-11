@@ -111,6 +111,15 @@ public class CmsUser {
         this.isEnabled = isEnabled;
     }
 
+    public void setDefaultValues() {
+        firstName = "";
+        lastName = "";
+        middleName = "";
+        age = 0;
+        gender = "";
+        isEnabled = 1;
+    }
+
     @Override
     public String toString() {
         return "cmsUserId:"+cmsUserId+",cmsUsername:"+cmsUsername+",cmsPassword:"+cmsPassword ;//+  cmsUserType;

@@ -24,4 +24,6 @@ public interface CmsUserSiteService {
 
     List<CmsUserSite> getList();
 
+    CmsUserSite createNewCmsUserSite(long cmsUserId, String blogUrl, long cmsTemplateId);
+
 }

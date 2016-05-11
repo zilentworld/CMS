@@ -93,8 +93,9 @@
         <property name="cmsUserTypeService" ref="cmsUserTypeService"/>
     </bean>
 
-    <bean id="newBlogSite" class="com.jiro.action.cms.CreateNewBlogSiteAction" scope="prototype">
+    <bean id="createSiteAction" class="com.jiro.action.cms.CmsCreateSiteAction" scope="prototype">
         <property name="cmsTemplatesService" ref="cmsTemplatesService"/>
+        <property name="cmsUserSiteService" ref="cmsUserSiteService" />
     </bean>
 
     <bean id="loginAction" class="com.jiro.action.cms.CmsLoginAction" scope="prototype">

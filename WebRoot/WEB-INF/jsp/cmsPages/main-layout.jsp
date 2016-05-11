@@ -58,9 +58,7 @@
             </s:div>
         </s:div>
         <s:div class="inner">
-            <tiles:insertAttribute name="content" ignore="true" >
-                <tiles:insertAttribute name="accountContent" ignore="true" />
-            </tiles:insertAttribute>
+            <tiles:insertAttribute name="content" ignore="true" />
         </s:div>
     </s:div>
 </s:div>

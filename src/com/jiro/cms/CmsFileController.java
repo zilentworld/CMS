@@ -113,4 +113,12 @@ public class CmsFileController {
         }
     }
 
+    public static void createSiteInitialFiles(CmsUserSite cmsUserSite) {
+//        Files.walk(Paths.get("/home/you/Desktop")).forEach(filePath -> {
+//            if (Files.isRegularFile(filePath)) {
+//                System.out.println(filePath);
+//            }
+//        });
+    }
+
 }

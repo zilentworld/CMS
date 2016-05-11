@@ -16,7 +16,7 @@
 			<result-type name="tiles"
 				class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
-		
+
 		<global-results>
 			<result name="next" type="redirectAction">
 				<param name="actionName">actionForward</param>
@@ -34,20 +34,28 @@
 		<action name="ContactUs" class="cmsNavAction" method="showContactUs">
 			<result name="success" type="tiles">main-contactUs</result>
 		</action>
-
 		<action name="Account" class="cmsNavAction" method="showAccount">
 			<result name="login" type="tiles">main-register-login</result>
 			<result name="success" type="tiles">main-account</result>
 		</action>
+		<action name="checkAccount" class="cmsNavAction" method="checkAccount">
+			<result name="login" type="tiles">main-register-login</result>
+			<result name="success" type="redirect">Account</result>
+		</action>
 		<action name="processRegister" class="registerCms">
 			<result name="error" type="tiles">main-register-login</result>
 			<result name="input" type="tiles">main-register-login</result>
-			<result name="success" type="tiles">main-account</result>
+			<!--<result name="success" type="tiles">main-account</result>-->
+			<result name="success">${sourcePage}</result>
+			<!--<result name="success" type="redirect">${sourcePage}</result>-->
 		</action>
 		<action name="processLogin" class="loginAction">
 			<result name="error" type="tiles">main-register-login</result>
 			<result name="input" type="tiles">main-register-login</result>
-			<result name="success" type="tiles">main-account</result>
+			<result name="success">${sourcePage}</result>
+			<!--<result name="success" type="redirect">${sourcePage}</result>-->
+			<!--<result name="success" type="redirect">Account</result>-->
+			<!--<result name="success" type="tiles">main-account</result>-->
 		</action>
 		<action name="SiteList" class="cmsAccountAction" method="showSiteList">
 			<result name="success" type="tiles">main-account-siteList</result>
@@ -78,13 +86,26 @@
 			<result name="input">EditUser</result>
 			<!--<result name="input" type="tiles">main-account-editUser</result>-->
 			<!--<result name="success">UserList</result>-->
-			<result name="success">${sourcePage}</result>
+			<result name="success" type="redirect">${sourcePage}</result>
 		</action>
 		<action name="Logout" class="loginAction" method="processLogout">
 			<result name="success" type="tiles">main-welcome</result>
 		</action>
-		<action name="showTemplate" class="newBlogSite" method="showTemplate">
+		<action name="TemplateList" class="createSiteAction" method="showTemplate">
 			<result name="success" type="tiles">main-template</result>
+		</action>
+		<action name="PickTemplate" class="createSiteAction" method="pickTemplate">
+			<result name="success">EnterUrl</result>
+		</action>
+		<action name="EnterUrl" class="createSiteAction" method="showUrlEntry">
+			<result name="success" type="tiles">main-enterUrl</result>
+		</action>
+		<action name="ConfirmUrl" class="createSiteAction" method="processUrl">
+			<result name="login" type="tiles">main-register-login</result>
+			<result name="success">ProcessNewSite</result>
+		</action>
+		<action name="ProcessNewSite" class="createSiteAction" method="processNewSite">
+			<result name="success" type="redirect">UserSites</result>
 		</action>
 
 

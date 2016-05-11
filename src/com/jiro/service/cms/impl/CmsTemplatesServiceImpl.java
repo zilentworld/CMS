@@ -23,7 +23,7 @@ public class CmsTemplatesServiceImpl implements CmsTemplatesService {
     
 
     @Override
-    public CmsTemplates get(long templateId) {
+    public CmsTemplates getById(long templateId) {
         return cmsTemplatesDao.get(templateId);
     }
 

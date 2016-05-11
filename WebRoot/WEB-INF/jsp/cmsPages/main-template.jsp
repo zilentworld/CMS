@@ -8,7 +8,7 @@
             </h3>
         </s:if>
     </s:div>
-    <s:div class="border template-outer">
+    <s:div class="template-outer">
         <h2 class="h2-mainTemplate">
             Pick a template
         </h2>
@@ -43,7 +43,7 @@
     $(document).ready(function () {
         $("img").click(function () {
             $("#templateFrm #imgSrc").val($(this).attr('src'));
-            $("#templateFrm").attr('action', 'pickTemplate');
+            $("#templateFrm").attr('action', 'PickTemplate');
             $("#templateFrm").submit();
         });
     });

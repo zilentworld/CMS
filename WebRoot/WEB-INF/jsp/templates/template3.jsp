@@ -7,13 +7,14 @@
 <meta charset="UTF-8">
 <title>Title</title>
 </head>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/generationBaseFiles/css/template3.css" />
 <body>
 	<s:div id="site-wrapper">
 		template3
 		<s:property value="#blogSiteUrl" />
 		<s:div>
 			<s:div>
-				<s:div style="width:100%; height: 50%; text-align: center;">
+				<s:div class="outer-banner">
 					<s:div id="banner">
 						<s:div id="banner-img">
 							<tiles:insertAttribute name="banner" ignore="true" />
@@ -21,16 +22,15 @@
 					</s:div>
 				</s:div>
 				<s:div>
-					<s:div
-						style="position:absolute; min-width:60%; margin-left:20%; margin-right:20%;">
-						<s:div style="float:right;">
+					<s:div class="main-content">
+						<s:div class="float-right">
 							<s:div id="header">
-								<s:div id="header-buttons" style="margin-top:5px">
+								<s:div id="header-buttons" class="header-buttons">
 									<tiles:insertAttribute name="header" ignore="true" />
 								</s:div>
 							</s:div>
 						</s:div>
-						<s:div style="clear:both;">
+						<s:div class="clear">
 						</s:div>
 						<s:div id="body">
 							<tiles:insertAttribute name="body" />
@@ -49,8 +49,8 @@
 		}
 		function toggleHidden(divId) {
 			var theDiv = document.getElementById(divId);
-			theDiv.style.display = (theDiv.style.display == 'none' ? 'block'
-					: 'none');
+			theDiv.style.display = (theDiv.style.display == 'block' ? 'none'
+					: 'block');
 			return false;
 		}
 	</script>
