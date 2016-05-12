@@ -6,6 +6,12 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by dev-pc on 5/4/16.
@@ -14,7 +20,7 @@ public class CmsFileController {
 
     private static String realPath;
 
-    public static  String getRealPath() {
+    public static String getRealPath() {
         return realPath;
     }
 
@@ -114,11 +120,67 @@ public class CmsFileController {
     }
 
     public static void createSiteInitialFiles(CmsUserSite cmsUserSite) {
-//        Files.walk(Paths.get("/home/you/Desktop")).forEach(filePath -> {
-//            if (Files.isRegularFile(filePath)) {
-//                System.out.println(filePath);
-//            }
-//        });
+        System.out.println("cmsFileController:createSiteInitialFiles:");
+        String templateName = cmsUserSite.getCmsTemplates().getTemplateName();
+        String siteName = cmsUserSite.getBlogUrl();
+        File templatePath = new File(realPath + Constants.CMS_PATH_TO_DEFAULT_FILES + templateName);
+        File pendingPath = new File(Constants.CMS_PATH_TO_PENDING + siteName);
+        //copy from sitePages
+        try {
+            FileUtils.copyDirectory(templatePath, pendingPath, false);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
+    public static List<File> getAllFiles(CmsUserSite cmsUserSite) {
+//        System.out.println("getAllFiles:");
+        String siteUrl = cmsUserSite.getBlogUrl();
+//        System.out.println("getAllFiles:siteUrl:"+siteUrl);
+        String currPath = cmsUserSite.getIsPublished() == 1 ?
+                Constants.CMS_PATH_TO_PUBLISHED : Constants.CMS_PATH_TO_PENDING;
+//        System.out.println("getAllFiles:currPath:"+currPath);
+        String sitePath = currPath + siteUrl;
+//        System.out.println("getAllFiles:sitePath:"+sitePath);
+        List<File> allFiles = new ArrayList<>();
+        try {
+            Files.walk(Paths.get(sitePath)).forEach(filePath -> {
+                System.out.println("in loop:filePath:"+filePath.toString());
+//                if (Files.isRegularFile(filePath)) {
+                if (filePath.toFile().isFile()) {
+                    System.out.println("add to list");
+                    allFiles.add(filePath.toFile());
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("getAllFiles:allFiles:"+allFiles.size());
+        return allFiles;
+    }
+
+    public static File getByFileName(CmsUserSite cmsUserSite, String filename) {
+        String siteUrl = cmsUserSite.getBlogUrl();
+        String currPath = cmsUserSite.getIsPublished() == 1 ?
+                Constants.CMS_PATH_TO_PUBLISHED : Constants.CMS_PATH_TO_PENDING;
+        String sitePath = currPath + siteUrl;
+
+        try {
+            Iterator<Path> iterator = Files.walk(Paths.get(sitePath)).iterator();
+            while(iterator.hasNext()) {
+                Path p = iterator.next();
+                File file = p.toFile();
+                if (file.isFile()) {
+                    if(file.getName().equals(filename)) {
+                        return file;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }

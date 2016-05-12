@@ -5,15 +5,17 @@ public final class Constants {
     //CMS Paths
     public static final String CMS_PATH_TO_PENDING = "/home/dev-pc/CMS/pending/";
     public static final String CMS_PATH_TO_PUBLISHED = "/home/dev-pc/CMS/published/";
-    public static final String CMS_PATH_TO_HTML = "/web/html/";
-    public static final String CMS_PATH_TO_CSS = "/web/css/";
-    public static final String CMS_PATH_TO_IMAGES = "/web/images/";
     public static final String CMS_PATH_TO_SITE = "/WEB-INF/jsp/sitePages/";
     public static final String CMS_PATH_TO_TEMPLATES = "/WEB-INF/jsp/templates/";
-    public static final String CMS_PATH_TO_TILES = "/WEB-INF/tiles.xml";
     public static final String CMS_PATH_TO_GENERATED = "/WEB-INF/jsp/generated/";
-    public static final String CMS_PATH_TO_TEMPLATE_CSS = "/css/template-css/";
+
+    //Default Site Paths
+    public static final String CMS_PATH_TO_DEFAULT_FILES = "/siteDefaultFiles/";
+    public static final String CMS_PATH_TO_DEFAULT_HTML = "/html/";
+    public static final String CMS_PATH_TO_DEFAULT_CSS = "/css/";
     public static final String CMS_PATH_TO_DEFAULT_IMAGES = "/images/";
+    public static final String CMS_PATH_TO_DEFAULT_JS = "/js/";
+
     
     //CMS Session Attributes
     public static final String CMS_SESSION_CMS_USER = "cms_user";

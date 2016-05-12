@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Title</title>
 </head>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/generationBaseFiles/css/template3.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/generationBaseFiles/css/template3/template.css" />
 <body>
 	<s:div id="site-wrapper">
 		template3

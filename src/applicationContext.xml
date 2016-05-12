@@ -177,6 +177,10 @@
         <property name="cmsUserService" ref="cmsUserService" />
     </bean>
 
+    <bean id="cmsFileManageAction" class="com.jiro.action.cms.CmsFileManageAction" scope="prototype">
+        <property name="cmsUserSiteService" ref="cmsUserSiteService" />
+    </bean>
+
     <!-- 	settings -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
     <tx:annotation-driven proxy-target-class="true"/>

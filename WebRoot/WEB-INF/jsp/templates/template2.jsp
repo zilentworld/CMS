@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/generationBaseFiles/css/template2.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/generationBaseFiles/template2/css/template.css" />
 <body>
 <s:div id="site-wrapper">
 	<s:div>

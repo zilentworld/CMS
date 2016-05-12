@@ -1,6 +1,7 @@
 .border {
     border: 1px solid black;
 }
+
 .template {
     height: 45vh;
     width: 44vh;
@@ -8,36 +9,42 @@
     margin: 1%;
     cursor: pointer;
 }
+
 .right-open {
     margin-right: 5px;
 }
+
 .ov-hidden {
     overflow: hidden;
 }
+
 .h2-mainTemplate, .h3-mainTemplate {
     text-align: center;
 }
+
 .template-outer {
     height: 100%;
     width: 100%;
     /*position:absolute;*/
-    top:0;
+    top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     margin: auto;
 }
+
 .message-outer {
-    border:1px solid black;
-    height:600px;
-    width:1000px;
-    position:absolute;
-    top:0;
+    border: 1px solid black;
+    height: 600px;
+    width: 1000px;
+    position: absolute;
+    top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     margin: auto;
 }
+
 .welcome-msg {
     top: 0;
     bottom: 260px;
@@ -47,6 +54,7 @@
     margin-left: auto;
     margin-top: 10vh;
 }
+
 .create-label {
     border: 1px solid black;
     height: 75px;
@@ -57,12 +65,13 @@
     margin-top: 10vh;
     cursor: pointer;
 }
+
 .outside {
-    border:1px solid black;
-    height:90vh;
-    width:150vh;
-    position:absolute;
-    top:0;
+    border: 1px solid black;
+    height: 90vh;
+    width: 150vh;
+    position: absolute;
+    top: 0;
     bottom: 0;
     left: 0;
     right: 0;
@@ -70,57 +79,70 @@
     min-height: 800px;
     min-width: 800px;
 }
+
 .inner {
     border-top: solid black 1px;
     height: 83vh;
     width: 100%;
 }
+
 .header {
     height: 7vh;
     width: 100%;
 }
+
 .header-buttons {
     float: right;
     margin-top: 2.5vh;
     margin-right: 5vh;
 }
+
 .header-name {
     float: left;
     margin-top: 2.5vh;
     margin-left: 5vh;
 }
+
 .header-button {
     float: left;
 }
+
 .contactUs-msg {
-    width:400px;
-    height:30px;
-    position:absolute;
-    top:0;
+    width: 400px;
+    height: 30px;
+    position: absolute;
+    top: 0;
     bottom: 260px;
     left: 0;
     right: 0;
     margin: auto;
 }
+
 .account-header-tab {
     height: 5vh;
     min-height: 35px;
 }
+
 .account-headers {
     float: right;
     margin-top: 2.5vh;
     margin-right: 5vh;
 }
+
 .account-header {
     float: left;
 }
+
 .account-content {
     border-top: 1px solid black;
     overflow: auto;
+    max-height: 78vh;
 }
+
 .account-outer {
     height: 100%;
 }
+
 .register {
     width: 68vh;
     height: 28vh;
@@ -148,9 +170,59 @@
     margin-top: 3vh;
     margin-left: 3vh;
 }
+
 .account-content-inner {
     margin: 4vh;
     width: 95%;
-    height: 95%;
+    max-height: 70vh;
     overflow: auto;
+
+}
+
+.about-msg {
+    width: 400px;
+    height: 30px;
+    position: absolute;
+    top: 0;
+    bottom: 260px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.margin3 {
+    margin: 3%;
+}
+
+.cms-title-div {
+    text-align: center;
+}
+
+.cms-search-div {
+    align-content: center;
+}
+
+.cms-files-div {
+    /*margin: 3% auto 0;*/
+    /*width: 80%;*/
+    margin-top: 3%;
+    text-align: center;
+    height: 57vh;
+    overflow: auto;
+}
+
+.cms-search-div-inner {
+    margin: 0px auto;
+    width: 50%;
+}
+
+.cms-buttons {
+    float: right;
+    margin-top: 2vh ;
+}
+
+#searchParameter {
+    max-width: 90%;
+    min-width: 70%;
+    width: 70vh;
 }

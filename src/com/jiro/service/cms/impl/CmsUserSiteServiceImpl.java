@@ -1,5 +1,6 @@
 package com.jiro.service.cms.impl;
 
+import com.jiro.cms.CmsFileController;
 import com.jiro.model.cms.CmsUser;
 import com.jiro.service.cms.CmsTemplatesService;
 import com.jiro.service.cms.CmsUserService;
@@ -122,6 +123,8 @@ public class CmsUserSiteServiceImpl implements CmsUserSiteService {
         cmsUserSite.setIsPublished(0);
         System.out.println("createNewCmsUserSite:saveNewUserSite:");
         saveNewUserSite(cmsUserSite);
+        System.out.println("createNewCmsUserSite:createSiteInitialFiles");
+        CmsFileController.createSiteInitialFiles(cmsUserSite);
 
         return cmsUserSite;
     }

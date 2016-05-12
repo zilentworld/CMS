@@ -33,6 +33,8 @@ public class CmsTemplates {
     private Set<CmsUserSite> cmsUserSites;
     @Column(name="template_baselayout")
     private String templateBaselayout;
+    @Column(name="css_file")
+    private String cssFile;
     
     public String getDefaultFooterImg() {
         return defaultFooterImg;
@@ -87,5 +89,11 @@ public class CmsTemplates {
     }
     public void setTemplateBaselayout(String templateBaselayout) {
         this.templateBaselayout = templateBaselayout;
+    }
+    public String getCssFile() {
+        return cssFile;
+    }
+    public void setCssFile(String cssFile) {
+        this.cssFile = cssFile;
     }
 }
