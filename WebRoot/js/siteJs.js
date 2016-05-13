@@ -1,6 +1,3 @@
-/**
- * Created by dev-pc on 5/11/16.
- */
 function callAction(action) {
     window.location = action;
 }

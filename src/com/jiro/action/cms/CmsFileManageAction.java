@@ -6,11 +6,10 @@ import com.jiro.cms.CmsFileController;
 import com.jiro.model.cms.CmsUserSite;
 import com.jiro.service.cms.CmsUserSiteService;
 import com.opensymphony.xwork2.ActionSupport;
-import org.apache.commons.io.IOUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,6 +24,33 @@ public class CmsFileManageAction extends ActionSupport {
     private String fileName;
     private String fileContent;
     private File file;
+    private String filePath;
+    private String searchFile;
+    private String newFileName;
+
+    public String getNewFileName() {
+        return newFileName;
+    }
+
+    public void setNewFileName(String newFileName) {
+        this.newFileName = newFileName;
+    }
+
+    public String getSearchFile() {
+        return searchFile;
+    }
+
+    public void setSearchFile(String searchFile) {
+        this.searchFile = searchFile;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
 
     public String getFileContent() {
         return fileContent;
@@ -75,33 +101,70 @@ public class CmsFileManageAction extends ActionSupport {
     }
 
     public String showCMS() {
-        System.out.println("cmsFileManageAction:showCMS:cmsUserSiteId:"+cmsUserSiteId);
+        System.out.println("cmsFileManageAction:showCMS:cmsUserSiteId:" + cmsUserSiteId);
         cmsUserSite = cmsUserSiteService.getById(cmsUserSiteId);
         fileList = CmsFileController.getAllFiles(cmsUserSite);
-
-        System.out.println("showCMs::spw");
-        fileList.forEach(e -> {
-            System.out.println(e.getName());
-            System.out.println(e.getPath());
-            System.out.println(e.getParent());
-            System.out.println(e.getParent().substring(e.getParent().lastIndexOf('/')));
-        });
 
         return SUCCESS;
     }
 
     public String showEditFile() {
-        System.out.println("cmsFileManageAction:showEditFile:fileName:"+fileName);
-        System.out.println("cmsFileManageAction:showEditFile:cmsUserSiteId:"+cmsUserSiteId);
+        System.out.println("cmsFileManageAction:showEditFile:fileName:" + fileName);
+        System.out.println("cmsFileManageAction:showEditFile:cmsUserSiteId:" + cmsUserSiteId);
         cmsUserSite = cmsUserSiteService.getById(cmsUserSiteId);
         file = CmsFileController.getByFileName(cmsUserSite, fileName);
+        updateFileContent(file);
+
+        return SUCCESS;
+    }
+
+    public String saveCMS() {
+        System.out.println("saveCMS:");
+        System.out.println(fileContent);
+        System.out.println("cmsFileManageAction:saveCMS:fileName:" + fileName);
+        System.out.println("cmsFileManageAction:saveCMS:cmsUserSiteId:" + cmsUserSiteId);
+
+        return SUCCESS;
+    }
+
+    public String showPreview() {
+        System.out.println("cmsFileManageAction:showPreview:fileName:" + fileName);
+        System.out.println("cmsFileManageAction:showPreview:cmsUserSiteId:" + cmsUserSiteId);
+        cmsUserSite = cmsUserSiteService.getById(cmsUserSiteId);
+        file = CmsFileController.getByFileName(cmsUserSite, fileName);
+        filePath = file.getPath();
+        System.out.println("cmsFileManageAction:showPreview:filePath:" + filePath);
+        updateFileContent(file);
+        System.out.println("cmsFileManageAction:showPreview:fileContent:" + fileContent);
+
+        return SUCCESS;
+    }
+
+    public String showFilteredCMS() {
+        System.out.println("cmsFilemanageAction:showFilteredCms:cmsUserSiteId:"+cmsUserSiteId);
+        cmsUserSite = cmsUserSiteService.getById(cmsUserSiteId);
+        fileList = new ArrayList<>();
+        if(searchFile != null && searchFile.length() > 0)
+            fileList.add(CmsFileController.getByFileName(cmsUserSite, searchFile));
+        else
+            fileList = CmsFileController.getAllFiles(cmsUserSite);
+
+        return SUCCESS;
+    }
+
+    private void updateFileContent(File file) {
         try {
+            /*List<String> contentList = Files.readLines(file, Charsets.UTF_8);
+            StringBuffer sb = new StringBuffer();
+            contentList.forEach(e -> sb.append(e));
+
+            fileContent = sb.toString();*/
+
             fileContent = Files.toString(file, Charsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return SUCCESS;
     }
 
 }

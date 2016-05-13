@@ -30,6 +30,9 @@
     <definition name="main-enterUrl" extends="main-layout">
         <put-attribute name="content" value="/WEB-INF/jsp/cmsPages/main-enterUrl.jsp" />
     </definition>
+    <definition name="main-addFile" extends="main-layout">
+        <put-attribute name="content" value="/WEB-INF/jsp/cmsPages/main-cms-addFile.jsp" />
+    </definition>
 
     <!--account-->
     <definition name="main-account" extends="main-layout">

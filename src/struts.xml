@@ -113,6 +113,27 @@
 		<action name="EditFile" class="cmsFileManageAction" method="showEditFile">
 			<result name="success" type="tiles">main-editfile</result>
 		</action>
+		<action name="FilterCMS" class="cmsFileManageAction" method="showFilteredCMS">
+			<result name="success" type="tiles">main-cms</result>
+		</action>
+		<action name="saveCMS" class="cmsFileManageAction" method="saveCMS">
+			<result name="success" type="chain">
+				<param name="actionName">CMS</param>
+				<param name="cmsUserSiteId">${cmsUserSiteId}</param>
+			</result>
+		</action>
+		<action name="AddNewFile" class="cmsAddNewFileAction" method="showAddFile">
+			<result name="success" type="tiles">main-addFile</result>
+		</action>
+		<action name="doAddNewFile" class="cmsAddNewFileAction" method="addNewFile">
+			<result name="success" type="redirectAction">
+				<param name="actionName">CMS</param>
+				<param name="cmsUserSiteId">${cmsUserSiteId}</param>
+			</result>
+		</action>
+		<action name="Preview" class="cmsFileManageAction" method="showPreview">
+			<result name="success">/WEB-INF/jsp/cmsPages/main-preview.jsp</result>
+		</action>
 
 
 

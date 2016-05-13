@@ -226,3 +226,11 @@
     min-width: 70%;
     width: 70vh;
 }
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}

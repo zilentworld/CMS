@@ -119,15 +119,50 @@ public class CmsFileController {
         }
     }
 
+    public static void addNewFile(CmsUserSite cmsUserSite, String newFilename) {
+        System.out.println("cmsFileController:addNewFile:");
+        String templateName = cmsUserSite.getCmsTemplates().getTemplateName();
+        String siteName = cmsUserSite.getBlogUrl();
+        String currPath = cmsUserSite.getIsPublished() == 1 ?
+                Constants.CMS_PATH_TO_PUBLISHED : Constants.CMS_PATH_TO_PENDING;
+        File templatePath = new File(realPath + Constants.CMS_PATH_TO_DEFAULT_FILES + templateName);
+        File pendingPath = new File(currPath + siteName + "/html");
+        File baseFile = new File(templatePath + "/html/base.html");
+        File baseFilePending = new File(pendingPath + "/base.html");
+        File newFile = new File(pendingPath + "/" + newFilename + ".html");
+        try {
+            System.out.println("paths:");
+            System.out.println("templatePath:" + templatePath.getPath());
+            System.out.println("baseFile:" + baseFile.getPath());
+            System.out.println("pendingPath:" + pendingPath.getPath());
+            System.out.println("baseFilePending:" + baseFilePending.getPath());
+            System.out.println("newFile:" + newFile.getPath());
+            FileUtils.copyFileToDirectory(baseFile, pendingPath, false);
+            FileUtils.moveFile(baseFilePending, newFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteFile(CmsUserSite cmsUserSite, String fileName) {
+        String currPath = cmsUserSite.getIsPublished() == 1 ?
+                Constants.CMS_PATH_TO_PUBLISHED : Constants.CMS_PATH_TO_PENDING;
+        String siteName = cmsUserSite.getBlogUrl();
+        File fileToDelete = new File(currPath + siteName + "/html/" + fileName);
+    }
+
     public static void createSiteInitialFiles(CmsUserSite cmsUserSite) {
         System.out.println("cmsFileController:createSiteInitialFiles:");
         String templateName = cmsUserSite.getCmsTemplates().getTemplateName();
         String siteName = cmsUserSite.getBlogUrl();
         File templatePath = new File(realPath + Constants.CMS_PATH_TO_DEFAULT_FILES + templateName);
         File pendingPath = new File(Constants.CMS_PATH_TO_PENDING + siteName);
+        File baseFile = new File(Constants.CMS_PATH_TO_PENDING + siteName + "/html/base.html");
         //copy from sitePages
         try {
             FileUtils.copyDirectory(templatePath, pendingPath, false);
+            //remove base.html
+            FileUtils.deleteQuietly(baseFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -172,7 +207,8 @@ public class CmsFileController {
                 Path p = iterator.next();
                 File file = p.toFile();
                 if (file.isFile()) {
-                    if(file.getName().equals(filename)) {
+                    if(file.getName().toLowerCase().contains(filename.toLowerCase())) {
+                        System.out.println("getByFilename:file:filePath:"+file.getPath());
                         return file;
                     }
                 }
@@ -181,6 +217,16 @@ public class CmsFileController {
             e.printStackTrace();
         }
 
+        System.out.println("getByFileName:null:");
         return null;
+    }
+
+    public static boolean checkIfFileExists(CmsUserSite cmsUserSite, String filename) {
+        String htmlFileName = filename + ".html";
+        String currPath = cmsUserSite.getIsPublished() == 1 ?
+                Constants.CMS_PATH_TO_PUBLISHED : Constants.CMS_PATH_TO_PENDING;
+        File checkFile = new File(currPath + htmlFileName);
+
+        return Files.isRegularFile(checkFile.toPath());
     }
 }

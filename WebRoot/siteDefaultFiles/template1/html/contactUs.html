@@ -4,14 +4,130 @@
     <meta charset="UTF-8">
     <title>Home</title>
 </head>
-<link rel="stylesheet" type="text/css" href="../css/template.css"/>
+<style>
+    .site-whole {
+        height: 100%;
+        width: 100%;
+    }
+
+    .site-container {
+        min-width: 80%;
+        max-width: 90%;
+        position: absolute;
+        left: 5%;
+        right: 5%;
+        border: 1px solid black;
+        background-color: white;
+    }
+
+    .margin1 {
+        margin: 1%;
+    }
+
+    .margin5 {
+        margin: 5%;
+    }
+
+    .headers {
+        min-height: 5%;
+    }
+
+    .header-buttons {
+        min-height: 10px;
+    }
+
+    .clear {
+        clear: both;
+    }
+
+    .body-content {
+        height: 70%;
+    }
+
+    .main-content {
+        min-width: 70%;
+        width: 85%;
+        max-width: 85%;
+        float: left;
+    }
+
+    .main-inner {
+        width: 90%;
+        height: 90%;
+        clear: both;
+        margin: 1%;
+    }
+
+    .side-content {
+        min-width: 10%;
+        max-width: 15%;
+        float: left;
+    }
+
+    .archive-content {
+        margin: 3%;
+        min-height: 30%;
+    }
+
+    .footer-content {
+        clear: both;
+        height: 5%;
+    }
+
+    .banner-img {
+        height: 100%;
+        width: 100%;
+    }
+
+    .footer-img {
+
+        height: 100%;
+        width: 100%;
+    }
+
+    .float-left {
+        float: left;
+    }
+
+    .float-right {
+        float: right;
+    }
+
+    .blog-title {
+        min-width: 400px;
+    }
+
+    .blog-content {
+        width: 600px;
+        height: 300px;
+        max-width: 1100px;
+    }
+
+    .site-post-content {
+        word-wrap: break-word;
+        overflow: hidden;
+    }
+
+    .comment-textarea {
+        width: 320px;
+        height: 90px;
+    }
+
+    .display-block {
+        display: block;
+    }
+
+    .display-none {
+        display: none;
+    }
+</style>
 <body>
 <div id="site_whole" class="site-whole">
     <div id="site-container" class="site-container">
         <div id="banner">
             <div id="banner-img">
                 <div>
-                    <img src="../images/banner.jpg" class="banner-img" />
+                    <img src="http://i.imgur.com/zOa0aeH.jpg" class="banner-img" />
                 </div>
             </div>
         </div>
@@ -20,21 +136,24 @@
             <div id="headers" class="headers">
                 <div id="header-buttons" class="header-buttons">
                     <div class="float-right">
-                        <form id="header_form">
-                            <div id="home" class="float-left">
-                                <button type="submit" onclick="form.action='url'; form.submit();">
-                                    Home
-                                </button>
-                            </div>
-                            <div id="login" class="float-left">
-                                <button type="submit" id="banner_login_btn" onclick="form.action='login'; form.submit();">
-                                    Login
-                                </button>
-                            </div>
-                            <div class="float-right">
-                                &nbsp;
-                            </div>
-                        </form>
+                        <div id="home" class="float-left">
+                            <button>
+                                Home
+                            </button>
+                        </div>
+                        <div id="about" class="float-left">
+                            <button>
+                                About
+                            </button>
+                        </div>
+                        <div id="contactUs" class="float-left">
+                            <button>
+                                Contact Us
+                            </button>
+                        </div>
+                        <div class="float-right">
+                            &nbsp;
+                        </div>
                     </div>
                 </div>
             </div>
@@ -58,9 +177,28 @@
                 </div>
             </div>
             <hr class="clear" />
+            <div id="footer-content" class="footer-content">
+                <div id="footer">
+                    <div>
+                        <img src="http://i.imgur.com/sBEvUtP.png" class="banner-img" />
+                    </div>
+                </div>
+            </div>
+            <hr class="clear" />
         </div>
     </div>
 </div>
-<script src="../js/siteJs.js" />
+<script>
+    function callAction(action) {
+        window.location = action;
+    }
+    function toggleHidden(divId) {
+        var theDiv = document.getElementById(divId);
+        theDiv.style.display = (theDiv.style.display == 'block' ? 'none'
+                : 'block');
+        return false;
+    }
+
+</script>
 </body>
 </html>

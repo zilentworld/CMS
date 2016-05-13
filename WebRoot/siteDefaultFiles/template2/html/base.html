@@ -4,7 +4,89 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<link rel="stylesheet" type="text/css" href="../css/template.css"/>
+<style>
+    .outer {
+        margin: 1%;
+        overflow-x: hidden;
+    }
+
+    .sidebar {
+        width: 20%;
+        float: left;
+        border: 1px solid black;
+    }
+
+    .archive-content {
+        margin: 3%;
+        min-height: 30%;
+    }
+
+    .main-content {
+        margin-left: 2%;
+        margin-bottom: 2%;
+        width: 75%;
+        float: left;
+    }
+
+    .border {
+        border: 1px solid black;
+    }
+
+    .footer {
+        margin-top: 10px;
+    }
+
+    .banner-img {
+        height: 100%;
+        width: 100%;
+    }
+
+    .footer-img {
+
+        height: 100%;
+        width: 100%;
+    }
+
+    .float-right {
+        float: right;
+    }
+
+    .float-left {
+        float: left;
+    }
+
+    .blog-title {
+        min-width: 400px;
+    }
+
+    .blog-content {
+        width: 600px;
+        height: 300px;
+        max-width: 1100px;
+    }
+
+    .clear {
+        clear: both;
+    }
+
+    .site-post-content {
+        word-wrap: break-word;
+        overflow: hidden;
+    }
+
+    .comment-textarea {
+        width: 320px;
+        height: 90px;
+    }
+
+    .display-block {
+        display: block;
+    }
+
+    .display-none {
+        display: none;
+    }
+</style>
 <body>
 <div id="site-wrapper">
     <div>
@@ -13,21 +95,24 @@
                 <div id="header">
                     <div id="header-buttons">
                         <div class="float-right">
-                            <form id="header_form">
-                                <div id="home" class="float-left">
-                                    <button type="submit" onclick="form.action='url'; form.submit();">
-                                        Home
-                                    </button>
-                                </div>
-                                <div id="login" class="float-left">
-                                    <button type="submit" id="banner_login_btn" onclick="form.action='login'; form.submit();">
-                                        Login
-                                    </button>
-                                </div>
-                                <div class="float-right">
-                                    &nbsp;
-                                </div>
-                            </form>
+                            <div id="home" class="float-left">
+                                <button>
+                                    Home
+                                </button>
+                            </div>
+                            <div id="about" class="float-left">
+                                <button>
+                                    About
+                                </button>
+                            </div>
+                            <div id="contactUs" class="float-left">
+                                <button>
+                                    Contact Us
+                                </button>
+                            </div>
+                            <div class="float-right">
+                                &nbsp;
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -40,7 +125,7 @@
                     <div id="banner">
                         <div id="banner-img">
                             <div>
-                                <img src="../images/banner.jpg" class="banner-img" />
+                                <img src="http://i.imgur.com/lJ9Qvoc.jpg" class="banner-img" />
                             </div>
                         </div>
                     </div>
@@ -53,7 +138,7 @@
                 <div id="footer" class="border footer">
                     <div id="footer-content">
                         <div>
-                            <img src="../images/footer.png" />
+                            <img src="http://i.imgur.com/mU5HE0f.png" class="banner-img" />
                         </div>
                     </div>
                 </div>
@@ -61,6 +146,16 @@
         </div>
     </div>
 </div>
-<script src="../js/siteJs.js" />
+<script>
+    function callAction(action) {
+        window.location = action;
+    }
+    function toggleHidden(divId) {
+        var theDiv = document.getElementById(divId);
+        theDiv.style.display = (theDiv.style.display == 'block' ? 'none'
+                : 'block');
+        return false;
+    }
+</script>
 </body>
 </html>

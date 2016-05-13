@@ -50,7 +50,7 @@
                         <th>
                             Site Owner
                         </th>
-                        <th colspan="3">
+                        <th>
                             Action
                         </th>
                     </tr>
@@ -64,11 +64,9 @@
                             </td>
                             <td>
                                 <s:submit class="CMS" hidden-data="%{cmsUserSiteId}" type="button" theme="simple" value="CMS"/>
-                            </td>
-                            <td>
-                                <s:submit type="button" theme="simple" value="Preview"/>
-                            </td>
-                            <td>
+                            <%--<td>--%>
+                                <%--<s:submit class="CMS" hidden-data="%{cmsUserSiteId}" type="button" theme="simple" value="Preview"/>--%>
+                            <%--</td>--%>
                                 <s:submit type="button" theme="simple" value="Publish"/>
                             </td>
                         </tr>
@@ -87,6 +85,14 @@
             var id = $(this).attr('hidden-data');
             hiddenField.val(id);
             form.attr('action','CMS');
+            form.submit();
+        });
+        $(".previewCMS").click(function () {
+            var hiddenField = $("#cmsUserSiteId");
+            var form = $("#userSiteForm");
+            var id = $(this).attr('hidden-data');
+            hiddenField.val(id);
+            form.attr('action', 'Preview');
             form.submit();
         });
     });
