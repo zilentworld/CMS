@@ -134,6 +134,12 @@
 		<action name="Preview" class="cmsFileManageAction" method="showPreview">
 			<result name="success">/WEB-INF/jsp/cmsPages/main-preview.jsp</result>
 		</action>
+		<action name="DeleteFile" class="cmsFileManageAction" method="deleteFile">
+			<result name="success" type="chain">
+				<param name="actionName">CMS</param>
+				<param name="cmsUserSiteId">${cmsUserSiteId}</param>
+			</result>
+		</action>
 
 
 

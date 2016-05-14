@@ -152,6 +152,15 @@ public class CmsFileManageAction extends ActionSupport {
         return SUCCESS;
     }
 
+    public String deleteFile() {
+        System.out.println("cmsFilemanageAction:deleteFile:cmsUserSiteId:"+cmsUserSiteId);
+        System.out.println("cmsFilemanageAction:deleteFile:fileName:"+fileName);
+        cmsUserSite = cmsUserSiteService.getById(cmsUserSiteId);
+        CmsFileController.deleteFile(cmsUserSite, fileName);
+
+        return SUCCESS;
+    }
+
     private void updateFileContent(File file) {
         try {
             /*List<String> contentList = Files.readLines(file, Charsets.UTF_8);

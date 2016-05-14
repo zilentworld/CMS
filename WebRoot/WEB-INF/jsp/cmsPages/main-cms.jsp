@@ -45,6 +45,7 @@
                                 <s:set var="parent" value="%{getParent()}"/>
                                 <s:set var="parentFolder" value="parent.substring(parent.lastIndexOf('/'))"/>
                                 <s:property value="#parentFolder"/>
+                                <s:property value="%{getPath()}"/>
                             </td>
                             <td>
                                 <s:submit class="Edit" hidden-data="%{#filename}" type="button" value="Edit" theme="simple"/>
@@ -82,6 +83,14 @@
             var id = $(this).attr('hidden-data');
             hiddenField.val(id);
             form.attr('action', 'Preview');
+            form.submit();
+        });
+        $(".Delete").click(function () {
+            var hiddenField = $("#fileName");
+            var form = $("#filesForm");
+            var id = $(this).attr('hidden-data');
+            hiddenField.val(id);
+            form.attr('action', 'DeleteFile');
             form.submit();
         });
         $("#addFile").click(function () {

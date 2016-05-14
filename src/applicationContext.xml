@@ -198,7 +198,7 @@
           abstract="false" lazy-init="default" autowire="default"
           p:url="jdbc:mysql://localhost:3306/cms"
           p:driverClassName="com.mysql.jdbc.Driver" p:username="root"
-          p:password="12345">
+          p:password="123456">
     </bean>
 
     <bean id="transactionManager"

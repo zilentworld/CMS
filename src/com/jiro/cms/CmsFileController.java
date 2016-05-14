@@ -2,6 +2,7 @@ package com.jiro.cms;
 
 import com.jiro.model.cms.CmsUserSite;
 import com.jiro.utility.Constants;
+import com.jiro.utility.Utility;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -32,7 +33,7 @@ public class CmsFileController {
         System.out.println("getRealPath:" + realPath);
 
         //copy the sitePages to the ~/pending/<siteUrl>/
-        String pathToSitePending = Constants.CMS_PATH_TO_PENDING + cmsUserSite.getBlogUrl() + "/";
+        String pathToSitePending = Constants.getPendingPath() + cmsUserSite.getBlogUrl() + "/";
         String templateFileName = cmsUserSite.getCmsTemplates().getTemplateBaselayout();
 
         //copy the latest files
@@ -40,10 +41,10 @@ public class CmsFileController {
     }
 
     public static void publishSite(CmsUserSite cmsUserSite) {
-        String pathToSitePending = Constants.CMS_PATH_TO_PENDING + cmsUserSite.getBlogUrl() + "/";
+        String pathToSitePending = Constants.getPendingPath() + cmsUserSite.getBlogUrl() + "/";
         File sitePending = new File(pathToSitePending);
         File generatedPath = new File(realPath + Constants.CMS_PATH_TO_GENERATED);
-        File sitePublished = new File(Constants.CMS_PATH_TO_PUBLISHED);
+        File sitePublished = new File(Constants.getPublishPath());
 
         try {
             //copy from pending to generated
@@ -58,7 +59,7 @@ public class CmsFileController {
     public static void updatePublishedSite(CmsUserSite cmsUserSite) {
 
         try {
-            String pathToSitePublished = Constants.CMS_PATH_TO_PUBLISHED + cmsUserSite.getBlogUrl() + "/";
+            String pathToSitePublished = Constants.getPublishPath() + cmsUserSite.getBlogUrl() + "/";
             String templateFileName = cmsUserSite.getCmsTemplates().getTemplateBaselayout();
             File sitePublished = new File(pathToSitePublished);
 
@@ -101,7 +102,7 @@ public class CmsFileController {
     }
 
     public static void initializeSites() {
-        File sitePublished = new File(Constants.CMS_PATH_TO_PUBLISHED);
+        File sitePublished = new File(Constants.getPublishPath());
         File generatedPath = new File(realPath + Constants.CMS_PATH_TO_GENERATED);
         try {
             FileUtils.copyDirectory(sitePublished, generatedPath);
@@ -123,8 +124,7 @@ public class CmsFileController {
         System.out.println("cmsFileController:addNewFile:");
         String templateName = cmsUserSite.getCmsTemplates().getTemplateName();
         String siteName = cmsUserSite.getBlogUrl();
-        String currPath = cmsUserSite.getIsPublished() == 1 ?
-                Constants.CMS_PATH_TO_PUBLISHED : Constants.CMS_PATH_TO_PENDING;
+        String currPath = cmsUserSite.getCurrPath();
         File templatePath = new File(realPath + Constants.CMS_PATH_TO_DEFAULT_FILES + templateName);
         File pendingPath = new File(currPath + siteName + "/html");
         File baseFile = new File(templatePath + "/html/base.html");
@@ -145,10 +145,11 @@ public class CmsFileController {
     }
 
     public static void deleteFile(CmsUserSite cmsUserSite, String fileName) {
-        String currPath = cmsUserSite.getIsPublished() == 1 ?
-                Constants.CMS_PATH_TO_PUBLISHED : Constants.CMS_PATH_TO_PENDING;
+        String currPath = cmsUserSite.getCurrPath();
         String siteName = cmsUserSite.getBlogUrl();
         File fileToDelete = new File(currPath + siteName + "/html/" + fileName);
+        System.out.println("cmsFileController:deleteFile:"+fileToDelete.getPath());
+        FileUtils.deleteQuietly(fileToDelete);
     }
 
     public static void createSiteInitialFiles(CmsUserSite cmsUserSite) {
@@ -156,8 +157,8 @@ public class CmsFileController {
         String templateName = cmsUserSite.getCmsTemplates().getTemplateName();
         String siteName = cmsUserSite.getBlogUrl();
         File templatePath = new File(realPath + Constants.CMS_PATH_TO_DEFAULT_FILES + templateName);
-        File pendingPath = new File(Constants.CMS_PATH_TO_PENDING + siteName);
-        File baseFile = new File(Constants.CMS_PATH_TO_PENDING + siteName + "/html/base.html");
+        File pendingPath = new File(Constants.getPendingPath() + siteName);
+        File baseFile = new File(Constants.getPendingPath() + siteName + "/html/base.html");
         //copy from sitePages
         try {
             FileUtils.copyDirectory(templatePath, pendingPath, false);
@@ -172,8 +173,7 @@ public class CmsFileController {
 //        System.out.println("getAllFiles:");
         String siteUrl = cmsUserSite.getBlogUrl();
 //        System.out.println("getAllFiles:siteUrl:"+siteUrl);
-        String currPath = cmsUserSite.getIsPublished() == 1 ?
-                Constants.CMS_PATH_TO_PUBLISHED : Constants.CMS_PATH_TO_PENDING;
+        String currPath = cmsUserSite.getCurrPath();
 //        System.out.println("getAllFiles:currPath:"+currPath);
         String sitePath = currPath + siteUrl;
 //        System.out.println("getAllFiles:sitePath:"+sitePath);
@@ -197,8 +197,7 @@ public class CmsFileController {
 
     public static File getByFileName(CmsUserSite cmsUserSite, String filename) {
         String siteUrl = cmsUserSite.getBlogUrl();
-        String currPath = cmsUserSite.getIsPublished() == 1 ?
-                Constants.CMS_PATH_TO_PUBLISHED : Constants.CMS_PATH_TO_PENDING;
+        String currPath = cmsUserSite.getCurrPath();
         String sitePath = currPath + siteUrl;
 
         try {
@@ -223,8 +222,7 @@ public class CmsFileController {
 
     public static boolean checkIfFileExists(CmsUserSite cmsUserSite, String filename) {
         String htmlFileName = filename + ".html";
-        String currPath = cmsUserSite.getIsPublished() == 1 ?
-                Constants.CMS_PATH_TO_PUBLISHED : Constants.CMS_PATH_TO_PENDING;
+        String currPath = cmsUserSite.getCurrPath();
         File checkFile = new File(currPath + htmlFileName);
 
         return Files.isRegularFile(checkFile.toPath());
