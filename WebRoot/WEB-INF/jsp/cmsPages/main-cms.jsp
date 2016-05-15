@@ -63,6 +63,9 @@
         </s:div>
         <s:div class="cms-buttons">
             <s:submit type="button" id="addFile" value="Add File" theme="simple"/>
+            <s:if test="'cms_admin'.equals(#session.cms_user.cmsUserType.cmsUserTypeCode)" >
+                <s:submit type="button" id="publishButton" value="Publish" theme="simple"/>
+            </s:if>
         </s:div>
     </s:div>
 </s:div>
@@ -96,6 +99,12 @@
         $("#addFile").click(function () {
             var form = $("#filesForm");
             form.attr('action', 'AddNewFile');
+            form.submit();
+        });
+        $("#publishButton").click(function () {
+            alert("publishButton");
+            var form = $("#filesForm");
+            form.attr('action', 'PublishSite');
             form.submit();
         });
     });

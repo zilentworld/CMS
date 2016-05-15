@@ -67,7 +67,7 @@
                             <%--<td>--%>
                                 <%--<s:submit class="CMS" hidden-data="%{cmsUserSiteId}" type="button" theme="simple" value="Preview"/>--%>
                             <%--</td>--%>
-                                <s:submit type="button" theme="simple" value="Publish"/>
+                                <s:submit class="publishSite" hidden-data="%{cmsUserSiteId}" type="button" theme="simple" value="Publish"/>
                             </td>
                         </tr>
                     </s:iterator>
@@ -93,6 +93,14 @@
             var id = $(this).attr('hidden-data');
             hiddenField.val(id);
             form.attr('action', 'Preview');
+            form.submit();
+        });
+        $(".publishSite").click(function () {
+            var hiddenField = $("#cmsUserSiteId");
+            var form = $("#siteListForm");
+            var id = $(this).attr('hidden-data');
+            hiddenField.val(id);
+            form.attr('action', 'PublishSite');
             form.submit();
         });
     });
