@@ -5,8 +5,8 @@ public final class Constants {
     //CMS Paths
     public static final String CMS_PATH_TO_PENDING = "/home/dev-pc/CMS/pending/";
     public static final String CMS_PATH_TO_PUBLISHED = "/home/dev-pc/CMS/published/";
-    public static final String CMS_PATH_TO_PENDING_WIN = "G:/work/generated/pending";
-    public static final String CMS_PATH_TO_PUBLISHED_WIN = "G:/work/generated/published";
+    public static final String CMS_PATH_TO_PENDING_WIN = "G:/work/generated/pending/";
+    public static final String CMS_PATH_TO_PUBLISHED_WIN = "G:/work/generated/published/";
     public static final String CMS_PATH_TO_SITE = "/WEB-INF/jsp/sitePages/";
     public static final String CMS_PATH_TO_TEMPLATES = "/WEB-INF/jsp/templates/";
     public static final String CMS_PATH_TO_GENERATED = "/WEB-INF/jsp/generated/";
