@@ -253,6 +253,7 @@
 			<!--<result name="success" type="tiles">${nextAction}</result>-->
 		<!--</action>-->
 
+		<!--do this-->
 		<action name="/*" class="checkBlogUrl">
 			<param name="blogSiteUrl">{1}</param>
 			<result type="redirectAction">
