@@ -234,3 +234,7 @@
 .float-right {
     float: right;
 }
+
+.tableAlternate tr:nth-child(even) {
+    background-color: rgba(73, 39, 42, 0.15);
+}
