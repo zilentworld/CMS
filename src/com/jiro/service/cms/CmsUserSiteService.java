@@ -26,4 +26,6 @@ public interface CmsUserSiteService {
 
     CmsUserSite createNewCmsUserSite(long cmsUserId, String blogUrl, long cmsTemplateId);
 
+    void publishSite (CmsUserSite cmsUserSite);
+
 }

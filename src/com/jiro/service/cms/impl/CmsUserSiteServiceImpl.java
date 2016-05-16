@@ -128,4 +128,11 @@ public class CmsUserSiteServiceImpl implements CmsUserSiteService {
 
         return cmsUserSite;
     }
+
+    @Override
+    public void publishSite(CmsUserSite cmsUserSite) {
+        CmsFileController.publishSite(cmsUserSite);
+        cmsUserSite.setIsPublished(1);
+        cmsUserSiteDao.saveOrUpdate(cmsUserSite);
+    }
 }

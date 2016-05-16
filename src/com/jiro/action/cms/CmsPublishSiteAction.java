@@ -42,7 +42,8 @@ public class CmsPublishSiteAction extends ActionSupport {
     public String execute() throws Exception {
         System.out.println("cmsPublishSiteAction:execute:cmsUserSiteId:"+cmsUserSiteId);
         cmsUserSite = cmsUserSiteService.getById(cmsUserSiteId);
-        CmsFileController.publishSite(cmsUserSite);
+        cmsUserSiteService.publishSite(cmsUserSite);
+
 
         return SUCCESS;
     }
