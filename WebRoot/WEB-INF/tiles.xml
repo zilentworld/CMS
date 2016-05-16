@@ -54,6 +54,9 @@
     <definition name="main-account-editUser" extends="main-layout">
         <put-attribute name="content" value="/WEB-INF/jsp/cmsPages/main-account-editUser.jsp" />
     </definition>
+    <definition name="main-message" extends="main-layout">
+        <put-attribute name="content" value="/WEB-INF/jsp/cmsPages/message.jsp" />
+    </definition>
 
     <!--CMS-->
     <definition name="main-cms" extends="main-layout">

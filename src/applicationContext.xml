@@ -189,6 +189,10 @@
         <property name="cmsUserSiteService" ref="cmsUserSiteService" />
     </bean>
 
+    <bean id="cmsSiteNavAction" class="com.jiro.action.cms.CmsSiteNavAction" scope="prototype">
+        <property name="cmsUserSiteService" ref="cmsUserSiteService" />
+    </bean>
+
     <!-- 	settings -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
     <tx:annotation-driven proxy-target-class="true"/>
@@ -202,7 +206,7 @@
           abstract="false" lazy-init="default" autowire="default"
           p:url="jdbc:mysql://localhost:3306/cms"
           p:driverClassName="com.mysql.jdbc.Driver" p:username="root"
-          p:password="123456">
+          p:password="12345">
     </bean>
 
     <bean id="transactionManager"

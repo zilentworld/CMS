@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE struts PUBLIC 
-"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" 
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
 "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 
  	<constant name="struts.objectFactory" value="spring" />
  	<constant name="struts.enable.SlashesInActionNames" value="true"/>
 	<constant name="struts.mapper.alwaysSelectFullNamespace" value="false"/>
+	<constant name="struts.patternMatcher" value="regex" />
 	<package name="default" namespace="/" extends="struts-default">
 
-		<!-- <include file="com/jiro/cms/struts-cms.xml"></include> -->
-		<!-- <include file="com/jiro/site/struts-site.xml"></include> -->
-  		
 		<result-types>
 			<result-type name="tiles"
 				class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
 
-		<!--<global-results>-->
-			<!--<result name="next" type="redirectAction">-->
-				<!--<param name="actionName">actionForward</param>-->
-				<!--<param name="nextAction">${nextAction}</param>-->
-			<!--</result>-->
-			<!--&lt;!&ndash; <result name="next" type="tiles">${nextAction}</result> &ndash;&gt;-->
-		<!--</global-results>-->
+		<action name="/{siteUrl}/{*}" class="cmsSiteNavAction" method="toFile" >
+			<param name="fileName">{2}</param>
+			<result name="success">${siteFilePath}</result>
+			<result name="error" type="tiles">main-message</result>
+		</action>
+
+		<action name="/{siteUrl}" class="cmsSiteNavAction">
+			<result name="success">${siteFilePath}</result>
+			<result name="error" type="tiles">main-message</result>
+		</action>
 
 		<action name="Home" class="cmsNavAction" method="showHome">
 			<result name="success" type="tiles">main-welcome</result>
@@ -53,9 +54,6 @@
 			<result name="error" type="tiles">main-register-login</result>
 			<result name="input" type="tiles">main-register-login</result>
 			<result name="success">${sourcePage}</result>
-			<!--<result name="success" type="redirect">${sourcePage}</result>-->
-			<!--<result name="success" type="redirect">Account</result>-->
-			<!--<result name="success" type="tiles">main-account</result>-->
 		</action>
 		<action name="SiteList" class="cmsAccountAction" method="showSiteList">
 			<result name="success" type="tiles">main-account-siteList</result>
@@ -84,8 +82,6 @@
 		<action name="SaveEditUser" class="cmsEdituserAction">
 			<result name="error" type="tiles">main-account-editUser</result>
 			<result name="input">EditUser</result>
-			<!--<result name="input" type="tiles">main-account-editUser</result>-->
-			<!--<result name="success">UserList</result>-->
 			<result name="success" type="redirect">${sourcePage}</result>
 		</action>
 		<action name="Logout" class="loginAction" method="processLogout">
@@ -142,221 +138,7 @@
 		</action>
 		<action name="PublishSite" class="cmsPublishSiteAction">
 			<result name="success">CMS</result>
-			<!--should be the site-->
 		</action>
-
-
-
-
-		<!--<action name="*/showLogin" class="siteLoginAction" method="showLogin">-->
-			<!--<param name="blogSiteUrl">{1}</param>-->
-			<!--<result name="success" type="tiles">${nextAction}</result>-->
-			<!--<result name="input" type="tiles">${nextAction}</result>-->
-		<!--</action>-->
-
-		<!--<action name="*/doLogin" class="siteLoginAction">-->
-			<!--<param name="blogSiteUrl">{1}</param>-->
-			<!--<result name="input" type="tiles">${nextAction}</result>-->
-			<!--<result name="success" type="redirectAction">-->
-				<!--<param name="actionName">${blogSiteUrl}/postPreview</param>-->
-				<!--<param name="nextAction">${nextAction}</param>-->
-			<!--</result>-->
-		<!--</action>-->
-		<!---->
-		<!--<action name="*/showRegister" class="siteRegisterAction" method="showRegister">-->
-			<!--<param name="blogSiteUrl">{1}</param>-->
-			<!--<result name="success" type="tiles">${nextAction}</result>-->
-			<!--<result name="input" type="tiles">${nextAction}</result>-->
-		<!--</action>-->
-		<!---->
-		<!--<action name="*/doRegister" class="siteRegisterAction">-->
-			<!--<param name="blogSiteUrl">{1}</param>-->
-			<!--<result name="success" type="redirectAction">-->
-				<!--<param name="actionName">${blogSiteUrl}/postPreview</param>-->
-				<!--<param name="nextAction">${nextAction}</param>-->
-			<!--</result>-->
-			<!--<result name="input" type="tiles">${nextAction}</result>-->
-		<!--</action>-->
-		<!---->
-		<!--<action name="*/doLogout" class="logoutAction">-->
-			<!--<param name="blogSiteUrl">{1}</param>-->
-			<!--<result name="success" type="redirectAction">-->
-				<!--<param name="actionName">${blogSiteUrl}/postPreview</param>-->
-				<!--<param name="nextAction">${nextAction}</param>-->
-			<!--</result>-->
-		<!--</action>-->
-		<!---->
-		<!--<action name="*/postContent" class="postContentAction">-->
-			<!--<param name="blogSiteUrl">{1}</param>-->
-			<!--<result name="success" type="tiles">${nextAction}</result>-->
-		<!--</action>-->
-		<!---->
-		<!--<action name="*/postPreview" class="blogPostAction">-->
-			<!--<param name="blogSiteUrl">{1}</param>-->
-			<!--<result name="success" type="tiles">${nextAction}</result>-->
-		<!--</action>-->
-		<!---->
-		<!--<action name="*/showNewSitePost" class="sitePostAction" method="showNewSitePost">-->
-			<!--<param name="blogSiteUrl">{1}</param>-->
-			<!--<result name="success" type="tiles">${nextAction}</result>-->
-			<!--<result name="input" type="tiles">${nextAction}</result>-->
-		<!--</action>-->
-		<!---->
-		<!--<action name="*/editSitePost" class="sitePostAction" method="editSitePost">-->
-			<!--<param name="blogSiteUrl">{1}</param>-->
-			<!--<result name="success" type="tiles">${nextAction}</result>-->
-			<!--<result name="input" type="tiles">${nextAction}</result>-->
-		<!--</action>-->
-		<!---->
-		<!--<action name="*/deleteSitePost" class="sitePostAction" method="deleteSitePost">-->
-			<!--<param name="blogSiteUrl">{1}</param>-->
-			<!--<result name="success" type="redirectAction">-->
-				<!--<param name="actionName">${blogSiteUrl}/postPreview</param>-->
-				<!--<param name="nextAction">${nextAction}</param>-->
-			<!--</result>-->
-			<!--<result name="input" type="tiles">${nextAction}</result>-->
-		<!--</action>-->
-		<!---->
-		<!--<action name="*/newSitePost" class="sitePostAction">-->
-			<!--<param name="blogSiteUrl">{1}</param>-->
-			<!--<result name="success" type="redirectAction">-->
-				<!--<param name="actionName">${blogSiteUrl}/postContent</param>-->
-				<!--<param name="postId">${postId}</param>-->
-			<!--</result>-->
-			<!--<result name="error" type="redirectAction">-->
-				<!--<param name="actionName">${blogSiteUrl}/newSitePost</param>-->
-				<!--<param name="msg">${msg}</param>-->
-			<!--</result>-->
-			<!--<result name="input" type="tiles">${nextAction}</result>-->
-		<!--</action>-->
-		<!---->
-		<!--<action name="*/saveCommentPost" class="siteCommentAction">-->
-			<!--<param name="blogSiteUrl">{1}</param>-->
-			<!--<result name="success" type="redirectAction">-->
-				<!--<param name="actionName">${blogSiteUrl}/postContent</param>-->
-				<!--<param name="postId">${postId}</param>-->
-			<!--</result>-->
-			<!--<result name="input" type="tiles">${nextAction}</result>-->
-		<!--</action>-->
-		<!---->
-		<!--<action name="*/deleteCommentPost" class="siteCommentAction" method="deleteComment">-->
-			<!--<param name="blogSiteUrl">{1}</param>-->
-			<!--<result name="success" type="redirectAction">-->
-				<!--<param name="actionName">${blogSiteUrl}/postContent</param>-->
-				<!--<param name="postId">${postId}</param>-->
-			<!--</result>-->
-			<!--<result name="input" type="tiles">${nextAction}</result>-->
-		<!--</action>-->
-		<!---->
-		<!--<action name="*/userComments" class="userCommentAction">-->
-			<!--<param name="blogSiteUrl">{1}</param>-->
-			<!--<result name="success" type="tiles">${nextAction}</result>-->
-		<!--</action>-->
-
-		<!--do this-->
-		<action name="/*" class="checkBlogUrl">
-			<param name="blogSiteUrl">{1}</param>
-			<result type="redirectAction">
-				<param name="actionName">checkBlogUrl</param>
-				<param name="blogSiteUrl">{1}</param>
-			</result>
-			<result name="error">/WEB-INF/jsp/cmsPages/message.jsp</result>
-		</action>
-
-		<action name="checkBlogUrl" class="checkBlogUrl">
-			<result name="success" type="redirectAction">
-				<param name="actionName">${blogSiteUrl}/postPreview</param>
-			</result>
-			<result name="error">/WEB-INF/jsp/cmsPages/message.jsp</result>
-		</action>
-
-		<!--<action name="showCmsLogin" class="loginAction" method="showCmsLogin">-->
-            <!--<result name="success">/WEB-INF/jsp/cmsPages/cmsAccountLogin.jsp</result>-->
-            <!--<result name="error">/WEB-INF/jsp/cmsPages/cmsAccountLogin.jsp</result>-->
-            <!--<result name="input">/WEB-INF/jsp/cmsPages/cmsAccountLogin.jsp</result>-->
-		<!--</action>-->
-		<!---->
-		<!--<action name="doCmsLogin" class="loginAction" method="cmsLoginAction">-->
-			<!--<result name="success" type="tiles">cms-management</result>-->
-            <!--<result name="error">/WEB-INF/jsp/cmsPages/cmsAccountLogin.jsp</result>-->
-            <!--<result name="input">/WEB-INF/jsp/cmsPages/cmsAccountLogin.jsp</result>-->
-		<!--</action>-->
-		<!---->
-		<!--<action name="showSiteList" class="cmsMgmtAction" method="showSiteList">-->
-			<!--<result name="success" type="tiles">site-list</result>-->
-		<!--</action>-->
-
-		<!--<action name="publishSite" class="cmsMgmtAction" method="publishSite">-->
-			<!--<result name="error" type="redirectAction">-->
-				<!--<param name="actionName">showSiteList</param>-->
-			<!--</result>-->
-			<!--<result name="success" type="redirectAction">-->
-				<!--<param name="actionName">${blogSiteUrl}/postPreview</param>-->
-				<!--<param name="nextAction">${nextAction}</param>-->
-			<!--</result>-->
-		<!--</action>-->
-
-		<!--<action name="republishSite" class="cmsMgmtAction" method="republishSite">-->
-			<!--<result name="error" type="redirectAction">-->
-				<!--<param name="actionName">showSiteList</param>-->
-			<!--</result>-->
-			<!--<result name="success" type="redirectAction">-->
-				<!--<param name="actionName">showSiteList</param>-->
-			<!--</result>-->
-		<!--</action>-->
-
-		<!--<action name="republishAllSites" class="cmsMgmtAction" method="republishAllSites">-->
-			<!--<result name="error" type="redirectAction">-->
-				<!--<param name="actionName">showSiteList</param>-->
-			<!--</result>-->
-			<!--<result name="success" type="redirectAction">-->
-				<!--<param name="actionName">showSiteList</param>-->
-			<!--</result>-->
-		<!--</action>-->
-
-		<!--<action name="showManageHeaders" class="cmsMgmtAction" method="showManageHeaders">-->
-			<!--<result name="success" type="tiles">manage-headers</result>-->
-		<!--</action>-->
-
-		<!--<action name="processManageHeaders" class="cmsMgmtAction" method="processManageHeaders">-->
-			<!--<result name="success" type="redirectAction">showManageHeaders</result>-->
-		<!--</action>-->
-
-		<!--<action name="showMySites" class="cmsMgmtAction" method="showMySites">-->
-			<!--<result name="success" type="tiles">my-sites</result>-->
-		<!--</action>-->
-
-		<!--<action name="showMyUsers" class="cmsMgmtAction" method="showMyUsers">-->
-		<!--<result name="success" type="tiles">manage-headers</result>-->
-		<!--</action>-->
-
-		<!--<action name="pickTemplate" class="newBlogSite">-->
-			<!--<result name="error">/WEB-INF/jsp/cmsPages/templatePicker.jsp</result>-->
-			<!--<result name="success">/WEB-INF/jsp/cmsPages/requestRegister.jsp-->
-			<!--</result>-->
-		<!--</action>-->
-
-		<!--<action name="confirmUrl" class="userSiteAction">-->
-			<!--<result name="input">/WEB-INF/jsp/cmsPages/enterUrl.jsp</result>-->
-			<!--<result name="error">/WEB-INF/jsp/cmsPages/enterUrl.jsp</result>-->
-			<!--&lt;!&ndash;<result name="success" type="redirectAction">&ndash;&gt;-->
-				<!--&lt;!&ndash;<param name="actionName">checkBlogUrl</param>&ndash;&gt;-->
-				<!--&lt;!&ndash;<param name="blogSiteUrl">${cmsUserSite.blogUrl}</param>&ndash;&gt;-->
-			<!--&lt;!&ndash;</result>&ndash;&gt;-->
-            <!--<result name="success">/WEB-INF/jsp/cmsPages/message.jsp</result>-->
-		<!--</action>-->
-
-		<!--<action name="bannerImg" class="siteImgAction">-->
-			<!--<result name="success">/WEB-INF/jsp/sitePages/bannerImg.jsp</result>-->
-		<!--</action>-->
-
-		<!--<action name="footerImg" class="siteImgAction">-->
-			<!--<result name="success">/WEB-INF/jsp/sitePages/footerImg.jsp</result>-->
-		<!--</action>-->
-
-		<!--<action name="*">-->
-			<!--<result>/${1}.jsp</result>-->
-		<!--</action>-->
 
 	</package>
 
