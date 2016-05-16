@@ -116,9 +116,13 @@ public class CmsLoginAction extends ActionSupport implements SessionAware {
             cmsUser.setCmsPassword("");            
         }
         cmsUser = cmsUserService.getByLogin(cmsUser);
+        if(cmsUser.getIsEnabled() == 0) {
+            addFieldError("cmsUser.cmsUsername", Constants.CMS_ERROR_ACCT_DISABLED);
+            cmsUser.setCmsPassword("");
+        }
 
         if("UserSites".equals(sourcePage) && "cms_admin".equals(cmsUser.getCmsUserType().getCmsUserTypeCode())) {
-            addFieldError("cmsUser.cmsUsername", "Cannot use admin account");
+            addFieldError("cmsUser.cmsUsername", Constants.CMS_ERROR_ADMIN_CANNOT);
             cmsUser.setCmsPassword("");
         }
     }

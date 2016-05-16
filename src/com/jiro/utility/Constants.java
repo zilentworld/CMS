@@ -68,6 +68,9 @@ public final class Constants {
     public static final String CMS_ERROR_GENDER_INVALID = "Invalid format for the gender";
     public static final String CMS_ERROR_AGE_INVALID = "Invalid format for the age";
     public static final String CMS_ERROR_ID_INVALID = "Invalid ID. Kindly return to User List";
+    public static final String CMS_ERROR_ADMIN_CANNOT =  "Cannot use admin account";
+    public static final String CMS_ERROR_ACCT_DISABLED = "Account is disabled";
+    public static final String CMS_ERROR_PAGE_NOT_EXISTS = "Page does not exist";
 
     //Error Messages for SITE
     public static final String SITE_ERROR_USERNAME_REQUIRED = "Username is required";
