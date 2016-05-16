@@ -122,7 +122,7 @@
 			<result name="success" type="tiles">main-addFile</result>
 		</action>
 		<action name="doAddNewFile" class="cmsAddNewFileAction" method="addNewFile">
-			<result name="success" type="redirectAction">
+			<result name="success" type="chain">
 				<param name="actionName">CMS</param>
 				<param name="cmsUserSiteId">${cmsUserSiteId}</param>
 			</result>
@@ -131,7 +131,7 @@
 			<result name="success">/WEB-INF/jsp/cmsPages/main-preview.jsp</result>
 		</action>
 		<action name="DeleteFile" class="cmsFileManageAction" method="deleteFile">
-			<result name="success" type="chain">
+			<result name="success" type="chain">e
 				<param name="actionName">CMS</param>
 				<param name="cmsUserSiteId">${cmsUserSiteId}</param>
 			</result>

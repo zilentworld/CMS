@@ -59,6 +59,7 @@ public class CheckBlogUrlAction extends ActionSupport implements SessionAware {
 
     @Override
     public String execute() throws Exception {
+        System.out.println("checkBlogUrl");
         HttpServletRequest request = ServletActionContext.getRequest();
         if(blogSiteUrl == null || blogSiteUrl == "")
             blogSiteUrl = request.getServletPath().substring(1);
@@ -76,12 +77,12 @@ public class CheckBlogUrlAction extends ActionSupport implements SessionAware {
 
 
 //            nextAction = "home-" + cmsUserSite.getCmsTemplates().getTemplateName().toLowerCase();
-        nextAction = "home";
+//        nextAction = "home";
 
-        System.out.println("checkBlogUrl:nextAction:" + nextAction);
+//        System.out.println("checkBlogUrl:nextAction:" + nextAction);
         System.out.println("checkBlogUrl:blogSiteUrl:" + blogSiteUrl);
 
-        sessionMap.put(Constants.CMS_SESSION_BLOG_URL, cmsUserSite.getBlogUrl());
+//        sessionMap.put(Constants.CMS_SESSION_BLOG_URL, cmsUserSite.getBlogUrl());
         return SUCCESS;
     }
     

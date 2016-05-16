@@ -50,6 +50,7 @@ public class CmsAddNewFileAction extends ActionSupport {
 
     @SkipValidation
     public String showAddFile() {
+        System.out.println("showAddFile");
         return SUCCESS;
     }
 
