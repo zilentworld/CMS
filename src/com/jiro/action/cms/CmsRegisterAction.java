@@ -177,7 +177,7 @@ public class CmsRegisterAction extends ActionSupport implements SessionAware {
 
         System.out.println("checkexist");
         if(cmsUserService.checkExistingCmsUser(cmsUserRegister)) {
-            addFieldError("cmsUserRegister.cmsUsername", Constants.CMS_ERROR_GENERIC_REGISTER);
+            addFieldError("cmsUserRegister.cmsUsername", Constants.SITE_ERROR_USERNAME_TAKEN);
         }
         try {
             Long.parseLong(cmsTemplateId);
