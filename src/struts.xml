@@ -15,6 +15,18 @@
 				class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
 
+		<interceptors>
+			<interceptor name="loginInterceptor" class="com.jiro.interceptor.LoginInterceptor" />
+			<interceptor-stack name="loginCheckStack">
+				<interceptor-ref name="loginInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		
+		<global-results>
+			<result name="login-require" type="redirect">Account</result>
+		</global-results>
+
 		<action name="Home" class="cmsNavAction" method="showHome">
 			<result name="success" type="tiles">main-welcome</result>
 		</action>
@@ -45,30 +57,38 @@
 			<result name="success">${sourcePage}</result>
 		</action>
 		<action name="SiteList" class="cmsAccountAction" method="showSiteList">
+			<interceptor-ref name="loginCheckStack" />
 			<result name="success" type="tiles">main-account-siteList</result>
 		</action>
 		<action name="UserList" class="cmsAccountAction" method="showUserList">
+			<interceptor-ref name="loginCheckStack" />
 			<result name="success" type="tiles">main-account-userList</result>
 		</action>
 		<action name="UserSites" class="cmsAccountAction" method="showUserSites">
+			<interceptor-ref name="loginCheckStack" />
 			<result name="success" type="tiles">main-account-userSites</result>
 		</action>
 		<action name="UserInfo" class="cmsAccountAction" method="showUserInfo">
+			<interceptor-ref name="loginCheckStack" />
 			<result name="success" type="tiles">main-account-userInfo</result>
 		</action>
 		<action name="deactivateUser" class="cmsAccountAction" method="deactivateUser">
+			<interceptor-ref name="loginCheckStack" />
 			<result name="error">UserList</result>
 			<result name="success">UserList</result>
 		</action>
 		<action name="activateUser" class="cmsAccountAction" method="activateUser">
+			<interceptor-ref name="loginCheckStack" />
 			<result name="error">UserList</result>
 			<result name="success">UserList</result>
 		</action>
 		<action name="EditUser" class="cmsEdituserAction" method="showEditUser">
+			<interceptor-ref name="loginCheckStack" />
 			<result name="error" type="tiles">main-account-editUser</result>
 			<result name="success" type="tiles">main-account-editUser</result>
 		</action>
 		<action name="SaveEditUser" class="cmsEdituserAction">
+			<interceptor-ref name="loginCheckStack" />
 			<result name="error" type="tiles">main-account-editUser</result>
 			<result name="input">EditUser</result>
 			<result name="success" type="redirect">${sourcePage}</result>
@@ -93,25 +113,31 @@
 			<result name="success" type="redirect">UserSites</result>
 		</action>
 		<action name="CMS" class="cmsFileManageAction" method="showCMS">
+			<interceptor-ref name="loginCheckStack" />
 			<result name="success" type="tiles">main-cms</result>
 		</action>
 		<action name="EditFile" class="cmsFileManageAction" method="showEditFile">
+			<interceptor-ref name="loginCheckStack" />
 			<result name="success" type="tiles">main-editfile</result>
 		</action>
 		<action name="FilterCMS" class="cmsFileManageAction" method="showFilteredCMS">
+			<interceptor-ref name="loginCheckStack" />
 			<result name="success" type="tiles">main-cms</result>
 		</action>
 		<action name="saveCMS" class="cmsFileManageAction" method="saveCMS">
+			<interceptor-ref name="loginCheckStack" />
 			<result name="success" type="chain">
 				<param name="actionName">CMS</param>
 				<param name="cmsUserSiteId">${cmsUserSiteId}</param>
 			</result>
 		</action>
 		<action name="AddNewFile" class="cmsAddNewFileAction" method="showAddFile">
+			<interceptor-ref name="loginCheckStack" />
 			<result name="success" type="tiles">main-addFile</result>
 			<result name="input" type="tiles">main-addFile</result>
 		</action>
 		<action name="doAddNewFile" class="cmsAddNewFileAction" method="addNewFile">
+			<interceptor-ref name="loginCheckStack" />
 			<result name="success" type="chain">
 				<param name="actionName">CMS</param>
 				<param name="cmsUserSiteId">${cmsUserSiteId}</param>
@@ -119,15 +145,18 @@
 			<result name="input" type="tiles">main-addFile</result>
 		</action>
 		<action name="Preview" class="cmsFileManageAction" method="showPreview">
+			<interceptor-ref name="loginCheckStack" />
 			<result name="success">/WEB-INF/jsp/cmsPages/main-preview.jsp</result>
 		</action>
 		<action name="DeleteFile" class="cmsFileManageAction" method="deleteFile">
+			<interceptor-ref name="loginCheckStack" />
 			<result name="success" type="chain">
 				<param name="actionName">CMS</param>
 				<param name="cmsUserSiteId">${cmsUserSiteId}</param>
 			</result>
 		</action>
 		<action name="PublishSite" class="cmsPublishSiteAction">
+			<interceptor-ref name="loginCheckStack" />
 			<result name="success">CMS</result>
 		</action>
 
