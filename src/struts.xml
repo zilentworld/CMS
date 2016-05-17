@@ -167,10 +167,9 @@
 		</action>
 
 		<action name="/{siteUrl}" class="cmsSiteNavAction">
-			<result name="success">${siteFilePath}</result>
+			<result name="success" type="redirect">${siteHomePath}</result>
 			<result name="error" type="tiles">main-message</result>
 		</action>
 
 	</package>
-
 </struts>

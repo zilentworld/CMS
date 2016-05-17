@@ -4,9 +4,9 @@
     <h1 style="text-align:center;">Welcome to MyCMS!</h1>
 </s:div>
 <s:if test="'cms_admin'.equals(#session.cms_user.cmsUserType.cmsUserTypeCode)">
-    <h1>
-        ADMIN
-    </h1>
+    <%--<h1>--%>
+        <%--ADMIN--%>
+    <%--</h1>--%>
 </s:if>
 <s:else>
     <s:div class="create-label" id="create-div">

@@ -9,10 +9,10 @@
         </s:div>
         <s:div id="cms-search-div" class="cms-search-div" style="margin-top: 5%;">
             <s:div class="cms-search-div-inner">
-                <form id="searchForm" method="post" action="doAddNewFile">
+                <form id="searchForm" method="post">
                     <s:hidden value="%{cmsUserSiteId}" name="cmsUserSiteId"/>
                     <s:textfield id="newFileName" name="newFileName"/>
-                    <s:submit type="button" theme="simple" value="Go"/>
+                    <s:submit type="button" theme="simple" value="Go" id="goButton"/>
                     <s:div style="text-align:center;">
                         File Name
                     </s:div>
@@ -24,5 +24,11 @@
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script>
     $(document).ready(function () {
+        $("#goButton").click(function () {
+            var form = $("#searchForm");
+            alert('Added new File');
+            form.attr("action","doAddNewFile");
+            form.submit();
+        });
     });
 </script>

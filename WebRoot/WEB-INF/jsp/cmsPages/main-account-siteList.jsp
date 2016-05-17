@@ -42,7 +42,7 @@
         <s:div class="account-content-inner">
             <form id="siteListForm" method="POST">
                 <s:hidden id="cmsUserSiteId" name="cmsUserSiteId" value=""/>
-                <table style="width : 100%; text-align: center;">
+                <table style="width : 100%; text-align: center;" class="tableAlternate">
                     <tr>
                         <th>
                             Site Name
@@ -113,11 +113,10 @@
             }
         });
         $(".goToSite").click(function () {
-            alert("goToSite");
             var form = $("#siteListForm");
             var siteUrl = $(this).attr('hidden-data');
-            alert("siteUrl:"+siteUrl);
             form.attr('action', siteUrl);
+            form.submit();
         });
     });
 </script>

@@ -131,6 +131,7 @@ public class CmsFileController {
         File baseFile = new File(templatePath + "/html/base.html");
         File baseFilePending = new File(pendingPath + "/base.html");
         File newFile = new File(pendingPath + "/" + newFilename + ".html");
+        File generatedPath = new File(realPath + Constants.CMS_PATH_TO_GENERATED);
         try {
             System.out.println("paths:");
             System.out.println("templatePath:" + templatePath.getPath());
@@ -138,8 +139,11 @@ public class CmsFileController {
             System.out.println("pendingPath:" + pendingPath.getPath());
             System.out.println("baseFilePending:" + baseFilePending.getPath());
             System.out.println("newFile:" + newFile.getPath());
+            //copy to published path
             FileUtils.copyFileToDirectory(baseFile, pendingPath, false);
             FileUtils.moveFile(baseFilePending, newFile);
+            //copy to generated path
+            FileUtils.copyFileToDirectory(newFile, generatedPath, false);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -118,9 +118,12 @@
             form.submit();
         });
         $('#save').click(function () {
-            var form = $("#editUserForm");
-            form.attr('action','SaveEditUser');
-            form.submit();
+            if (confirm('Do you want to save?')) {
+                alert("User info saved.");
+                var form = $("#editUserForm");
+                form.attr('action', 'SaveEditUser');
+                form.submit();
+            }
         });
     });
 </script>

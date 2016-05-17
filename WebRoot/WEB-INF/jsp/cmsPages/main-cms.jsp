@@ -93,7 +93,7 @@
             form.submit();
         });
         $(".Delete").click(function () {
-            if (confirm('Are you sure ?')) {
+            if (confirm('Do you want to delete this file?')) {
                 var hiddenField = $("#fileName");
                 var form = $("#filesForm");
                 var id = $(this).attr('hidden-data');
@@ -108,7 +108,8 @@
             form.submit();
         });
         $("#publishButton").click(function () {
-            if (confirm('Are you sure ?')) {
+            if (confirm('Do you want to publish this site?')) {
+                alert("Site Published!");
                 var form = $("#filesForm");
                 form.attr('action', 'PublishSite');
                 form.submit();

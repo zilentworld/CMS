@@ -49,6 +49,9 @@
                             Site Name
                         </th>
                         <th>
+                            Template
+                        </th>
+                        <th>
                             Status
                         </th>
                         <th>
@@ -59,6 +62,9 @@
                         <tr align="center">
                             <td>
                                 <s:property value="blogUrl"/>
+                            </td>
+                            <td>
+                                <s:property value="cmsTemplates.templateName"/>
                             </td>
                             <td>
                                 <s:if test="isPublished > 0">
@@ -103,10 +109,10 @@
             form.submit();
         });
         $(".goToSite").click(function () {
-            alert("goToSite");
+//            alert("goToSite");
             var form = $("#userSiteForm");
             var siteUrl = $(this).attr('hidden-data');
-            alert(siteUrl);
+//            alert(siteUrl);
             form.attr('action', siteUrl);
             form.submit();
         });

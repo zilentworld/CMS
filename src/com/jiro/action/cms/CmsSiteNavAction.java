@@ -19,6 +19,15 @@ public class CmsSiteNavAction extends ActionSupport {
     private CmsUserSiteService cmsUserSiteService;
     private CmsUserSite cmsUserSite;
     private String msg;
+    private String siteHomePath;
+
+    public String getSiteHomePath() {
+        return siteHomePath;
+    }
+
+    public void setSiteHomePath(String siteHomePath) {
+        this.siteHomePath = siteHomePath;
+    }
 
     public String getMsg() {
         return msg;
@@ -91,6 +100,8 @@ public class CmsSiteNavAction extends ActionSupport {
         System.out.println("cmsSiteNavAction:execute:fileName:" + fileName);
         fileName = "home";
         siteFilePath = Constants.CMS_PATH_TO_GENERATED + siteUrl + "/html/" + fileName + ".html";
+        siteHomePath = siteUrl + "/" + fileName;
+        System.out.println("cmsSiteNavAction:execute:siteHomePath:" + siteHomePath);
         System.out.println("cmsSiteNavAction:execute:siteFilePath:" + siteFilePath);
 
         return getReturnValue();

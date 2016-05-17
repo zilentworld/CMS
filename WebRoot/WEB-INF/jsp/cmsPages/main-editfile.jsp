@@ -25,9 +25,11 @@
             form.submit();
         });
         $("#saveButton").click(function () {
-            var form = $("#editForm");
-            form.attr('action', 'saveCMS');
-            form.submit();
+            if (confirm('Do you want to save?')) {
+                var form = $("#editForm");
+                form.attr('action', 'saveCMS');
+                form.submit();
+            }
         });
     });
 
