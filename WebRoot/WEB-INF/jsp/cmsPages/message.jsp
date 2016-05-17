@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cms-global.css" />
 <body>
 <s:div>
-    <s:div class="message-outer">
+    <s:div>
         <s:div style="text-align:center; margin-top: 10%;">
             <h1>
                 <s:property value="msg" />

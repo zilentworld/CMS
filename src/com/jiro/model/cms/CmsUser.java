@@ -22,7 +22,7 @@ public class CmsUser {
     private CmsUserType cmsUserType;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cmsUser", fetch = FetchType.LAZY)
     private Set<CmsUserSite> cmsUserSites;
-    @Column(name="cms_register_date")
+    @Column(name="cms_register_date", insertable=false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date cmsRegisterDate;
     @Column(name="first_name")
@@ -124,5 +124,5 @@ public class CmsUser {
     public String toString() {
         return "cmsUserId:"+cmsUserId+",cmsUsername:"+cmsUsername+",cmsPassword:"+cmsPassword ;//+  cmsUserType;
     }
-    
+
 }

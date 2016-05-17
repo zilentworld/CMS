@@ -2,6 +2,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <s:div class="main-cms">
     <s:div id="main-cms-inner" class="margin3">
+        <s:hidden value="%{cmsUserSite.blogUrl}" id="siteUrl"/>
         <s:div id="cms-title-div" class="cms-title-div">
             <h1>
                 <s:property value="cmsUserSite.blogUrl"/>
@@ -23,7 +24,7 @@
             <form id="filesForm" method="post">
                 <s:hidden value="" id="fileName" name="fileName"/>
                 <s:hidden value="%{cmsUserSite.cmsUserSiteId}" name="cmsUserSiteId"/>
-                <table width="100%">
+                <table width="100%" class="tableAlternate">
                     <tr>
                         <th>
                             File Name
@@ -63,8 +64,11 @@
         </s:div>
         <s:div class="cms-buttons">
             <s:submit type="button" id="addFile" value="Add File" theme="simple"/>
-            <s:if test="'cms_admin'.equals(#session.cms_user.cmsUserType.cmsUserTypeCode)" >
+            <s:if test="'cms_admin'.equals(#session.cms_user.cmsUserType.cmsUserTypeCode) && cmsUserSite.isPublished == 0" >
                 <s:submit type="button" id="publishButton" value="Publish" theme="simple"/>
+            </s:if>
+            <s:if test="cmsUserSite.isPublished == 1" >
+                <s:submit type="button" id="goToSite" value="Go to Site" theme="simple"/>
             </s:if>
         </s:div>
     </s:div>
@@ -89,12 +93,14 @@
             form.submit();
         });
         $(".Delete").click(function () {
-            var hiddenField = $("#fileName");
-            var form = $("#filesForm");
-            var id = $(this).attr('hidden-data');
-            hiddenField.val(id);
-            form.attr('action', 'DeleteFile');
-            form.submit();
+            if (confirm('Are you sure ?')) {
+                var hiddenField = $("#fileName");
+                var form = $("#filesForm");
+                var id = $(this).attr('hidden-data');
+                hiddenField.val(id);
+                form.attr('action', 'DeleteFile');
+                form.submit();
+            }
         });
         $("#addFile").click(function () {
             var form = $("#filesForm");
@@ -102,9 +108,16 @@
             form.submit();
         });
         $("#publishButton").click(function () {
-            alert("publishButton");
+            if (confirm('Are you sure ?')) {
+                var form = $("#filesForm");
+                form.attr('action', 'PublishSite');
+                form.submit();
+            }
+        });
+        $("#goToSite").click(function () {
             var form = $("#filesForm");
-            form.attr('action', 'PublishSite');
+            var siteUrl = $("#siteUrl").val();
+            form.attr('action', siteUrl);
             form.submit();
         });
     });

@@ -4,6 +4,7 @@ import com.jiro.model.cms.CmsUserSite;
 import com.jiro.utility.Constants;
 import com.jiro.utility.Utility;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -145,11 +146,13 @@ public class CmsFileController {
     }
 
     public static void deleteFile(CmsUserSite cmsUserSite, String fileName) {
-        String currPath = cmsUserSite.getCurrPath();
-        String siteName = cmsUserSite.getBlogUrl();
-        File fileToDelete = new File(currPath + siteName + "/html/" + fileName);
-        System.out.println("cmsFileController:deleteFile:"+fileToDelete.getPath());
-        FileUtils.deleteQuietly(fileToDelete);
+        if(!StringUtils.isEmpty(fileName)) {
+            String currPath = cmsUserSite.getCurrPath();
+            String siteName = cmsUserSite.getBlogUrl();
+            File fileToDelete = new File(currPath + siteName + "/html/" + fileName);
+            System.out.println("cmsFileController:deleteFile:" + fileToDelete.getPath());
+            FileUtils.deleteQuietly(fileToDelete);
+        }
     }
 
     public static void createSiteInitialFiles(CmsUserSite cmsUserSite) {
@@ -174,9 +177,9 @@ public class CmsFileController {
         String siteUrl = cmsUserSite.getBlogUrl();
 //        System.out.println("getAllFiles:siteUrl:"+siteUrl);
         String currPath = cmsUserSite.getCurrPath();
-//        System.out.println("getAllFiles:currPath:"+currPath);
+        System.out.println("getAllFiles:currPath:"+currPath);
         String sitePath = currPath + siteUrl;
-//        System.out.println("getAllFiles:sitePath:"+sitePath);
+        System.out.println("getAllFiles:sitePath:"+sitePath);
         List<File> allFiles = new ArrayList<>();
         try {
             Files.walk(Paths.get(sitePath)).forEach(filePath -> {
@@ -223,8 +226,19 @@ public class CmsFileController {
     public static boolean checkIfFileExists(CmsUserSite cmsUserSite, String filename) {
         String htmlFileName = filename + ".html";
         String currPath = cmsUserSite.getCurrPath();
-        File checkFile = new File(currPath + htmlFileName);
+        File checkFile = new File(currPath + cmsUserSite.getBlogUrl() + "/html/" + htmlFileName);
+        System.out.println("checkIfFileExists:htmlFileName:"+htmlFileName);
+        System.out.println("checkIfFileExists:currPath:"+currPath);
+        System.out.println("checkIfFileExists:checkFile:"+checkFile.getPath());
 
-        return Files.isRegularFile(checkFile.toPath());
+        return checkFile.exists() && checkFile.isFile();
+    }
+
+    public static boolean checkIfFileDeployed(CmsUserSite cmsUserSite, String filename) {
+        String htmlFileName = filename + ".html";
+        String currPath = Constants.CMS_PATH_TO_GENERATED;
+        File checkFile = new File(realPath + currPath + cmsUserSite.getBlogUrl() + "/html/" + htmlFileName);
+
+        return checkFile.exists() && checkFile.isFile();
     }
 }

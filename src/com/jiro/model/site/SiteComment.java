@@ -39,7 +39,7 @@ public class SiteComment {
     @Column(name="site_comment_content")
     private String siteCommentContent;
 
-    @Column(name="comment_date")
+    @Column(name="comment_date", insertable=false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date commentDate;
     

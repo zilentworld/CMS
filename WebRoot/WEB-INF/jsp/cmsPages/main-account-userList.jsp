@@ -43,7 +43,7 @@
             <form id="userListForm" method="post">
                 <s:hidden id="userId" name="cmsUserId" value="" />
                 <s:hidden id="sourcePage" name="sourcePage" value="UserList"/>
-                <table style="width : 100%; text-align: center;">
+                <table style="width : 100%; text-align: center;" class="tableAlternate">
                     <tr>
                         <th>
                             Username

@@ -72,6 +72,9 @@
                                 <%--<s:submit type="button" hidden-data="%{cmsUserSiteId}" class="previewCMS" value="Preview" theme="simple"/>--%>
                                 <s:submit type="button" hidden-data="%{cmsUserSiteId}" class="editCMS" value="CMS"
                                           theme="simple"/>
+                                <s:if test="isPublished == 1" >
+                                    <s:submit type="button" hidden-data="%{blogUrl}" class="goToSite" value="Go to Site" theme="simple"/>
+                                </s:if>
                             </td>
                         </tr>
                     </s:iterator>
@@ -97,6 +100,14 @@
             var id = $(this).attr('hidden-data');
             hiddenField.val(id);
             form.attr('action', 'Preview');
+            form.submit();
+        });
+        $(".goToSite").click(function () {
+            alert("goToSite");
+            var form = $("#userSiteForm");
+            var siteUrl = $(this).attr('hidden-data');
+            alert(siteUrl);
+            form.attr('action', siteUrl);
             form.submit();
         });
     });

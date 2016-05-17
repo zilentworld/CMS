@@ -38,7 +38,7 @@ public class SiteUser {
     @Column(name="site_user_password")
     private String siteUserPassword;
 
-    @Column(name="site_register_date")
+    @Column(name="site_register_date", insertable=false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date siteRegisterDate;
 

@@ -41,7 +41,7 @@
     <s:div class="account-content">
         <s:div class="account-content-inner">
             <form id="siteListForm" method="POST">
-                <s:hidden id="cmsUserSiteId" name="cmsUserSiteId" value="" />
+                <s:hidden id="cmsUserSiteId" name="cmsUserSiteId" value=""/>
                 <table style="width : 100%; text-align: center;">
                     <tr>
                         <th>
@@ -63,11 +63,18 @@
                                 <s:property value="cmsUser.cmsUsername"/>
                             </td>
                             <td>
-                                <s:submit class="CMS" hidden-data="%{cmsUserSiteId}" type="button" theme="simple" value="CMS"/>
-                            <%--<td>--%>
-                                <%--<s:submit class="CMS" hidden-data="%{cmsUserSiteId}" type="button" theme="simple" value="Preview"/>--%>
-                            <%--</td>--%>
-                                <s:submit class="publishSite" hidden-data="%{cmsUserSiteId}" type="button" theme="simple" value="Publish"/>
+                                <s:submit class="CMS" hidden-data="%{cmsUserSiteId}" type="button" theme="simple"
+                                          value="CMS"/>
+                                    <%--<td>--%>
+                                    <%--<s:submit class="CMS" hidden-data="%{cmsUserSiteId}" type="button" theme="simple" value="Preview"/>--%>
+                                    <%--</td>--%>
+                                <s:if test="isPublished == 1" >
+                                    <s:submit type="button" hidden-data="%{blogUrl}" class="goToSite" value="Go to Site" theme="simple"/>
+                                </s:if>
+                                <s:else>
+                                    <s:submit class="publishSite" hidden-data="%{cmsUserSiteId}" type="button"
+                                              theme="simple" value="Publish"/>
+                                </s:else>
                             </td>
                         </tr>
                     </s:iterator>
@@ -84,7 +91,7 @@
             var form = $("#siteListForm");
             var id = $(this).attr('hidden-data');
             hiddenField.val(id);
-            form.attr('action','CMS');
+            form.attr('action', 'CMS');
             form.submit();
         });
         $(".previewCMS").click(function () {
@@ -96,12 +103,21 @@
             form.submit();
         });
         $(".publishSite").click(function () {
-            var hiddenField = $("#cmsUserSiteId");
+            if (confirm('Are you sure ?')) {
+                var hiddenField = $("#cmsUserSiteId");
+                var form = $("#siteListForm");
+                var id = $(this).attr('hidden-data');
+                hiddenField.val(id);
+                form.attr('action', 'PublishSite');
+                form.submit();
+            }
+        });
+        $(".goToSite").click(function () {
+            alert("goToSite");
             var form = $("#siteListForm");
-            var id = $(this).attr('hidden-data');
-            hiddenField.val(id);
-            form.attr('action', 'PublishSite');
-            form.submit();
+            var siteUrl = $(this).attr('hidden-data');
+            alert("siteUrl:"+siteUrl);
+            form.attr('action', siteUrl);
         });
     });
 </script>

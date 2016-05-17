@@ -29,7 +29,7 @@ public class CmsUserSite {
     @JoinColumn(name = "blog_template")
     private CmsTemplates cmsTemplates;
 
-    @Column(name = "create_date")
+    @Column(name = "create_date", insertable=false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;
 

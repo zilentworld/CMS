@@ -16,7 +16,7 @@ public class ContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         System.out.println("Initialize Sites");
         CmsFileController.setRealPath(servletContextEvent.getServletContext().getRealPath(""));
-//        CmsFileController.initializeSites();
+        CmsFileController.initializeSites();
         System.out.println("Finished Initializing Sites");
     }
 

@@ -43,7 +43,7 @@ public class SitePost {
     @Column(name="site_post_content")
     private String sitePostContent;
     
-    @Column(name="site_post_date")
+    @Column(name="site_post_date", insertable=false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date sitePostDate;
     
