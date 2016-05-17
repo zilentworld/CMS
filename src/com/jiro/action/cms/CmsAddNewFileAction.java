@@ -65,14 +65,20 @@ public class CmsAddNewFileAction extends ActionSupport {
 
     @Override
     public void validate() {
-        if(cmsUserSiteId <= 0)
+        System.out.println("cmsAddNewFileACtion:validate:");
+        if(cmsUserSiteId <= 0) {
+            System.out.println("cmsAddNewFileACtion:id not exists1:");
             addFieldError("newFileName","Id not exists");
+        }
 
         cmsUserSite = cmsUserSiteService.getById(cmsUserSiteId);
-        if(cmsUserSite == null)
+        if(cmsUserSite == null) {
+            System.out.println("cmsAddNewFileACtion:id not exists2:");
             addFieldError("newFileName","Id not exists");
+        }
 
         if(CmsFileController.checkIfFileExists(cmsUserSite, newFileName)) {
+            System.out.println("cmsAddNewFileACtion:file already exists:");
             addFieldError("newFileName","File already exists");
         }
     }

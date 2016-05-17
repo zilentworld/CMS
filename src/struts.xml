@@ -15,17 +15,6 @@
 				class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
 
-		<action name="/{siteUrl}/{*}" class="cmsSiteNavAction" method="toFile" >
-			<param name="fileName">{2}</param>
-			<result name="success">${siteFilePath}</result>
-			<result name="error" type="tiles">main-message</result>
-		</action>
-
-		<action name="/{siteUrl}" class="cmsSiteNavAction">
-			<result name="success">${siteFilePath}</result>
-			<result name="error" type="tiles">main-message</result>
-		</action>
-
 		<action name="Home" class="cmsNavAction" method="showHome">
 			<result name="success" type="tiles">main-welcome</result>
 		</action>
@@ -120,24 +109,37 @@
 		</action>
 		<action name="AddNewFile" class="cmsAddNewFileAction" method="showAddFile">
 			<result name="success" type="tiles">main-addFile</result>
+			<result name="input" type="tiles">main-addFile</result>
 		</action>
 		<action name="doAddNewFile" class="cmsAddNewFileAction" method="addNewFile">
 			<result name="success" type="chain">
 				<param name="actionName">CMS</param>
 				<param name="cmsUserSiteId">${cmsUserSiteId}</param>
 			</result>
+			<result name="input" type="tiles">main-addFile</result>
 		</action>
 		<action name="Preview" class="cmsFileManageAction" method="showPreview">
 			<result name="success">/WEB-INF/jsp/cmsPages/main-preview.jsp</result>
 		</action>
 		<action name="DeleteFile" class="cmsFileManageAction" method="deleteFile">
-			<result name="success" type="chain">e
+			<result name="success" type="chain">
 				<param name="actionName">CMS</param>
 				<param name="cmsUserSiteId">${cmsUserSiteId}</param>
 			</result>
 		</action>
 		<action name="PublishSite" class="cmsPublishSiteAction">
 			<result name="success">CMS</result>
+		</action>
+
+		<action name="/{siteUrl}/{*}" class="cmsSiteNavAction" method="toFile" >
+			<param name="fileName">{2}</param>
+			<result name="success">${siteFilePath}</result>
+			<result name="error" type="tiles">main-message</result>
+		</action>
+
+		<action name="/{siteUrl}" class="cmsSiteNavAction">
+			<result name="success">${siteFilePath}</result>
+			<result name="error" type="tiles">main-message</result>
 		</action>
 
 	</package>
