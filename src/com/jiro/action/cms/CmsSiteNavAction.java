@@ -5,6 +5,7 @@ import com.jiro.model.cms.CmsUserSite;
 import com.jiro.service.cms.CmsUserSiteService;
 import com.jiro.utility.Constants;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.commons.lang3.StringUtils;
 
 
 /**
@@ -74,6 +75,9 @@ public class CmsSiteNavAction extends ActionSupport {
         fileName = sanitizeSlashes(fileName);
         System.out.println("cmsSiteNavAction:toFile:siteUrl:" + siteUrl);
         System.out.println("cmsSiteNavAction:toFile:fileName:" + fileName);
+        if(StringUtils.isEmpty(fileName)) {
+            fileName = "home";
+        }
         siteFilePath = Constants.CMS_PATH_TO_GENERATED + siteUrl + "/html/" + fileName + ".html";
         System.out.println("cmsSiteNavAction:toFile:siteFilePath:" + siteFilePath);
 
@@ -111,24 +115,26 @@ public class CmsSiteNavAction extends ActionSupport {
     }
 
     private String sanitizeSlashes(String sanitizeString) {
-        System.out.println(sanitizeString);
-        System.out.println("charAt(0)");
-        while (sanitizeString.charAt(0) == '/') {
-            System.out.println("1:"+sanitizeString);
-            sanitizeString.substring(1, sanitizeString.length());
-            System.out.println("2:"+sanitizeString);
-        }
-        System.out.println("charAt(sb.length()):" + sanitizeString.length());
-        while (sanitizeString.charAt(sanitizeString.length() - 1) == '/') {
-            System.out.println("3:"+sanitizeString);
-            sanitizeString = sanitizeString.substring(0, sanitizeString.length() - 1);
-            System.out.println("4:"+sanitizeString);
-        }
-        System.out.println("indexOf('//')");
-        while (sanitizeString.indexOf("//") > 0) {
-            System.out.println("5:"+sanitizeString);
-            sanitizeString = sanitizeString.replace("//", "/");
-            System.out.println("6:"+sanitizeString);
+        if (!StringUtils.isEmpty(sanitizeString)) {
+            System.out.println(sanitizeString);
+            System.out.println("charAt(0)");
+            while (sanitizeString.charAt(0) == '/') {
+                System.out.println("1:" + sanitizeString);
+                sanitizeString = sanitizeString.substring(1, sanitizeString.length());
+                System.out.println("2:" + sanitizeString);
+            }
+            System.out.println("charAt(sb.length()):" + sanitizeString.length());
+            while (sanitizeString.charAt(sanitizeString.length() - 1) == '/') {
+                System.out.println("3:" + sanitizeString);
+                sanitizeString = sanitizeString.substring(0, sanitizeString.length() - 1);
+                System.out.println("4:" + sanitizeString);
+            }
+            System.out.println("indexOf('//')");
+            while (sanitizeString.indexOf("//") > 0) {
+                System.out.println("5:" + sanitizeString);
+                sanitizeString = sanitizeString.replace("//", "/");
+                System.out.println("6:" + sanitizeString);
+            }
         }
 
         return sanitizeString;
