@@ -6,6 +6,7 @@ import com.jiro.service.cms.CmsUserSiteService;
 import com.jiro.utility.Constants;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 /**
@@ -13,69 +14,14 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class CmsSiteNavAction extends ActionSupport {
 
+    @Autowired
+    private CmsUserSiteService cmsUserSiteService;
     private String siteUrl;
     private String fileName;
     private String siteFilePath;
-    private CmsUserSiteService cmsUserSiteService;
     private CmsUserSite cmsUserSite;
     private String msg;
     private String siteHomePath;
-
-    public String getSiteHomePath() {
-        return siteHomePath;
-    }
-
-    public void setSiteHomePath(String siteHomePath) {
-        this.siteHomePath = siteHomePath;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public CmsUserSite getCmsUserSite() {
-        return cmsUserSite;
-    }
-
-    public void setCmsUserSite(CmsUserSite cmsUserSite) {
-        this.cmsUserSite = cmsUserSite;
-    }
-
-    public CmsUserSiteService getCmsUserSiteService() {
-        return cmsUserSiteService;
-    }
-
-    public void setCmsUserSiteService(CmsUserSiteService cmsUserSiteService) {
-        this.cmsUserSiteService = cmsUserSiteService;
-    }
-
-    public String getSiteFilePath() {
-        return siteFilePath;
-    }
-
-    public void setSiteFilePath(String siteFilePath) {
-        this.siteFilePath = siteFilePath;
-    }
-
-    public String getSiteUrl() {
-        return siteUrl;
-    }
-
-    public void setSiteUrl(String siteUrl) {
-        this.siteUrl = siteUrl;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
 
     public String toFile() {
         System.out.println("cmsSiteNavAction:toFile:siteUrl:" + siteUrl);
@@ -149,5 +95,53 @@ public class CmsSiteNavAction extends ActionSupport {
         }
 
         return sanitizeString;
+    }
+
+    public String getSiteHomePath() {
+        return siteHomePath;
+    }
+
+    public void setSiteHomePath(String siteHomePath) {
+        this.siteHomePath = siteHomePath;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public CmsUserSite getCmsUserSite() {
+        return cmsUserSite;
+    }
+
+    public void setCmsUserSite(CmsUserSite cmsUserSite) {
+        this.cmsUserSite = cmsUserSite;
+    }
+
+    public String getSiteFilePath() {
+        return siteFilePath;
+    }
+
+    public void setSiteFilePath(String siteFilePath) {
+        this.siteFilePath = siteFilePath;
+    }
+
+    public String getSiteUrl() {
+        return siteUrl;
+    }
+
+    public void setSiteUrl(String siteUrl) {
+        this.siteUrl = siteUrl;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }

@@ -10,6 +10,7 @@ import com.jiro.model.cms.CmsUser;
 import com.jiro.service.cms.CmsUserService;
 import com.jiro.utility.Constants;
 import com.opensymphony.xwork2.ActionSupport;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class CmsLoginAction extends ActionSupport implements SessionAware {
 
@@ -17,53 +18,14 @@ public class CmsLoginAction extends ActionSupport implements SessionAware {
      * 
      */
     private static final long serialVersionUID = 1L;
-    
-    private CmsUser cmsUser;
+
+    @Autowired
     private CmsUserService cmsUserService;
+    private CmsUser cmsUser;
     private Map<String, Object> sessionMap;
     private String sourcePage;
     private String cmsTemplateId;
     private String urlName;
-
-    public String getCmsTemplateId() {
-        return cmsTemplateId;
-    }
-
-    public void setCmsTemplateId(String cmsTemplateId) {
-        this.cmsTemplateId = cmsTemplateId;
-    }
-
-    public String getUrlName() {
-        return urlName;
-    }
-
-    public void setUrlName(String urlName) {
-        this.urlName = urlName;
-    }
-
-    public String getSourcePage() {
-        return sourcePage;
-    }
-
-    public void setSourcePage(String sourcePage) {
-        this.sourcePage = sourcePage;
-    }
-
-    public CmsUser getCmsUser() {
-        return cmsUser;
-    }
-
-    public void setCmsUser(CmsUser cmsUser) {
-        this.cmsUser = cmsUser;
-    }
-
-    public CmsUserService getCmsUserService() {
-        return cmsUserService;
-    }
-
-    public void setCmsUserService(CmsUserService cmsUserService) {
-        this.cmsUserService = cmsUserService;
-    }
 
     public String cmsLoginAction() {
         cmsUser = cmsUserService.getByLogin(cmsUser);
@@ -130,6 +92,38 @@ public class CmsLoginAction extends ActionSupport implements SessionAware {
     @Override
     public void setSession(Map<String, Object> sessionMap) {
         this.sessionMap = sessionMap;
+    }
+
+    public String getCmsTemplateId() {
+        return cmsTemplateId;
+    }
+
+    public void setCmsTemplateId(String cmsTemplateId) {
+        this.cmsTemplateId = cmsTemplateId;
+    }
+
+    public String getUrlName() {
+        return urlName;
+    }
+
+    public void setUrlName(String urlName) {
+        this.urlName = urlName;
+    }
+
+    public String getSourcePage() {
+        return sourcePage;
+    }
+
+    public void setSourcePage(String sourcePage) {
+        this.sourcePage = sourcePage;
+    }
+
+    public CmsUser getCmsUser() {
+        return cmsUser;
+    }
+
+    public void setCmsUser(CmsUser cmsUser) {
+        this.cmsUser = cmsUser;
     }
     
 }

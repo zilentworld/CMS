@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class CmsNavAction extends ActionSupport implements SessionAware {
 
-    private Map<String, Object> sessionmap;
+    private Map<String, Object> sessionMap;
     private String sourcePage;
 
     public String getSourcePage() {
@@ -40,7 +40,7 @@ public class CmsNavAction extends ActionSupport implements SessionAware {
     }
 
     public String showAccount() {
-        CmsUser cmsUser = (CmsUser) sessionmap.get(Constants.CMS_SESSION_CMS_USER);
+        CmsUser cmsUser = (CmsUser) sessionMap.get(Constants.CMS_SESSION_CMS_USER);
         if(cmsUser != null && cmsUser.getCmsUserId() > 0) {
             return SUCCESS;
         }
@@ -51,7 +51,7 @@ public class CmsNavAction extends ActionSupport implements SessionAware {
     }
 
     @Override
-    public void setSession(Map<String, Object> sessionmap) {
-        this.sessionmap = sessionmap;
+    public void setSession(Map<String, Object> sessionMap) {
+        this.sessionMap = sessionMap;
     }
 }

@@ -14,27 +14,9 @@ import com.jiro.service.cms.CmsUserTypeService;
 
 @Service
 public class CmsUserServiceImpl implements CmsUserService {
-    
+
     @Autowired
-    CmsUserTypeService cmsUserTypeService;
-    @Autowired
-    CmsUserDao cmsUserDao;
-    
-    public CmsUserTypeService getCmsUserTypeService() {
-        return cmsUserTypeService;
-    }
-
-    public void setCmsUserTypeService(CmsUserTypeService cmsUserTypeService) {
-        this.cmsUserTypeService = cmsUserTypeService;
-    }
-
-    public CmsUserDao getCmsUserDao() {
-        return cmsUserDao;
-    }
-
-    public void setCmsUserDao(CmsUserDao cmsUserDao) {
-        this.cmsUserDao = cmsUserDao;
-    }
+    private CmsUserDao cmsUserDao;
 
     @Override
     public boolean createNewCmsUser(CmsUser cmsUser) {

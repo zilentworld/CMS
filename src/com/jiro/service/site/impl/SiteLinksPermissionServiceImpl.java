@@ -7,6 +7,7 @@ import com.jiro.model.site.SiteLinksPermission;
 import com.jiro.service.site.SiteLinksPermissionService;
 import com.jiro.service.site.SiteLinksService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
  * Created by dev-pc on 5/3/16.
  */
 
+@Service
 public class SiteLinksPermissionServiceImpl implements SiteLinksPermissionService {
 
 
@@ -22,15 +24,6 @@ public class SiteLinksPermissionServiceImpl implements SiteLinksPermissionServic
     private SiteLinksPermissionDao siteLinksPermissionDao;
     @Autowired
     private SiteLinksService siteLinksService;
-
-
-    public void setSiteLinksService(SiteLinksService siteLinksService) {
-        this.siteLinksService = siteLinksService;
-    }
-
-    public void setSiteLinksPermissionDao(SiteLinksPermissionDao siteLinksPermissionDao) {
-        this.siteLinksPermissionDao = siteLinksPermissionDao;
-    }
 
     @Override
     public void updateSiteLinkPermission(long cmsUserSiteId, long siteLinkId, boolean isEnabled) {

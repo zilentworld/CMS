@@ -12,10 +12,6 @@ public class SiteCommentServiceImpl implements SiteCommentService {
     
     @Autowired
     private SiteCommentDao siteCommentDao;
-    
-    public void setSiteCommentDao(SiteCommentDao siteCommentDao) {
-        this.siteCommentDao = siteCommentDao;
-    }
 
     @Override
     public SiteComment getById(long sitePostId) {

@@ -9,6 +9,7 @@ import com.jiro.utility.Constants;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.interceptor.SessionAware;
 import org.apache.struts2.interceptor.validation.SkipValidation;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
 
@@ -19,79 +20,17 @@ public class CmsCreateSiteAction extends ActionSupport implements SessionAware {
      */
     private static final long serialVersionUID = 1L;
 
-    private CmsTemplates cmsTemplates;
+    @Autowired
     private CmsTemplatesService cmsTemplatesService;
+    @Autowired
     private CmsUserSiteService cmsUserSiteService;
+    private CmsTemplates cmsTemplates;
     private String urlName;
     private String imgSrc;
     private String errMsg;
     private long cmsTemplateId;
     private String sourcePage;
     private Map<String, Object> sessionMap;
-
-    public String getSourcePage() {
-        return sourcePage;
-    }
-
-    public void setSourcePage(String sourcePage) {
-        this.sourcePage = sourcePage;
-    }
-
-    public CmsUserSiteService getCmsUserSiteService() {
-        return cmsUserSiteService;
-    }
-
-    public void setCmsUserSiteService(CmsUserSiteService cmsUserSiteService) {
-        this.cmsUserSiteService = cmsUserSiteService;
-    }
-
-    public String getUrlName() {
-        return urlName;
-    }
-
-    public void setUrlName(String urlName) {
-        this.urlName = urlName;
-    }
-
-    public String getImgSrc() {
-        return imgSrc;
-    }
-
-    public CmsTemplatesService getCmsTemplatesService() {
-        return cmsTemplatesService;
-    }
-
-    public void setCmsTemplatesService(CmsTemplatesService cmsTemplatesService) {
-        this.cmsTemplatesService = cmsTemplatesService;
-    }
-
-    public void setImgSrc(String imgSrc) {
-        this.imgSrc = imgSrc;
-    }
-
-    public String getErrMsg() {
-        return errMsg;
-    }
-
-    public void setErrMsg(String errMsg) {
-        this.errMsg = errMsg;
-    }
-
-    public CmsTemplates getCmsTemplates() {
-        return cmsTemplates;
-    }
-
-    public void setCmsTemplates(CmsTemplates cmsTemplates) {
-        this.cmsTemplates = cmsTemplates;
-    }
-
-    public long getCmsTemplateId() {
-        return cmsTemplateId;
-    }
-
-    public void setCmsTemplateId(long cmsTemplateId) {
-        this.cmsTemplateId = cmsTemplateId;
-    }
 
     @SkipValidation
     public String showTemplate() {
@@ -153,5 +92,53 @@ public class CmsCreateSiteAction extends ActionSupport implements SessionAware {
     @Override
     public void setSession(Map<String, Object> sessionMap) {
         this.sessionMap = sessionMap;
+    }
+
+    public String getSourcePage() {
+        return sourcePage;
+    }
+
+    public void setSourcePage(String sourcePage) {
+        this.sourcePage = sourcePage;
+    }
+
+    public String getUrlName() {
+        return urlName;
+    }
+
+    public void setUrlName(String urlName) {
+        this.urlName = urlName;
+    }
+
+    public String getImgSrc() {
+        return imgSrc;
+    }
+
+    public void setImgSrc(String imgSrc) {
+        this.imgSrc = imgSrc;
+    }
+
+    public String getErrMsg() {
+        return errMsg;
+    }
+
+    public void setErrMsg(String errMsg) {
+        this.errMsg = errMsg;
+    }
+
+    public CmsTemplates getCmsTemplates() {
+        return cmsTemplates;
+    }
+
+    public void setCmsTemplates(CmsTemplates cmsTemplates) {
+        this.cmsTemplates = cmsTemplates;
+    }
+
+    public long getCmsTemplateId() {
+        return cmsTemplateId;
+    }
+
+    public void setCmsTemplateId(long cmsTemplateId) {
+        this.cmsTemplateId = cmsTemplateId;
     }
 }

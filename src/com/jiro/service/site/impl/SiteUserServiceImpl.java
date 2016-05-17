@@ -13,11 +13,6 @@ public class SiteUserServiceImpl implements SiteUserService {
     
     @Autowired
     private SiteUserDao siteUserDao;
-    
-
-    public void setSiteUserDao(SiteUserDao siteUserDao) {
-        this.siteUserDao = siteUserDao;
-    }
 
     @Override
     public boolean checkLoginExists(String username, String password, String siteUrl) {

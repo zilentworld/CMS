@@ -10,6 +10,7 @@ import com.jiro.model.site.SitePost;
 import com.jiro.model.site.SiteUser;
 import com.jiro.service.site.SitePostService;
 import com.jiro.utility.Constants;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class SitePostAction extends SiteAbstractAction {
 
@@ -17,52 +18,13 @@ public class SitePostAction extends SiteAbstractAction {
      * 
      */
     private static final long serialVersionUID = 1L;
+    @Autowired
     private SitePostService sitePostService;
     private SitePost sitePost;
     private String postType;
     private long postId;
     private String msg;
-                
-    public String getMsg() {
-        return msg;
-    }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public long getPostId() {
-        return postId;
-    }
-
-    public void setPostId(long postId) {
-        this.postId = postId;
-    }
-
-    public String getPostType() {
-        return postType;
-    }
-
-    public void setPostType(String postType) {
-        this.postType = postType;
-    }
-
-    public SitePostService getSitePostService() {
-        return sitePostService;
-    }
-
-    public void setSitePostService(SitePostService sitePostService) {
-        this.sitePostService = sitePostService;
-    }
-
-    public SitePost getSitePost() {
-        return sitePost;
-    }
-
-    public void setSitePost(SitePost sitePost) {
-        this.sitePost = sitePost;
-    }
-    
     @SkipValidation
     public String showNewSitePost() {
         setNextAction(getBlogSiteUrl() + "/newSitePost");
@@ -130,6 +92,39 @@ public class SitePostAction extends SiteAbstractAction {
         if(StringUtils.isEmpty(sitePost.getSitePostContent())) {
             addFieldError("sitePost.sitePostContent", Constants.SITE_ERROR_NEW_POST_CONTENT_EMPTY);
         }
+    }
+
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public long getPostId() {
+        return postId;
+    }
+
+    public void setPostId(long postId) {
+        this.postId = postId;
+    }
+
+    public String getPostType() {
+        return postType;
+    }
+
+    public void setPostType(String postType) {
+        this.postType = postType;
+    }
+
+    public SitePost getSitePost() {
+        return sitePost;
+    }
+
+    public void setSitePost(SitePost sitePost) {
+        this.sitePost = sitePost;
     }
 
 }

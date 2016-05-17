@@ -9,48 +9,34 @@ import org.apache.struts2.interceptor.validation.SkipValidation;
 import com.jiro.model.site.SiteUser;
 import com.jiro.service.site.SiteUserService;
 import com.jiro.utility.Constants;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class SiteLoginAction extends SiteAbstractAction {
-    
+
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 1L;
-    private SiteUser siteUser;
+    @Autowired
     private SiteUserService siteUserService;
-    
-    public SiteUserService getSiteUserService() {
-        return siteUserService;
-    }
-
-    public void setSiteUserService(SiteUserService siteUserService) {
-        this.siteUserService = siteUserService;
-    }
-
-    public SiteUser getSiteUser() {
-        return siteUser;
-    }
-
-    public void setSiteUser(SiteUser siteUser) {
-        this.siteUser = siteUser;
-    }
+    private SiteUser siteUser;
 
     @Override
     @SuppressWarnings("unchecked")
     public String execute() throws Exception {
         siteUser = siteUserService.getByLogin(siteUser.getSiteUserUsername(), siteUser.getSiteUserPassword(), getBlogSiteUrl());
-        System.out.println("siteUserSession:id:"+getSiteUserSessionId() +" = "+siteUser.getSiteUserId());
-        System.out.println("siteUserSession:name:"+getSiteUserSessionName() + " = "+siteUser.getSiteUserUsername());
+        System.out.println("siteUserSession:id:" + getSiteUserSessionId() + " = " + siteUser.getSiteUserId());
+        System.out.println("siteUserSession:name:" + getSiteUserSessionName() + " = " + siteUser.getSiteUserUsername());
         Map<String, SiteUser> siteSessionMap = (Map<String, SiteUser>) getSessionMap().get(Constants.SITE_SESSION_MAP_VARIABLE);
-        if(siteSessionMap == null)
+        if (siteSessionMap == null)
             siteSessionMap = new HashMap<String, SiteUser>();
-        
+
         siteSessionMap.put(getBlogSiteUrl(), siteUser);
 
         getSessionMap().put(Constants.SITE_SESSION_MAP_VARIABLE, siteSessionMap);
 
         setNextAction(getBlogSiteUrl() + "/home");
-        System.out.println("siteLoginAction:execute:blogSiteUrl:"+getBlogSiteUrl());
+        System.out.println("siteLoginAction:execute:blogSiteUrl:" + getBlogSiteUrl());
         System.out.println("TEST");
 
         System.out.println(
@@ -62,13 +48,13 @@ public class SiteLoginAction extends SiteAbstractAction {
         System.out.println("END TEST");
         return SUCCESS;
     }
-    
+
     @SkipValidation
     public String showLogin() {
-        System.out.println("siteLoginAction:showLogin:blogSiteUrl:"+getBlogSiteUrl());
+        System.out.println("siteLoginAction:showLogin:blogSiteUrl:" + getBlogSiteUrl());
 
         setNextAction(getBlogSiteUrl() + "/siteLogin");
-        System.out.println("nextAction:"+getNextAction());
+        System.out.println("nextAction:" + getNextAction());
 
         return SUCCESS;
     }
@@ -85,4 +71,11 @@ public class SiteLoginAction extends SiteAbstractAction {
         }
     }
 
+    public SiteUser getSiteUser() {
+        return siteUser;
+    }
+
+    public void setSiteUser(SiteUser siteUser) {
+        this.siteUser = siteUser;
+    }
 }

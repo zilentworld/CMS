@@ -6,6 +6,7 @@ import com.jiro.cms.CmsFileController;
 import com.jiro.model.cms.CmsUserSite;
 import com.jiro.service.cms.CmsUserSiteService;
 import com.opensymphony.xwork2.ActionSupport;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,9 +18,10 @@ import java.util.List;
  */
 public class CmsFileManageAction extends ActionSupport {
 
+    @Autowired
+    private CmsUserSiteService cmsUserSiteService;
     private CmsUserSite cmsUserSite;
     private long cmsUserSiteId;
-    private CmsUserSiteService cmsUserSiteService;
     private List<File> fileList;
     private String fileName;
     private String fileContent;
@@ -27,78 +29,6 @@ public class CmsFileManageAction extends ActionSupport {
     private String filePath;
     private String searchFile;
     private String newFileName;
-
-    public String getNewFileName() {
-        return newFileName;
-    }
-
-    public void setNewFileName(String newFileName) {
-        this.newFileName = newFileName;
-    }
-
-    public String getSearchFile() {
-        return searchFile;
-    }
-
-    public void setSearchFile(String searchFile) {
-        this.searchFile = searchFile;
-    }
-
-    public String getFilePath() {
-        return filePath;
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
-    }
-
-    public String getFileContent() {
-        return fileContent;
-    }
-
-    public void setFileContent(String fileContent) {
-        this.fileContent = fileContent;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public List<File> getFileList() {
-        return fileList;
-    }
-
-    public void setFileList(List<File> fileList) {
-        this.fileList = fileList;
-    }
-
-    public CmsUserSite getCmsUserSite() {
-        return cmsUserSite;
-    }
-
-    public void setCmsUserSite(CmsUserSite cmsUserSite) {
-        this.cmsUserSite = cmsUserSite;
-    }
-
-    public long getCmsUserSiteId() {
-        return cmsUserSiteId;
-    }
-
-    public void setCmsUserSiteId(long cmsUserSiteId) {
-        this.cmsUserSiteId = cmsUserSiteId;
-    }
-
-    public CmsUserSiteService getCmsUserSiteService() {
-        return cmsUserSiteService;
-    }
-
-    public void setCmsUserSiteService(CmsUserSiteService cmsUserSiteService) {
-        this.cmsUserSiteService = cmsUserSiteService;
-    }
 
     public String showCMS() {
         System.out.println("cmsFileManageAction:showCMS:cmsUserSiteId:" + cmsUserSiteId);
@@ -174,6 +104,70 @@ public class CmsFileManageAction extends ActionSupport {
             e.printStackTrace();
         }
 
+    }
+
+    public String getNewFileName() {
+        return newFileName;
+    }
+
+    public void setNewFileName(String newFileName) {
+        this.newFileName = newFileName;
+    }
+
+    public String getSearchFile() {
+        return searchFile;
+    }
+
+    public void setSearchFile(String searchFile) {
+        this.searchFile = searchFile;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public String getFileContent() {
+        return fileContent;
+    }
+
+    public void setFileContent(String fileContent) {
+        this.fileContent = fileContent;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public List<File> getFileList() {
+        return fileList;
+    }
+
+    public void setFileList(List<File> fileList) {
+        this.fileList = fileList;
+    }
+
+    public CmsUserSite getCmsUserSite() {
+        return cmsUserSite;
+    }
+
+    public void setCmsUserSite(CmsUserSite cmsUserSite) {
+        this.cmsUserSite = cmsUserSite;
+    }
+
+    public long getCmsUserSiteId() {
+        return cmsUserSiteId;
+    }
+
+    public void setCmsUserSiteId(long cmsUserSiteId) {
+        this.cmsUserSiteId = cmsUserSiteId;
     }
 
 }

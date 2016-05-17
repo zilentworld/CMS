@@ -25,62 +25,6 @@ public class CmsEditUserAction extends ActionSupport implements SessionAware {
     private String sourcePage;
     private Map<String, Object> sessionMap;
 
-    public Map<String, Object> getSessionMap() {
-        return sessionMap;
-    }
-
-    public void setSessionMap(Map<String, Object> sessionMap) {
-        this.sessionMap = sessionMap;
-    }
-
-    public String getSourcePage() {
-        return sourcePage;
-    }
-
-    public void setSourcePage(String sourcePage) {
-        this.sourcePage = sourcePage;
-    }
-
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
-    }
-
-    public String getErrorMsg() {
-        return errorMsg;
-    }
-
-    public void setErrorMsg(String errorMsg) {
-        this.errorMsg = errorMsg;
-    }
-
-    public CmsUser getCmsUser() {
-        return cmsUser;
-    }
-
-    public void setCmsUser(CmsUser cmsUser) {
-        this.cmsUser = cmsUser;
-    }
-
-    public CmsUserService getCmsUserService() {
-        return cmsUserService;
-    }
-
-    public void setCmsUserService(CmsUserService cmsUserService) {
-        this.cmsUserService = cmsUserService;
-    }
-
-    public String getCmsUserId() {
-        return cmsUserId;
-    }
-
-    public void setCmsUserId(String cmsUserId) {
-        this.cmsUserId = cmsUserId;
-    }
-
     @SkipValidation
     public String showEditUser() {
         System.out.println("cmsEditUser:execute:showEditUser:sourcePage:"+sourcePage);
@@ -155,5 +99,53 @@ public class CmsEditUserAction extends ActionSupport implements SessionAware {
     @Override
     public void setSession(Map<String, Object> sessionMap) {
         this.sessionMap = sessionMap;
+    }
+
+    public Map<String, Object> getSessionMap() {
+        return sessionMap;
+    }
+
+    public void setSessionMap(Map<String, Object> sessionMap) {
+        this.sessionMap = sessionMap;
+    }
+
+    public String getSourcePage() {
+        return sourcePage;
+    }
+
+    public void setSourcePage(String sourcePage) {
+        this.sourcePage = sourcePage;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getErrorMsg() {
+        return errorMsg;
+    }
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
+    }
+
+    public CmsUser getCmsUser() {
+        return cmsUser;
+    }
+
+    public void setCmsUser(CmsUser cmsUser) {
+        this.cmsUser = cmsUser;
+    }
+
+    public String getCmsUserId() {
+        return cmsUserId;
+    }
+
+    public void setCmsUserId(String cmsUserId) {
+        this.cmsUserId = cmsUserId;
     }
 }

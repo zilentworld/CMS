@@ -16,10 +16,6 @@ public class SitePostServiceImpl implements SitePostService {
     @Autowired
     private SitePostDao sitePostDao;
 
-    public void setSitePostDao(SitePostDao sitePostDao) {
-        this.sitePostDao = sitePostDao;
-    }
-
     @Override
     public SitePost getById(long sitePostId) {
         return sitePostDao.getById(sitePostId);

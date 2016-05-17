@@ -128,20 +128,24 @@
             form.submit();
         });
         $('.deactivateButton').click(function () {
-            var id = $(this).attr('hidden-data');
-            var hiddenField = $("#userId");
-            var form = $("#userListForm")
-            hiddenField.val(id);
-            form.attr('action','deactivateUser');
-            form.submit();
+            if(confirm("Are you sure you want to deactivate this account?")) {
+                var id = $(this).attr('hidden-data');
+                var hiddenField = $("#userId");
+                var form = $("#userListForm")
+                hiddenField.val(id);
+                form.attr('action', 'deactivateUser');
+                form.submit();
+            }
         });
         $('.activateButton').click(function () {
-            var id = $(this).attr('hidden-data');
-            var hiddenField = $("#userId");
-            var form = $("#userListForm")
-            hiddenField.val(id);
-            form.attr('action','activateUser');
-            form.submit();
+            if(confirm("Are you sure you want to activate this account?")) {
+                var id = $(this).attr('hidden-data');
+                var hiddenField = $("#userId");
+                var form = $("#userListForm")
+                hiddenField.val(id);
+                form.attr('action', 'activateUser');
+                form.submit();
+            }
         });
     });
 </script>

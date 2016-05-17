@@ -14,6 +14,7 @@ import com.jiro.service.cms.CmsUserTypeService;
 import com.jiro.utility.Constants;
 import com.jiro.utility.Utility;
 import com.opensymphony.xwork2.ActionSupport;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class CmsRegisterAction extends ActionSupport implements SessionAware {
 
@@ -21,12 +22,13 @@ public class CmsRegisterAction extends ActionSupport implements SessionAware {
      * 
      */
     private static final long serialVersionUID = 1L;
-    
-    private CmsUser cmsUserRegister;
+
+    @Autowired
     private CmsUserService cmsUserService;
-    private CmsTemplates cmsTemplates;
-    private CmsTemplatesService cmsTemplatesService;
+    @Autowired
     private CmsUserTypeService cmsUserTypeService;
+    @Autowired
+    private CmsTemplatesService cmsTemplatesService;
     private String repeatPassword;
     private String nextAction;
     private String errMsg;
@@ -34,94 +36,8 @@ public class CmsRegisterAction extends ActionSupport implements SessionAware {
     private String sourcePage;
     private String cmsTemplateId;
     private String urlName;
-
-    public String getUrlName() {
-        return urlName;
-    }
-
-    public void setUrlName(String urlName) {
-        this.urlName = urlName;
-    }
-
-    public String getSourcePage() {
-        return sourcePage;
-    }
-
-    public void setSourcePage(String sourcePage) {
-        this.sourcePage = sourcePage;
-    }
-
-    public CmsUser getCmsUserRegister() {
-        return cmsUserRegister;
-    }
-    
-    public void setCmsUserRegister(CmsUser cmsUserRegister) {
-        this.cmsUserRegister = cmsUserRegister;
-    }
-    
-    public CmsUserService getCmsUserService() {
-        return cmsUserService;
-    }
-    
-    public void setCmsUserService(CmsUserService cmsUserService) {
-        this.cmsUserService = cmsUserService;
-    }
-        
-    public String getNextAction() {
-        return nextAction;
-    }
-
-    public void setNextAction(String nextAction) {
-        this.nextAction = nextAction;
-    }
-    
-    public String getRepeatPassword() {
-        return repeatPassword;
-    }
-
-    public void setRepeatPassword(String repeatPassword) {
-        this.repeatPassword = repeatPassword;
-    }
-    
-    public String getErrMsg() {
-        return errMsg;
-    }
-
-    public void setErrMsg(String errMsg) {
-        this.errMsg = errMsg;
-    }
-    
-    public CmsTemplates getCmsTemplates() {
-        return cmsTemplates;
-    }
-
-    public void setCmsTemplates(CmsTemplates cmsTemplates) {
-        this.cmsTemplates = cmsTemplates;
-    }
-    
-    public CmsTemplatesService getCmsTemplatesService() {
-        return cmsTemplatesService;
-    }
-
-    public void setCmsTemplatesService(CmsTemplatesService cmsTemplatesService) {
-        this.cmsTemplatesService = cmsTemplatesService;
-    }
-    
-    public CmsUserTypeService getCmsUserTypeService() {
-        return cmsUserTypeService;
-    }
-
-    public void setCmsUserTypeService(CmsUserTypeService cmsUserTypeService) {
-        this.cmsUserTypeService = cmsUserTypeService;
-    }
-    
-    public String getCmsTemplateId() {
-        return cmsTemplateId;
-    }
-
-    public void setCmsTemplateId(String cmsTemplateId) {
-        this.cmsTemplateId = cmsTemplateId;
-    }
+    private CmsUser cmsUserRegister;
+    private CmsTemplates cmsTemplates;
 
     @Override
     public String execute() throws Exception {
@@ -179,21 +95,80 @@ public class CmsRegisterAction extends ActionSupport implements SessionAware {
         if(cmsUserService.checkExistingCmsUser(cmsUserRegister)) {
             addFieldError("cmsUserRegister.cmsUsername", Constants.SITE_ERROR_USERNAME_TAKEN);
         }
-        try {
-            Long.parseLong(cmsTemplateId);
-        } catch (Exception e) {
-            addFieldError("cmsUserRegister.cmsUsername", Constants.CMS_ERROR_GENERIC_ERROR);
-        }
-        
+
+    }
+
+    private void resetPasswords() {
+        cmsUserRegister.setCmsPassword("");
+        repeatPassword = "";
     }
 
     @Override
     public void setSession(Map<String, Object> sessionMap) {
         this.sessionMap = sessionMap;
     }
-    
-    private void resetPasswords() {
-        cmsUserRegister.setCmsPassword("");
-        repeatPassword = "";
+
+    public String getUrlName() {
+        return urlName;
+    }
+
+    public void setUrlName(String urlName) {
+        this.urlName = urlName;
+    }
+
+    public String getSourcePage() {
+        return sourcePage;
+    }
+
+    public void setSourcePage(String sourcePage) {
+        this.sourcePage = sourcePage;
+    }
+
+    public CmsUser getCmsUserRegister() {
+        return cmsUserRegister;
+    }
+
+    public void setCmsUserRegister(CmsUser cmsUserRegister) {
+        this.cmsUserRegister = cmsUserRegister;
+    }
+
+    public String getNextAction() {
+        return nextAction;
+    }
+
+    public void setNextAction(String nextAction) {
+        this.nextAction = nextAction;
+    }
+
+    public String getRepeatPassword() {
+        return repeatPassword;
+    }
+
+    public void setRepeatPassword(String repeatPassword) {
+        this.repeatPassword = repeatPassword;
+    }
+
+    public String getErrMsg() {
+        return errMsg;
+    }
+
+    public void setErrMsg(String errMsg) {
+        this.errMsg = errMsg;
+    }
+
+    public CmsTemplates getCmsTemplates() {
+        return cmsTemplates;
+    }
+
+    public void setCmsTemplates(CmsTemplates cmsTemplates) {
+        this.cmsTemplates = cmsTemplates;
+    }
+
+    public String getCmsTemplateId() {
+        return cmsTemplateId;
+    }
+
+    public void setCmsTemplateId(String cmsTemplateId) {
+        this.cmsTemplateId = cmsTemplateId;
     }
 }

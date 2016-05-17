@@ -11,11 +11,7 @@ import com.jiro.service.cms.CmsUserTypeService;
 public class CmsUserTypeServiceImpl implements CmsUserTypeService {
     
     @Autowired
-    CmsUserTypeDao cmsUserTypeDao;
-    
-    public void setCmsUserTypeDao(CmsUserTypeDao cmsUserTypeDao) {
-        this.cmsUserTypeDao = cmsUserTypeDao;
-    }
+    private CmsUserTypeDao cmsUserTypeDao;
 
     @Override
     public boolean checkUserType(String userTypeString) {

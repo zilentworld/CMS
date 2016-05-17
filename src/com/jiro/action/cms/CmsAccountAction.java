@@ -23,61 +23,13 @@ public class CmsAccountAction extends ActionSupport implements SessionAware {
 
     @Autowired
     private CmsUserSiteService cmsUserSiteService;
-    private List<CmsUserSite> cmsUserSiteList;
     @Autowired
     private CmsUserService cmsUserService;
+    private List<CmsUserSite> cmsUserSiteList;
     private List<CmsUser> cmsUserList;
     private CmsUser cmsUser;
     private String cmsUserId;
     private Map<String, Object> sessionMap;
-
-    public List<CmsUser> getCmsUserList() {
-        return cmsUserList;
-    }
-
-    public void setCmsUserList(List<CmsUser> cmsUserList) {
-        this.cmsUserList = cmsUserList;
-    }
-
-    public CmsUserService getCmsUserService() {
-        return cmsUserService;
-    }
-
-    public void setCmsUserService(CmsUserService cmsUserService) {
-        this.cmsUserService = cmsUserService;
-    }
-
-    public CmsUserSiteService getCmsUserSiteService() {
-        return cmsUserSiteService;
-    }
-
-    public void setCmsUserSiteService(CmsUserSiteService cmsUserSiteService) {
-        this.cmsUserSiteService = cmsUserSiteService;
-    }
-
-    public List<CmsUserSite> getCmsUserSiteList() {
-        return cmsUserSiteList;
-    }
-
-    public void setCmsUserSiteList(List<CmsUserSite> cmsUserSiteList) {
-        this.cmsUserSiteList = cmsUserSiteList;
-    }
-
-    public CmsUser getCmsUser() {
-        return cmsUser;
-    }
-
-    public void setCmsUser(CmsUser cmsUser) {
-        this.cmsUser = cmsUser;
-    }
-
-    public String getCmsUserId() {
-        return cmsUserId;
-    }
-
-    public void setCmsUserId(String cmsUserId) {
-        this.cmsUserId = cmsUserId;
-    }
 
     public String showSiteList() {
         cmsUserSiteList = cmsUserSiteService.getList();
@@ -124,5 +76,37 @@ public class CmsAccountAction extends ActionSupport implements SessionAware {
     @Override
     public void setSession(Map<String, Object> sessionMap) {
         this.sessionMap = sessionMap;
+    }
+    
+    public List<CmsUser> getCmsUserList() {
+        return cmsUserList;
+    }
+
+    public void setCmsUserList(List<CmsUser> cmsUserList) {
+        this.cmsUserList = cmsUserList;
+    }
+
+    public List<CmsUserSite> getCmsUserSiteList() {
+        return cmsUserSiteList;
+    }
+
+    public void setCmsUserSiteList(List<CmsUserSite> cmsUserSiteList) {
+        this.cmsUserSiteList = cmsUserSiteList;
+    }
+
+    public CmsUser getCmsUser() {
+        return cmsUser;
+    }
+
+    public void setCmsUser(CmsUser cmsUser) {
+        this.cmsUser = cmsUser;
+    }
+
+    public String getCmsUserId() {
+        return cmsUserId;
+    }
+
+    public void setCmsUserId(String cmsUserId) {
+        this.cmsUserId = cmsUserId;
     }
 }

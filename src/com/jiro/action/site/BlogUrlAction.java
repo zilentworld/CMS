@@ -8,6 +8,7 @@ import com.jiro.service.cms.CmsUserSiteService;
 import com.jiro.utility.Constants;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.interceptor.SessionAware;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
 
@@ -17,79 +18,16 @@ public class BlogUrlAction extends ActionSupport implements SessionAware {
      *
      */
     private static final long serialVersionUID = 1L;
+    @Autowired
+    private CmsUserSiteService cmsUserSiteService;
+    @Autowired
+    private CmsTemplatesService cmsTemplatesService;
     private String cmsTemplateId;
     private String msgError;
     private Map<String, Object> sessionMap;
     private CmsUserSite cmsUserSite;
-    private CmsUserSiteService cmsUserSiteService;
-    private CmsTemplatesService cmsTemplatesService;
     private String nextAction;
     private String msg;
-    private CmsFileController cmsFileController;
-
-    public CmsFileController getCmsFileController() {
-        return cmsFileController;
-    }
-
-    public void setCmsFileController(CmsFileController cmsFileController) {
-        this.cmsFileController = cmsFileController;
-    }
-
-    public CmsUserSiteService getCmsUserSiteService() {
-        return cmsUserSiteService;
-    }
-
-    public void setCmsUserSiteService(CmsUserSiteService cmsUserSiteService) {
-        this.cmsUserSiteService = cmsUserSiteService;
-    }
-
-    public CmsUserSite getCmsUserSite() {
-        return cmsUserSite;
-    }
-
-    public void setCmsUserSite(CmsUserSite cmsUserSite) {
-        this.cmsUserSite = cmsUserSite;
-    }
-
-    public String getCmsTemplateId() {
-        return cmsTemplateId;
-    }
-
-    public void setCmsTemplateId(String cmsTemplateId) {
-        this.cmsTemplateId = cmsTemplateId;
-    }
-
-    public CmsTemplatesService getCmsTemplatesService() {
-        return cmsTemplatesService;
-    }
-
-    public void setCmsTemplatesService(CmsTemplatesService cmsTemplatesService) {
-        this.cmsTemplatesService = cmsTemplatesService;
-    }
-
-    public String getMsgError() {
-        return msgError;
-    }
-
-    public void setMsgError(String msgError) {
-        this.msgError = msgError;
-    }
-
-    public String getNextAction() {
-        return nextAction;
-    }
-
-    public void setNextAction(String nextAction) {
-        this.nextAction = nextAction;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
 
     @Override
     public String execute() throws Exception {
@@ -102,7 +40,7 @@ public class BlogUrlAction extends ActionSupport implements SessionAware {
             return ERROR;
         }
 
-        cmsFileController.generateFiles(cmsUserSite);
+        CmsFileController.generateFiles(cmsUserSite);
 
         msg = "Your site is waiting for publication";
 
@@ -129,4 +67,43 @@ public class BlogUrlAction extends ActionSupport implements SessionAware {
         this.sessionMap = sessionMap;
     }
 
+    public CmsUserSite getCmsUserSite() {
+        return cmsUserSite;
+    }
+
+    public void setCmsUserSite(CmsUserSite cmsUserSite) {
+        this.cmsUserSite = cmsUserSite;
+    }
+
+    public String getCmsTemplateId() {
+        return cmsTemplateId;
+    }
+
+    public void setCmsTemplateId(String cmsTemplateId) {
+        this.cmsTemplateId = cmsTemplateId;
+    }
+
+    public String getMsgError() {
+        return msgError;
+    }
+
+    public void setMsgError(String msgError) {
+        this.msgError = msgError;
+    }
+
+    public String getNextAction() {
+        return nextAction;
+    }
+
+    public void setNextAction(String nextAction) {
+        this.nextAction = nextAction;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 }

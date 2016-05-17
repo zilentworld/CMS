@@ -11,16 +11,7 @@ import com.jiro.service.cms.CmsTemplatesService;
 public class CmsTemplatesServiceImpl implements CmsTemplatesService {
     
     @Autowired
-    CmsTemplatesDao cmsTemplatesDao;
-    
-    public CmsTemplatesDao getCmsTemplatesDao() {
-        return cmsTemplatesDao;
-    }
-
-    public void setCmsTemplatesDao(CmsTemplatesDao cmsTemplatesDao) {
-        this.cmsTemplatesDao = cmsTemplatesDao;
-    }
-    
+    private CmsTemplatesDao cmsTemplatesDao;
 
     @Override
     public CmsTemplates getById(long templateId) {

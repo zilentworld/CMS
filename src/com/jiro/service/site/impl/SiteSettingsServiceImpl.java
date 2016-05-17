@@ -14,14 +14,6 @@ public class SiteSettingsServiceImpl implements SiteSettingsService {
     @Autowired
     private SiteSettingsDao siteSettingsDao;
 
-    public SiteSettingsDao getSiteSettingsDao() {
-        return siteSettingsDao;
-    }
-
-    public void setSiteSettingsDao(SiteSettingsDao siteSettingsDao) {
-        this.siteSettingsDao = siteSettingsDao;
-    }
-
     @Override
     public SiteSettings getById(long siteSettingsId) {
         return siteSettingsDao.getById(siteSettingsId);

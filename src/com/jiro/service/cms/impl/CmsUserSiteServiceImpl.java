@@ -38,27 +38,6 @@ public class CmsUserSiteServiceImpl implements CmsUserSiteService {
     @Autowired
     private CmsTemplatesService cmsTemplatesService;
 
-
-    public void setSiteSettingsService(SiteSettingsService siteSettingsService) {
-        this.siteSettingsService = siteSettingsService;
-    }
-
-    public void setSiteLinksPermissionService(SiteLinksPermissionService siteLinksPermissionService) {
-        this.siteLinksPermissionService = siteLinksPermissionService;
-    }
-
-    public void setSiteUserService(SiteUserService siteUserService) {
-        this.siteUserService = siteUserService;
-    }
-
-    public void setSitePostService(SitePostService sitePostService) {
-        this.sitePostService = sitePostService;
-    }
-
-    public void setCmsUserSiteDao(CmsUserSiteDao cmsUserSiteDao) {
-        this.cmsUserSiteDao = cmsUserSiteDao;
-    }
-    
     public boolean saveNewUserSite(CmsUserSite cmsUserSite) {
         System.out.println("saveNewUserSite");
         if(cmsUserSiteDao.persist(cmsUserSite) > 0) {

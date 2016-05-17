@@ -10,42 +10,18 @@ import com.jiro.model.site.SiteUser;
 import com.jiro.service.site.SiteUserService;
 import com.jiro.utility.Constants;
 import com.jiro.utility.Utility;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class SiteRegisterAction extends SiteAbstractAction {
-    
 
     /**
      * 
      */
     private static final long serialVersionUID = 1L;
+    @Autowired
     private SiteUserService siteUserService;
     private String repeatPassword;
     private SiteUser siteUser;
-    
-    public SiteUserService getSiteUserService() {
-        return siteUserService;
-    }
-
-    public void setSiteUserService(SiteUserService siteUserService) {
-        this.siteUserService = siteUserService;
-    }
-
-    public String getRepeatPassword() {
-        return repeatPassword;
-    }
-
-    public void setRepeatPassword(String repeatPassword) {
-        this.repeatPassword = repeatPassword;
-    }
-    
-
-    public SiteUser getSiteUser() {
-        return siteUser;
-    }
-
-    public void setSiteUser(SiteUser siteUser) {
-        this.siteUser = siteUser;
-    }
 
     @SkipValidation
     public String showRegister() {
@@ -66,7 +42,7 @@ public class SiteRegisterAction extends SiteAbstractAction {
         System.out.println("BLOGURL:"+blogUrl);
         System.out.println("BEFORE SETCMSUSERSITE");
         
-        siteUser.setCmsUserSite(getCmsUserSiteService().getByUrl(blogUrl));
+        siteUser.setCmsUserSite(cmsUserSiteService.getByUrl(blogUrl));
         
         System.out.println("AFTER SETCMSUSERSITE");
         if(!siteUserService.saveNewUser(siteUser)) {
@@ -116,4 +92,22 @@ public class SiteRegisterAction extends SiteAbstractAction {
         siteUser.setSiteUserPassword("");
         repeatPassword = "";
     }
+
+    public String getRepeatPassword() {
+        return repeatPassword;
+    }
+
+    public void setRepeatPassword(String repeatPassword) {
+        this.repeatPassword = repeatPassword;
+    }
+
+
+    public SiteUser getSiteUser() {
+        return siteUser;
+    }
+
+    public void setSiteUser(SiteUser siteUser) {
+        this.siteUser = siteUser;
+    }
+
 }
