@@ -1,9 +1,10 @@
 package com.jiro.cms;
 
+import com.google.common.base.Charsets;
 import com.jiro.model.cms.CmsUserSite;
 import com.jiro.utility.Constants;
-import com.jiro.utility.Utility;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -21,6 +22,15 @@ import java.util.List;
 public class CmsFileController {
 
     private static String realPath;
+//    private static Map<String, String> cmsTagsMap = new HashedMap();
+//
+//    public static Map<String, String> getCmsTagsMap() {
+//        return cmsTagsMap;
+//    }
+//
+//    public static void setCmsTagsMap(Map<String, String> cmsTagsMap) {
+//        CmsFileController.cmsTagsMap = cmsTagsMap;
+//    }
 
     public static String getRealPath() {
         return realPath;
@@ -52,6 +62,90 @@ public class CmsFileController {
             FileUtils.copyDirectoryToDirectory(sitePending, generatedPath);
             //move from pending to published
             FileUtils.moveDirectoryToDirectory(sitePending, sitePublished, true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void convertHtmlToJsp() {
+        String sitePublishedPath = realPath + Constants.CMS_PATH_TO_GENERATED;
+        convertHtmlFiles(sitePublishedPath);
+    }
+
+    public static void convertHtmlToJsp(CmsUserSite cmsUserSite) {
+        String sitePublishedPath = realPath + Constants.CMS_PATH_TO_GENERATED + cmsUserSite.getBlogUrl() + "/html/";
+        convertHtmlFiles(sitePublishedPath);
+    }
+
+    private static void convertHtmlFiles(String sitePublishedPath) {
+        try {
+            Files.walk(Paths.get(sitePublishedPath)).forEach(filePath -> {
+                if (filePath.toFile().isFile()) {
+                    if ("html".equals(FilenameUtils.getExtension(filePath.toString()))) {
+                        System.out.println("convert html to jsp:" + filePath.toString());
+                        String newFileName = FilenameUtils.removeExtension(filePath.getFileName().toString()) + ".jsp";
+                        System.out.println("jspConverted:" + newFileName);
+                        try {
+                            //rename file
+                            Files.move(filePath, filePath.resolveSibling(newFileName));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void convertSpecialCmsTags() {
+        String sitePublishedPath = realPath + Constants.CMS_PATH_TO_GENERATED;
+        putStrutTags(sitePublishedPath);
+    }
+
+    public static void convertSpecialCmsTags(CmsUserSite cmsUserSite) {
+        String sitePublishedPath = realPath + Constants.CMS_PATH_TO_GENERATED + cmsUserSite.getBlogUrl() + "/html/";
+        putStrutTags(sitePublishedPath);
+    }
+
+    private static void putStrutTags(String path) {
+        String prependStr = "<%@ page contentType=\"text/html; charset=UTF-8\"%>" +
+                "<%@ taglib prefix=\"s\" uri=\"/struts-tags\"%>";
+        try {
+            Files.walk(Paths.get(path)).forEach(filePath -> {
+                if (filePath.toFile().isFile()) {
+                    if ("jsp".equals(FilenameUtils.getExtension(filePath.toString()))) {
+//                        System.out.println("filePath:" + filePath.toString());
+                        File jspFile = filePath.toFile();
+                        String fileAsString = null;
+                        try {
+                            fileAsString = prependStr + com.google.common.io.Files.toString(jspFile, Charsets.UTF_8);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        Iterator iter = CmsTagsMap.tagsMap.keySet().iterator();
+//                        System.out.println("putStrutTags:jspFile:" + jspFile.toString());
+                        while (iter.hasNext()) {
+                            String a = iter.next().toString();
+//                            System.out.println("putStrutTags:iter:" + a);
+                            if (fileAsString.contains(a)) {
+//                                System.out.println("beforeReplace:fileAsString:" + fileAsString);
+                                String urlFolder = filePath.toFile().getParentFile().getParentFile().getName();
+                                String[] actionTag = CmsTagsMap.tagsMap.get(a);
+                                fileAsString = fileAsString.replace(a, actionTag[0] + urlFolder + actionTag[1] );
+//                                System.out.println("afterReplace:fileAsString:" + fileAsString);
+                            }
+                        }
+
+                        try {
+                            FileUtils.writeStringToFile(jspFile, fileAsString);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -110,6 +204,8 @@ public class CmsFileController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        convertHtmlToJsp();
+        convertSpecialCmsTags();
     }
 
     public static void destroySites() {
@@ -150,7 +246,7 @@ public class CmsFileController {
     }
 
     public static void deleteFile(CmsUserSite cmsUserSite, String fileName) {
-        if(!StringUtils.isEmpty(fileName)) {
+        if (!StringUtils.isEmpty(fileName)) {
             String currPath = cmsUserSite.getCurrPath();
             String siteName = cmsUserSite.getBlogUrl();
             File fileToDelete = new File(currPath + siteName + "/html/" + fileName);
@@ -181,13 +277,13 @@ public class CmsFileController {
         String siteUrl = cmsUserSite.getBlogUrl();
 //        System.out.println("getAllFiles:siteUrl:"+siteUrl);
         String currPath = cmsUserSite.getCurrPath();
-        System.out.println("getAllFiles:currPath:"+currPath);
+        System.out.println("getAllFiles:currPath:" + currPath);
         String sitePath = currPath + siteUrl;
-        System.out.println("getAllFiles:sitePath:"+sitePath);
+        System.out.println("getAllFiles:sitePath:" + sitePath);
         List<File> allFiles = new ArrayList<>();
         try {
             Files.walk(Paths.get(sitePath)).forEach(filePath -> {
-                System.out.println("in loop:filePath:"+filePath.toString());
+                System.out.println("in loop:filePath:" + filePath.toString());
 //                if (Files.isRegularFile(filePath)) {
                 if (filePath.toFile().isFile()) {
                     System.out.println("add to list");
@@ -198,7 +294,7 @@ public class CmsFileController {
             e.printStackTrace();
         }
 
-        System.out.println("getAllFiles:allFiles:"+allFiles.size());
+        System.out.println("getAllFiles:allFiles:" + allFiles.size());
         return allFiles;
     }
 
@@ -209,12 +305,12 @@ public class CmsFileController {
 
         try {
             Iterator<Path> iterator = Files.walk(Paths.get(sitePath)).iterator();
-            while(iterator.hasNext()) {
+            while (iterator.hasNext()) {
                 Path p = iterator.next();
                 File file = p.toFile();
                 if (file.isFile()) {
-                    if(file.getName().toLowerCase().contains(filename.toLowerCase())) {
-                        System.out.println("getByFilename:file:filePath:"+file.getPath());
+                    if (file.getName().toLowerCase().contains(filename.toLowerCase())) {
+                        System.out.println("getByFilename:file:filePath:" + file.getPath());
                         return file;
                     }
                 }
@@ -231,18 +327,19 @@ public class CmsFileController {
         String htmlFileName = filename + ".html";
         String currPath = cmsUserSite.getCurrPath();
         File checkFile = new File(currPath + cmsUserSite.getBlogUrl() + "/html/" + htmlFileName);
-        System.out.println("checkIfFileExists:htmlFileName:"+htmlFileName);
-        System.out.println("checkIfFileExists:currPath:"+currPath);
-        System.out.println("checkIfFileExists:checkFile:"+checkFile.getPath());
+        System.out.println("checkIfFileExists:htmlFileName:" + htmlFileName);
+        System.out.println("checkIfFileExists:currPath:" + currPath);
+        System.out.println("checkIfFileExists:checkFile:" + checkFile.getPath());
 
         return checkFile.exists() && checkFile.isFile();
     }
 
     public static boolean checkIfFileDeployed(CmsUserSite cmsUserSite, String filename) {
-        String htmlFileName = filename + ".html";
+        String htmlFileName = filename + ".jsp";
         String currPath = Constants.CMS_PATH_TO_GENERATED;
         File checkFile = new File(realPath + currPath + cmsUserSite.getBlogUrl() + "/html/" + htmlFileName);
 
         return checkFile.exists() && checkFile.isFile();
     }
+
 }

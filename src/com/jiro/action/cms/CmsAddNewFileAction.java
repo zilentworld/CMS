@@ -6,10 +6,12 @@ import com.jiro.service.cms.CmsUserSiteService;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 /**
  * Created by dev-pc on 5/13/16.
  */
+@Controller
 public class CmsAddNewFileAction extends ActionSupport {
 
     @Autowired

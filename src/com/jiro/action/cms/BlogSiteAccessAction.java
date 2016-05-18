@@ -1,7 +1,9 @@
 package com.jiro.action.cms;
 
 import com.opensymphony.xwork2.ActionSupport;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class BlogSiteAccessAction extends ActionSupport {
 
     /**

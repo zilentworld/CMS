@@ -8,12 +8,15 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.interceptor.SessionAware;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import java.util.Map;
 
 /**
  * Created by dev-pc on 5/10/16.
  */
+
+@Controller
 public class CmsEditUserAction extends ActionSupport implements SessionAware {
 
     @Autowired

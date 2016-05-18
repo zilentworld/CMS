@@ -11,11 +11,13 @@ import com.jiro.utility.Constants;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@Controller
 public class CmsMgmtAction extends ActionSupport implements SessionAware {
 
     /**
@@ -75,7 +77,11 @@ public class CmsMgmtAction extends ActionSupport implements SessionAware {
     }
 
     public String republishAllSites() {
-        cmsUserSiteService.getByPublished(true).forEach(e -> CmsFileController.updatePublishedSite(e));
+//        cmsUserSiteService.getByPublished(true).forEach(e -> CmsFileController.updatePublishedSite(e));
+        cmsUserSiteLists = cmsUserSiteService.getByPublished(true);
+        for (CmsUserSite cmsUserSite : cmsUserSiteLists) {
+            CmsFileController.updatePublishedSite(cmsUserSite);
+        }
 
         return SUCCESS;
     }

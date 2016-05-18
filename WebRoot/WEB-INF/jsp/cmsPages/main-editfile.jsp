@@ -35,7 +35,7 @@
 
     tinymce.init({
         selector: 'textarea',
-        plugins: ["preview", "code", "fullpage"],
+        plugins: ["code", "fullpage"],
         height: "600",
         width: "99%",
         valid_elements : '*[*]'

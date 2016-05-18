@@ -11,7 +11,9 @@ import com.jiro.service.site.SiteUserService;
 import com.jiro.utility.Constants;
 import com.jiro.utility.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class SiteRegisterAction extends SiteAbstractAction {
 
     /**

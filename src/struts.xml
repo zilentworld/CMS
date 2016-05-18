@@ -44,14 +44,14 @@
 			<result name="login" type="tiles">main-register-login</result>
 			<result name="success" type="redirect">Account</result>
 		</action>
-		<action name="processRegister" class="registerCms">
+		<action name="processRegister" class="cmsRegisterAction">
 			<result name="error" type="tiles">main-register-login</result>
 			<result name="input" type="tiles">main-register-login</result>
 			<!--<result name="success" type="tiles">main-account</result>-->
 			<result name="success">${sourcePage}</result>
 			<!--<result name="success" type="redirect">${sourcePage}</result>-->
 		</action>
-		<action name="processLogin" class="loginAction">
+		<action name="processLogin" class="cmsLoginAction">
 			<result name="error" type="tiles">main-register-login</result>
 			<result name="input" type="tiles">main-register-login</result>
 			<result name="success">${sourcePage}</result>
@@ -82,34 +82,34 @@
 			<result name="error">UserList</result>
 			<result name="success">UserList</result>
 		</action>
-		<action name="EditUser" class="cmsEdituserAction" method="showEditUser">
+		<action name="EditUser" class="cmsEditUserAction" method="showEditUser">
 			<interceptor-ref name="loginCheckStack" />
 			<result name="error" type="tiles">main-account-editUser</result>
 			<result name="success" type="tiles">main-account-editUser</result>
 		</action>
-		<action name="SaveEditUser" class="cmsEdituserAction">
+		<action name="SaveEditUser" class="cmsEditUserAction">
 			<interceptor-ref name="loginCheckStack" />
 			<result name="error" type="tiles">main-account-editUser</result>
 			<result name="input">EditUser</result>
 			<result name="success" type="redirect">${sourcePage}</result>
 		</action>
-		<action name="Logout" class="loginAction" method="processLogout">
+		<action name="Logout" class="cmsLoginAction" method="processLogout">
 			<result name="success" type="tiles">main-welcome</result>
 		</action>
-		<action name="TemplateList" class="createSiteAction" method="showTemplate">
+		<action name="TemplateList" class="cmsCreateSiteAction" method="showTemplate">
 			<result name="success" type="tiles">main-template</result>
 		</action>
-		<action name="PickTemplate" class="createSiteAction" method="pickTemplate">
+		<action name="PickTemplate" class="cmsCreateSiteAction" method="pickTemplate">
 			<result name="success">EnterUrl</result>
 		</action>
-		<action name="EnterUrl" class="createSiteAction" method="showUrlEntry">
+		<action name="EnterUrl" class="cmsCreateSiteAction" method="showUrlEntry">
 			<result name="success" type="tiles">main-enterUrl</result>
 		</action>
-		<action name="ConfirmUrl" class="createSiteAction" method="processUrl">
+		<action name="ConfirmUrl" class="cmsCreateSiteAction" method="processUrl">
 			<result name="login" type="tiles">main-register-login</result>
 			<result name="success">ProcessNewSite</result>
 		</action>
-		<action name="ProcessNewSite" class="createSiteAction" method="processNewSite">
+		<action name="ProcessNewSite" class="cmsCreateSiteAction" method="processNewSite">
 			<result name="success" type="redirect">UserSites</result>
 		</action>
 		<action name="CMS" class="cmsFileManageAction" method="showCMS">
@@ -160,16 +160,35 @@
 			<result name="success">CMS</result>
 		</action>
 
+		<action name="/{siteUrl}/postPreview" class="postPreviewAction">
+			<result name="success" >/WEB-INF/jsp/sitePages/postPreview.jsp</result>
+		</action>
+
+		<action name="/{blogSiteUrl}/postContent" class="postContentAction">
+			<result name="success" >/WEB-INF/jsp/sitePages/postContent.jsp</result>
+		</action>
+
+		<action name="/{blogSiteUrl}/showNewPost" class="sitePostAction" method="showNewSitePost">
+			<result name="success" >/WEB-INF/jsp/sitePages/sitePost.jsp</result>
+		</action>
+
+		<action name="/{blogSiteUrl}/newSitePost" class="sitePostAction">
+			<result name="success">home</result>
+		</action>
+
+		<action name="/{blogSiteUrl}/showLogin" class="siteLoginAction">
+			<result name="success">/WEB-INF/jsp/sitePages/siteLogin.jsp</result>
+		</action>
+
 		<action name="/{siteUrl}/{*}" class="cmsSiteNavAction" method="toFile" >
 			<param name="fileName">{2}</param>
 			<result name="success">${siteFilePath}</result>
-			<result name="error" type="tiles">main-message</result>
+			<result name="error">/WEB-INF/jsp/cmsPages/message.jsp</result>
 		</action>
 
 		<action name="/{siteUrl}" class="cmsSiteNavAction">
 			<result name="success" type="redirect">${siteHomePath}</result>
-			<result name="error" type="tiles">main-message</result>
+			<result name="error">/WEB-INF/jsp/cmsPages/message.jsp</result>
 		</action>
-
 	</package>
 </struts>

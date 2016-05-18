@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
 
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ import java.util.Map;
 /**
  * Created by dev-pc on 5/6/16.
  */
+@Controller
 public class CmsAccountAction extends ActionSupport implements SessionAware {
 
 

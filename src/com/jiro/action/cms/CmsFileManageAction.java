@@ -7,6 +7,7 @@ import com.jiro.model.cms.CmsUserSite;
 import com.jiro.service.cms.CmsUserSiteService;
 import com.opensymphony.xwork2.ActionSupport;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +17,8 @@ import java.util.List;
 /**
  * Created by dev-pc on 5/12/16.
  */
+
+@Controller
 public class CmsFileManageAction extends ActionSupport {
 
     @Autowired

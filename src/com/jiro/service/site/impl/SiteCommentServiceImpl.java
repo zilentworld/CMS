@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.jiro.dao.site.SiteCommentDao;
 import com.jiro.model.site.SiteComment;
 import com.jiro.service.site.SiteCommentService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class SiteCommentServiceImpl implements SiteCommentService {
     
     @Autowired

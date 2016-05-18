@@ -9,7 +9,9 @@ import com.jiro.service.cms.CmsUserSiteService;
 import com.jiro.utility.Constants;
 import com.opensymphony.xwork2.ActionSupport;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public abstract class SiteAbstractAction extends ActionSupport implements SessionAware {
 
     /**

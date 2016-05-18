@@ -4,85 +4,92 @@
     <title>Title</title>
 </head>
 <style>
-.outer-banner {
-    width: 100%;
-    height: 50%;
-    text-align: center;
-}
+    .outer-banner {
+        width: 100%;
+        height: 50%;
+        text-align: center;
+    }
 
-.main-content {
-    position: absolute;
-    min-width: 60%;
-    margin-left: 20%;
-    margin-right: 20%;
-}
+    .main-content {
+        position: absolute;
+        min-width: 60%;
+        margin-left: 20%;
+        margin-right: 20%;
+    }
 
-.float-left {
-    float: left;
-}
+    .float-left {
+        float: left;
+    }
 
-.float-right {
-    float: right;
-}
+    .float-right {
+        float: right;
+    }
 
-.header-buttons {
-    margin-top: 5px;
-}
+    .header-buttons {
+        margin-top: 5px;
+    }
 
-.clear {
-    clear: both;
-}
+    .clear {
+        clear: both;
+    }
 
-.banner-img {
-    height: 100%;
-    width: 100%;
-}
+    .banner-img {
+        height: 100%;
+        width: 100%;
+    }
 
-.footer-img {
+    .footer-img {
 
-    height: 100%;
-    width: 100%;
-}
+        height: 100%;
+        width: 100%;
+    }
 
-.blog-title {
-    min-width: 400px;
-}
+    .blog-title {
+        min-width: 400px;
+    }
 
-.blog-content {
-    width: 600px;
-    height: 300px;
-    max-width: 1100px;
-}
+    .blog-content {
+        width: 600px;
+        height: 300px;
+        max-width: 1100px;
+    }
 
-.site-post-content {
-    word-wrap: break-word;
-    overflow: hidden;
-}
+    .main-inner {
+        width: 90%;
+        height: 90%;
+        clear: both;
+        margin: 1%;
+    }
 
-.comment-textarea {
-    width: 320px;
-    height: 90px;
-}
+    .site-post-content {
+        word-wrap: break-word;
+        overflow: hidden;
+    }
 
-.display-block {
-    display: block;
-}
+    .comment-textarea {
+        width: 320px;
+        height: 90px;
+    }
 
-.display-none {
-    display: none;
-}
+    .display-block {
+        display: block;
+    }
+
+    .display-none {
+        display: none;
+    }
 </style>
 <body>
 <div id="site-wrapper">
     template3
-    <property value="#blogSiteUrl" />
+    <property value="#blogSiteUrl"/>
     <div>
         <div>
             <div class="outer-banner">
                 <div id="banner">
                     <div id="banner-img">
                         <div>
-                            <img src="http://i.imgur.com/96UBJIk.jpg" class="banner-img" />
+                            <img src="http://i.imgur.com/96UBJIk.jpg" class="banner-img"/>
                         </div>
                     </div>
                 </div>
@@ -121,28 +128,7 @@
                         <div class="main-inner">
                             <div id="posts-content" class="margin1">
                                 <div class="margin5">
-                                    <div>
-                                        <h2>
-                                            Blog Posts
-                                        </h2>
-                                        <div>
-                                            <div id="post-title-1">
-                                                <a href="./firstPost">
-                                                    Blog First Title
-                                                </a>
-                                            </div>
-                                            <div id="post-user-1">
-                                                by User1
-                                            </div>
-                                            <div id="post-preview-1">
-                                                <p>
-                                                    Blog First  Content...
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        <br />
-                                    </div>
+                                    [!postPreview]
                                 </div>
                             </div>
                         </div>
@@ -150,7 +136,7 @@
                     <div>
                         <div id="footer-content">
                             <div>
-                                <img src="http://i.imgur.com/kRtWTs7.png" class="banner-img" />
+                                <img src="http://i.imgur.com/kRtWTs7.png" class="banner-img"/>
                             </div>
                         </div>
                     </div>

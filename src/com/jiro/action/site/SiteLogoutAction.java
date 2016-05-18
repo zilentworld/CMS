@@ -4,8 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.jiro.utility.Constants;
+import org.springframework.stereotype.Controller;
 
-
+@Controller
 public class SiteLogoutAction extends SiteAbstractAction {
 
     /**

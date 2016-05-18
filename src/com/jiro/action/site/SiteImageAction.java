@@ -3,7 +3,9 @@ package com.jiro.action.site;
 import com.jiro.model.site.SiteSettings;
 import com.jiro.service.site.SiteSettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class SiteImageAction extends SiteAbstractAction {
 
     /**

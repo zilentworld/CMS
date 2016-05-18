@@ -7,11 +7,14 @@ import com.jiro.utility.Constants;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 
 /**
  * Created by dev-pc on 5/16/16.
  */
+
+@Controller
 public class CmsSiteNavAction extends ActionSupport {
 
     @Autowired
@@ -23,6 +26,12 @@ public class CmsSiteNavAction extends ActionSupport {
     private String msg;
     private String siteHomePath;
 
+    public String testAction() {
+        System.out.println("testAction:siteUrl:"+siteUrl);
+        msg = "ha!";
+        return SUCCESS;
+    }
+
     public String toFile() {
         System.out.println("cmsSiteNavAction:toFile:siteUrl:" + siteUrl);
         System.out.println("cmsSiteNavAction:toFile:fileName:" + fileName);
@@ -33,7 +42,7 @@ public class CmsSiteNavAction extends ActionSupport {
         if(StringUtils.isEmpty(fileName)) {
             fileName = "home";
         }
-        siteFilePath = Constants.CMS_PATH_TO_GENERATED + siteUrl + "/html/" + fileName + ".html";
+        siteFilePath = Constants.CMS_PATH_TO_GENERATED + siteUrl + "/html/" + fileName + ".jsp";
         System.out.println("cmsSiteNavAction:toFile:siteFilePath:" + siteFilePath);
 
         return getReturnValue();
@@ -45,7 +54,7 @@ public class CmsSiteNavAction extends ActionSupport {
         System.out.println("cmsSiteNavAction:execute:siteUrl:" + siteUrl);
         System.out.println("cmsSiteNavAction:execute:fileName:" + fileName);
         fileName = "home";
-        siteFilePath = Constants.CMS_PATH_TO_GENERATED + siteUrl + "/html/" + fileName + ".html";
+        siteFilePath = Constants.CMS_PATH_TO_GENERATED + siteUrl + "/html/" + fileName + ".jsp";
         siteHomePath = siteUrl + "/" + fileName;
         System.out.println("cmsSiteNavAction:execute:siteHomePath:" + siteHomePath);
         System.out.println("cmsSiteNavAction:execute:siteFilePath:" + siteFilePath);
@@ -73,24 +82,24 @@ public class CmsSiteNavAction extends ActionSupport {
 
     private String sanitizeSlashes(String sanitizeString) {
         if (!StringUtils.isEmpty(sanitizeString)) {
-            System.out.println(sanitizeString);
-            System.out.println("charAt(0)");
+//            System.out.println(sanitizeString);
+//            System.out.println("charAt(0)");
             while (sanitizeString.charAt(0) == '/') {
-                System.out.println("1:" + sanitizeString);
+//                System.out.println("1:" + sanitizeString);
                 sanitizeString = sanitizeString.substring(1, sanitizeString.length());
-                System.out.println("2:" + sanitizeString);
+//                System.out.println("2:" + sanitizeString);
             }
-            System.out.println("charAt(sb.length()):" + sanitizeString.length());
+//            System.out.println("charAt(sb.length()):" + sanitizeString.length());
             while (sanitizeString.charAt(sanitizeString.length() - 1) == '/') {
-                System.out.println("3:" + sanitizeString);
+//                System.out.println("3:" + sanitizeString);
                 sanitizeString = sanitizeString.substring(0, sanitizeString.length() - 1);
-                System.out.println("4:" + sanitizeString);
+//                System.out.println("4:" + sanitizeString);
             }
-            System.out.println("indexOf('//')");
+//            System.out.println("indexOf('//')");
             while (sanitizeString.indexOf("//") > 0) {
-                System.out.println("5:" + sanitizeString);
+//                System.out.println("5:" + sanitizeString);
                 sanitizeString = sanitizeString.replace("//", "/");
-                System.out.println("6:" + sanitizeString);
+//                System.out.println("6:" + sanitizeString);
             }
         }
 

@@ -4,12 +4,15 @@ import com.jiro.model.cms.CmsUser;
 import com.jiro.utility.Constants;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.interceptor.SessionAware;
+import org.springframework.stereotype.Controller;
 
 import java.util.Map;
 
 /**
  * Created by dev-pc on 5/6/16.
  */
+
+@Controller
 public class CmsNavAction extends ActionSupport implements SessionAware {
 
     private Map<String, Object> sessionMap;

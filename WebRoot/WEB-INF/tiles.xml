@@ -98,7 +98,7 @@
     <!--</definition>-->
 
     <!--<definition name="*/newSitePost" extends="{1}/home">-->
-        <!--<put-attribute name="body" value="/WEB-INF/jsp/generated/{1}/newSitePost.jsp" />-->
+        <!--<put-attribute name="body" value="/WEB-INF/jsp/generated/{1}/sitePost.jsp" />-->
     <!--</definition>-->
 
     <!--<definition name="*/siteUserComments" extends="{1}/home">-->
@@ -164,13 +164,13 @@
     <!--</definition>-->
     <!---->
     <!--<definition name="newSitePost-template1" extends="home-template1">-->
-        <!--<put-attribute name="body" value="/WEB-INF/jsp/sitePages/newSitePost.jsp" />-->
+        <!--<put-attribute name="body" value="/WEB-INF/jsp/sitePages/sitePost.jsp" />-->
     <!--</definition>-->
     <!--<definition name="newSitePost-template2" extends="home-template2">-->
-        <!--<put-attribute name="body" value="/WEB-INF/jsp/sitePages/newSitePost.jsp" />-->
+        <!--<put-attribute name="body" value="/WEB-INF/jsp/sitePages/sitePost.jsp" />-->
     <!--</definition>-->
     <!--<definition name="newSitePost-template3" extends="home-template3">-->
-        <!--<put-attribute name="body" value="/WEB-INF/jsp/sitePages/newSitePost.jsp" />-->
+        <!--<put-attribute name="body" value="/WEB-INF/jsp/sitePages/sitePost.jsp" />-->
     <!--</definition>-->
     <!---->
     <!--<definition name="siteUserComments-template1" extends="home-template1">-->

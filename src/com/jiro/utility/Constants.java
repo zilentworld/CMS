@@ -12,14 +12,14 @@ public final class Constants {
     public static final String CMS_PATH_TO_GENERATED = "/WEB-INF/jsp/generated/";
 
     public static String getPendingPath() {
-        if(OsValidator.isWindows())
+        if (OsValidator.isWindows())
             return CMS_PATH_TO_PENDING_WIN;
         else
             return CMS_PATH_TO_PENDING;
     }
 
     public static String getPublishPath() {
-        if(OsValidator.isWindows())
+        if (OsValidator.isWindows())
             return CMS_PATH_TO_PUBLISHED_WIN;
         else
             return CMS_PATH_TO_PUBLISHED;
@@ -32,20 +32,20 @@ public final class Constants {
     public static final String CMS_PATH_TO_DEFAULT_IMAGES = "/images/";
     public static final String CMS_PATH_TO_DEFAULT_JS = "/js/";
 
-    
+
     //CMS Session Attributes
     public static final String CMS_SESSION_CMS_USER = "cms_user";
     public static final String CMS_SESSION_USERNAME = "cms_username";
     public static final String CMS_SESSION_USER_TYPE_CODE = "cms_user_type_code";
     public static final String CMS_SESSION_CMS_TEMPLATE = "cms_template";
     public static final String CMS_SESSION_BLOG_URL = "blog_site_url";
-    
+
     //Site Session Attributes
     public static final String SITE_SESSION_MAP_VARIABLE = "siteMapVars";
     public static final String SITE_SESSION_SITE_USER = "siteUser";
     public static final String SITE_SESSION_SITE_USER_ID = "siteUserId";
     public static final String SITE_SESSION_SITE_USER_NAME = "siteUsername";
-    
+
     //Error Messages for CMS
     public static final String CMS_ERROR_USERNAME_REQUIRED = "Username is required";
     public static final String CMS_ERROR_USERNAME_SHORT = "Username is too short";
@@ -68,7 +68,7 @@ public final class Constants {
     public static final String CMS_ERROR_GENDER_INVALID = "Invalid format for the gender";
     public static final String CMS_ERROR_AGE_INVALID = "Invalid format for the age";
     public static final String CMS_ERROR_ID_INVALID = "Invalid ID. Kindly return to User List";
-    public static final String CMS_ERROR_ADMIN_CANNOT =  "Cannot use admin account";
+    public static final String CMS_ERROR_ADMIN_CANNOT = "Cannot use admin account";
     public static final String CMS_ERROR_ACCT_DISABLED = "Account is disabled";
     public static final String CMS_ERROR_PAGE_NOT_EXISTS = "Page does not exist";
 
@@ -89,16 +89,17 @@ public final class Constants {
     public static final String SITE_ERROR_NEW_POST_CONTENT_EMPTY = "Content must not be empty";
     public static final String SITE_ERROR_NEW_POST_USER_EMPTY = "An error occured, kindly relog.";
     public static final String SITE_ERROR_NEW_POST_ERROR = "An error occured, kindly create a new post again";
-        
+
     //CMS Variables
     public static final String CMS_DEFAULT_USER_TYPE = "cms_user";
-    
+
     //Integer values for CMS
     public static final int CMS_USERNAME_MIN_LENGTH = 5;
-    
+
     //CMS Regex
     public static final String REGEX_USERNAME = "^[a-z0-9_-]{3,15}$";
-    
-    private Constants() {}
+
+    private Constants() {
+    }
 
 }

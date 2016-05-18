@@ -1,14 +1,16 @@
 package com.jiro.action.cms;
 
-import com.jiro.cms.CmsFileController;
 import com.jiro.model.cms.CmsUserSite;
 import com.jiro.service.cms.CmsUserSiteService;
 import com.opensymphony.xwork2.ActionSupport;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 /**
  * Created by zilentworld on 5/15/2016.
  */
+
+@Controller
 public class CmsPublishSiteAction extends ActionSupport {
 
     @Autowired

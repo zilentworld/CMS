@@ -11,7 +11,9 @@ import com.jiro.model.site.SiteUser;
 import com.jiro.service.site.SitePostService;
 import com.jiro.utility.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class SitePostAction extends SiteAbstractAction {
 
     /**
@@ -76,6 +78,7 @@ public class SitePostAction extends SiteAbstractAction {
     @Override
     public void validate() {
         Map<String, Object> varMap = (HashMap<String, Object>) getSessionMap().get(Constants.SITE_SESSION_MAP_VARIABLE);
+        System.out.println("validate:"+getBlogSiteUrl());
         
         if(!varMap.containsKey(getBlogSiteUrl())) {
             addFieldError("sitePost.sitePostTitle", Constants.SITE_ERROR_NEW_POST_USER_EMPTY);

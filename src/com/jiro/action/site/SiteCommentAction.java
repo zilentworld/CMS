@@ -8,7 +8,9 @@ import com.jiro.model.site.SiteUser;
 import com.jiro.service.site.SiteCommentService;
 import com.jiro.utility.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class SiteCommentAction extends SiteAbstractAction {
 
     /**

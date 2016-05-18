@@ -7,7 +7,9 @@ import com.jiro.model.site.SitePost;
 import com.jiro.service.site.SiteCommentService;
 import com.jiro.service.site.SitePostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class PostContentAction extends SiteAbstractAction {
 
     /**

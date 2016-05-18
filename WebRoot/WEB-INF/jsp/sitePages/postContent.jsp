@@ -1,6 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-
 <s:set var="siteMapVars" value="#session.siteMapVars" />
 <s:set var="blogSiteUrl" value="blogSiteUrl" />
 <s:set var="sessionSiteUser" value="%{#siteMapVars[#blogSiteUrl]}" />
@@ -64,7 +62,6 @@
 				Kindly login to comment
 			</s:label>
 		</s:else>
-		AA
 		<s:iterator value="siteComments">
 			<s:div id="comment-%{siteCommentId}">
 				<h5>

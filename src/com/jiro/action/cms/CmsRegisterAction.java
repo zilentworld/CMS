@@ -15,7 +15,9 @@ import com.jiro.utility.Constants;
 import com.jiro.utility.Utility;
 import com.opensymphony.xwork2.ActionSupport;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class CmsRegisterAction extends ActionSupport implements SessionAware {
 
     /**
