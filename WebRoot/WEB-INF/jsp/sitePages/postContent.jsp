@@ -65,7 +65,7 @@
 		<s:iterator value="siteComments">
 			<s:div id="comment-%{siteCommentId}">
 				<h5>
-					<s:div id="comment-controls" class="display-block">
+					<s:div id="comment-controls" style="display:block;">
 						<s:form id="comment-control-form-%{siteCommentId}">
 							<s:property value="siteUser.siteUserUsername" />
 							on <s:date name="commentDate" format="dd/MM/yyyy hh:mm:ss" />
@@ -86,13 +86,13 @@
 						</s:form>
 					</s:div>
 				</h5>
-				<s:div id="comment-content-%{siteCommentId}" class="display-block">
+				<s:div id="comment-content-%{siteCommentId}" style="display:block;">
 					<p>
 						<s:property value="siteCommentContent" />
 					</p>
 				</s:div>
 				<s:if test="#sessionSiteUser.siteUserId == siteUser.siteUserId">
-					<s:div id="comment-edit-%{siteCommentId}" class="display-none">
+					<s:div id="comment-edit-%{siteCommentId}" style="display:none;">
 						<s:form action="postComment" method="post">
 							<table>
 								<tr>
@@ -130,9 +130,11 @@
 </s:else>
 <script>
 	function switchHidden(divId1, divId2) {
-		var theDiv = document.getElementById(divId);
-		theDiv.style.display = (theDiv.style.display == 'block' ? 'none'
-				: 'block');
+		var div1 = document.getElementById(divId1);
+		var div2 = document.getElementById(divId2);
+		div1.style.display = (div1.style.display == 'block' ? 'none' : 'block');
+		div2.style.display = (div2.style.display == 'block' ? 'none' : 'block');
+
 		return false;
 	}
 </script>
