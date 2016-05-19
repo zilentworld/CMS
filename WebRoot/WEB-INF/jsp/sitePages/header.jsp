@@ -2,8 +2,8 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
     <s:set var="siteMapVars" value="#session.siteMapVars" />
 	<s:set var="blogSiteUrl" value="blogSiteUrl" />
-	<s:set var="siteUser" value="%{#siteMapVars[#blogSiteUrl]}"/>
-    <s:if test="#siteUser.siteUserId > 0">
+	<s:set var="siteUser" value="%{#session.siteMapVars[#blogSiteUrl].siteUserId}"/>
+    <s:if test="##session.siteMapVars[#blogSiteUrl].siteUserId > 0">
     	Hi <s:property value="#siteUser.siteUserUsername"/>!
     </s:if>
 		<s:form id="header_form">

@@ -160,33 +160,76 @@
 			<result name="success">CMS</result>
 		</action>
 
-		<action name="/{siteUrl}/postPreview" class="postPreviewAction">
+		<action name="{siteUrl}/postPreview" class="postPreviewAction">
 			<result name="success" >/WEB-INF/jsp/sitePages/postPreview.jsp</result>
 		</action>
 
-		<action name="/{blogSiteUrl}/postContent" class="postContentAction">
+		<action name="{blogSiteUrl}/postContent" class="postContentAction">
 			<result name="success" >/WEB-INF/jsp/sitePages/postContent.jsp</result>
 		</action>
 
-		<action name="/{blogSiteUrl}/showNewPost" class="sitePostAction" method="showNewSitePost">
-			<result name="success" >/WEB-INF/jsp/sitePages/sitePost.jsp</result>
+		<action name="{blogSiteUrl}/showNewPost" class="sitePostAction" method="showNewSitePost">
+			<result name="success">/WEB-INF/jsp/sitePages/sitePost.jsp</result>
 		</action>
 
-		<action name="/{blogSiteUrl}/newSitePost" class="sitePostAction">
+		<action name="{blogSiteUrl}/newSitePost" class="sitePostAction">
 			<result name="success">home</result>
 		</action>
 
-		<action name="/{blogSiteUrl}/showLogin" class="siteLoginAction">
+		<action name="{blogSiteUrl}/editPost" class="sitePostAction" method="editSitePost">
+			<!--<result name="success">/WEB-INF/jsp/sitePages/sitePost.jsp</result>-->
+			<result name="success">${blogSiteUrl}/createPost</result>
+		</action>
+
+		<action name="{blogSiteUrl}/deletePost" class="sitePostAction" method="deleteSitePost">
+			<result name="success">home</result>
+		</action>
+
+		<action name="{blogSiteUrl}/showLogin" class="siteLoginAction" method="showLogin">
+			<result name="input">/WEB-INF/jsp/sitePages/siteLogin.jsp</result>
 			<result name="success">/WEB-INF/jsp/sitePages/siteLogin.jsp</result>
 		</action>
 
-		<action name="/{siteUrl}/{*}" class="cmsSiteNavAction" method="toFile" >
+		<action name="{blogSiteUrl}/doLogin" class="siteLoginAction">
+			<result name="input">/${blogSiteUrl}/login</result>
+			<result name="success">/${blogSiteUrl}/home</result>
+		</action>
+
+		<action name="{blogSiteUrl}/showRegister" class="siteRegisterAction" method="showRegister">
+			<result name="input">/WEB-INF/jsp/sitePages/siteRegister.jsp</result>
+			<result name="success">/WEB-INF/jsp/sitePages/siteRegister.jsp</result>
+		</action>
+
+		<action name="{blogSiteUrl}/doRegister" class="siteRegisterAction">
+			<result name="input">/${blogSiteUrl}/login</result>
+			<result name="success">/${blogSiteUrl}/home</result>
+		</action>
+
+		<action name="{blogSiteUrl}/doLogout" class="siteLogoutAction">
+			<result name="success">/${blogSiteUrl}/home</result>
+		</action>
+
+		<action name="{blogSiteUrl}/saveComment" class="siteCommentAction">
+			<result name="success" type="redirectAction">
+				<param name="actionName">${blogSiteUrl}/content</param>
+				<param name="postId">${postId}</param>
+			</result>
+		</action>
+
+		<action name="{blogSiteUrl}/deleteComment" class="siteCommentAction" method="deleteComment">
+			<result name="success" type="redirectAction">
+				<param name="actionName">${blogSiteUrl}/content</param>
+				<param name="postId">${postId}</param>
+			</result>
+		</action>
+
+		<action name="{siteUrl}/{*}" class="cmsSiteNavAction" method="toFile" >
 			<param name="fileName">{2}</param>
 			<result name="success">${siteFilePath}</result>
 			<result name="error">/WEB-INF/jsp/cmsPages/message.jsp</result>
 		</action>
 
-		<action name="/{siteUrl}" class="cmsSiteNavAction">
+		<action name="{siteUrl}" class="cmsSiteNavAction">
 			<result name="success" type="redirect">${siteHomePath}</result>
 			<result name="error">/WEB-INF/jsp/cmsPages/message.jsp</result>
 		</action>

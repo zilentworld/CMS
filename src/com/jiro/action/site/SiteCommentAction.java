@@ -42,14 +42,16 @@ public class SiteCommentAction extends SiteAbstractAction {
         siteComment.setCmsUserSite(getCmsUserSite());
         System.out.println("siteCommentAction:execute:siteCommentContent:"+siteComment.getSiteCommentContent());
         if("edit".equals(commentType)) {
-            System.out.println("siteCommentAction:execute:edit:");
+            System.out.println("siteCommentAction:execute:edit:commentId:");
             siteCommentService.updateComment(siteComment);
         } else {
             System.out.println("siteCommentAction:execute:save:");
             siteCommentService.saveNewComment(siteComment);
         }
         postId = siteComment.getSitePost().getSitePostId();
-        
+        System.out.println("siteCommentAction:postId:"+postId);
+        System.out.println("siteCommentAction:blogSiteUrl:"+getBlogSiteUrl());
+
         return SUCCESS;
     }
 

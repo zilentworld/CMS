@@ -2,6 +2,7 @@ package com.jiro.service.site.impl;
 
 import java.util.List;
 
+import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +34,14 @@ public class SitePostServiceImpl implements SitePostService {
 
     @Override
     public List<SitePost> getPostPreview(String siteUrl, int currPage, int maxResults) {
-        return sitePostDao.getPostPreview(siteUrl, currPage, maxResults);
+        List<SitePost> sitePostList = sitePostDao.getPostPreview(siteUrl, currPage, maxResults);
+        sitePostList.forEach(sitePost -> sitePost.setSitePostContent(removeTags(sitePost.getSitePostContent())));
+
+        return  sitePostList;
+    }
+
+    private String removeTags(String postContent) {
+        return Jsoup.parse(postContent).text();
     }
 
     @Override

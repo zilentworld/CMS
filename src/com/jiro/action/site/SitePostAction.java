@@ -11,9 +11,11 @@ import com.jiro.model.site.SiteUser;
 import com.jiro.service.site.SitePostService;
 import com.jiro.utility.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 @Controller
+@Scope("prototype")
 public class SitePostAction extends SiteAbstractAction {
 
     /**

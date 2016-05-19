@@ -17,7 +17,7 @@ public class SiteCommentDao extends GenericDaoImpl {
     public SiteComment getById(long sitePostId) {
         return (SiteComment) super.get(SiteComment.class, sitePostId);
     }
-    
+
     @SuppressWarnings("unchecked")
     @Transactional
     public List<SiteComment> getUserComment(long siteUserId, String siteUrl) {
@@ -38,6 +38,7 @@ public class SiteCommentDao extends GenericDaoImpl {
                .createCriteria(SiteComment.class)
                .createAlias("sitePost", "site_post")
                .add(Restrictions.eq("sitePost.sitePostId", postId))
+                .addOrder(Order.desc("commentDate"))
                .list();
     }
 

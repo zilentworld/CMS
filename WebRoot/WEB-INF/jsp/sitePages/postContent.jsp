@@ -26,12 +26,12 @@
 			<s:div id="post-controls" class="clear float-right">
 				<s:form id="post-control-form">
 					<s:a
-						href="javascript:callAction('editSitePost?postType=edit&postId=' + %{sitePost.sitePostId});">
+						href="javascript:callAction('editPost?postType=edit&postId=' + %{sitePost.sitePostId});">
 		    			Edit
 		    		</s:a> 
 			 		|
 		    		<s:a
-						href="javascript:callAction('deleteSitePost?postId=' + %{sitePost.sitePostId});"
+						href="javascript:callAction('deletePost?postId=' + %{sitePost.sitePostId});"
 						onclick="return confirm('Are you sure?')">
 		    			Delete
 		    		</s:a>
@@ -52,7 +52,7 @@
 					<s:textarea name="siteComment.siteCommentContent"
 						class="comment-textarea" />
 					<br />					
-        		<s:submit type="button" onclick="form.action='saveCommentPost'; form.submit();" value="Submit"/>
+        		<s:submit type="button" onclick="form.action='saveComment'; form.submit();" value="Submit"/>
 				</s:form>
 			</s:div>
 		</s:if>
@@ -72,13 +72,12 @@
 							<s:if test="#sessionSiteUser.siteUserId == siteUser.siteUserId">
 								(
 					    		<s:a
-									onclick="javascript:return toggleHidden('comment-edit-%{siteCommentId}') 
-									         || toggleHidden('comment-content-%{siteCommentId}');">
+									onclick="javascript:return switchHidden('comment-edit-%{siteCommentId}','comment-content-%{siteCommentId}');">
 					    			Edit
 					    		</s:a> 
 						 		|
 					    		<s:a
-									href="javascript:callAction('deleteCommentPost?commentId=' + %{siteCommentId} + '&postId=' + %{sitePost.sitePostId});"
+									href="javascript:callAction('deleteComment?commentId=' + %{siteCommentId} + '&postId=' + %{sitePost.sitePostId});"
 									onclick="return confirm('Are you sure?')">
 					    			Delete
 					    		</s:a>
@@ -110,11 +109,10 @@
 								</tr>
 								<tr>
 									<td><s:submit
-											onclick="return toggleHidden('comment-edit-%{siteCommentId}') 
-											        || toggleHidden('comment-content-%{siteCommentId}');"
+											onclick="return switchHidden('comment-edit-%{siteCommentId}','comment-content-%{siteCommentId}');"
 											value="Cancel" theme="simple" /></td>
 									<td>
-        							<s:submit theme="simple" type="button" onclick="form.action='saveCommentPost'; form.submit();" value="Submit"/>
+        							<s:submit theme="simple" type="button" onclick="form.action='saveComment'; form.submit();" value="Submit"/>
 									</td>
 								</tr>
 							</table>
@@ -130,3 +128,11 @@
 		<h4>Error in loading post</h4>
 	</s:div>
 </s:else>
+<script>
+	function switchHidden(divId1, divId2) {
+		var theDiv = document.getElementById(divId);
+		theDiv.style.display = (theDiv.style.display == 'block' ? 'none'
+				: 'block');
+		return false;
+	}
+</script>

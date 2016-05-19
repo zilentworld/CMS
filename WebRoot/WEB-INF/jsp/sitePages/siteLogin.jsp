@@ -12,6 +12,6 @@
         <s:textfield label="Username" name="siteUser.siteUserUsername" />
         <s:password label="Password" name="siteUser.siteUserPassword" />
         <s:submit type="button" onclick="form.action='doLogin'; form.submit();" value="Login"/>
-        <s:submit type="button" onclick="form.action='showRegister'; form.submit();" value="Register"/>
+        <s:submit type="button" onclick="form.action='register'; form.submit();" value="Register"/>
     </s:form>
 </s:div>

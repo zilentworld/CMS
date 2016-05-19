@@ -32,8 +32,6 @@ public class PostPreviewAction extends SiteAbstractAction {
         System.out.println("postPreview:blogPostAction:" + siteUrl);
         postPreviewList = sitePostService.getPostPreview(siteUrl, 0, 5);
         System.out.println("postPreviewList:size:" + postPreviewList.size());
-//        setNextAction(getBlogSiteUrl() + "/home");
-//        System.out.println("postPreviewAction:execute:nextAction:" + getNextAction());
         System.out.println("postPreviewAction:execute:blogSiteUrl:" + getBlogSiteUrl());
 
         return SUCCESS;

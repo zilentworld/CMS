@@ -81,6 +81,7 @@ public abstract class SiteAbstractAction extends ActionSupport implements Sessio
     }
 
     public void setBlogSiteUrl(String blogSiteUrl) {
+        blogSiteUrl = blogSiteUrl.replace("/","");
         this.blogSiteUrl = blogSiteUrl;
     }
 
