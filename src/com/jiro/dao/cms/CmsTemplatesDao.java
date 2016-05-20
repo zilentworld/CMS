@@ -33,5 +33,12 @@ public class CmsTemplatesDao extends GenericDaoImpl {
             return null;
         }
     }
-    
+
+    @Transactional
+    public CmsTemplates getByTemplateName(String templateName) {
+        return (CmsTemplates) getCurrentSession()
+                              .createCriteria(CmsTemplates.class)
+                              .add(Restrictions.eq("templateName",templateName))
+                              .uniqueResult();
+    }
 }

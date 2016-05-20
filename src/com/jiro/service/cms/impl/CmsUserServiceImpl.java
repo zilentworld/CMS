@@ -45,7 +45,8 @@ public class CmsUserServiceImpl implements CmsUserService {
     }
     
     @Override
-    public boolean checkLogin(CmsUser cmsUser) {
+    public boolean checkLoginUserPass(CmsUser cmsUser) {
+        System.out.println("checkLoginUserPass:"+cmsUser.getCmsUsername()+":"+cmsUser.getCmsPassword());
         if(cmsUserDao.getByLogin(cmsUser.getCmsUsername(), cmsUser.getCmsPassword()) != null)
             return true;
         else 

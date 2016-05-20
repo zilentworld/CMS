@@ -65,6 +65,8 @@ public class CmsFileController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        convertHtmlToJsp();
+        convertSpecialCmsTags();
     }
 
     public static void convertHtmlToJsp() {
@@ -78,6 +80,7 @@ public class CmsFileController {
     }
 
     private static void convertHtmlFiles(String sitePublishedPath) {
+        System.out.println("CONVERT HTML TO JSP");
         try {
             Files.walk(Paths.get(sitePublishedPath)).forEach(filePath -> {
                 if (filePath.toFile().isFile()) {
@@ -109,6 +112,22 @@ public class CmsFileController {
         putStrutTags(sitePublishedPath);
     }
 
+    public static String getPreviewWithTags(CmsUserSite cmsUserSite, String fileContent) {
+        String prependStr = "<%@ page contentType=\"text/html; charset=UTF-8\"%>" +
+                "<%@ taglib prefix=\"s\" uri=\"/struts-tags\"%>";
+        fileContent = prependStr + fileContent;
+        Iterator iter = CmsTagsMap.tagsMap.keySet().iterator();
+        while (iter.hasNext()) {
+            String a = iter.next().toString();
+            if (fileContent.contains(a)) {
+                String[] actionTag = CmsTagsMap.tagsMap.get(a);
+                fileContent = fileContent.replace(a, actionTag[0] + cmsUserSite.getBlogUrl() + actionTag[1]);
+            }
+        }
+
+        return fileContent;
+    }
+
     private static void putStrutTags(String path) {
         String prependStr = "<%@ page contentType=\"text/html; charset=UTF-8\"%>" +
                 "<%@ taglib prefix=\"s\" uri=\"/struts-tags\"%>";
@@ -133,7 +152,7 @@ public class CmsFileController {
 //                                System.out.println("beforeReplace:fileAsString:" + fileAsString);
                                 String urlFolder = filePath.toFile().getParentFile().getParentFile().getName();
                                 String[] actionTag = CmsTagsMap.tagsMap.get(a);
-                                fileAsString = fileAsString.replace(a, actionTag[0] + urlFolder + actionTag[1] );
+                                fileAsString = fileAsString.replace(a, actionTag[0] + urlFolder + actionTag[1]);
 //                                System.out.println("afterReplace:fileAsString:" + fileAsString);
                             }
                         }
@@ -308,6 +327,7 @@ public class CmsFileController {
             while (iterator.hasNext()) {
                 Path p = iterator.next();
                 File file = p.toFile();
+                System.out.println("p:"+p.toString());
                 if (file.isFile()) {
                     if (file.getName().toLowerCase().contains(filename.toLowerCase())) {
                         System.out.println("getByFilename:file:filePath:" + file.getPath());

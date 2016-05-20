@@ -37,15 +37,28 @@ public class CmsCreateSiteAction extends ActionSupport implements SessionAware {
     @SkipValidation
     public String showTemplate() {
         System.out.println("SHOW TEMPLATE");
-        return SUCCESS;
+
+        CmsUser cmsUser = (CmsUser) sessionMap.get(Constants.CMS_SESSION_CMS_USER);
+        if(cmsUser != null && cmsUser.getCmsUserId() > 0) {
+            return SUCCESS;
+        }
+        else {
+            sourcePage = "TemplateList";
+            return LOGIN;
+        }
     }
 
     @SkipValidation
     public String pickTemplate() {
         System.out.println("createNewBlogSite:imgSrc:" + imgSrc);
-        cmsTemplates = cmsTemplatesService.getByImgSrc(imgSrc);
+        if("notemplate".equals(imgSrc)) {
+            cmsTemplates = cmsTemplatesService.getByTemplateName(imgSrc);
+        } else {
+            cmsTemplates = cmsTemplatesService.getByImgSrc(imgSrc);
+        }
         if (cmsTemplates == null) {
             errMsg = "An error occured. Kindly pick a template again.";
+            System.out.println("NULL");
             return ERROR;
         }
         System.out.println(cmsTemplates.getTemplateName());

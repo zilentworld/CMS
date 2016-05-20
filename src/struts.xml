@@ -1,237 +1,299 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC
-"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
-"http://struts.apache.org/dtds/struts-2.1.dtd">
+        "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 
- 	<constant name="struts.objectFactory" value="spring" />
- 	<constant name="struts.enable.SlashesInActionNames" value="true"/>
-	<constant name="struts.mapper.alwaysSelectFullNamespace" value="false"/>
-	<constant name="struts.patternMatcher" value="regex" />
-	<package name="default" namespace="/" extends="struts-default">
+    <constant name="struts.objectFactory" value="spring"/>
+    <constant name="struts.enable.SlashesInActionNames" value="true"/>
+    <constant name="struts.mapper.alwaysSelectFullNamespace" value="false"/>
+    <constant name="struts.patternMatcher" value="regex"/>
+    <package name="default" namespace="/" extends="struts-default">
 
-		<result-types>
-			<result-type name="tiles"
-				class="org.apache.struts2.views.tiles.TilesResult" />
-		</result-types>
+        <result-types>
+            <result-type name="tiles"
+                         class="org.apache.struts2.views.tiles.TilesResult"/>
+        </result-types>
 
-		<interceptors>
-			<interceptor name="loginInterceptor" class="com.jiro.interceptor.LoginInterceptor" />
-			<interceptor-stack name="loginCheckStack">
-				<interceptor-ref name="loginInterceptor" />
-				<interceptor-ref name="defaultStack" />
-			</interceptor-stack>
-		</interceptors>
-		
-		<global-results>
-			<result name="login-require" type="redirect">Account</result>
-		</global-results>
+        <interceptors>
+            <interceptor name="loginInterceptor" class="com.jiro.interceptor.LoginInterceptor"/>
+            <interceptor-stack name="loginCheckStack">
+                <interceptor-ref name="loginInterceptor"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
 
-		<action name="Home" class="cmsNavAction" method="showHome">
-			<result name="success" type="tiles">main-welcome</result>
-		</action>
-		<action name="About" class="cmsNavAction" method="showAbout">
-			<result name="success" type="tiles">main-about</result>
-		</action>
-		<action name="ContactUs" class="cmsNavAction" method="showContactUs">
-			<result name="success" type="tiles">main-contactUs</result>
-		</action>
-		<action name="Account" class="cmsNavAction" method="showAccount">
-			<result name="login" type="tiles">main-register-login</result>
-			<result name="success" type="tiles">main-account</result>
-		</action>
-		<action name="checkAccount" class="cmsNavAction" method="checkAccount">
-			<result name="login" type="tiles">main-register-login</result>
-			<result name="success" type="redirect">Account</result>
-		</action>
-		<action name="processRegister" class="cmsRegisterAction">
-			<result name="error" type="tiles">main-register-login</result>
-			<result name="input" type="tiles">main-register-login</result>
-			<!--<result name="success" type="tiles">main-account</result>-->
-			<result name="success">${sourcePage}</result>
-			<!--<result name="success" type="redirect">${sourcePage}</result>-->
-		</action>
-		<action name="processLogin" class="cmsLoginAction">
-			<result name="error" type="tiles">main-register-login</result>
-			<result name="input" type="tiles">main-register-login</result>
-			<result name="success">${sourcePage}</result>
-		</action>
-		<action name="SiteList" class="cmsAccountAction" method="showSiteList">
-			<interceptor-ref name="loginCheckStack" />
-			<result name="success" type="tiles">main-account-siteList</result>
-		</action>
-		<action name="UserList" class="cmsAccountAction" method="showUserList">
-			<interceptor-ref name="loginCheckStack" />
-			<result name="success" type="tiles">main-account-userList</result>
-		</action>
-		<action name="UserSites" class="cmsAccountAction" method="showUserSites">
-			<interceptor-ref name="loginCheckStack" />
-			<result name="success" type="tiles">main-account-userSites</result>
-		</action>
-		<action name="UserInfo" class="cmsAccountAction" method="showUserInfo">
-			<interceptor-ref name="loginCheckStack" />
-			<result name="success" type="tiles">main-account-userInfo</result>
-		</action>
-		<action name="deactivateUser" class="cmsAccountAction" method="deactivateUser">
-			<interceptor-ref name="loginCheckStack" />
-			<result name="error">UserList</result>
-			<result name="success">UserList</result>
-		</action>
-		<action name="activateUser" class="cmsAccountAction" method="activateUser">
-			<interceptor-ref name="loginCheckStack" />
-			<result name="error">UserList</result>
-			<result name="success">UserList</result>
-		</action>
-		<action name="EditUser" class="cmsEditUserAction" method="showEditUser">
-			<interceptor-ref name="loginCheckStack" />
-			<result name="error" type="tiles">main-account-editUser</result>
-			<result name="success" type="tiles">main-account-editUser</result>
-		</action>
-		<action name="SaveEditUser" class="cmsEditUserAction">
-			<interceptor-ref name="loginCheckStack" />
-			<result name="error" type="tiles">main-account-editUser</result>
-			<result name="input">EditUser</result>
-			<result name="success" type="redirect">${sourcePage}</result>
-		</action>
-		<action name="Logout" class="cmsLoginAction" method="processLogout">
-			<result name="success" type="tiles">main-welcome</result>
-		</action>
-		<action name="TemplateList" class="cmsCreateSiteAction" method="showTemplate">
-			<result name="success" type="tiles">main-template</result>
-		</action>
-		<action name="PickTemplate" class="cmsCreateSiteAction" method="pickTemplate">
-			<result name="success">EnterUrl</result>
-		</action>
-		<action name="EnterUrl" class="cmsCreateSiteAction" method="showUrlEntry">
-			<result name="success" type="tiles">main-enterUrl</result>
-		</action>
-		<action name="ConfirmUrl" class="cmsCreateSiteAction" method="processUrl">
-			<result name="login" type="tiles">main-register-login</result>
-			<result name="success">ProcessNewSite</result>
-		</action>
-		<action name="ProcessNewSite" class="cmsCreateSiteAction" method="processNewSite">
-			<result name="success" type="redirect">UserSites</result>
-		</action>
-		<action name="CMS" class="cmsFileManageAction" method="showCMS">
-			<interceptor-ref name="loginCheckStack" />
-			<result name="success" type="tiles">main-cms</result>
-		</action>
-		<action name="EditFile" class="cmsFileManageAction" method="showEditFile">
-			<interceptor-ref name="loginCheckStack" />
-			<result name="success" type="tiles">main-editfile</result>
-		</action>
-		<action name="FilterCMS" class="cmsFileManageAction" method="showFilteredCMS">
-			<interceptor-ref name="loginCheckStack" />
-			<result name="success" type="tiles">main-cms</result>
-		</action>
-		<action name="saveCMS" class="cmsFileManageAction" method="saveCMS">
-			<interceptor-ref name="loginCheckStack" />
-			<result name="success" type="chain">
-				<param name="actionName">CMS</param>
-				<param name="cmsUserSiteId">${cmsUserSiteId}</param>
-			</result>
-		</action>
-		<action name="AddNewFile" class="cmsAddNewFileAction" method="showAddFile">
-			<interceptor-ref name="loginCheckStack" />
-			<result name="success" type="tiles">main-addFile</result>
-			<result name="input" type="tiles">main-addFile</result>
-		</action>
-		<action name="doAddNewFile" class="cmsAddNewFileAction" method="addNewFile">
-			<interceptor-ref name="loginCheckStack" />
-			<result name="success" type="chain">
-				<param name="actionName">CMS</param>
-				<param name="cmsUserSiteId">${cmsUserSiteId}</param>
-			</result>
-			<result name="input" type="tiles">main-addFile</result>
-		</action>
-		<action name="Preview" class="cmsFileManageAction" method="showPreview">
-			<interceptor-ref name="loginCheckStack" />
-			<result name="success">/WEB-INF/jsp/cmsPages/main-preview.jsp</result>
-		</action>
-		<action name="DeleteFile" class="cmsFileManageAction" method="deleteFile">
-			<interceptor-ref name="loginCheckStack" />
-			<result name="success" type="chain">
-				<param name="actionName">CMS</param>
-				<param name="cmsUserSiteId">${cmsUserSiteId}</param>
-			</result>
-		</action>
-		<action name="PublishSite" class="cmsPublishSiteAction">
-			<interceptor-ref name="loginCheckStack" />
-			<result name="success">CMS</result>
-		</action>
+        <global-results>
+            <result name="login-require" type="tiles">
+                <param name="location">main-register-login</param>
+                <param name="sourcePage">${sourcePage}</param>
+            </result>
+        </global-results>
 
-		<action name="{siteUrl}/postPreview" class="postPreviewAction">
-			<result name="success" >/WEB-INF/jsp/sitePages/postPreview.jsp</result>
-		</action>
+        <action name="Home" class="cmsNavAction" method="showHome">
+            <result name="success" type="tiles">main-welcome</result>
+        </action>
 
-		<action name="{blogSiteUrl}/postContent" class="postContentAction">
-			<result name="success" >/WEB-INF/jsp/sitePages/postContent.jsp</result>
-		</action>
+        <action name="About" class="cmsNavAction" method="showAbout">
+            <result name="success" type="tiles">main-about</result>
+        </action>
 
-		<action name="{blogSiteUrl}/showNewPost" class="sitePostAction" method="showNewSitePost">
-			<result name="success">/WEB-INF/jsp/sitePages/sitePost.jsp</result>
-		</action>
+        <action name="ContactUs" class="cmsNavAction" method="showContactUs">
+            <result name="success" type="tiles">main-contactUs</result>
+        </action>
 
-		<action name="{blogSiteUrl}/newSitePost" class="sitePostAction">
-			<result name="success">home</result>
-		</action>
+        <action name="Account" class="cmsNavAction" method="showAccount">
+            <result name="login" type="tiles">main-register-login</result>
+            <result name="success" type="tiles">main-account</result>
+        </action>
 
-		<action name="{blogSiteUrl}/editPost" class="sitePostAction" method="editSitePost">
-			<!--<result name="success">/WEB-INF/jsp/sitePages/sitePost.jsp</result>-->
-			<result name="success">${blogSiteUrl}/createPost</result>
-		</action>
+        <action name="checkAccount" class="cmsNavAction" method="checkAccount">
+            <result name="login" type="tiles">main-register-login</result>
+            <result name="success" type="redirect">Account</result>
+        </action>
 
-		<action name="{blogSiteUrl}/deletePost" class="sitePostAction" method="deleteSitePost">
-			<result name="success">home</result>
-		</action>
+        <action name="processRegister" class="cmsRegisterAction">
+            <result name="error" type="tiles">main-register-login</result>
+            <result name="input" type="tiles">main-register-login</result>
+            <!--<result name="success" type="tiles">main-account</result>-->
+            <result name="success">${sourcePage}</result>
+            <!--<result name="success" type="redirect">${sourcePage}</result>-->
+        </action>
 
-		<action name="{blogSiteUrl}/showLogin" class="siteLoginAction" method="showLogin">
-			<result name="input">/WEB-INF/jsp/sitePages/siteLogin.jsp</result>
-			<result name="success">/WEB-INF/jsp/sitePages/siteLogin.jsp</result>
-		</action>
+        <action name="processLogin" class="cmsLoginAction">
+            <result name="error" type="tiles">main-register-login</result>
+            <result name="input" type="tiles">main-register-login</result>
+            <result name="success">${sourcePage}</result>
+        </action>
 
-		<action name="{blogSiteUrl}/doLogin" class="siteLoginAction">
-			<result name="input">/${blogSiteUrl}/login</result>
-			<result name="success">/${blogSiteUrl}/home</result>
-		</action>
+        <action name="SiteList" class="cmsAccountAction" method="showSiteList">
+            <interceptor-ref name="loginCheckStack"/>
+            <result name="success" type="tiles">main-account-siteList</result>
+        </action>
 
-		<action name="{blogSiteUrl}/showRegister" class="siteRegisterAction" method="showRegister">
-			<result name="input">/WEB-INF/jsp/sitePages/siteRegister.jsp</result>
-			<result name="success">/WEB-INF/jsp/sitePages/siteRegister.jsp</result>
-		</action>
+        <action name="UserList" class="cmsAccountAction" method="showUserList">
+            <interceptor-ref name="loginCheckStack"/>
+            <result name="success" type="tiles">main-account-userList</result>
+        </action>
 
-		<action name="{blogSiteUrl}/doRegister" class="siteRegisterAction">
-			<result name="input">/${blogSiteUrl}/login</result>
-			<result name="success">/${blogSiteUrl}/home</result>
-		</action>
+        <action name="UserSites" class="cmsAccountAction" method="showUserSites">
+            <interceptor-ref name="loginCheckStack"/>
+            <result name="success" type="tiles">main-account-userSites</result>
+        </action>
 
-		<action name="{blogSiteUrl}/doLogout" class="siteLogoutAction">
-			<result name="success">/${blogSiteUrl}/home</result>
-		</action>
+        <action name="UserInfo" class="cmsAccountAction" method="showUserInfo">
+            <interceptor-ref name="loginCheckStack"/>
+            <result name="success" type="tiles">main-account-userInfo</result>
+        </action>
 
-		<action name="{blogSiteUrl}/saveComment" class="siteCommentAction">
-			<result name="success" type="redirectAction">
-				<param name="actionName">${blogSiteUrl}/content</param>
-				<param name="postId">${postId}</param>
-			</result>
-		</action>
+        <action name="deactivateUser" class="cmsAccountAction" method="deactivateUser">
+            <interceptor-ref name="loginCheckStack"/>
+            <result name="error">UserList</result>
+            <result name="success">UserList</result>
+        </action>
 
-		<action name="{blogSiteUrl}/deleteComment" class="siteCommentAction" method="deleteComment">
-			<result name="success" type="redirectAction">
-				<param name="actionName">${blogSiteUrl}/content</param>
-				<param name="postId">${postId}</param>
-			</result>
-		</action>
+        <action name="activateUser" class="cmsAccountAction" method="activateUser">
+            <interceptor-ref name="loginCheckStack"/>
+            <result name="error">UserList</result>
+            <result name="success">UserList</result>
+        </action>
 
-		<action name="{siteUrl}/{*}" class="cmsSiteNavAction" method="toFile" >
-			<param name="fileName">{2}</param>
-			<result name="success">${siteFilePath}</result>
-			<result name="error">/WEB-INF/jsp/cmsPages/message.jsp</result>
-		</action>
+        <action name="EditUser" class="cmsEditUserAction" method="showEditUser">
+            <interceptor-ref name="loginCheckStack"/>
+            <result name="error" type="tiles">main-account-editUser</result>
+            <result name="success" type="tiles">main-account-editUser</result>
+        </action>
 
-		<action name="{siteUrl}" class="cmsSiteNavAction">
-			<result name="success" type="redirect">${siteHomePath}</result>
-			<result name="error">/WEB-INF/jsp/cmsPages/message.jsp</result>
-		</action>
-	</package>
+        <action name="SaveEditUser" class="cmsEditUserAction">
+            <interceptor-ref name="loginCheckStack"/>
+            <result name="error" type="tiles">main-account-editUser</result>
+            <result name="input">EditUser</result>
+            <result name="success" type="redirect">${sourcePage}</result>
+        </action>
+
+        <action name="Logout" class="cmsLoginAction" method="processLogout">
+            <result name="success" type="tiles">main-welcome</result>
+        </action>
+
+        <action name="TemplateList" class="cmsCreateSiteAction" method="showTemplate">
+            <result name="login" type="tiles">main-register-login</result>
+            <result name="success" type="tiles">main-template</result>
+        </action>
+
+        <action name="PickTemplate" class="cmsCreateSiteAction" method="pickTemplate">
+            <result name="error">PickTemplate</result>
+            <result name="success">EnterUrl</result>
+        </action>
+
+        <action name="EnterUrl" class="cmsCreateSiteAction" method="showUrlEntry">
+            <result name="success" type="tiles">main-enterUrl</result>
+        </action>
+
+        <action name="ConfirmUrl" class="cmsCreateSiteAction" method="processUrl">
+            <result name="login" type="tiles">main-register-login</result>
+            <result name="success">ProcessNewSite</result>
+        </action>
+
+        <action name="ProcessNewSite" class="cmsCreateSiteAction" method="processNewSite">
+            <result name="success" type="redirect">UserSites</result>
+        </action>
+
+        <action name="CMS" class="cmsFileManageAction" method="showCMS">
+            <interceptor-ref name="loginCheckStack"/>
+            <result name="success" type="tiles">main-cms</result>
+        </action>
+
+        <action name="EditFile" class="cmsFileManageAction" method="showEditFile">
+            <interceptor-ref name="loginCheckStack"/>
+            <result name="success" type="tiles">main-editfile</result>
+        </action>
+
+        <action name="FilterCMS" class="cmsFileManageAction" method="showFilteredCMS">
+            <interceptor-ref name="loginCheckStack"/>
+            <result name="success" type="tiles">main-cms</result>
+        </action>
+
+        <action name="saveCMS" class="cmsFileManageAction" method="saveCMS">
+            <interceptor-ref name="loginCheckStack"/>
+            <result name="success" type="chain">
+                <param name="actionName">CMS</param>
+                <param name="cmsUserSiteId">${cmsUserSiteId}</param>
+            </result>
+        </action>
+
+        <action name="AddNewFile" class="cmsAddNewFileAction" method="showAddFile">
+            <interceptor-ref name="loginCheckStack"/>
+            <result name="success" type="tiles">main-addFile</result>
+            <result name="input" type="tiles">main-addFile</result>
+        </action>
+
+        <action name="doAddNewFile" class="cmsAddNewFileAction" method="addNewFile">
+            <interceptor-ref name="loginCheckStack"/>
+            <result name="success" type="chain">
+                <param name="actionName">CMS</param>
+                <param name="cmsUserSiteId">${cmsUserSiteId}</param>
+            </result>
+            <result name="input" type="tiles">main-addFile</result>
+        </action>
+
+        <action name="Preview" class="cmsFileManageAction" method="showPreview">
+            <interceptor-ref name="loginCheckStack"/>
+            <result name="success">/WEB-INF/jsp/cmsPages/main-preview.jsp</result>
+        </action>
+
+        <action name="DeleteFile" class="cmsFileManageAction" method="deleteFile">
+            <interceptor-ref name="loginCheckStack"/>
+            <result name="success" type="chain">
+                <param name="actionName">CMS</param>
+                <param name="cmsUserSiteId">${cmsUserSiteId}</param>
+            </result>
+        </action>
+
+        <action name="PublishSite" class="cmsPublishSiteAction">
+            <interceptor-ref name="loginCheckStack"/>
+            <result name="success">CMS</result>
+        </action>
+
+        <action name="UploadFile" class="uploadFileAction">
+            <result name="input" type="chain">
+                <param name="actionName">CMS</param>
+                <param name="cmsUserSiteId">${cmsUserSiteId}</param>
+                <param name="msg">${msg}</param>
+            </result>
+            <result name="success" type="chain">
+                <param name="actionName">CMS</param>
+                <param name="cmsUserSiteId">${cmsUserSiteId}</param>
+                <param name="msg">${msg}</param>
+            </result>
+            <!--<interceptor-ref name="params">-->
+                <!--<param name="excludeParams">dojo\..*,^struts\..*</param>-->
+            <!--</interceptor-ref>-->
+            <!--<interceptor-ref name="validation">-->
+                <!--<param name="excludeMethods">input,back,cancel,browse</param>-->
+            <!--</interceptor-ref>-->
+            <!--<interceptor-ref name="workflow">-->
+                <!--<param name="excludeMethods">input,back,cancel,browse</param>-->
+            <!--</interceptor-ref>-->
+            <!--<interceptor-ref name="defaultStack">-->
+                <!--<param name="fileUpload.maximumSize">10485760</param>-->
+            <!--</interceptor-ref>-->
+        </action>
+
+        <action name="{siteUrl}/postPreview" class="postPreviewAction">
+            <result name="success">/WEB-INF/jsp/sitePages/postPreview.jsp</result>
+        </action>
+
+        <action name="{blogSiteUrl}/postContent" class="postContentAction">
+            <result name="success">/WEB-INF/jsp/sitePages/postContent.jsp</result>
+        </action>
+
+        <action name="{blogSiteUrl}/showNewPost" class="sitePostAction" method="showNewSitePost">
+            <result name="success">/WEB-INF/jsp/sitePages/sitePost.jsp</result>
+        </action>
+
+        <action name="{blogSiteUrl}/newSitePost" class="sitePostAction">
+            <result name="success">home</result>
+        </action>
+
+        <action name="{blogSiteUrl}/editPost" class="sitePostAction">
+            <!--<result name="success">/WEB-INF/jsp/sitePages/sitePost.jsp</result>-->
+            <result name="success" type="redirectAction">
+                <param name="actionName">${blogSiteUrl}/content</param>
+                <param name="postId">${postId}</param>
+            </result>
+        </action>
+
+        <action name="{blogSiteUrl}/deletePost" class="sitePostAction" method="deleteSitePost">
+            <result name="success">home</result>
+        </action>
+
+        <action name="{blogSiteUrl}/showLogin" class="siteLoginAction" method="showLogin">
+            <result name="input">/WEB-INF/jsp/sitePages/siteLogin.jsp</result>
+            <result name="success">/WEB-INF/jsp/sitePages/siteLogin.jsp</result>
+        </action>
+
+        <action name="{blogSiteUrl}/doLogin" class="siteLoginAction">
+            <result name="input">/${blogSiteUrl}/login</result>
+            <result name="success">/${blogSiteUrl}/home</result>
+        </action>
+
+        <action name="{blogSiteUrl}/showRegister" class="siteRegisterAction" method="showRegister">
+            <result name="input">/WEB-INF/jsp/sitePages/siteRegister.jsp</result>
+            <result name="success">/WEB-INF/jsp/sitePages/siteRegister.jsp</result>
+        </action>
+
+        <action name="{blogSiteUrl}/doRegister" class="siteRegisterAction">
+            <result name="input">/${blogSiteUrl}/login</result>
+            <result name="success">/${blogSiteUrl}/home</result>
+        </action>
+
+        <action name="{blogSiteUrl}/doLogout" class="siteLogoutAction">
+            <result name="success">/${blogSiteUrl}/home</result>
+        </action>
+
+        <action name="{blogSiteUrl}/saveComment" class="siteCommentAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">${blogSiteUrl}/content</param>
+                <param name="postId">${postId}</param>
+            </result>
+        </action>
+
+        <action name="{blogSiteUrl}/deleteComment" class="siteCommentAction" method="deleteComment">
+            <result name="success" type="redirectAction">
+                <param name="actionName">${blogSiteUrl}/content</param>
+                <param name="postId">${postId}</param>
+            </result>
+        </action>
+
+        <action name="{siteUrl}/{*}" class="cmsSiteNavAction" method="toFile">
+            <param name="fileName">{2}</param>
+            <result name="success">${siteFilePath}</result>
+            <result name="error">/WEB-INF/jsp/cmsPages/message.jsp</result>
+        </action>
+
+        <action name="{siteUrl}" class="cmsSiteNavAction">
+            <result name="success" type="redirect">${siteHomePath}</result>
+            <result name="error">/WEB-INF/jsp/cmsPages/message.jsp</result>
+        </action>
+    </package>
 </struts>

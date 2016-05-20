@@ -117,6 +117,13 @@ public class CmsUserSite {
         return this.isPublished == 1 ? Constants.getPublishPath() : Constants.getPendingPath();
     }
 
+    public String getCurrFullPath() {
+        String fullPath = this.isPublished == 1 ? Constants.getPublishPath() : Constants.getPendingPath();
+        fullPath += "/" + blogUrl + "/html/";
+
+        return fullPath;
+    }
+
     public CmsUserSite() {
     }
 }

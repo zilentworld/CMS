@@ -65,13 +65,11 @@
                             <td>
                                 <s:submit class="CMS" hidden-data="%{cmsUserSiteId}" type="button" theme="simple"
                                           value="CMS"/>
-                                    <%--<td>--%>
-                                    <%--<s:submit class="CMS" hidden-data="%{cmsUserSiteId}" type="button" theme="simple" value="Preview"/>--%>
-                                    <%--</td>--%>
                                 <s:if test="isPublished == 1" >
                                     <s:submit type="button" hidden-data="%{blogUrl}" class="goToSite" value="Go to Site" theme="simple"/>
                                 </s:if>
                                 <s:else>
+                                    <%--<s:submit class="previewCMS" hidden-data="%{cmsUserSiteId}" type="button" theme="simple" value="Preview"/>--%>
                                     <s:submit class="publishSite" hidden-data="%{cmsUserSiteId}" type="button"
                                               theme="simple" value="Publish"/>
                                 </s:else>
@@ -95,8 +93,9 @@
             form.submit();
         });
         $(".previewCMS").click(function () {
+            alert("previewCms");
             var hiddenField = $("#cmsUserSiteId");
-            var form = $("#userSiteForm");
+            var form = $("#siteListForm");
             var id = $(this).attr('hidden-data');
             hiddenField.val(id);
             form.attr('action', 'Preview');

@@ -11,9 +11,11 @@ import com.jiro.service.cms.CmsUserService;
 import com.jiro.utility.Constants;
 import com.opensymphony.xwork2.ActionSupport;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 @Controller
+@Scope("prototype")
 public class CmsLoginAction extends ActionSupport implements SessionAware {
 
     /**
@@ -68,26 +70,35 @@ public class CmsLoginAction extends ActionSupport implements SessionAware {
     @Override
     public void validate() {
         System.out.println("cmsLoginAction:validate:sourcePage:"+sourcePage);
+        boolean failed = false;
         if(StringUtils.isEmpty(cmsUser.getCmsUsername())) {
             addFieldError("cmsUser.cmsUsername", Constants.CMS_ERROR_USERNAME_REQUIRED);
+            failed = true;
         } else if(StringUtils.isEmpty(cmsUser.getCmsPassword())) {
             addFieldError("cmsUser.cmsPassword", Constants.CMS_ERROR_PASSWORD_REQUIRED);
+            failed = true;
         } else if(!cmsUserService.checkExistingCmsUser(cmsUser)) {
             addFieldError("cmsUser.cmsUsername", Constants.CMS_ERROR_USERNAME_NOT_EXIST);
             cmsUser.setCmsPassword("");
-        } else if(!cmsUserService.checkLogin(cmsUser)) {
-            addFieldError("cmsUser.cmsUsername", Constants.CMS_ERROR_INVALID_LOGIN);
-            cmsUser.setCmsPassword("");            
+            failed = true;
         }
-        cmsUser = cmsUserService.getByLogin(cmsUser);
-        if(cmsUser.getIsEnabled() == 0) {
-            addFieldError("cmsUser.cmsUsername", Constants.CMS_ERROR_ACCT_DISABLED);
-            cmsUser.setCmsPassword("");
-        }
+        if(!failed) {
+            boolean cont = cmsUserService.checkLoginUserPass(cmsUser);
+            if (!cont) {
+                addFieldError("cmsUser.cmsUsername", Constants.CMS_ERROR_INVALID_LOGIN);
+                cmsUser.setCmsPassword("");
+            } else {
+                cmsUser = cmsUserService.getByLogin(cmsUser);
+                if (cmsUser.getIsEnabled() == 0) {
+                    addFieldError("cmsUser.cmsUsername", Constants.CMS_ERROR_ACCT_DISABLED);
+                    cmsUser.setCmsPassword("");
+                }
 
-        if("UserSites".equals(sourcePage) && "cms_admin".equals(cmsUser.getCmsUserType().getCmsUserTypeCode())) {
-            addFieldError("cmsUser.cmsUsername", Constants.CMS_ERROR_ADMIN_CANNOT);
-            cmsUser.setCmsPassword("");
+                if (("UserSites".equals(sourcePage) || "TemplateList".equals(sourcePage) ) && "cms_admin".equals(cmsUser.getCmsUserType().getCmsUserTypeCode())) {
+                    addFieldError("cmsUser.cmsUsername", Constants.CMS_ERROR_ADMIN_CANNOT);
+                    cmsUser.setCmsPassword("");
+                }
+            }
         }
     }
 

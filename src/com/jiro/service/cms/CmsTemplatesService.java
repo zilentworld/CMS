@@ -4,12 +4,14 @@ import com.jiro.model.cms.CmsTemplates;
 
 public interface CmsTemplatesService {
 
-    public CmsTemplates getByImgSrc(String imgSrc);
+    CmsTemplates getByImgSrc(String imgSrc);
     
-    public CmsTemplates getNewCmsTemplates();
+    CmsTemplates getNewCmsTemplates();
     
-    public CmsTemplates getById(long templateId);
+    CmsTemplates getById(long templateId);
     
-    public void initializeBlog();
+    void initializeBlog();
+
+    CmsTemplates getByTemplateName(String templateName);
         
 }

@@ -33,6 +33,11 @@
             </s:div>
             <s:div style="clear:both;" />
         </s:div>
+        <s:div class="no-template border">
+            <h3 style="text-align: center;">
+                I dont want a template.
+            </h3>
+        </s:div>
     </s:div>
 </s:div>
 <s:form id="templateFrm">
@@ -43,6 +48,11 @@
     $(document).ready(function () {
         $("img").click(function () {
             $("#templateFrm #imgSrc").val($(this).attr('src'));
+            $("#templateFrm").attr('action', 'PickTemplate');
+            $("#templateFrm").submit();
+        });
+        $(".no-template").click(function () {
+            $("#templateFrm #imgSrc").val("notemplate");
             $("#templateFrm").attr('action', 'PickTemplate');
             $("#templateFrm").submit();
         });

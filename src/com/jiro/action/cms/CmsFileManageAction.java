@@ -3,9 +3,12 @@ package com.jiro.action.cms;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import com.jiro.cms.CmsFileController;
+import com.jiro.model.cms.CmsFile;
 import com.jiro.model.cms.CmsUserSite;
 import com.jiro.service.cms.CmsUserSiteService;
+import com.jiro.utility.FileUtility;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -25,18 +28,21 @@ public class CmsFileManageAction extends ActionSupport {
     private CmsUserSiteService cmsUserSiteService;
     private CmsUserSite cmsUserSite;
     private long cmsUserSiteId;
-    private List<File> fileList;
+    private List<CmsFile> cmsFileList;
     private String fileName;
     private String fileContent;
     private File file;
     private String filePath;
     private String searchFile;
     private String newFileName;
+    private String msg;
 
     public String showCMS() {
         System.out.println("cmsFileManageAction:showCMS:cmsUserSiteId:" + cmsUserSiteId);
         cmsUserSite = cmsUserSiteService.getById(cmsUserSiteId);
-        fileList = CmsFileController.getAllFiles(cmsUserSite);
+        cmsFileList = new ArrayList<>();
+        CmsFileController.getAllFiles(cmsUserSite).forEach(files -> cmsFileList.add(new CmsFile(files)));
+        System.out.println("cmsFileManageAction:showCMS:msg:" + msg);
 
         return SUCCESS;
     }
@@ -64,6 +70,8 @@ public class CmsFileManageAction extends ActionSupport {
         System.out.println("cmsFileManageAction:showPreview:fileName:" + fileName);
         System.out.println("cmsFileManageAction:showPreview:cmsUserSiteId:" + cmsUserSiteId);
         cmsUserSite = cmsUserSiteService.getById(cmsUserSiteId);
+        if(StringUtils.isEmpty(fileName))
+            fileName = "home.html";
         file = CmsFileController.getByFileName(cmsUserSite, fileName);
         filePath = file.getPath();
         System.out.println("cmsFileManageAction:showPreview:filePath:" + filePath);
@@ -76,11 +84,14 @@ public class CmsFileManageAction extends ActionSupport {
     public String showFilteredCMS() {
         System.out.println("cmsFilemanageAction:showFilteredCms:cmsUserSiteId:"+cmsUserSiteId);
         cmsUserSite = cmsUserSiteService.getById(cmsUserSiteId);
-        fileList = new ArrayList<>();
-        if(searchFile != null && searchFile.length() > 0)
-            fileList.add(CmsFileController.getByFileName(cmsUserSite, searchFile));
-        else
-            fileList = CmsFileController.getAllFiles(cmsUserSite);
+        cmsFileList = new ArrayList<>();
+        if(searchFile != null && searchFile.length() > 0) {
+            cmsFileList.add(new CmsFile(CmsFileController.getByFileName(cmsUserSite, searchFile)));
+        }
+        else {
+//            fileList = CmsFileController.getAllFiles(cmsUserSite);
+            CmsFileController.getAllFiles(cmsUserSite).forEach(files -> cmsFileList.add(new CmsFile(files)));
+        }
 
         return SUCCESS;
     }
@@ -96,13 +107,8 @@ public class CmsFileManageAction extends ActionSupport {
 
     private void updateFileContent(File file) {
         try {
-            /*List<String> contentList = Files.readLines(file, Charsets.UTF_8);
-            StringBuffer sb = new StringBuffer();
-            contentList.forEach(e -> sb.append(e));
-
-            fileContent = sb.toString();*/
-
             fileContent = Files.toString(file, Charsets.UTF_8);
+            CmsFileController.getPreviewWithTags(cmsUserSite, fileContent);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -149,12 +155,12 @@ public class CmsFileManageAction extends ActionSupport {
         this.fileName = fileName;
     }
 
-    public List<File> getFileList() {
-        return fileList;
+    public List<CmsFile> getCmsFileList() {
+        return cmsFileList;
     }
 
-    public void setFileList(List<File> fileList) {
-        this.fileList = fileList;
+    public void setCmsFileList(List<CmsFile> cmsFileList) {
+        this.cmsFileList = cmsFileList;
     }
 
     public CmsUserSite getCmsUserSite() {
@@ -173,4 +179,11 @@ public class CmsFileManageAction extends ActionSupport {
         this.cmsUserSiteId = cmsUserSiteId;
     }
 
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 }

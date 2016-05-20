@@ -49,5 +49,9 @@ public class CmsTemplatesServiceImpl implements CmsTemplatesService {
     public void initializeBlog() {
         
     }
-    
+
+    @Override
+    public CmsTemplates getByTemplateName(String templateName) {
+        return cmsTemplatesDao.getByTemplateName(templateName);
+    }
 }

@@ -12,7 +12,7 @@ public interface CmsUserService {
 
     boolean checkExistingCmsUser(String cmsUsername);
 
-    boolean checkLogin(CmsUser cmsUser);
+    boolean checkLoginUserPass(CmsUser cmsUser);
 
     CmsUser getByLogin(CmsUser cmsUser);
 
